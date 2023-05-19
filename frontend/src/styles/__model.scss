@@ -1,0 +1,28 @@
+html,
+body, 
+#root {
+   height: 100%;
+   line-height: 1;
+   font-weight: 400;
+   color: #393939;
+   font-size: 17;
+   font-family: 'Inter', sans-serif;
+}
+
+.wrapper {
+   min-height: 100%;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+}
+
+.page {
+   flex: 1 1 auto;
+   display: flex;
+}
+
+[class*="__container"] {
+   max-width: 1300px;
+   padding: 0px 15px;
+   margin: 0px auto;
+}

@@ -6,11 +6,14 @@ import Footer from '../components/Footer/Footer'
 
 function App() {
   return (
-    <div className="App">
+    <div className="wrapper">
       <Header />
+          <main className='page'>
+            <div className='m__container'>Вакансии</div>
 
+            
+          </main>
       <Footer />
-    <h1 className='title'>SewingWeb</h1>
     </div>
   );
 }
