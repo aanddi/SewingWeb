@@ -39,8 +39,14 @@
           background-color: #328EE3;
           padding: 10px 15px;
           border-radius: 8px;
+          
+     }
+     
+     &__login a {
           color: #fff;
      }
+
+
 }
 
 .menu {
@@ -60,11 +66,16 @@
      }
 
      &__link {
-
           color: inherit;
      }
 
      &__item:hover {
+          background-color: #DBE0EC;
+          color: #0C3F7B;
+          text-decoration: underline;
+     }
+
+     &__item_active {
           background-color: #DBE0EC;
           color: #0C3F7B;
           text-decoration: underline;

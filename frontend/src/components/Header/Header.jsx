@@ -1,4 +1,6 @@
-import './Header.scss'
+import './Header.scss';
+
+import { Link } from 'react-router-dom'
 
 import logo from '../../assets/Logo/logo.svg'
 import city from '../../assets/Header/icon/city.svg'
@@ -12,20 +14,23 @@ const Header = () => {
                               <img src={logo} alt="" className='header__logo'/>
                               <nav className="header__menu menu">
                                    <ul className="menu__list">
+
+
+
                                         <li className="menu__item">
-                                             <a href="/" className="menu__link">Найти работу</a>
+                                             <Link to='/' className="menu__link">Найти работу</Link>
                                         </li>
                                         <li className="menu__item">
-                                             <a href="/" className="menu__link">Работодателям</a>
+                                             <Link to='/employers' className="menu__link">Работодателям</Link>
                                         </li>
                                         <li className="menu__item">
-                                             <a href="/" className="menu__link">Профессии</a>
+                                             <Link to='/professions' className="menu__link">Профессии</Link>
                                         </li>
                                         <li className="menu__item">
-                                             <a href="/" className="menu__link">Предприятия</a>
+                                             <Link to='/enterprises' className="menu__link">Предприятия</Link>
                                         </li>
                                         <li className="menu__item">
-                                             <a href="/" className="menu__link">Курсы</a>
+                                             <Link to='/courses' className="menu__link">Курсы</Link>
                                         </li>
                                    </ul>
                               </nav>     
@@ -36,7 +41,7 @@ const Header = () => {
                                    <img src={city} alt="Город" />
                               </div>
                               <div className="header__login">
-                                   Войти
+                                   <a href="">Войти</a>
                               </div>
                          </div>
                     </div>

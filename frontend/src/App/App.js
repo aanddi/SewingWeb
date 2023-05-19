@@ -1,20 +1,32 @@
 import React from 'react';
 import '../styles/App.scss'
 
-import Header from '../components/Header/Header'
-import Footer from '../components/Footer/Footer'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import Home from '../pages/Home/Home'
+import Employers from '../pages/Employers/Employers'
+import Professions from '../pages/Professions/Professions'
+import Enterprises from '../pages/Enterprises/Enterprises'
+import Courses from '../pages/Courses/Courses'
+
 
 function App() {
   return (
-    <div className="wrapper">
-      <Header />
-          <main className='page'>
-            <div className='m__container'>Вакансии</div>
 
-            
-          </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+
+        <Routes>
+            <Route path='/' element={ <Home />} />
+            <Route path='/employers' element={ <Employers /> } />
+            <Route path='/professions' element={ <Professions /> } />
+            <Route path='/enterprises' element={ <Enterprises /> } />
+            <Route path='/courses' element={ <Courses /> } />
+        </Routes>
+
+        <Home />
+
+    </BrowserRouter>
+    
   );
 }
 
