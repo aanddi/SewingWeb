@@ -1,4 +1,6 @@
-@import "reset.scss";
+@import "__reset.scss";
+@import "__variables.scss";
+@import "__model.scss";
 
 .title {
      color: red;
