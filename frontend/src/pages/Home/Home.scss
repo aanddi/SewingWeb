@@ -65,3 +65,20 @@
           font-weight: 600;
      }
 }
+
+.ribbon {
+     margin-top: 50px;
+
+     &__content {
+          display: flex; 
+          justify-content: space-between;
+     }
+
+     &__vacancies > * {
+          margin-bottom: 40px;
+     }
+
+     &__ad {
+
+     }
+}

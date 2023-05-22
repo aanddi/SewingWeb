@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 
-import SearchFull from '../../ui/Search/SearchFull'
+import SearchFull from '../../components/Search/SearchFull'
+import Ad from '../../components/Ad/Ad'
+import VacanciesCard from '../../components/VacanciesCard/VacanciesCard'
 
 
 const Home = () => {
@@ -27,6 +29,22 @@ const Home = () => {
                                         <span>1203 <br /> резюме</span> 
                                    </div>
                                    <button className="search__button">Создать резюме</button>
+                              </div>
+                         </div>
+                    </section>
+
+                    <section className='home__ribbon ribbon'>
+                         <div className="ribbon__container">
+                              <div className="ribbon__content">
+                                   <div className="ribbon__vacancies vacancies">
+                                        <VacanciesCard />
+                                        <VacanciesCard />
+                                        <VacanciesCard />
+                                   </div>
+                                   <div className="ribbon__ad">
+                                        <Ad/>
+                                        <Ad/>
+                                   </div>
                               </div>
                          </div>
                     </section>

@@ -1,0 +1,47 @@
+.vacancies__card {
+     border: 1px solid #BBB3B3;
+     border-radius: 10px;
+     margin-right: 80px;
+     font-size: 17px;
+
+     .content {
+          padding: 23px 35px;
+     }
+
+     .card__title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+     }
+
+     .card__price {
+          margin-top: 7px;
+          margin-bottom: 25px;
+          font-weight: 600;
+     }
+
+     .card__about {
+          font-size: 17px;
+          line-height: 21px;
+          margin-bottom: 25px;
+     }
+
+     .card__company {
+          margin-bottom: 10px;
+          font-weight: 500;
+     }
+
+     .card__company > *:not(:last-child), .card__map > *:not(:last-child)  {
+          margin-right: 6px;
+     }
+
+     .card__map {
+          margin-bottom: 35px;
+          font-weight: 500;
+     }
+
+     .button > *:not(:last-child) {
+          margin-right: 18px;
+     }
+}
