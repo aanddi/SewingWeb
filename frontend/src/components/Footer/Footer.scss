@@ -8,6 +8,7 @@
           justify-content: space-around;
      }
 
+     /*
      &__list {
 
      }
@@ -16,7 +17,7 @@
      
 
      }
-
+     */
      &__item:not(:first-child) {
           padding-bottom: 8px;
 
@@ -28,21 +29,21 @@
           color: #FFFFFF;
      }
 
-     &__link:hover {
+     &__link:hover, &__develop a:hover {
           text-decoration: underline;
      }
 
      &__title {
-          font-weight: 500;
+          font-weight: 600;
           font-size: 17px;
           line-height: 21px;
           margin-bottom: 17px;
-          display: block;
+          color: #FFFFFF;
      }
 
      &__social {
           display: flex;
-          justify-content: end;
+          justify-content: right;
           margin-top: 15px;
      }
 
@@ -60,13 +61,15 @@
 
      }
 
+
      &__text-company {
 
      }
 
-     &__develop {
-
+     &__develop a {
+          color: inherit;
      }
+
 
 }
 

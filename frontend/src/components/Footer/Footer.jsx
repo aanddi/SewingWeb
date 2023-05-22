@@ -1,5 +1,7 @@
 import './Footer.scss'
 
+import { Link } from 'react-router-dom'
+
 import vk from '../../assets/Footer/icon/vk.svg'
 import telegram from '../../assets/Footer/icon/telegram.svg'
 import youtube from '../../assets/Footer/icon/youtube.svg'
@@ -10,11 +12,10 @@ const Footer = () => {
      <footer className="footer">
          <div className="footer__container">
             <nav className="footer__menu">
+
                 <ul className="footer__list">
                     <li className="footer__item">
-                        <a href="/" className="footer__link">
-                            <span className="footer__title">Информация</span>
-                            </a>
+                        <h3 className="footer__title">Информация</h3>
                     </li>
                     <li className="footer__item">
                         <a href="/" className="footer__link">О “LegpromRF”</a>
@@ -29,79 +30,77 @@ const Footer = () => {
                         <a href="/" className="footer__link">Защита персональных данных</a>
                     </li>
                 </ul>
+
                 <ul className="footer__list">
                     <li className="footer__item">
-                        <a href="/" className="footer__link">
-                            <span className="footer__title">Соискателю</span>
-                            </a>
+                        <h3 className="footer__title">Соискателю</h3>
                     </li>
                     <li className="footer__item">
                         <a href="/" className="footer__link">Моё резюме</a>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Поиск вакансии</a>
+                        <Link to="/" className="footer__link">Поиск вакансии</Link>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Каталог компаний</a>
+                        <Link to="/enterprises" className="footer__link">Каталог компаний</Link>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Каталог профессий</a>
+                        <Link to="/professions" className="footer__link">Каталог профессий</Link>
                     </li>
                 </ul>
 
                 <ul className="footer__list">
                     <li className="footer__item">
-                        <a href="/" className="footer__link">
-                            <span className="footer__title">Работодателю</span>
-                            </a>
+                        <h3 className="footer__title">Работодателю</h3>
                     </li>
                     <li className="footer__item">
                         <a href="/" className="footer__link">Мои вакансии</a>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Найти сотрудников</a>
+                        <Link to="/" className="footer__link">Найти сотрудников</Link>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Производственный календарь</a>
+                        <a 
+                        target='__blank'
+                        href="https://calendar.yoip.ru/work/2023-proizvodstvennyj-calendar.html" 
+                        className="footer__link">
+                            Производственный календарь
+                        </a>
                     </li>
                 </ul>
 
                 <ul className="footer__list">
                     <li className="footer__item">
-                        <a href="/" className="footer__link">
-                            <span className="footer__title">Профессии</span>
-                            </a>
+                        <h3 className="footer__title">Профессии</h3>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Список профессий</a>
+                        <Link to="/professions" className="footer__link">Список профессий</Link>
                     </li>
                 </ul>
 
                 <ul className="footer__list">
                     <li className="footer__item">
-                        <a href="/" className="footer__link">
-                            <span className="footer__title">Предприятия</span>
-                            </a>
+                        <h3 className="footer__title">Предприятия</h3>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Список предприятий</a>
+                        <Link to="/enterprises" className="footer__link">Список предприятий</Link>
                     </li>
                 </ul>
 
                 <ul className="footer__list">
                     <li className="footer__item">
-                        <a href="/" className="footer__link">
-                            <span className="footer__title">Курсы</span>
-                            </a>
+                        <h3 className="footer__title">Курсы</h3>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Опубликовть курс</a>
+                        <a href="/" className="footer__link">Опубликовать курс</a>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Список курсов</a>
+                        <Link to="/courses" className="footer__link">Список курсов</Link>
                     </li>
                 </ul>
+
             </nav>
+
             <div className="footer__social">
                 <a href="/">
                     <img src={vk} alt="Вконтакте" />
@@ -116,14 +115,18 @@ const Footer = () => {
                     <img src={dzen} alt="Дзен" />
                 </a>
             </div>
+
             <div className="footer__bottom">
                 <div className="footer__text-company">
                 © 2023 LegpromRF
                 </div>
                 <div className="footer__develop">
-                    Anval Team
+                   <a 
+                   target='__blank'
+                   href="https://github.com/aanddi/SewingWeb">Anval Team</a> 
                 </div>
             </div>
+            
          </div>
      </footer> 
      );

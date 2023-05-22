@@ -59,14 +59,17 @@
 
      &__item {
   
-          padding: 24px 0px;
-          line-height: 21px;
-          width: 148px;
+
           text-align: center;
      }
 
      &__link {
           color: inherit;
+          display: flex;
+          justify-content: center;
+          padding: 24px 0px;
+          line-height: 21px;
+          width: 148px;
      }
 
      &__item:hover {
