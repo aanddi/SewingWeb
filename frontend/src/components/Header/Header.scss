@@ -31,21 +31,27 @@
           align-items: center;
      }
 
+     &__city:hover {
+          text-decoration: underline;
+     }
+
      &__city span {
           padding-right: 10px;
      }
 
-     &__login {
-          background-color: #328EE3;
+     &__login a {
           padding: 10px 15px;
           border-radius: 8px;
+          border: 1px solid #328EE3;
+          color: inherit;
           
      }
-     
-     &__login a {
-          color: #fff;
-     }
 
+     &__login a:hover {
+          color: #fff;
+          background-color: #328EE3;
+          
+     }
 
 }
 

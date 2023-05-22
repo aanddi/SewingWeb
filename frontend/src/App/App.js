@@ -9,6 +9,8 @@ import Professions from '../pages/Professions/Professions'
 import Enterprises from '../pages/Enterprises/Enterprises'
 import Courses from '../pages/Courses/Courses'
 
+import LoginUser from '../pages/Login/User/LoginUser'
+
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
             <Route path='/professions' element={ <Professions /> } />
             <Route path='/enterprises' element={ <Enterprises /> } />
             <Route path='/courses' element={ <Courses /> } />
+
+            <Route path='/loguser' element={<LoginUser/>}/>
         </Routes>
   );
 }

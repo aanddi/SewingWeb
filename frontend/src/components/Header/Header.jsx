@@ -41,7 +41,7 @@ const Header = () => {
                                    <img src={city} alt="Город" />
                               </div>
                               <div className="header__login">
-                                   <a href="">Войти</a>
+                                   <Link to="/loguser">Войти</Link>
                               </div>
                          </div>
                     </div>

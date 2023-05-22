@@ -1,0 +1,33 @@
+.search {
+     background-color: #439BDB;
+     display: inline-flex;
+     justify-content: center;
+     padding: 6px;
+     border-radius: 16px;
+     padding-left: 6px;
+     align-items: center;
+
+     input {
+          background-color: #fff;
+          padding: 13px 181px 13px 9px;
+          border-radius: 16px 0 0px 16px;
+     }
+
+     &__btn_tools {
+          background-color: #fff;
+          padding: 13px 12px 12px 12px;
+          border-radius: 0 16px 16px 0;
+          margin-left: 2px;
+     }
+
+     &__btn_text {
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 24px;
+          color: #fff;
+          padding: 10px 15px 10px 30px;
+     }
+
+ 
+}
+
