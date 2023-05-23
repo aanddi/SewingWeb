@@ -1,5 +1,6 @@
 import style from './VacanciesCard.module.scss';
 
+import {Link} from 'react-router-dom'
 
 import Button__blue from '../../../../ui/Buttons/Button__Blue/Button__blue';
 import Button__grey from '../../../../ui/Buttons/Button__Grey/Button__grey';
@@ -38,8 +39,8 @@ const VacanciesCard = () => {
                     </div>
 
                     <div className={style.button}>
-                         <Button__blue title='Откликнуться'/>
-                         <Button__grey title='Позвонить' />
+                         <Button__blue title='Откликнуться' path='/vacancies/1'/>
+                         <Button__grey title='Позвонить' path='/vacancies/1'/>
                     </div>
                     
                </div>

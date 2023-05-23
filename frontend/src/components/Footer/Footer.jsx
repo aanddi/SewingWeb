@@ -118,7 +118,7 @@ const Footer = () => {
 
             <div className="footer__bottom">
                 <div className="footer__text-company">
-                © 2023 LegpromRF
+                © 2023 SewingWeb
                 </div>
                 <div className="footer__develop">
                    <a 

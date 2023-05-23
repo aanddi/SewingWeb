@@ -1,0 +1,61 @@
+.card {
+
+     
+     flex: 0 1 33.333%;
+	padding: 0px 15px;
+     margin-bottom: 30px;
+
+
+
+     &__content {
+          background: #FFFFFF;
+          border: 1px solid #C4C3C3;
+          border-radius: 10px;
+          height: 100%;
+          box-shadow: 0px 13px 19px rgba(0, 0, 0, 0.07);
+          background-color: #fff;
+          padding: 17px 17px 33px 17px;
+          position: relative;
+          color: #020202; 
+          transition: all 0.2s ease-in;
+
+          &:hover {
+               background-color: #4B62EA;
+               color: #fff;
+          }
+     }
+
+
+
+     &__title {
+          font-weight: 900;
+          font-size: 20px;
+          line-height: 24px;
+  
+     }
+
+     &__logo {
+          position: absolute;
+          top: 15px;
+          right: 10px;
+     }
+
+     &__price {
+          font-size: 16px;
+          line-height: 19px;
+          margin: 12px 0;
+          font-weight: 500;
+ 
+     }
+
+     &__vacancies {
+          margin-bottom: 17px;
+          font-weight: 500;
+     
+     }
+
+     &__about {
+          font-size: 14px;
+     }
+
+}

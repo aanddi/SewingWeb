@@ -12,6 +12,8 @@ import Courses from '../pages/Courses/Courses'
 import LoginUser from '../pages/Login/User/LoginUser'
 import LoginEmployers from '../pages/Login/Employer/LoginEmployer'
 
+import Vacancies from '../pages/Vacancies/Vacancies'
+
 function App() {
   return (
         <Routes>
@@ -23,6 +25,8 @@ function App() {
 
             <Route path='/loguser' element={<LoginUser/>}/>
             <Route path='/logemployer' element={<LoginEmployers/>}/>
+
+            <Route path='/vacancies/1' element={<Vacancies/>}/>
         </Routes>
   );
 }
