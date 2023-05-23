@@ -1,12 +1,21 @@
-.button {
+.btn__link {
+     padding: 10px 15px;
      background-color: #D6D9DC;
      border-radius: 20px;
      display: inline-flex;
-     padding: 10px 15px;
+     transition: all 0.4s ease-out;
 
-     button {
+
+
+     .link {
           font-size: 17px;
           line-height: 21px;
           color: #050505;
+     
      }
+}
+
+.btn__link:hover {
+     background-color: #b4b4b4;
+
 }

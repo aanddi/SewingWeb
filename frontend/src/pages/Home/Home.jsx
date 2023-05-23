@@ -7,7 +7,7 @@ import Footer from '../../components/Footer/Footer'
 
 import SearchFull from '../../components/Search/SearchFull'
 import Ad from '../../components/Ad/Ad'
-import VacanciesCard from '../../components/VacanciesCard/VacanciesCard'
+import VacanciesCard from './components/VacanciesCard/VacanciesCard'
 
 
 const Home = () => {
@@ -40,8 +40,13 @@ const Home = () => {
                                         <VacanciesCard />
                                         <VacanciesCard />
                                         <VacanciesCard />
+                                        <VacanciesCard />
+                                        <VacanciesCard />
+                                        <VacanciesCard />
                                    </div>
                                    <div className="ribbon__ad">
+                                        <Ad/>
+                                        <Ad/>
                                         <Ad/>
                                         <Ad/>
                                    </div>

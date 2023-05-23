@@ -1,12 +1,18 @@
 .header {
+     position: fixed;
      background-color: #fff;
+     top: 0;
+     width: 100%;
+     z-index: 9999;
+     border-bottom: 1px solid #D6D9DC;
+    
 
      &__content {
           display: flex;
           align-items: center;
           justify-content: space-between;
 
-          border-bottom: 1px solid #D6D9DC;
+          
      }
 
      &__left {

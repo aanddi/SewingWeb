@@ -1,0 +1,21 @@
+.log-user {
+
+		&__wrapper {
+               display: flex;
+               justify-content: space-between;
+		}
+
+		&__bg {
+               background-image: url(../../../assets/Login/bg.jpg);
+               background-repeat: no-repeat;
+               background-size: cover;  
+               height: 100vh;
+               flex: 1 0 40%;
+		}
+
+		&__content {
+               height: 300px;
+               height: 100vh;
+               flex: 1 0 60%;
+		}
+}

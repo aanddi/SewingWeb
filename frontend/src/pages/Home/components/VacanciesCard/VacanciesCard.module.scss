@@ -3,6 +3,19 @@
      border-radius: 10px;
      margin-right: 80px;
      font-size: 17px;
+     position: relative;
+
+     .card__patterns_top {
+          position: absolute;
+          top: 0;
+          left: 300px;
+     }
+
+     .card__patterns_bottom {
+          position: absolute;
+          bottom: 0;
+          left: 700px;
+     }
 
      .content {
           padding: 23px 35px;
@@ -44,4 +57,5 @@
      .button > *:not(:last-child) {
           margin-right: 18px;
      }
+
 }

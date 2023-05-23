@@ -1,16 +1,19 @@
 import style from './VacanciesCard.module.scss';
 
 
-import Button__blue from '../../ui/Buttons/Button__Blue/Button__blue';
+import Button__blue from '../../../../ui/Buttons/Button__Blue/Button__blue';
 
-import favorites from '../../assets/Home/favorites.svg';
-import Mark from '../../assets/Global-icon/mark.svg'
-import Map from '../../assets/Global-icon/Map.svg'
-import Button__grey from '../../ui/Buttons/Button__Grey/Button__grey';
+import favorites from '../../../../assets/Home/favorites.svg';
+import Mark from '../../../../assets/Global-icon/mark.svg'
+import Map from '../../../../assets/Global-icon/Map.svg'
+import Button__grey from '../../../../ui/Buttons/Button__Grey/Button__grey';
+import Patterns_1 from '../../../../assets/Patterns/patterns_1.svg'
+import Patterns_2 from '../../../../assets/Patterns/patterns_2.svg'
 
 const VacanciesCard = () => {
      return ( 
           <div className={style.vacancies__card}>
+               <img src={Patterns_1} alt="" className={style.card__patterns_top}/>
                <div className={style.content}>
                     <div className={style.card__title}>
                          <h2>Швея</h2>
@@ -39,6 +42,7 @@ const VacanciesCard = () => {
                     </div>
                     
                </div>
+               <img src={Patterns_2} alt="" className={style.card__patterns_bottom}/>
           </div>
       );
 }
