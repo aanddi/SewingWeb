@@ -21,12 +21,12 @@
                background-repeat: no-repeat;
                background-size: cover;  
                height: 100vh;
-               flex: 1 0 40%;
+               flex: 1 0 50%;
 		}
 
 		&__content {
                overflow: hidden;
-               flex: 1 0 60%;
+               flex: 1 0 50%;
                margin-top: 30px;
 
 		}
@@ -47,21 +47,21 @@
           }
 
           &__nav {
-               margin-top: 30px;
+               margin-top: 50px;
           }
 
           &__title {
                font-weight: 700;
-               font-size: 20px;
+               font-size: 30px;
                line-height: 21px;
                text-align: center;
-               margin-top: 41px;
+               margin-top: 55px;
                border-bottom: 1px solid grey;
-               padding-bottom: 10px;
+               padding-bottom: 15px;
           }
 
           &__form {
-               margin-top: 25px;
+               margin-top: 30px;
           }
 
           &__form >*:not(:last-child) {
@@ -69,16 +69,25 @@
           }
 
           &__pas {
-               text-align: center;
+
+               display: flex;
+               justify-content: center;
                margin-top: 12px;
-               font-weight: 500;
-               font-size: 14px;
-               line-height: 17px;
-               color: #7A7878;
                margin-bottom: 10px;
+
+               h3 {
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: #7A7878;
+
+                    &:hover {
+                         text-decoration: underline;
+                    }
+               }
           }
 
-          &__pas:hover, &__regist:hover {
+           &__regist:hover {
                text-decoration: underline;
           }
 
@@ -112,31 +121,5 @@
                     margin-left: 30px;
                }
           }
-
-          &__agreement {
-               display: flex;
-               margin-top: 30px;
-
-               input {
-                    width: 20px;
-               }
-               p {
-                    font-weight: 500;
-                    font-size: 14px;
-                    line-height: 17px;
-                    color: #7A7878;
-                    margin-left: 20px;
-
-                    span {
-                         color: #3495DB;
-                         margin-left: 4px;
-
-                         &:hover {
-                              text-decoration: underline;
-                         }
-                    }
-               }
-          }
-
 
 }

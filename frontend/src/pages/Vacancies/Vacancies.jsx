@@ -87,7 +87,7 @@ const Vacancies = () => {
                                          от 30 000 руб.
                                    </h2>
                                    <div className="right__buttons">
-                                        <Button__blue title='Откликнуться' path='/vacancies/1'/>
+                                        <Button__blue title='Откликнуться' path='/loguser'/>
                                         <Button__grey title='Показать номер' path='/vacancies/1'/>
                                    </div>
                                    <div className="right__company company">

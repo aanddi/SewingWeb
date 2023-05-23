@@ -33,10 +33,11 @@ const LoginUser = () => {
                                         <div className="loguser__title">Вход</div>
                                         <form action="" className="loguser__form">
                                              <Input title="Телефон или Email" />
-                                             <Input title="Пароль" />
+                                             <Input title="Пароль" type="password"/>
                                              <Submit title='Войти' />
                                         </form>
-                                        <h3 className='loguser__pas'>Забыли пароль?</h3>
+                                        <div className="loguser__pas"><h3>Забыли пароль?</h3></div>
+                                        
                                         <h3 className='loguser__social'>
                                              <p>Войти с помощью:</p> 
                                              <div className="loguser__social_icon">
@@ -55,16 +56,6 @@ const LoginUser = () => {
                                              </div>
                                         </h3>
                                         <h3 className='loguser__regist'>Зарегистрироваться</h3>
-                                        <div className="loguser__agreement">
-                                             <input type="checkbox" />
-                                             <p>Я согласен с 
-                                                  
-                                                  <span>
-                                                   условиями пользовательского соглашения 
-                                                  и соглашения об обработке персональных данных
-                                                  </span> 
-                                             </p>
-                                        </div>
                                         
                                     </div>
                               </div> 

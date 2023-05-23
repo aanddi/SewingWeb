@@ -10,7 +10,6 @@ import Enterprises from '../pages/Enterprises/Enterprises'
 import Courses from '../pages/Courses/Courses'
 
 import LoginUser from '../pages/Login/User/LoginUser'
-import LoginEmployers from '../pages/Login/Employer/LoginEmployer'
 
 import Vacancies from '../pages/Vacancies/Vacancies'
 
@@ -24,7 +23,7 @@ function App() {
             <Route path='/courses' element={ <Courses /> } />
 
             <Route path='/loguser' element={<LoginUser/>}/>
-            <Route path='/logemployer' element={<LoginEmployers/>}/>
+            <Route path='/logemployer' element={<LoginUser/>}/>
 
             <Route path='/vacancies/1' element={<Vacancies/>}/>
             <Route path='/vacancies/2' element={<Vacancies/>}/>
