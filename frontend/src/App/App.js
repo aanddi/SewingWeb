@@ -10,7 +10,7 @@ import Enterprises from '../pages/Enterprises/Enterprises'
 import Courses from '../pages/Courses/Courses'
 
 import LoginUser from '../pages/Login/User/LoginUser'
-
+import LoginEmployers from '../pages/Login/Employer/LoginEmployer'
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
             <Route path='/courses' element={ <Courses /> } />
 
             <Route path='/loguser' element={<LoginUser/>}/>
+            <Route path='/logemployer' element={<LoginEmployers/>}/>
         </Routes>
   );
 }

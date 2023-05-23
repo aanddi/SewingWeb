@@ -1,0 +1,16 @@
+.submit {
+
+     background-color: #DB435F;
+     border-radius: 15px;
+     display: flex;
+     justify-content: center;
+     width: 100%;
+
+     &__button {
+          color: #fff;
+          font-weight: 500;
+          font-size: 17px;
+          line-height: 21px;
+          padding: 10px 0;
+     }
+}
