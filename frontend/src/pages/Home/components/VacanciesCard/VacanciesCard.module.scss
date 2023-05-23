@@ -4,6 +4,7 @@
      margin-right: 80px;
      font-size: 17px;
      position: relative;
+     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
      .card__patterns_top {
           position: absolute;
@@ -25,6 +26,8 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          font-size: 22px;
+          font-weight: 600;
 
      }
 
@@ -43,6 +46,10 @@
      .card__company {
           margin-bottom: 10px;
           font-weight: 500;
+     }
+
+     .card__company:hover {
+          text-decoration: underline;
      }
 
      .card__company > *:not(:last-child), .card__map > *:not(:last-child)  {

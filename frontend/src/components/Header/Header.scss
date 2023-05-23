@@ -1,10 +1,10 @@
 .header {
      position: fixed;
-     background-color: #fff;
+     background-color: #0D1117;
+     color: #fff;
      top: 0;
      width: 100%;
      z-index: 9999;
-     border-bottom: 1px solid #D6D9DC;
     
 
      &__content {
@@ -46,16 +46,18 @@
      }
 
      &__login a {
-          padding: 10px 15px;
+          padding: 10px 20px;
           border-radius: 8px;
-          border: 1px solid #328EE3;
+          border: 1px solid #4B62EA;
           color: inherit;
+          transition: all 0.2s ease-in;
+          box-shadow: 2px 2px 5px #e9e3e340;
           
      }
 
      &__login a:hover {
           color: #fff;
-          background-color: #328EE3;
+          background-color: #4B62EA;
           
      }
 
@@ -69,9 +71,8 @@
           margin-left: 10px;
      }
 
-     &__item {
-  
-
+     &__item { 
+          transition: all 0.2s ease-in;
           text-align: center;
      }
 
@@ -86,13 +87,13 @@
 
      &__item:hover {
           background-color: #DBE0EC;
-          color: #0C3F7B;
-          text-decoration: underline;
+          color: #4B62EA;
+
      }
 
      &__item_active {
           background-color: #DBE0EC;
-          color: #0C3F7B;
+          color: #4B62EA;
           text-decoration: underline;
      }
 }

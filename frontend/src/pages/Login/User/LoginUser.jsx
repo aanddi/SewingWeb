@@ -9,10 +9,13 @@ const LoginUser = () => {
           <div className="wrapper">
                <main className="page log-user">
                     <div className="log-user__wrapper">
-                         <div className="log-user__bg">fdgfg</div>
-                         <div className="log-user__content">
+                         <div className="loguser__bg">fdgfg</div>
+                         <div className="loguser__content">
+                              <div className="loguser__log_container">
                               <img src={logo_id} alt="" />
-                              <Link to='/'>dfgdfg</Link>
+                              <Link to='/'>Назад</Link>
+                              </div>
+
                          </div>
                     </div>
                     

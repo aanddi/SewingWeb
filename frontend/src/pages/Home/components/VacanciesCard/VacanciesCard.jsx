@@ -2,11 +2,12 @@ import style from './VacanciesCard.module.scss';
 
 
 import Button__blue from '../../../../ui/Buttons/Button__Blue/Button__blue';
+import Button__grey from '../../../../ui/Buttons/Button__Grey/Button__grey';
 
 import favorites from '../../../../assets/Home/favorites.svg';
 import Mark from '../../../../assets/Global-icon/mark.svg'
 import Map from '../../../../assets/Global-icon/Map.svg'
-import Button__grey from '../../../../ui/Buttons/Button__Grey/Button__grey';
+
 import Patterns_1 from '../../../../assets/Patterns/patterns_1.svg'
 import Patterns_2 from '../../../../assets/Patterns/patterns_2.svg'
 

@@ -2,7 +2,7 @@ import './Header.scss';
 
 import { Link } from 'react-router-dom'
 
-import logo from '../../assets/Logo/logo.svg'
+import logo from '../../assets/Logo/logo_black.svg'
 import city from '../../assets/Header/icon/city.svg'
 
 const Header = () => {
@@ -14,9 +14,6 @@ const Header = () => {
                               <img src={logo} alt="" className='header__logo'/>
                               <nav className="header__menu menu">
                                    <ul className="menu__list">
-
-
-
                                         <li className="menu__item">
                                              <Link to='/' className="menu__link">Найти работу</Link>
                                         </li>
