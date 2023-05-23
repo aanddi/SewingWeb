@@ -1,5 +1,5 @@
 <h1 align="center">
-SewingWeb
+<img src='frontend/src/assets/Logo/logo.svg'>
 </h1>
 SewingWeb - это веб-приложение для размещение вакансий и поиска работы швейных предприятий.
 
