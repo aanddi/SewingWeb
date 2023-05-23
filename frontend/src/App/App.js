@@ -27,6 +27,7 @@ function App() {
             <Route path='/logemployer' element={<LoginEmployers/>}/>
 
             <Route path='/vacancies/1' element={<Vacancies/>}/>
+            <Route path='/vacancies/2' element={<Vacancies/>}/>
         </Routes>
   );
 }

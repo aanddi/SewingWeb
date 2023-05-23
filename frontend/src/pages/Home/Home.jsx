@@ -37,12 +37,12 @@ const Home = () => {
                          <div className="ribbon__container">
                               <div className="ribbon__content">
                                    <div className="ribbon__vacancies vacancies">
-                                        <VacanciesCard />
-                                        <VacanciesCard />
-                                        <VacanciesCard />
-                                        <VacanciesCard />
-                                        <VacanciesCard />
-                                        <VacanciesCard />
+                                        <VacanciesCard path='/vacancies/2'/>
+                                        <VacanciesCard path='/vacancies/2'/>
+                                        <VacanciesCard path='/vacancies/1'/>
+                                        <VacanciesCard path='/vacancies/2'/>
+                                        <VacanciesCard path='/vacancies/2'/>
+                                        <VacanciesCard path='/vacancies/1'/>
                                    </div>
                                    <div className="ribbon__ad">
                                         <Ad/>

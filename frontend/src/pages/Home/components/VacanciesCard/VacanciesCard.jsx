@@ -12,7 +12,7 @@ import Map from '../../../../assets/Global-icon/Map.svg'
 import Patterns_1 from '../../../../assets/Patterns/patterns_1.svg'
 import Patterns_2 from '../../../../assets/Patterns/patterns_2.svg'
 
-const VacanciesCard = () => {
+const VacanciesCard = (props) => {
      return ( 
           <div className={style.vacancies__card}>
                <img src={Patterns_1} alt="" className={style.card__patterns_top}/>
@@ -39,8 +39,8 @@ const VacanciesCard = () => {
                     </div>
 
                     <div className={style.button}>
-                         <Button__blue title='Откликнуться' path='/vacancies/1'/>
-                         <Button__grey title='Позвонить' path='/vacancies/1'/>
+                         <Button__blue title='Откликнуться' path={props.path}/>
+                         <Button__grey title='Позвонить' path={props.path}/>
                     </div>
                     
                </div>
