@@ -10,7 +10,7 @@ const Vacancies = () => {
            <Header />
                <main className='page vacancies'>
                     <div className='vacancies__container'>
-                         vacancies
+                         <div className="vacancies__content"></div>
                     </div>
                </main>
           <Footer />
