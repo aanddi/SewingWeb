@@ -5,6 +5,7 @@ import Footer from '../../components/Footer/Footer'
 
 import Button__blue from '../../ui/Buttons/Button__Blue/Button__blue';
 import Button__grey from '../../ui/Buttons/Button__Grey/Button__grey';
+import Submit from '../../ui/Buttons/Submit/Submit'
 
 import VacanciesCard from '../../pages/Home/components/VacanciesCard/VacanciesCard'
 
@@ -25,15 +26,45 @@ const Vacancies = () => {
                               <div className="vacancies__left left">
                                    <div className="left__bigtitle">Швея</div>
                                    <div className="left__header">
-                                        <div className="left__star">
-                                             <img src={favorites} alt="" />
-                                             <span>Добавить в избраное</span> 
+                                        <div className="left__info">
+                                             <div className="left__infoText">
+                                                  <h4 className='left__infoTitle'>Опыт работы: </h4>
+                                                  <span>от 1 года</span>
+                                             </div>
+                                             <div className="left__infoText">
+                                                  <h4 className='left__infoTitle'>Тип занятости:</h4>
+                                                  <span>полная занятость</span>
+                                             </div>
+                                             <div className="left__infoText">
+                                                  <h4 className='left__infoTitle'>Тип занятости:</h4>
+                                                  <span>полная занятость</span>
+                                             </div>
+                                             <div className="left__infoText">
+                                                  <h4 className='left__infoTitle'>График работы:</h4>
+                                                  <span>полный день</span>
+                                             </div>
+                                             <div className="left__infoText">
+                                                  <h4 className='left__infoTitle'>Кто может откликаться:</h4>
+                                                  <span>все</span>
+                                             </div>
                                         </div>
-                                        <div className="left__date">Вакансия опубликована 18.01.2023</div>
+                                        <div className="left__panel">
+                                             <div className="left__star">
+                                                  <img src={favorites} alt="" />
+                                                  <span>Добавить в избраное</span> 
+                                             </div>
+                                             <div className="left__date">Вакансия опубликована 18.01.2023</div>
+                                        </div>
                                    </div>
                                    <div className="left__content content">
                                         <div className="content__block">
                                              <div className="content__title">Ключевые навыки</div>
+                                             <div className="content__btn">
+                                                  <Submit title='Массовое производство'/>
+                                                  <Submit title='Работа в команде'/>
+                                                  <Submit title='Ответственность'/>
+                                                  
+                                             </div>
                                         </div>
                                         <div className="content__block">
                                              <div className="content__title">Расположение</div>

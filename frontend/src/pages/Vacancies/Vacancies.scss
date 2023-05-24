@@ -29,9 +29,9 @@
 
 	&__bigtitle {
 		font-weight: 900;
-		font-size: 35px;
-		line-height: 42px;
-		color: #000000;
+		font-size: 45px;
+		line-height: 120%;
+		color: #2c2c2c;
 		padding-bottom: 20px;
 		border-bottom: 1px solid grey;
 	}
@@ -42,13 +42,32 @@
 		margin-top: 20px;
 	}
 
-	&__star {
+	&__infoText {
 		display: flex;
+		font-size: 20px;
+		line-height: 24px;
+	}
+
+	&__infoTitle {
+		font-weight: 700;
+		margin-right: 7px;
+	}
+
+	&__panel {
+		display: flex;
+		flex-direction: column;
+		margin-left: 70px;
+		justify-content: center;
+	}
+
+	&__star {
+		width: 200px;
+		display: inline-flex;
 		align-items: center;
 		border: 1px solid grey;
 		border-radius: 20px;
-		margin-right: 30px;
-		padding: 5px 15px;
+		padding: 5px;
+		margin-bottom: 17px;
 		font-weight: 500;
 		font-size: 14px;
 		line-height: 24px;
@@ -183,6 +202,16 @@
 			line-height: 150%;
 			text-align: justify;
 			color: #000000;
+		}
+	}
+
+	&__btn {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 15px;
+		& > * {
+			flex: 1 1 20%;
+			margin-right: 5px;
 		}
 	}
 }

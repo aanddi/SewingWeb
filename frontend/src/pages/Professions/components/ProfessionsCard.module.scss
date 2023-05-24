@@ -1,28 +1,22 @@
 .card {
-
-     
      flex: 0 1 33.333%;
 	padding: 0px 15px;
      margin-bottom: 30px;
 
-
-
      &__content {
-          
-          background: #FFFFFF;
-          border: 1px solid #C4C3C3;
+          border-left: 10px solid #d1d7fa;
+
+          background: #F8F9FA;
           border-radius: 10px;
           height: 100%;
-          box-shadow: 0px 13px 19px rgba(0, 0, 0, 0.07);
-          background-color: #fff;
-          padding: 17px 17px 33px 17px;
+          box-shadow: 0 .125rem .25rem #00000013;
+          padding: 33px 15px 33px 15px;
           position: relative;
           color: #020202; 
           transition: all 0.2s ease-in;
 
           &:hover {
-               background-color: #4B62EA;
-               color: #fff;
+               box-shadow: 0px 13px 19px #939394;
           }
      }
 
@@ -30,7 +24,7 @@
 
      &__title {
           font-weight: 900;
-          font-size: 20px;
+          font-size: 25px;
           line-height: 24px;
   
      }
@@ -38,7 +32,7 @@
      &__logo {
           position: absolute;
           top: 15px;
-          right: 10px;
+          right: 20px;
      }
 
      &__price {
@@ -57,6 +51,7 @@
 
      &__about {
           font-size: 14px;
+          line-height: 150%;
      }
 
 }
