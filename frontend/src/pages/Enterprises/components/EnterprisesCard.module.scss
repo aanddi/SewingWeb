@@ -1,23 +1,18 @@
 .card {
 
-     
      flex: 0 1 33.333%;
 	padding: 0px 15px;
      margin-bottom: 30px;
 
-
-
      &__content {
-          
-          background: #FFFFFF;
-          border: 1px solid #C4C3C3;
+          border-left: 7px solid #DA435F;
           border-radius: 10px;
           height: 100%;
           box-shadow: 0px 13px 19px rgba(0, 0, 0, 0.07);
-          background-color: #fff;
+          background-color: #0D1117;
           padding: 17px 17px 33px 17px;
           position: relative;
-          color: #020202; 
+          color: #dad8d8;
           transition: all 0.2s ease-in;
 
           &:hover {
@@ -52,11 +47,13 @@
      &__vacancies {
           margin-bottom: 17px;
           font-weight: 500;
-     
+          margin: 12px 0;
      }
 
      &__about {
           font-size: 14px;
+          display: flex;
+          align-items: center;
      }
 
 }

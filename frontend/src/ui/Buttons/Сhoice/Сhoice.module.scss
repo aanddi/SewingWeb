@@ -1,0 +1,29 @@
+.choice {
+
+     background-color: #9e9c9c;
+     border-radius: 15px;
+     display: flex;
+     justify-content: center;
+     flex: 1 0 40%;
+     width: 100%;
+     margin-bottom: 15px;
+     transition: all 0.2s ease-in;
+   
+
+
+     &:hover {
+          background-color: #fa2c52;
+     }
+
+     &__button {
+          color: #fff;
+          font-weight: 500;
+          font-size: 17px;
+          line-height: 21px;
+          padding: 7px 0;
+ 
+
+
+
+     }
+}
