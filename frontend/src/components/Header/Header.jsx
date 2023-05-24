@@ -1,12 +1,20 @@
 import './Header.scss';
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-import logo from '../../assets/Logo/logo_black.svg'
-import city from '../../assets/Header/icon/city.svg'
+import { useLocation } from "react-router-dom";
+
+import logo from '../../assets/Logo/logo_black.svg';
+import city from '../../assets/Header/icon/city.svg';
 
 const Header = () => {
+
+     const location = useLocation();
+     const { pathname } = location;
+     console.log(pathname)
+
      return ( 
+         
           <header className="header">
                <div className="header__container">
                     <div className="header__content">
@@ -14,21 +22,47 @@ const Header = () => {
                               <img src={logo} alt="" className='header__logo'/>
                               <nav className="header__menu menu">
                                    <ul className="menu__list">
+
                                         <li className="menu__item">
-                                             <Link to='/' className="menu__link">Найти работу</Link>
+                                             <span  className="menu__link">
+                                                  <Link to='/' className={pathname === "/" ? "active__globalNavigation" : "inactive"}>
+                                                       Найти работу
+                                                  </Link>
+                                             </span>   
                                         </li>
+
                                         <li className="menu__item">
-                                             <Link to='/employers' className="menu__link">Работодателям</Link>
+                                             <span  className="menu__link">
+                                                  <Link to='/employers' className={pathname === "/employers" ? "active__globalNavigation" : "inactive"}>
+                                                       Работодателям
+                                                  </Link>
+                                             </span>   
                                         </li>
+
                                         <li className="menu__item">
-                                             <Link to='/professions' className="menu__link">Профессии</Link>
+                                             <span  className="menu__link">
+                                                  <Link to='/professions' className={pathname === "/professions" ? "active__globalNavigation" : "inactive"}>
+                                                       Профессии
+                                                  </Link>
+                                             </span>   
                                         </li>
+
                                         <li className="menu__item">
-                                             <Link to='/enterprises' className="menu__link">Предприятия</Link>
+                                             <span  className="menu__link">
+                                                  <Link to='/enterprises' className={pathname === "/enterprises" ? "active__globalNavigation" : "inactive"}>
+                                                       Предприятия
+                                                  </Link>
+                                             </span>   
                                         </li>
+
                                         <li className="menu__item">
-                                             <Link to='/courses' className="menu__link">Курсы</Link>
+                                             <span  className="menu__link">
+                                                  <Link to='/courses' className={pathname === "/courses" ? "active__globalNavigation" : "inactive"}>
+                                                       Курсы
+                                                  </Link>
+                                             </span>   
                                         </li>
+
                                    </ul>
                               </nav>     
                          </div>

@@ -3,13 +3,13 @@ import {Link} from 'react-router-dom'
 import style from './ProfessionsCard.module.scss'
 
 import icon from '../../../assets/Professions/ico.svg'
-const ProfessionsCard = (props) => {
+const ProfessionsCard = () => {
      return ( 
           <div className={style.card}>
                <Link to='/'>
                <div className={style.card__content}>
                     <div className={style.card__title}>
-                         <h3>Швея</h3> 
+                         <h3>{}Швея</h3> 
                          <img className={style.card__logo} src={icon} alt="" />
                          </div>
                     <div className={style.card__price}>40.000 руб. в среднем</div>

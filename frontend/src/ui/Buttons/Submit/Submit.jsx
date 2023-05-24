@@ -1,4 +1,4 @@
-import style from '../../../ui/Buttons/Submit/Submit.module.scss'
+import style from './Submit.module.scss'
 
 const Submit = (props) => {
      return ( 
