@@ -10,8 +10,10 @@ import Enterprises from '../pages/Enterprises/Enterprises'
 import Courses from '../pages/Courses/Courses'
 
 import LoginUser from '../pages/Login/User/LoginUser'
+import Registration from '../pages/Registration/Registration';
 
 import Vacancies from '../pages/Vacancies/Vacancies'
+
 
 function App() {
   return (
@@ -22,8 +24,11 @@ function App() {
             <Route path='/enterprises' element={ <Enterprises /> } />
             <Route path='/courses' element={ <Courses /> } />
 
-            <Route path='/loguser' element={<LoginUser/>}/>
-            <Route path='/logemployer' element={<LoginUser/>}/>
+            <Route path='/loginUser' element={<LoginUser/>}/>
+            <Route path='/loginEmployer' element={<LoginUser/>}/>
+
+            <Route path='/registrationUser' element={<Registration/>}/>
+            <Route path='/registrationEmployer' element={<Registration/>}/>
 
             <Route path='/vacancies/1' element={<Vacancies/>}/>
             <Route path='/vacancies/2' element={<Vacancies/>}/>

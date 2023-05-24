@@ -1,19 +1,19 @@
-import './LoginUser.scss'
+import './Registration.scss'
 
 import {Link} from 'react-router-dom'
 
-import Button__grey from '../../../ui/Buttons/Button__Grey/Button__grey';
-import LoginNavigation from '../components/LoginNavigation/LoginNavigation'
-import logo_id from '../../../assets/Logo/logo.id.svg'
-import Input from '../../../ui/Inputs/Input';
-import Submit from '../../../ui/Buttons/Submit/Submit';
+import Button__grey from '../../ui/Buttons/Button__Grey/Button__grey';
+import LoginNavigation from '../Login/components/LoginNavigation/LoginNavigation'
+import logo_id from '../../assets/Logo/logo.id.svg'
+import Input from '../../ui/Inputs/Input';
+import Submit from '../../ui/Buttons/Submit/Submit';
 
-import vk from '../../../assets/Footer/icon/vk.svg'
-import telegram from '../../../assets/Footer/icon/telegram.svg'
-import youtube from '../../../assets/Footer/icon/youtube.svg'
-import dzen from '../../../assets/Footer/icon//dzen.svg'
+import vk from '../../assets/Footer/icon/vk.svg'
+import telegram from '../../assets/Footer/icon/telegram.svg'
+import youtube from '../../assets/Footer/icon/youtube.svg'
+import dzen from '../../assets/Footer/icon//dzen.svg'
 
-const LoginUser = () => {
+const Registration = () => {
      return ( 
           <div className="wrapper">
                <main className="page log-user">
@@ -30,15 +30,18 @@ const LoginUser = () => {
                                         </header>
 
                                         <div className="loguser__nav">
-                                                  <LoginNavigation path1='/loginUser' path2='/loginEmployer' />
+                                        <LoginNavigation path1='/registrationUser' path2='/registrationEmployer' />
                                         </div>
-                                        <div className="loguser__title">Вход</div>
+                                        <div className="loguser__title">Регистрация</div>
                                         <form action="" className="loguser__form">
-                                             <Input title="Телефон или Email" />
+                                             <Input title="Имя" />
+                                             <Input title="Фамилия" />
+                                             <Input title="Номер телефона" />
                                              <Input title="Пароль" type="password"/>
+                                             <Input title="Повторите пароль" type="password"/>
                                              <Submit title='Войти' />
                                         </form>
-                                        <div className="loguser__pas"><h3>Забыли пароль?</h3></div>
+                                        <div className="loguser__pas"><Link to='/loginUser'>Есть аккаунт?</Link></div>
                                         
                                         <h3 className='loguser__social'>
                                              <p>Войти с помощью:</p> 
@@ -57,11 +60,6 @@ const LoginUser = () => {
                                                   </a>
                                              </div>
                                         </h3>
-                                        <div className="loguser__regist">
-                                             <Link to='/registrationUser'>Зарегистрироваться</Link>
-                                        </div>
-                                        
-                                        
                                     </div>
                               </div> 
                     </div> 
@@ -70,4 +68,4 @@ const LoginUser = () => {
       );
 }
  
-export default LoginUser;
+export default Registration;

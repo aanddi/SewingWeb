@@ -38,7 +38,7 @@ const Header = () => {
                                    <img src={city} alt="Город" />
                               </div>
                               <div className="header__login">
-                                   <Link to="/loguser">Войти</Link>
+                                   <Link to="/loginUser">Войти</Link>
                               </div>
                          </div>
                     </div>

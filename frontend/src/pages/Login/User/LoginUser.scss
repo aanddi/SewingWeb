@@ -75,7 +75,7 @@
                margin-top: 12px;
                margin-bottom: 10px;
 
-               h3 {
+               a {
                     font-weight: 500;
                     font-size: 14px;
                     line-height: 17px;
@@ -87,18 +87,28 @@
                }
           }
 
-           &__regist:hover {
-               text-decoration: underline;
-          }
+
 
           &__regist {
+               display: flex;
+               justify-content: center;
                border-top: 1px solid grey;
-               font-weight: 500;
-               font-size: 14px;
-               line-height: 17px;
-               text-align: center;
                padding-top: 10px;
-               color: #7A7878;
+
+               a {
+                    display: inline-flex;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: #7A7878;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 17px;
+               }
+
+               & > *:hover {
+                    text-decoration: underline;
+               }
           }
 
           &__social {
@@ -118,7 +128,7 @@
                
 
                & > * {
-                    margin-left: 30px;
+                    margin-left: 20px;
                }
           }
 
