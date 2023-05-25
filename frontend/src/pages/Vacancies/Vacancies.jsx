@@ -12,6 +12,8 @@ import VacanciesCard from '../../pages/Home/components/VacanciesCard/VacanciesCa
 import favorites from '../../assets/Home/favorites.svg';
 import Mark from '../../assets/Global-icon/mark.svg'
 import Star from '../../assets/Global-icon/star.svg'
+import Logo from '../../assets/Logo/LogoInterprises.svg'
+
 import Ad from '../../components/Ad/Ad'
 
 const Vacancies = () => {
@@ -21,7 +23,6 @@ const Vacancies = () => {
            <Header />
                <main className='page vacancies'>
                     <div className='vacancies__container'>
-
                          <div className="vacancies__content">
                               <div className="vacancies__left left">
                                    <div className="left__bigtitle">Швея</div>
@@ -30,10 +31,6 @@ const Vacancies = () => {
                                              <div className="left__infoText">
                                                   <h4 className='left__infoTitle'>Опыт работы: </h4>
                                                   <span>от 1 года</span>
-                                             </div>
-                                             <div className="left__infoText">
-                                                  <h4 className='left__infoTitle'>Тип занятости:</h4>
-                                                  <span>полная занятость</span>
                                              </div>
                                              <div className="left__infoText">
                                                   <h4 className='left__infoTitle'>Тип занятости:</h4>
@@ -112,7 +109,6 @@ const Vacancies = () => {
                                    
 
                               </div>
-
                               <div className="vacancies__right right">
                                    <h2 className="right__title">
                                          от 30 000 руб.
@@ -123,8 +119,11 @@ const Vacancies = () => {
                                    </div>
                                    <div className="right__company company">
                                         <div className="company__name">
-                                             <img src={Mark} alt="" />
-                                             <div className="company__title">ООО ТканьРФ</div>
+                                             <div className="company__title">
+                                                  <img src={Mark} alt="" />
+                                                  <span>ООО ТканьРФ</span> 
+                                             </div>
+                                             <img src={Logo} alt="" />
                                         </div>
                                    <h5 className="company__vakancies">
                                         3 вакансии на сайте

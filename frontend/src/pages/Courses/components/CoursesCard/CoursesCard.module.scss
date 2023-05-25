@@ -1,0 +1,107 @@
+.card {
+     flex: 1 0 40%;
+     padding: 0px 15px;
+     margin-bottom: 30px;
+
+
+     &__patterns1 {
+          position: absolute;
+          top: 0;
+          right: 100px;
+     }
+
+     &__patterns2 {
+          position: absolute;
+          top: 100px;
+          right: 0;
+     }
+
+     &__content {
+          position: relative;
+          padding: 23px 34px;
+          background: #FFFFFF;
+          border: 1px solid #BBB3B3;
+          border-radius: 10px;
+          box-shadow: 0 .125rem .25rem #00000013;
+          transition: all 0.2s ease-in;
+
+          &:hover {
+               box-shadow: 0px 13px 19px #c4c4c5;
+          }
+     }
+
+     &__title {
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 21px;
+          color: #000000;
+
+     }
+
+     &__subTitle {
+          line-height: 21px;
+          color: #000000;
+          margin: 15px 0;
+     }
+
+     &__info {
+          display: flex;
+          margin-bottom: 12px;
+          
+
+          & > * {
+               font-size: 15px;
+               line-height: 18px;
+               border-radius: 20px;
+               padding: 4px 20px;
+               margin-right: 12px;
+          }
+
+          &_green {
+               color: #4DB629;
+               background: #EAF2EC;
+          }
+
+          &_blue {
+               background: #E1EDF8;
+               color: #328EE3;
+          }
+     }
+
+     &__fullInfo {
+          margin-bottom: 12px;
+          font-weight: 500;
+          font-size: 17px;
+          line-height: 21px;
+          color: #000000;
+
+          img {
+
+          }
+
+          span {
+               margin-left: 5px;
+          }
+     }
+
+     &__button {
+   
+          a {
+               margin-top: 30px;
+               display: flex;
+               border-radius: 20px;
+               justify-content: center;
+               background-color: #D6D9DC;
+               width: 100%;
+               color: #000000;
+               padding: 10px 0;
+               transition: all 0.2s ease-in;
+          }
+
+          a:hover {
+               background-color: #bdbdbd;
+          }
+     }
+
+
+}

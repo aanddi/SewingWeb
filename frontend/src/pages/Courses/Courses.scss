@@ -1,0 +1,93 @@
+
+.courses {
+     margin-top: 68px;
+		&__header {
+
+               background-image: url('https://damion.club/uploads/posts/2022-09/1664085523_10-damion-club-p-fon-dlya-shveinoi-masterskoi-instagram-12.jpg');
+               background-color: rgba(15, 9, 3, 0.7);
+               background-attachment: fixed;
+               background-blend-mode: multiply;
+               background-size: cover;
+               padding: 80px 45px;
+		}
+
+          
+}
+.headerCourses {
+
+          &__content {
+               display: flex;
+               align-items: center;
+          }
+
+		&__left {
+               justify-content: center;
+               flex: 1 0 70%;
+		}
+
+		&__bigTitle {
+               text-align: center;
+               font-weight: 900;
+               font-size: 38px;
+               line-height: 152%;
+               text-align: center;
+               letter-spacing: 0.03em;
+               color: #FFFFFF;
+		}
+
+		&__right {
+               text-align: center;
+               flex: 1 0 30%;
+
+               img {
+                    width: 270px;
+
+               }
+		}
+
+
+
+		&__title {
+               font-weight: 600;
+               font-size: 17px;
+               line-height: 135%;
+               text-align: center;
+               text-decoration-line: underline;
+               color: #FFFFFF;
+               margin-top: 20px;
+		}
+
+          &__ribbon {
+
+          }
+
+
+}
+
+
+.courses {
+
+
+}
+.ribbon-courses {
+
+     &__content {
+          display: flex;
+          margin-top: 40px;
+     }
+
+     &__left {
+
+          flex: 1 0 90%;
+     }
+
+     &__courses {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0 110px 0 0;
+     }
+
+     &__right {
+          flex: 1 0 10%;
+     }
+}
