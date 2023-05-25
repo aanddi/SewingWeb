@@ -7,6 +7,7 @@ import Input1 from '../../ui/Inputs/Input'
 import Input2 from '../../ui/Inputs/help_textarea'
 import Button_red from '../../ui/Buttons/Button_Red/Button__red'
 import Button_green from '../../ui/Buttons/Button_Green/Button__green'
+import Button__grey from '../../ui/Buttons/Button__Grey/Button__grey';
 import Button_send from '../../ui/Buttons/Send/Send'
 
 import head_line from '../../assets/Employers/head_line.svg'
@@ -74,6 +75,18 @@ const Employers = () => {
                          </div>
                     </section>
 
+                    <section className='employers__money money'>
+                         <div className="money__conrainer">
+                              <div className="money__block">
+                                   <h1 className="money__title"></h1>
+                                   <h3 className="money__descript"></h3>
+                                   <p className="money__text"></p>
+                                   <Button__grey title='2000 руб'/>
+                              </div>
+                         </div>
+
+                    </section>
+
                     <section className='employers__help help'> 
                          <div className="help__container">
                               <div className="help__title">
@@ -93,7 +106,7 @@ const Employers = () => {
                                    
                                         <Input1 title="Эл. почта"/>
                                         <Input2 title="Вопрос"/>
-                                        <p className="form__text">Нажимая кнопку «Отправить» вы принимаете условия Правил и Соглашения об использовании сайта </p>
+                                        <p className="form__text">Нажимая кнопку «Отправить» вы принимаете условия <a href=""> Правил </a> и <a href="#"> Соглашения об использовании </a> сайта </p>
                                         <Button_send title="Отправить"/>
                                    </form>
                               </div>

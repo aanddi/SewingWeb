@@ -1,7 +1,7 @@
 $width-conteiner: 1279px;
 
 .employers {
-    margin-top: 69px;
+    margin-top: 68px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -118,15 +118,15 @@ $width-conteiner: 1279px;
 .info {
     background-color: rgba(151, 255, 205, 0.34);
     // background-image: linear-gradient(180deg, rgba(151, 255, 205, 0.34), rgba(178, 249, 204, 0.89), rgba(213, 249, 195, 0.89));
-    max-height: 500px;
+    max-height: 600px;
     flex-grow: 1;
-    flex-basis: 500px;
+    flex-basis: 600px;
     flex-shrink: 1;
 
     &__container {
-        max-height: 500px;
+        max-height: 600px;
         max-width: $width-conteiner;
-        height: 500px;
+        height: 600px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -137,14 +137,14 @@ $width-conteiner: 1279px;
 
     &__img1 {
         position: absolute;
-        top: 134px;
+        top: 148px;
         left: 350px;
         z-index: 2;
     }
 
     &__img2 {
         position: absolute;
-        bottom: 50px;
+        bottom: 104px;
         right: 300px;
         z-index: 2;
     }
@@ -206,17 +206,22 @@ $width-conteiner: 1279px;
 
 .cards {
     box-sizing: border-box;
-    margin-bottom: 135px;
+    margin-bottom: 175px;
     position: relative;
     z-index: 2;
 
     &__block {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
         flex: 1 1 397px;
         width: 397px;
+        height: 200px;
         padding: 20px;
         text-align: center;
         background-color: rgb(181, 228, 217);
         margin-left: 20px;
+        border-radius: 10px;
         transition: background-color, flex 1s, color 20s, 
     }
 
@@ -237,13 +242,14 @@ $width-conteiner: 1279px;
     &__block > h2 {
         font-size: 24px;
         color:rgb(122, 122, 137);
+        margin-bottom: 10px;
     }
 
     &__block > p {
         max-width: 340px;
         font-size: 18px;
         margin: 0 auto;
-        margin-top: 10px;
+        margin-bottom: 10px;
     }    
     
     &__block:hover>p {
@@ -252,6 +258,7 @@ $width-conteiner: 1279px;
 
 
 }
+
 
 .help {
     background-color: hsla(100, 82%, 87%, 0.89);
