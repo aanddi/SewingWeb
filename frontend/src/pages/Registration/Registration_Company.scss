@@ -1,0 +1,167 @@
+.header-reg-employer {
+    margin: 0 auto;
+    height: 105px;
+    width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reg-main {
+    margin: 0px auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    background-color: #fff;
+    height: 1250px;
+    width: 1100px;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.307);
+    border-radius: 20px;
+}
+
+.reg-list {
+
+    &__container {
+        margin: 0 auto;
+        max-width: 963px;
+        max-height: 1250px;
+        margin-top: 15px;
+    }
+
+    &__title {
+        font-size: 24px;
+        font-weight: 700;
+        position: relative;
+        top: 12px;
+        left: 11px;
+
+    }
+
+    &__form {
+        max-width: 800px;
+        height: 1150px;
+        margin: 0 auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .reg-form {
+
+        &__about-company {
+            margin-top: 55px;
+            width: 800px;
+
+            .about-block {
+
+                &__inn-input {
+                    width: 710px;
+                    height: 88px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+
+                    span {
+                        color: red;
+                    }
+                }
+
+                &__inn-text {
+                    font-size: 18px;
+                    font-weight: 600;
+                    font-style: italic;
+                    margin-left: 5px;
+                }
+
+                &__type-input {
+                    display: flex;
+                    flex-direction: column;
+                    height: 88px;
+                    justify-content: space-evenly;
+                    margin-top: 20px;
+
+                    span {
+                        color: red;
+                    }
+                }
+
+                &__type-input-text {
+                    font-size: 17px;
+                    font-style: italic;
+                    font-weight: 700;
+                    margin-left: 5px;
+                }
+
+                &__type-fields {
+                    display: flex;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #272991;
+                }
+
+                &__inp1 {
+                    margin-right: 40px;
+                }
+
+                &__last-input {
+                    display: flex;
+                    margin-top: 20px;   
+                }
+            }
+        }
+
+        &__contact-persone {
+            margin-top: 55px;
+
+            .contact-block {
+                &__title  {
+                    font-size: 18px;
+                    font-weight: 600;
+                    font-style: italic;
+                    position: relative;
+                    top: 12px;
+                    left: -50px;
+                }
+
+                &__contact-fields {
+                    margin-top: 55px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                
+                    .contact-fields {
+                        &__number2 {
+                            margin: 0 auto;
+                        }
+        
+                        &__password {
+                            display: flex;
+                            flex-direction: row;
+                        }
+                    }
+                }
+            }
+        }
+
+        & > p {
+            font-size: 18px;
+            font-weight: bold;
+            max-width: 540px;
+            text-align: center;
+            margin: 0 auto;
+            border-radius: 10px;
+            padding: 5px;
+            color: rgb(205, 34, 34);
+            background-color: #ff8f8f3b;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        &__btn {
+            width: 500px;
+            margin-top: 20px;
+        }
+    }  
+}

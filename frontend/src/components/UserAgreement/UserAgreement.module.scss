@@ -1,0 +1,18 @@
+.form_agreement {
+     float: right;
+     margin: 0 auto;
+     width: 530px;
+     text-align: center;
+     
+     &__input {
+          height: 20px;
+          width: 20px;
+          position: relative;
+          top: 4px;
+     }
+
+     &__text {
+          font-size: 18px;
+          margin-left: 5px;
+     }
+}
