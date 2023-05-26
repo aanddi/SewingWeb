@@ -15,6 +15,8 @@ import head_img1 from '../../assets/Employers/head_img1.svg'
 import head_img2 from '../../assets/Employers/head_img2.svg'
 import info_str1 from '../../assets/Employers/arrow_1.svg'
 import info_str2 from '../../assets/Employers/arrow_2.svg'
+import star from '../../assets/Employers/star.svg'
+import free from '../../assets/Employers/free.svg'
 
 import pattern1 from '../../assets/Patterns/pattern_green_square1.svg'
 import pattern2 from '../../assets/Patterns/pattern_green_square2.svg'
@@ -77,13 +79,63 @@ const Employers = () => {
 
                     <section className='employers__money money'>
                          <div className="money__conrainer">
+                              <h1>Выберите свой тариф</h1>
+                              <div className="money__blocks">
                               <div className="money__block">
-                                   <h1 className="money__title"></h1>
-                                   <h3 className="money__descript"></h3>
-                                   <p className="money__text"></p>
-                                   <Button__grey title='2000 руб'/>
+                                   <div className="money__titles">
+                                   <h1 className="money__title">Вакансия Стандарт</h1>
+                                   <h3 className="money__descript">Хороший выбор для экономии бюджета</h3>
+                                   </div>
+                                   <div className="money__texts">
+                                   <p className="money__text">- публикация на 30 дней;</p>
+                                   <p className="money__text">- отклик по телефону;</p>
+                                   </div>
+                                   <div className="money__btn">
+                                   <Button__grey path="/loginEmployer" title='2000 руб'/>
+                                   </div>
+                              </div>
+
+                              <div className="money__block">
+                              <div className="money__titles">
+                                   <h1 className="money__title">Вакансия <span> Pro </span></h1>
+                                   <h3 className="money__descript">Лучший выбор, для быстрого найма</h3> </div>
+                                   <div className="money__texts"> <p className="money__text">- публикация на 30 дней;</p>
+                                   <p className="money__text">- отклик по телефону;</p>
+                                   <p className="money__text-last">- продвижение в рассылке;</p>
+                                   <p className="money__text-last">- автоподбор резюме;</p>
+                                   </div> <div className="money__btn">
+                                   <Button__grey path="/loginEmployer" title='4100 руб'/> </div>
+                              </div>
+
+                              <div className="money__block">
+                              <div className="money__titles">
+                                   <h1 className="money__title">Вакансия <span> Премиум <img src={star} alt="" /> </span></h1>
+                                   <h3 className="money__descript">Сделайте поиск сотрудника в 10 раза эффективнее</h3> </div>
+                                   <div className="money__texts"> <p className="money__text">- публикация на 30 дней;</p>
+                                   <p className="money__text">- отклик по телефону;</p>
+                                   <p className="money__text">- продвижение в рассылке;</p>
+                                   <p className="money__text">- автоподбор резюме;</p>
+                                   <p className="money__text-last">- вакансия в рекомендуемых на 7 дней;</p>
+                                   <p className="money__text-last">- выделение в поиске на 7 дней;</p> </div> <div className="money__btn">
+                                   <Button__grey path="/loginEmployer" title='7500 руб'/> </div>
+                              </div>
+
+                              
+                              <div className="money__block-free">
+                              <img className="money__free-img"src={free} alt="" />
+                                   <div className="titles">
+                                   <h1 className="money__title">Доступ к резюме и просмотр контактов пользователей</h1>
+                                   {/* <h3 className="money__descript">Для поиска сотрудников достаточно просмотреть резюме</h3> */}
+                                   </div> <div className="money__texts">
+                                        <p className="money__text">- просмотр резюме соискателей;</p>
+                                        <p className="money__text">- просмотр контактов соискателей;</p> 
+                                        <div className="money__btn">
+                                        <Button__grey path="/loginEmployer" title='0 руб'/> </div>
+                                        </div> 
+                                   </div>
                               </div>
                          </div>
+                         
 
                     </section>
 

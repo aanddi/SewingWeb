@@ -1,6 +1,4 @@
-import './Registration_Company.scss';
-
-import {Link} from 'react-router-dom';
+import './Registration_Company.scss'
 
 import logo_id from '../../assets/Logo/logo.id.svg';
 import Button__grey from '../../ui/Buttons/Button__Grey/Button__grey';
@@ -9,6 +7,7 @@ import InputField from '../Registration/components/entry_field';
 import Input_btn from '../../ui/Buttons/Choice2/Choise_type';
 import Submit from '../../ui/Buttons/Submit/Submit';
 import UserAgreement from '../../components/UserAgreement/UserAgreement';
+// import SelectInput from '../../ui/Inputs/select';
 
 const RegCompany = () => {
     return (
@@ -18,7 +17,7 @@ const RegCompany = () => {
                     <img src={logo_id} alt="" /> 
                 </div>
                 <div>
-                    <Button__grey title='Назад'/>
+                    <Button__grey path="/employers" title='Назад'/>
                 </div>
             </header>
 
@@ -31,35 +30,36 @@ const RegCompany = () => {
                                 <div className="reg-form__about-company about-block">
                                     <div className="about-block__inn-input">  
                                         <label className="about-block__inn-text"for="input"> ИНН КОМПАНИИ <span> * </span> </label>
-                                        <Input id="#input" title="" /> 
+                                        <Input id="#input" title="" placeholder="Введите ИНН"/> 
                                     </div>
                                     <div className="about-block__type-input"> 
                                         <label className="about-block__type-input-text" for="input2"> Тип компании <span> * </span> </label>
                                         <div className="about-block__type-fields">
                                             <div className="about-block__inp1">
-                                                <Input_btn id="input2" title="Прямой работодатель" value=""/> 
+                                                <Input_btn id="input2" title="Прямой работодатель" value="" /> 
                                             </div>
                                             <Input_btn id="input2"  title="Кадровое агенство" value=""/> 
                                         </div>
                                     </div>
                                     <div className="about-block__last-input">
-                                        <InputField title="Название компании" />
-                                        <InputField title="Город" />
+                                        <InputField title="Название компании" placeholder="Полное наименование"/>
+                                        <InputField title="Город" placeholder="Город размещения компании"/>
+                                        {/* <SelectInput name="citys" for="city" value1="1" option1="1" /> */}
                                     </div>
                                 </div>
                                 <div className="reg-form__contact-persone contact-block">
                                     <h1 className='contact-block__title'>КОНТАКТНОЕ ЛИЦО (конфиденциально)</h1>
                                     <div className="contact-block__contact-fields contact-fields">
-                                        <InputField title="Имя" />
-                                        <InputField title="Фамилия" />
-                                        <InputField title="Email" />
-                                        <InputField title="Номер телефона" />
+                                        <InputField title="Имя" placeholder="Введите имя"/>
+                                        <InputField title="Фамилия" placeholder="Введите фамилию"/>
+                                        <InputField title="Email" placeholder="Введите email"/>
+                                        <InputField title="Номер телефона" placeholder="Введите номер телефона"/>
                                         <div    className="contact-fields__number2">
-                                            <InputField title="Добавочный номер" />
+                                            <InputField title="Добавочный номер" placeholder="Если имеется"/>
                                         </div>
                                         <div className="contact-fields__password">
-                                            <InputField title="Пароль" />
-                                            <InputField title="Повторите пароль" />
+                                            <InputField title="Пароль" placeholder="Введите пароль"/>
+                                            <InputField title="Повторите пароль" placeholder="Подтвердите пароль"/>
                                         </div>
                                     </div>
                                 </div>

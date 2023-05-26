@@ -6,7 +6,7 @@ const EntryField = (props) => {
     return (
         <div className={style.input_block}>  
             <label className={style.input_block__title} for='input'> {props.title} <span> * </span> </label> 
-            <Input id="#input" className={style.input_block__field} title=""/>
+            <Input id="#input" className={style.input_block__field} title="" placeholder={props.placeholder}/>
         </div>
     )
 }
