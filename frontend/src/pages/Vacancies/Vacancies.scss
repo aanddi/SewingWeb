@@ -1,11 +1,8 @@
 .vacancies {
-
 		&__content {
 			display: flex;
 			flex-wrap: nowrap;
-			margin-top: 100px;
-			
-			
+			margin-top: 30px;
 		}
 
 		&__left {
@@ -29,7 +26,7 @@
 
 	&__bigtitle {
 		font-weight: 900;
-		font-size: 45px;
+		font-size: 40px;
 		line-height: 120%;
 		color: #2c2c2c;
 		padding-bottom: 20px;
@@ -44,7 +41,7 @@
 
 	&__infoText {
 		display: flex;
-		font-size: 20px;
+		font-size: 16px;
 		line-height: 24px;
 	}
 
@@ -54,6 +51,7 @@
 	}
 
 	&__panel {
+
 		display: flex;
 		flex-direction: column;
 		margin-left: 70px;
@@ -83,7 +81,7 @@
 
 	&__date {
 		font-weight: 500;
-		font-size: 18px;
+		font-size: 16px;
 		line-height: 24px;
 		text-decoration-line: underline;
 		color: #000000;
@@ -117,8 +115,10 @@
 			flex-direction: column;
 			justify-content: center;
 
+
 			& > *:not(:last-child) {
 				margin-bottom: 23px;
+				width: 100%;
 			}
 		}
 
@@ -139,31 +139,43 @@
 	border: 2px solid #D6D9DC;
 	border-radius: 10px;
 
-
-
 	&__name {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+
+		& img {
+			border-radius: 7px;
+		}
 	}
 
 	&__title {
 		margin-left: 5px;
-		font-size: 20px;
+		font-size: 18px;
 		line-height: 24px;
-		color: #328EE3;
+		display: flex;
+		align-items: center;
 
-		&:hover {
+
+		& *:hover {
 			text-decoration: underline;
 		}
+
+		h2 a {
+			color: #328EE3;
+			margin-left: 5px;
+		}
+
+
 	}
 
 	&__vakancies {
-		font-size: 17px;
+		font-size: 15px;
 		line-height: 21px;
 		text-decoration-line: underline;
 		color: #0D0C0C;
 		margin: 10px 0;
+
 		&:hover {
 			text-decoration: none;
 		}
@@ -173,12 +185,20 @@
 		display: flex;
 		align-items: center;
 		margin-top: 5px;
+		font-size: 14px;
+		color: #328EE3;
+		text-decoration-line: underline;
+
 		& > *:not(:last-child) {
 			margin-right: 2px;
 		}
 
 		span {
 			margin-left: 8px;
+		}
+
+		&:hover {
+			text-decoration: none;
 		}
 	}
 }
@@ -192,18 +212,31 @@
 
 	&__title {
 		font-weight: 600;
-		font-size: 22px;
+		font-size: 19px;
 		line-height: 30px;
 		color: #000000;
+		margin-bottom: 5px;
+
+
 	}
 
 	&__block {
 		p {
 			text-align: justify;
-			font-size: 18px;
+			font-size: 15px;
 			line-height: 150%;
 			text-align: justify;
 			color: #000000;
+		}
+
+		h6 {
+			font-size: 14px;
+			margin-bottom: 10px;
+		}
+
+		iframe {
+			border-radius: 15px;
+			border: 1px solid #dbd9d9;
 		}
 	}
 
@@ -211,9 +244,28 @@
 		display: flex;
 		flex-wrap: wrap;
 		margin-top: 15px;
+
 		& > * {
-			flex: 1 1 20%;
-			margin-right: 5px;
+
+			margin-right: 10px;
+		}
+
+		h5 {
+			font-size: 15px;
+			border: 1px solid #3692DC;
+			padding: 7px 10px;
+			border-radius: 6px;
+			text-align: center;
+			margin-bottom: 10px;
 		}
 	}
+}
+
+.ribbon__vacanciesTitle {
+	margin-bottom: 20px;
+	font-weight: 600;
+	font-size: 19px;
+	line-height: 30px;
+	color: #000000;
+
 }

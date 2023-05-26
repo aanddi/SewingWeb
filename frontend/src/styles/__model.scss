@@ -22,6 +22,10 @@ body,
    flex: 1 1 auto;
    display: flex;
    flex-direction: column;
+   
+   & > *:first-child {
+      margin-top: 60px ;
+   }
 }
 
 [class*="__container"] {
@@ -29,4 +33,13 @@ body,
    padding: 0px 15px;
    margin: 0px auto;
    width: 100%;
+}
+
+.inactive__globalNavigation {
+   border-bottom: 5px solid #0D1117;
+}
+
+.active__globalNavigation {
+   border-bottom: 5px solid #3490DF;
+
 }

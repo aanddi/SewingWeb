@@ -1,22 +1,22 @@
 .search {
-     background-color: #4B62EA;
+     background-color: #3490DF;
      display: inline-flex;
      justify-content: center;
-     padding: 6px;
-     border-radius: 20px;
-     padding-left: 6px;
+     padding: 7px;
+     border-radius: 25px;
+     padding-left: 9px;
      align-items: center;
 
      input {
           background-color: #fff;
-          padding: 13px 181px 13px 9px;
-          border-radius: 16px 0 0px 16px;
+          padding: 13px 181px 13px 17px;
+          border-radius: 25px 0 0px 25px;
      }
 
      &__btn_tools {
           background-color: #fff;
           padding: 13px 12px 12px 12px;
-          border-radius: 0 16px 16px 0;
+          border-radius: 0 25px 25px 0;
           margin-left: 2px;
      }
 

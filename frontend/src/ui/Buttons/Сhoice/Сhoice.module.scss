@@ -1,6 +1,6 @@
 .choice {
-
-     background-color: #9e9c9c;
+     background-color: #f8f5f5;
+     border: 1px solid #b8b6b6;
      border-radius: 15px;
      display: flex;
      justify-content: center;
@@ -8,22 +8,23 @@
      width: 100%;
      margin-bottom: 15px;
      transition: all 0.2s ease-in;
-   
+     color: #5f5e5e;
 
 
-     &:hover {
-          background-color: #fa2c52;
-     }
+     
 
      &__button {
-          color: #fff;
-          font-weight: 500;
+          font-weight: 400;
           font-size: 17px;
           line-height: 21px;
           padding: 7px 0;
- 
+     }
 
 
-
+     &:hover{
+          border: none;
+          background-color: #fa2c52;
+          color: #fdfdfd;
      }
 }
+

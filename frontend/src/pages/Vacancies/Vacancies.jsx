@@ -1,24 +1,32 @@
 import './Vacancies.scss'
 
+
+
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 
 import Button__blue from '../../ui/Buttons/Button__Blue/Button__blue';
+import {Link } from 'react-router-dom'
+
 import Button__grey from '../../ui/Buttons/Button__Grey/Button__grey';
 import Submit from '../../ui/Buttons/Submit/Submit'
 
 import VacanciesCard from '../../pages/Home/components/VacanciesCard/VacanciesCard'
 
-import favorites from '../../assets/Home/favorites.svg';
+import favorites from '../../assets/Global-icon/favorites.svg';
 import Mark from '../../assets/Global-icon/mark.svg'
 import Star from '../../assets/Global-icon/star.svg'
 import Logo from '../../assets/Logo/LogoInterprises.svg'
 
 import Ad from '../../components/Ad/Ad'
 
+
+
+
+
 const Vacancies = () => {
+
      return ( 
-          
      <div className="wrapper">
            <Header />
                <main className='page vacancies'>
@@ -55,18 +63,6 @@ const Vacancies = () => {
                                    </div>
                                    <div className="left__content content">
                                         <div className="content__block">
-                                             <div className="content__title">Ключевые навыки</div>
-                                             <div className="content__btn">
-                                                  <Submit title='Массовое производство'/>
-                                                  <Submit title='Работа в команде'/>
-                                                  <Submit title='Ответственность'/>
-                                                  
-                                             </div>
-                                        </div>
-                                        <div className="content__block">
-                                             <div className="content__title">Расположение</div>
-                                        </div>
-                                        <div className="content__block">
                                              <div className="content__title">О нас</div>
                                              <p>
                                                   Набираем как на постоянную работу, так и на подработку. 
@@ -100,11 +96,26 @@ const Vacancies = () => {
                                              </p>
                                              <p>Если вас заинтересовала наша вакансия, нажмите кнопку «Откликнуться» или свяжитесь с нами по контактному номеру телефона</p> 
                                         </div>
-
                                         <div className="content__block">
-                                             <div className="content__title">Похожие вакансии</div>
-                                             
+                                             <div className="content__title">Ключевые навыки</div>
+                                             <div className="content__btn">
+                                                  <h5>массовое производство</h5>
+                                                  <h5>работа в команде</h5>
+                                                  <h5>ответственность</h5>
+                                                  <h5>массовое производство</h5>
+                                                  <h5>работа в команде</h5>
+                                                  <h5>ответственность</h5>
+                                             </div>
                                         </div>
+                                        <div className="content__block">
+                                             <div className="content__title">Расположение</div>
+                                             <h6>г.Симферополь, Учебный переулок 8</h6>
+                                             <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1d4d9c1c194c130a58410eb949d712316553ac943af0a52a114b4d263ab7e0f3&amp;source=constructor" 
+                                        width="830" height="225" frameborder="0">
+                                   </iframe>
+                                        </div>
+
+                                        
                                    </div>
                                    
 
@@ -114,14 +125,14 @@ const Vacancies = () => {
                                          от 30 000 руб.
                                    </h2>
                                    <div className="right__buttons">
-                                        <Button__blue title='Откликнуться' path='/loguser'/>
+                                        <Button__blue title='Откликнуться' path='/loginUser'/>
                                         <Button__grey title='Показать номер' path='/vacancies/1'/>
                                    </div>
                                    <div className="right__company company">
                                         <div className="company__name">
                                              <div className="company__title">
                                                   <img src={Mark} alt="" />
-                                                  <span>ООО ТканьРФ</span> 
+                                                  <h2><Link to='/enterprises/1'>ООО ТканьРФ</Link></h2>
                                              </div>
                                              <img src={Logo} alt="" />
                                         </div>
@@ -142,7 +153,11 @@ const Vacancies = () => {
                               
                          </div>
                          <section className='home__ribbon ribbon'>
+                              <div className="content__block">
+                                   <div className="ribbon__vacanciesTitle">Похожие вакансии</div>      
+                              </div>
                               <div className="ribbon__content">
+                                   
                                    <div className="ribbon__vacancies vacancies">
                                         <VacanciesCard path='/vacancies/2'/>
                                         <VacanciesCard path='/vacancies/2'/>

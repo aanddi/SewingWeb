@@ -1,6 +1,7 @@
 .btn__link {
-     padding: 10px 25px;
-     background-color: #D6D9DC;
+     padding: 7px 20px;
+     background: #f3f1f1;
+     border: 1px solid #d3d0d0;
      border-radius: 20px;
      display: inline-flex;
      transition: all 0.4s ease-out;
@@ -8,7 +9,7 @@
 
 
      .link {
-          font-size: 17px;
+          font-size: 15px;
           line-height: 21px;
           color: #050505;
      
@@ -16,6 +17,6 @@
 }
 
 .btn__link:hover {
-     background-color: #b4b4b4;
+     background-color: #dddbdb;
 
 }

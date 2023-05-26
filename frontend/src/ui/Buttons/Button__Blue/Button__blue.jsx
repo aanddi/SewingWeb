@@ -4,10 +4,11 @@ import style from './Button__blue.module.scss'
 
 const Button__blue = (props) => {
      return ( 
-          <div className={style.btn__link}>
-               <Link to={props.path} className={style.link}>{props.title}</Link>
-          </div>
-          
+               <div className={style.btn__link}>
+                    <Link to={props.path}> 
+                         <span className={style.link}>{props.title}</span>
+                    </Link>
+               </div>
       );
 }
  

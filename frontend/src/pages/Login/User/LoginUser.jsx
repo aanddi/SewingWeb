@@ -16,7 +16,7 @@ import dzen from '../../../assets/Footer/icon//dzen.svg'
 const LoginUser = () => {
      return ( 
           <div className="wrapper">
-               <main className="page log-user">
+               <main className="page loguser">
                     <div className="loguser__wrapper">
 
                          <div className="loguser__bg"></div>
@@ -25,7 +25,7 @@ const LoginUser = () => {
                                    <div className="loguser__log_container">
                                         <header className='loguser__header'>
                                              <img src={logo_id} alt="" />
-                                             <Button__grey title='Назад' />
+                                             <Button__grey title='Назад' path='/'/>
                                              
                                         </header>
 

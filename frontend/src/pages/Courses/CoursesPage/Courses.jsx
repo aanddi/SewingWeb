@@ -1,12 +1,13 @@
 import './Courses.scss'
 
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
-import Ad from '../../components/Ad/Ad'
+import Header from '../../../components/Header/Header'
+import Footer from '../../../components/Footer/Footer'
+import Ad from '../../../components/Ad/Ad'
 
-import Doc from '../../assets/Courses/doc.jpg'
-import CoursesCard from './components/CoursesCard/CoursesCard'
-const Courses = () => {
+import Doc from '../../../assets/Courses/doc.jpg'
+import CoursesCard from '../components/CoursesCard/CoursesCard'
+
+const CoursesPage = () => {
      return ( 
      <div className="wrapper">
           <Header />
@@ -61,4 +62,4 @@ const Courses = () => {
       );
 }
  
-export default Courses;
+export default CoursesPage;

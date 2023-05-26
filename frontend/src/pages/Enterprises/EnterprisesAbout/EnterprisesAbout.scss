@@ -1,0 +1,193 @@
+.enterprisesAbout {
+		&__content {
+               background-image: url(../../../assets/Enterprises/bgHeaderAbout.png);
+               background-repeat: no-repeat;
+               background-size: cover;  
+               margin-bottom: 40px;
+		}
+
+		&__header {
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+               margin: 56px 0;
+		}
+
+		&__left {
+               flex: 1 0 60%;
+		}
+
+		&__logo {
+               display: flex;
+               align-items: center;
+               font-weight: 900;
+               font-size: 35px;
+               line-height: 42px;
+               color: #FFFFFF;
+
+               & > * {
+                    margin-right: 10px;
+               }
+
+               img:first-child {
+                    width: 30px;
+               }
+
+               img:last-child {
+                    border-radius: 10px;
+               }
+		}
+
+		&__subLogo {
+               font-size: 19px;
+               line-height: 23px;
+               margin-top: 25px;
+               color: #FFFFFF;
+		}
+
+		&__right {
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+               flex: 1 0 40%;
+		}
+
+		&__info {
+               & > *:not(:last-child) {
+                    margin-bottom: 10px;
+               }
+		}
+
+		&__infoText {
+               span, a {
+                    font-size: 17px;
+                    line-height: 21px;
+                    color: #FFFFFF;
+               }
+
+               &_bold {
+                    font-weight: 700;
+                    font-size: 17px;
+                    line-height: 21px;
+                    text-decoration-line: underline;
+                    color: #FFFFFF;
+                    margin-right: 5px;
+               }
+		}
+
+		&__connection {
+               & > *:not(:last-child) {
+                    margin-bottom: 20px;
+               }
+		}
+
+		&__check {
+               font-size: 15px;
+               line-height: 18px;
+               color: #FFFFFF;
+		}
+
+		&__link {
+               background: #328EE3;
+               border-radius: 6px;
+               padding: 10px 13px;
+               display: flex;
+               justify-content: center;
+               transition: all 0.2s ease-in;
+
+               a {
+                    color: #FFFFFF;
+               }
+
+               &:hover {
+                    background: #589ee0;
+               }
+		}
+
+/*======================================================*/
+
+          &__wrapperCard {
+               display: flex;
+               align-items: center;
+               padding: 0 0px 50px 55px;
+          }
+
+          &__aboutContent {
+               background: radial-gradient(67.35% 426.64% at 94.92% 32.65%, rgba(255, 176, 205, 0.37) 5.21%, rgba(255, 252, 253, 0) 100%), radial-gradient(50% 474.91% at 0% 53.98%, #DCECFB 0%, rgba(255, 255, 255, 0) 100%) ;
+               border: 1px solid #D1D0D0;
+               filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+               border-radius: 30px;
+          }
+
+          &__bigTitle {
+               font-weight: 700;
+               font-size: 30px;
+               line-height: 42px;
+               text-align: center;
+               color: #000000;
+               margin: 25px 0;
+          }
+     
+          &__textAbout {
+               flex: 1 0 70%;
+               font-size: 18px;
+               line-height: 173%;
+               text-align: justify;
+               letter-spacing: 0.03em;
+               color: #0E0E0E;
+          }
+     
+          &__aboutLogo {
+               flex: 1 0 30%;
+               display: flex;
+               justify-content: center;
+               width: 200px;
+               height: 150px;
+               transition: all 0.2s ease-in;
+
+
+               img {
+                    border-radius: 20px; 
+                    transition: all 0.2s ease-in;
+               }
+
+               img:hover {
+                    transform: scale(1.1);
+               }
+          }
+
+
+/*======================================================*/
+
+		&__reviewsMap {
+               margin-top: 54px;
+		}
+
+		&__contentReviewsMap {
+               display: flex;
+         
+               background: linear-gradient(180deg, #F7FFF4 0%, rgba(240, 242, 255, 0.916667) 0.01%, #FFF0F1 100%);
+               box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+               border-radius: 39px;
+               padding: 0px 40px 40px 0;
+		}
+
+		&__Reviews {
+               flex: 1 0 50%;
+		}
+
+		&__Map {
+               flex: 1 40%;
+
+               iframe {
+                    border-radius: 30px;
+                    border: 1px solid #dbd9d9;
+               }
+
+		}
+}
+
+
+
+
+

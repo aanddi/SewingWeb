@@ -1,10 +1,12 @@
 .vacancies__card {
-     border: 1px solid #BBB3B3;
-     border-radius: 10px;
-     margin-right: 80px;
+     background: radial-gradient(116.58% 1156.56% at 0% 50%, #EDF5FC 14.59%, rgba(255, 220, 216, 0.44) 87.26%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+     border: 1px solid #CCCCCC;
+     box-shadow: 10px 12px 7px rgba(0, 0, 0, 0.15);
+     border-radius: 20px;
+     margin-right: 130px;
      font-size: 17px;
      position: relative;
-     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+     
 
      .card__patterns_top {
           position: absolute;
@@ -15,7 +17,7 @@
      .card__patterns_bottom {
           position: absolute;
           bottom: 0;
-          left: 700px;
+          left: 600px;
      }
 
      .content {
@@ -26,25 +28,42 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          font-size: 22px;
-          font-weight: 900;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 27px;
+          color: #000000;
 
      }
 
      .card__price {
+          font-size: 17px;
           margin-top: 7px;
-          margin-bottom: 25px;
+          margin-bottom: 15px;
           font-weight: 600;
+          color: #000000;
      }
 
      .card__about {
-          font-size: 17px;
-          line-height: 21px;
-          margin-bottom: 25px;
+          font-size: 14px;
+          line-height:  140%;
+          letter-spacing: 0.01em;
+          color: #2F2E2E;
+          margin-bottom: 20px;
      }
 
      .card__company {
+          display: flex;
+          align-items: center;
           margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 500;
+     }
+
+     .card__map {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+          font-size: 14px;
           font-weight: 500;
      }
 
@@ -56,13 +75,23 @@
           margin-right: 6px;
      }
 
-     .card__map {
-          margin-bottom: 35px;
-          font-weight: 500;
-     }
-
      .button > *:not(:last-child) {
           margin-right: 18px;
+     }
+
+     .card__bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+     }
+
+     .card__logo img {
+          width: 50px;
+          border-radius: 10px;
+     }
+
+     .card__favorites *:hover {
+          fill: #3490DF;
      }
 
 }

@@ -1,7 +1,4 @@
 .enterprises {
-     background: #F7FAFF;
-     padding: 69px 0;
-
 		&__header {
                margin-top: 40px;    
                display: flex;  
@@ -35,8 +32,8 @@
 		}
 
           &__btn {
-               background: #4B62EA;
-               border: 1px solid #4B62EA;
+               background: #3692DC;
+               border: 1px solid #3692DC;
                border-radius: 0 10px 10px 0;
                display: flex;
                
@@ -65,7 +62,8 @@
                flex: 1 0 40%;
                
               & > * {
-                    border-radius: 15px;
+                    border-radius: 30px;
+                    border: 1px solid #d3d3d3
               }
 
           }

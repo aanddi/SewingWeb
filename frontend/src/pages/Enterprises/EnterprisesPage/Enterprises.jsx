@@ -1,10 +1,10 @@
 import './Enterprises.scss'
 
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
+import Header from '../../../components/Header/Header'
+import Footer from '../../../components/Footer/Footer'
 
-import Choice from '../../ui/Buttons/Сhoice/Сhoice'
-import EnterprisesCard from './components/EnterprisesCard'
+import Choice from '../../../ui/Buttons/Сhoice/Сhoice'
+import EnterprisesCard from '../components/EnterprisesCard/EnterprisesCard'
 
 const Enterprises = () => {
      return ( 

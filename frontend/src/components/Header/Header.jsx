@@ -9,12 +9,20 @@ import city from '../../assets/Header/icon/city.svg';
 
 const Header = () => {
 
-     const location = useLocation();
-     const { pathname } = location;
-     console.log(pathname)
+     const { pathname } = useLocation();
+     const pathNameLocation = pathname.split('/');
+
+     const location = (isLocation) => {
+          if (isLocation[1] === '') {
+               return 'active__globalNavigation';
+          } else if (isLocation[1] === 'vacancies') {
+               return 'active__globalNavigation';
+          } else {
+               return 'inactive__globalNavigation';
+          }
+     }
 
      return ( 
-         
           <header className="header">
                <div className="header__container">
                     <div className="header__content">
@@ -25,7 +33,7 @@ const Header = () => {
 
                                         <li className="menu__item">
                                              <span  className="menu__link">
-                                                  <Link to='/' className={pathname === "/" ? "active__globalNavigation" : "inactive"}>
+                                                  <Link to='/' className={location(pathNameLocation)}>
                                                        Найти работу
                                                   </Link>
                                              </span>   
@@ -33,7 +41,7 @@ const Header = () => {
 
                                         <li className="menu__item">
                                              <span  className="menu__link">
-                                                  <Link to='/employers' className={pathname === "/employers" ? "active__globalNavigation" : "inactive"}>
+                                                  <Link to='/employers' className={pathNameLocation[1] === "employers" ? "active__globalNavigation" : "inactive__globalNavigation"}>
                                                        Работодателям
                                                   </Link>
                                              </span>   
@@ -41,7 +49,7 @@ const Header = () => {
 
                                         <li className="menu__item">
                                              <span  className="menu__link">
-                                                  <Link to='/professions' className={pathname === "/professions" ? "active__globalNavigation" : "inactive"}>
+                                                  <Link to='/professions' className={pathNameLocation[1] === "professions" ? "active__globalNavigation" : "inactive__globalNavigation"}>
                                                        Профессии
                                                   </Link>
                                              </span>   
@@ -49,7 +57,7 @@ const Header = () => {
 
                                         <li className="menu__item">
                                              <span  className="menu__link">
-                                                  <Link to='/enterprises' className={pathname === "/enterprises" ? "active__globalNavigation" : "inactive"}>
+                                                  <Link to='/enterprises' className={pathNameLocation[1] === "enterprises" ? "active__globalNavigation" : "inactive__globalNavigation"}>
                                                        Предприятия
                                                   </Link>
                                              </span>   
@@ -57,7 +65,7 @@ const Header = () => {
 
                                         <li className="menu__item">
                                              <span  className="menu__link">
-                                                  <Link to='/courses' className={pathname === "/courses" ? "active__globalNavigation" : "inactive"}>
+                                                  <Link to='/courses' className={pathNameLocation[1] === "courses" ? "active__globalNavigation" : "inactive__globalNavigation"}>
                                                        Курсы
                                                   </Link>
                                              </span>   
