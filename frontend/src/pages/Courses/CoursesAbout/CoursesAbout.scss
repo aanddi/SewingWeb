@@ -232,11 +232,6 @@
                justify-content: space-between;
                flex-wrap: wrap;
                margin: 0 -15px;
-     
-               
-               & > * {
-    
-               }
 		}
 
 
@@ -280,7 +275,6 @@
 		&__cardBody {
                display: flex;
                flex: 1 1 auto;
-               display: flex;
                flex-direction: column;
                padding: 10px 30px;
                p {

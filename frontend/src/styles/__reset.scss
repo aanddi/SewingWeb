@@ -70,8 +70,8 @@ button, input[type="submit"] {
     cursor: pointer;
 }
 
-input:focus, input:active,
-button:focus, button:active {
+input:focus, textarea:focus, input:active,
+button:focus,textarea:active, button:active {
     outline: none;
 }
 
