@@ -12,6 +12,7 @@ import vk from '../../../assets/Footer/icon/vk.svg'
 import telegram from '../../../assets/Footer/icon/telegram.svg'
 import youtube from '../../../assets/Footer/icon/youtube.svg'
 import dzen from '../../../assets/Footer/icon//dzen.svg'
+import Back from '../../../ui/Buttons/Back/Back';
 
 const LoginUser = () => {
      return ( 
@@ -25,7 +26,7 @@ const LoginUser = () => {
                                    <div className="loguser__log_container">
                                         <header className='loguser__header'>
                                              <img src={logo_id} alt="" />
-                                             <Button__grey title='Назад' path='/'/>
+                                             <Back title='Назад' path='/'/>
                                              
                                         </header>
 

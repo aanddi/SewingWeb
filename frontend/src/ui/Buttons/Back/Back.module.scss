@@ -1,0 +1,23 @@
+.btn__link {
+
+     background-color: #ffffff;
+     border: 1px solid #b9b8b8;
+     border-radius: 5px;
+     display: inline-flex;
+     transition: all 0.4s ease-out;
+     justify-content: center;
+
+     .link {
+          display: block;
+          padding: 7px 25px;
+          font-size: 15px;
+          line-height: 21px;
+          color: #000000;
+          width: 100%;
+     }
+}
+
+.btn__link:hover {
+     background-color: #e6e6e6;
+
+}

@@ -12,11 +12,13 @@ import vk from '../../assets/Footer/icon/vk.svg'
 import telegram from '../../assets/Footer/icon/telegram.svg'
 import youtube from '../../assets/Footer/icon/youtube.svg'
 import dzen from '../../assets/Footer/icon//dzen.svg'
+import Back from '../../ui/Buttons/Back/Back';
+import UserAgreement from '../../components/UserAgreement/UserAgreement';
 
 const Registration = () => {
      return ( 
           <div className="wrapper">
-               <main className="page log-user">
+               <main className="page loguser">
                     <div className="loguser__wrapper">
 
                          <div className="loguser__bg"></div>
@@ -25,7 +27,7 @@ const Registration = () => {
                                    <div className="loguser__log_container">
                                         <header className='loguser__header'>
                                              <img src={logo_id} alt="" />
-                                             <Button__grey title='Назад' />
+                                             <Back title='Назад' path="/"/>
                                              
                                         </header>
 
@@ -39,7 +41,9 @@ const Registration = () => {
                                              <Input title="Номер телефона" />
                                              <Input title="Пароль" type="password"/>
                                              <Input title="Повторите пароль" type="password"/>
+                                             <UserAgreement />
                                              <Submit title='Войти' />
+                                             
                                         </form>
                                         <div className="loguser__pas"><Link to='/loginUser'>Есть аккаунт?</Link></div>
                                         

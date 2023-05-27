@@ -1,0 +1,446 @@
+.coursesAbout {
+		&__header {
+               padding: 72px 0;
+               background-image: url('../../../assets/Courses/About/header_bg.png');
+               background-repeat: no-repeat;
+               background-size: cover;
+               background-attachment: fixed;
+		}
+
+}
+.header-coursesAbout {
+
+     &__container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+     }
+
+		&__bigTitle {
+               margin-bottom: 31px;
+               font-weight: 800;
+               font-size: 50px;
+               line-height: 61px;
+               text-align: center;
+               color: #FF4572;
+		}
+
+		&__subTitle {
+               font-weight: 500;
+               font-size: 20px;
+               line-height: 145%;
+               text-align: center;
+               color: #FFFFFF;
+               width: 361px;
+               margin-bottom: 80px;
+
+		}
+
+		&__link {
+
+               a {
+                    font-weight: 500;
+                    font-size: 22px;
+                    line-height: 27px;
+                    text-align: center;
+                    color: #FFFFFF;
+                    background: #3692DC;
+                    border-radius: 10px;
+                    padding: 14px 100px;
+               }
+
+               span {
+
+               }
+		}
+}
+
+.coursesAbout {
+     &__description {
+          background: linear-gradient(180deg, #E6F3FF 0%, #FFE4E5 100%);
+          border-radius: 0px 0px 300px  300px;
+     }
+}
+
+.description-coursesAbout {
+
+     &__bitTitle {
+          font-weight: 700;
+          font-size: 36px;
+          line-height: 44px;
+          text-align: center;
+          text-transform: uppercase;
+          color: #98401C;
+          margin: 0 0 30px 0;
+     }
+
+     &__content {
+          display: flex;
+          justify-content: space-between;
+     }
+
+     &__card {
+          margin-bottom: 60px;
+          background: #FFFFFF;
+          box-shadow: 7px 10px 10px rgba(0, 0, 0, 0.25);
+          border-radius: 120px;
+          padding: 50px 60px;
+          margin-top: 60px;
+     }
+
+     &__cardItem {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+     }
+
+     &__cardImg {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #cfcece;
+          border-radius: 30px;
+
+          & > img {
+               width: 350px;
+               height: 238.47px;
+          }
+     }
+
+     &__title {
+          font-weight: 700;
+          font-size: 23px;
+          line-height: 118%;
+          text-align: center;
+          color: #98401C;
+          padding: 30px 0 20px 0 ;
+     }
+
+     &__subTitle {
+          font-size: 18px;
+          line-height: 160%;
+          display: flex;
+          align-items: center;
+          text-align: center;
+          color: #696868;
+          width: 328px;
+     }
+}
+
+.afterTraing-coursesAbout {
+     margin-top: 45px;
+
+     &__card {
+          background: linear-gradient(0deg, rgba(255, 255, 255, 0.73), rgba(255, 255, 255, 0.73)), linear-gradient(269.69deg, #0F94FF 21.34%, #FFFFFF 99.71%);
+          border: 1px solid #d4e8fc;
+          box-shadow: 7px 6px 10px rgba(0, 0, 0, 0.25);
+          border-radius: 100px;
+          display: flex;
+          align-items: center;
+          padding: 30px 50px;
+     }
+
+     &__legt {
+          flex: 1 0 20%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+     }
+
+     &__right {
+          flex: 1 0 40%;
+     }
+
+     &__rightTitle {
+          font-weight: 700;
+          font-size: 36px;
+          line-height: 44px;
+          margin-bottom: 25px;
+          text-align: center;
+          color: #000000;
+     }
+
+     &__rightText {
+          font-size: 20px;
+          line-height: 145%;
+          display: flex;
+          align-items: center;
+          text-align: justify;
+          color: #000000;
+
+          &:not(:last-child) {
+               margin-bottom: 12px;
+          }
+
+          &:last-child {
+               margin-bottom: 25px;
+          }
+     }
+
+     &__rightLink {
+          display: flex;
+          justify-content: center;
+          a {
+               background: #3692DC;
+               border-radius: 10px;
+               padding: 18px 30px;
+               color: #ffffff;
+          }
+     }
+
+
+}
+
+.price-coursesAbout {
+
+     &__container {
+          align-items: center;
+          padding: 0 0 45px 0;
+     }
+
+     &__left {
+          flex: 1 0 60%;
+          margin: 50px 0;
+          align-items: center;
+     }
+
+}
+
+.price-coursesAbout {
+          margin-top: 65px;
+
+		&__content {
+
+              
+		}
+
+		&__title {
+               font-weight: 700;
+               font-size: 36px;
+               line-height: 44px;
+               margin-bottom: 25px;
+               text-align: center;
+               color: #000000;
+		}
+
+		&__cards {
+               display: flex;
+               justify-content: space-between;
+               flex-wrap: wrap;
+               margin: 0 -15px;
+     
+               
+               & > * {
+    
+               }
+		}
+
+
+		&__cardItem {
+               padding: 0 15px;
+               flex: 1 0 33%;
+		}
+
+          &__cardItemContent {
+               display: flex;
+               flex-direction: column;
+               border: 1px solid #e9e6e6;
+               background-color: #ffffff;
+               border-radius: 31px 31px 10px 10px;
+               min-height: 100%;
+               box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+          }
+
+		&__cardTitle {
+               font-size: 25px;
+               line-height: 29px;
+               text-align: center;
+               margin-bottom: 30px;
+               color: #ffffff;
+               border-radius: 30px 30px 0px 0px;
+               padding: 20px 0px;
+
+               &_red-big {
+                    background: #fa5f5f;
+               }
+     
+               &_red-middle{
+                    background: #ff8989;
+               }
+     
+               &_red-small{
+                    background: #fab2b2;
+               }
+		}
+
+		&__cardBody {
+               display: flex;
+               flex: 1 1 auto;
+               display: flex;
+               flex-direction: column;
+               padding: 10px 30px;
+               p {
+                    margin-left: 10px;
+                    font-size: 17px;
+                    line-height: 125%;
+                    color: #000000;
+                    min-width: 300px;
+               }
+
+               & > * {
+                    margin-bottom: 20px;
+               }
+		}
+
+		&__cardBodyColumn {
+               display: flex;
+               align-items: center;
+		}
+
+          
+
+          &__cardFooterMonth {
+               margin-top: 30px;
+               font-weight: 500;
+               font-size: 20px;
+               line-height: 29px;
+               text-align: center;
+               color: #000000;
+               border-top: 1px solid #bebbbb;
+               padding-top: 10px;
+          }
+     
+
+		&__cardFooterPrice {
+               font-weight: 700;
+               font-size: 27px;
+               line-height: 29px;
+               display: flex;
+               justify-content: center;
+               color: #FF2128;
+               align-items: center;
+               margin: 10px 0 20px 0;
+		}
+}
+
+.recording-coursesAbout {
+ 
+     &__gradient {
+          background: linear-gradient(180deg, #E6F3FF 0%, #FFE4E5 100%);
+          border-radius: 200px 200px 0px 0px;
+ 
+     }
+
+     &__container {
+          padding: 30px 50px;
+     }
+
+     &__title {
+          font-weight: 700;
+          font-size: 36px;
+          line-height: 44px;
+          margin-bottom: 25px;
+          text-align: center;
+          color: #4790d8;
+     }
+
+     &__form {
+          text-align: center;
+          width: 650px;
+          margin: 0 auto;
+          background: #FCFCFC;
+          border: 1px solid #DFDFDF;
+          border-radius: 50px;
+          padding: 30px 50px;
+          display: flex;
+          flex-direction: column;
+     }
+
+     &__formInput {
+          & > *:not(:last-child) {
+               margin-bottom: 24px;
+          }
+     }
+
+     &__formOr {
+          color: #B4B3B3;
+          font-size: 14px;
+          line-height: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          margin: 20px 0;
+
+          a {
+               font-size: 14px;
+               line-height: 15px;
+               display: flex;
+               align-items: center;
+               text-align: center;
+               text-decoration-line: underline;
+               color: #328EE3;
+          }
+     
+
+
+     }
+
+     &__formСhoice {
+
+          display: flex;
+          justify-content: center;
+     }
+
+     &__formСhoiceButton {
+          width: 440px;
+          display: flex;
+          flex-direction: column;
+
+          button {
+               background: #F0F0F0;
+               border: 1px solid #D0CBCB;
+               border-radius: 10px;
+               padding: 8px 0;
+               margin-bottom: 11px;
+               font-size: 14px;
+               transition: all 0.4s ease-in;
+     
+               &:hover {
+                    background-color: #E3325D;
+                    color: #fff;
+               }
+          }
+     
+          button:last-child {
+               background-color: #E3325D;
+               color: #fff;
+          }
+     }
+
+     &__formSubmit {
+          display: flex;
+          flex-direction: column;
+
+          button {
+               background: #3692DC;
+               border-radius: 10px;
+               color: #fff;
+               padding: 8px 0;
+               margin-bottom: 11px;
+               font-size: 14px;
+               transition: all 0.4s ease-in; 
+               margin-top: 20px;
+
+               &:hover {
+                    background: #2669a0;
+                    
+               }
+          }
+     }
+}
+

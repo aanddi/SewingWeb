@@ -9,6 +9,7 @@ import InputField from '../Registration/components/entry_field';
 import Input_btn from '../../ui/Buttons/Choice2/Choise_type';
 import Submit from '../../ui/Buttons/Submit/Submit';
 import UserAgreement from '../../components/UserAgreement/UserAgreement';
+import Back from '../../ui/Buttons/Back/Back';
 
 const RegCompany = () => {
     return (
@@ -18,7 +19,7 @@ const RegCompany = () => {
                     <img src={logo_id} alt="" /> 
                 </div>
                 <div>
-                    <Button__grey title='Назад'/>
+                    <Back title='Назад' path="/"/>
                 </div>
             </header>
 

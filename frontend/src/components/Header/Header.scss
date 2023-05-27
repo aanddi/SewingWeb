@@ -6,6 +6,7 @@
      width: 100%;
      z-index: 9999;
      box-sizing: border-box;
+
     
 
      &__content {
@@ -36,6 +37,10 @@
           margin-right: 45px;
           display: flex;
           align-items: center;
+          padding: 25px 0 20px 0;
+          font-size: 15px;
+          color: #fff;
+          border-bottom: 5px solid #0D1117;
      }
 
      &__city:hover {
@@ -82,7 +87,7 @@
           display: flex;
           
           a {
-               padding: 20px 0;
+               padding: 25px 0 20px 0;
                font-size: 15px;
                color: #fff;
           }

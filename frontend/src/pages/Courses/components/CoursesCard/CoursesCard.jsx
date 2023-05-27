@@ -11,7 +11,7 @@ import PatternsRed from '../../../../assets/Patterns/pattern_red1.svg'
 const CoursesCard = (props) => {
      return ( 
           <div className={style.card}>
-               <Link to='/'>
+
                     <div className={style.card__content}>
                          <img className={style.card__patterns1} src={Patterns1} alt="" />
                          <img className={style.card__patterns2} src={PatternsRed} alt="" />
@@ -39,8 +39,7 @@ const CoursesCard = (props) => {
                                <Link to='/courses/1'>Подробней</Link>
                          </div>
                          
-                    </div>    
-               </Link>
+               </div>    
           </div>
      );
 }

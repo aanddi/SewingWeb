@@ -31,7 +31,7 @@ const Employers = () => {
                               <img src={head_line} alt="" className='top__img-line'/>
                               <img src={head_img1} alt="" className='top__img1'/>
                               <img src={head_img2} alt="" className='top__img2'/>
-                              <h1 className="top__title"> Разместите вакансию на <span>LegpromRF</span></h1>
+                              <h1 className="top__title"> Разместите вакансию на <span>SewingWeb</span></h1>
                               <h2 className="top__text-top"> Все необходимые инструменты для качественного найма </h2>
                               <div className="top__btns top-btn">
                                    <Button_red title="Разместить вакансию"/>
