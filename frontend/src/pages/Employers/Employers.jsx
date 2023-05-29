@@ -211,7 +211,7 @@ const Employers = () => {
                                                   </div>
                                                   <div className="money-employers__cardFooter">
                                                        <div className="money-employers__cardFooterPrice">3990 рублей</div>
-                                                       <div className="money-employers__cardFooterTime">публикация на 60 дней</div>
+                                                       <div className="money-employers__cardFooterTime">публикация на 30 дней</div>
                                                   </div>
                                              </div>
                                         </div>
