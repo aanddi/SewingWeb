@@ -1,9 +1,9 @@
 .vacancies__card {
-     background: radial-gradient(116.58% 1156.56% at 0% 50%, #EDF5FC 14.59%, rgba(255, 220, 216, 0.44) 87.26%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-     border: 1px solid #CCCCCC;
-     box-shadow: 10px 12px 7px rgba(0, 0, 0, 0.15);
-     border-radius: 20px;
-     margin-right: 130px;
+     background: radial-gradient(116.58% 1156.56% at 0% 50%, #F9FCFF 14.59%, rgba(254, 244, 242, 0.44) 87.26%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+     border: 1px solid #E3E3E3;
+     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
+     border-radius: 10px;
+     margin-right: 100px;
      font-size: 17px;
      position: relative;
      
@@ -51,12 +51,57 @@
           margin-bottom: 20px;
      }
 
+     .card__tag {
+          display: flex;
+          margin-bottom: 20px;
+     
+
+     }
+
+     .card__tagFavorites {
+          display: flex;
+          align-items: center;
+          background: #FFECEF;
+          border-radius: 20px;
+          padding: 7px 11px;
+          margin-right: 10px;
+
+           span {
+               font-size: 13px;
+               line-height: 15px;
+               text-align: center;
+               color: #DC3150;
+               margin-left: 10px;
+           }
+     }
+
+     .card__student {
+          display: flex;
+          align-items: center;
+          background: #E2E2E2;
+          border-radius: 20px;
+          padding: 7px 11px;
+
+          span {
+               font-size: 13px;
+               line-height: 15px;
+               text-align: center;
+               color: #363535;
+               margin-left: 10px;
+          }
+     }
+
      .card__company {
           display: flex;
           align-items: center;
           margin-bottom: 10px;
-          font-size: 14px;
-          font-weight: 500;
+
+          a {
+               color: #000000;
+               font-weight: 500;
+               font-size: 14px;
+               line-height: 17px;
+          }
      }
 
      .card__map {
@@ -93,5 +138,7 @@
      .card__favorites *:hover {
           fill: #3490DF;
      }
+
+
 
 }

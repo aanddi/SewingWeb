@@ -5,18 +5,16 @@ import {Link} from 'react-router-dom'
 import Button__blue from '../../../../ui/Buttons/Button__Blue/Button__blue';
 import Button__grey from '../../../../ui/Buttons/Button__Grey/Button__grey';
 
-import favorites from '../../../../assets/Global-icon/favorites.svg';
-import Mark from '../../../../assets/Global-icon/mark.svg'
-import Map from '../../../../assets/Global-icon/Map.svg'
-import Logo from '../../../../assets/Logo/LogoInterprises.svg'
+import tagFavorites from '../../../../assets/Home/favorites.svg';
+import tagStudent from '../../../../assets/Home/student.svg'
+import Mark from '../../../../assets/Global-icon/mark.svg';
+import Map from '../../../../assets/Global-icon/Map.svg';
+import Logo from '../../../../assets/Logo/LogoInterprises.svg';
 
-import Patterns_1 from '../../../../assets/Patterns/patterns_1.svg'
-import Patterns_2 from '../../../../assets/Patterns/patterns_2.svg'
 
 const VacanciesCard = (props) => {
      return ( 
           <div className={style.vacancies__card}>
-               <img src={Patterns_1} alt="" className={style.card__patterns_top}/>
                <div className={style.content}>
                     <div className={style.card__title}>
                          <h2>Швея</h2>
@@ -32,15 +30,26 @@ const VacanciesCard = (props) => {
                          всегда поддерживая качество на высоком уровне. 
                          В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.
                     </div>
-                    
+
+                    <div className={style.card__tag}>
+                         <div className={style.card__tagFavorites}>
+                              <img src={tagFavorites} alt="" />
+                              <span>Вакансия недели</span> 
+                         </div>
+                         <div className={style.card__student}>
+                              <img src={tagStudent} alt="" />
+                              <span>Студенты</span> 
+                         </div>
+                    </div>
+                   
                     <div className={style.card__company}>
                          <img src={Mark} alt="" />
-                         <span>ООО Легпром</span> 
+                         <Link to="/enterprises/1"><span>ООО Легпром</span> </Link>
                     </div>
 
                     <div className={style.card__map}>
                          <img src={Map} alt="" />
-                              <span>Симферополь, Учебный переулок 8</span> 
+                         <span>Симферополь, Учебный переулок 8</span> 
                     </div>
 
                     <div className={style.card__bottom}>
@@ -53,7 +62,6 @@ const VacanciesCard = (props) => {
                          </div>
                     </div>
                </div>
-               <img src={Patterns_2} alt="" className={style.card__patterns_bottom}/>
           </div>
       );
 }

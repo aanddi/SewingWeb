@@ -31,20 +31,28 @@ const Employers = () => {
           <div className="wrapper">
           <Header />
                <main className='page employers'>
-                    <section className='employers__top top'>
-                         <div className="top__container">
-                              <img src={head_line} alt="" className='top__img-line'/>
-                              <img src={head_img1} alt="" className='top__img1'/>
-                              <img src={head_img2} alt="" className='top__img2'/>
-                              <h1 className="top__title"> Разместите вакансию на <span>SewingWeb</span></h1>
-                              <h2 className="top__text-top"> Все необходимые инструменты для качественного найма </h2>
-                              <div className="top__btns top-btn">
-                                   <Button_red title="Разместить вакансию"/>
-                                   <Button_green title="Найти резюме"/>
-                                   {/* <Link className="top-btn__link1"> Разместить вакансию </Link>
-                                   <Link className="top-btn__link2"> Найти резюме </Link> */}
+                    <section className='employers__top top-employers'>
+                         <div className="top-employers__container">
+                              <div className="top-employers__content">
+                                   <h1 className="top-employers__title"> Разместите <br /> вакансию на SewingWeb</h1>
+                                   <h3 className="top-employers__subTitle"> Все необходимые инструменты для качественного найма </h3>
+                                   <div className="top-employers__buttons">
+                                        <div className="top-employers__button top-employers__button_blue">
+                                             <Link to="/"><span>Разместить вакансию</span></Link>
+                                        </div>
+                                        <div className="top-employers__button top-employers__button_transparent">
+                                             <Link to="/"><span>Найти резюме</span></Link>
+                                        </div>
+                                   </div>
+                                   <div className="top-employers__text-disc"> 
+                                        <span>Вакансия — это объявление о поиске сотрудника. Опишите, кто нужен, и выбирайте лучших среди откликнувшихся. </span>
+                                   </div>
                               </div>
-                              <p className="top__text-bottom"> Вакансия — это объявление о поиске сотрудника. Опишите, кто нужен, и выбирайте лучших среди откликнувшихся. </p>
+
+                              <img src={head_line} alt="" className='top-employers__pattern top-employers__pattern_line'/>
+                              <img src={head_img1} alt="" className='top-employers__pattern top-employers__pattern_img1'/>
+                              <img src={head_img2} alt="" className=' top-employers__pattern top-employers__pattern_img2'/>
+
                          </div>
                     </section>
 

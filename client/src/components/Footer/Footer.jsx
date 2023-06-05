@@ -18,16 +18,22 @@ const Footer = () => {
                         <h3 className="footer__title">Информация</h3>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">О “LegpromRF”</a>
+                        <a href="/" className="footer__link">О SewingWeb</a>
                     </li>
                     <li className="footer__item">
-                        <a href="/" className="footer__link">Реклама на сайте</a>
+                        <a href="/" className="footer__link">Реклама на SewingWeb</a>
+                    </li>
+                    <li className="footer__item">
+                        <a href="/" className="footer__link">Разместить курсы на SewingWeb</a>
                     </li>
                     <li className="footer__item">
                         <a href="/" className="footer__link">Правила сайта</a>
                     </li>
                     <li className="footer__item">
                         <a href="/" className="footer__link">Защита персональных данных</a>
+                    </li>
+                    <li className="footer__item">
+                        <a href="/" className="footer__link">Панель Администратора</a>
                     </li>
                 </ul>
 

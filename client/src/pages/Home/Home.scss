@@ -1,69 +1,82 @@
-.home__search {
-     background-image: url(../../assets/Home/bg__search.jpg);
-     background-repeat: no-repeat;
-     background-attachment: fixed;
-     background-size: cover;  
-     height: 247px;
-     width: 100%;
-     box-shadow: 70px 0 40px #1a435a;
-}
+.mainScreen-home {
+     
+     margin-top: 50px;
+     background-image: url("../../assets/Home/bg__search.jpg");
+     height: 378px;
 
-.search{
+     box-shadow: 0px 3px 60px rgba(0, 0, 0, 0.2);
 
-     &__input {
-          margin-top: 87px;
+     &__search {
+          margin-top: 150px;
           display: flex;
-          justify-content: center;
+         
+          align-items: center;
+          flex-direction: column;
      }
 
+     &__employers {
 
-     &__text {
-          text-align: center;
-          font-weight: 500;
-          font-size: 20px;
-          line-height: 24px;
-          color: #fff;   
-          margin-top: 7px;
+          margin-top: 10px;
           
-     }
+          & a {
+               font-weight: 700;
+               font-size: 20px;
+               line-height: 24px;
+               color: #FFFFFF;
+               text-decoration-line: underline;
+          }
 
-     &__text a {
-          color: #fff;
-          text-decoration: underline;
-     }
-
-     &__text a:hover {
-          text-decoration: none;
+          & a:hover {
+               text-decoration: none;
+          }
      }
 
      &__bottom {
           display: flex;
-          color: #fff;
           justify-content: space-between;
+          margin-top: 60px;
           align-items: center;
      }
 
-     &__stat {
+
+     &__stats {
           display: flex;
-          text-align: center;
-          margin-top: 22px;
-          font-weight: 600;
-          font-size: 17px;
-          line-height: 21px;
-         
      }
 
-     &__stat > *:not(:first-child) {
-          margin-left: 33px;
-     }
 
-     &__button {
-          border: 1px solid #fff;
-          border-radius: 8px;
-          padding: 8px 14px;
+     &__stat {
+          margin-right: 20px;
+          font-weight: 500;
           font-size: 20px;
           line-height: 24px;
-          font-weight: 600;
+          text-align: center;
+          color: #FFFFFF;
+
+          & span {
+          font-weight: 800;
+          font-size: 27px;
+          line-height: 33px;
+          }
+     }
+
+     &__buttonWrap {
+
+          & a {
+               color: #FFFFFF;
+               border: 2px solid #FFFFFF;
+               border-radius: 8px;
+               padding: 7px 12px;
+               font-weight: 600;
+               font-size: 20px;
+               line-height: 24px;
+               transition: all 0.4s ease-in;
+          }
+
+          & a:hover { 
+               color: #4d4c4c;
+               border: 2px solid #ffffff;
+               background-color: #ffffff;
+          }
      }
 }
 

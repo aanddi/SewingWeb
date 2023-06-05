@@ -2,6 +2,8 @@ import './Home.scss'
 
 import { Link } from 'react-router-dom'
 
+import AdCourses from '../../components/Ad_SewingWeb/Courses/AdCourses'
+
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 
@@ -17,18 +19,24 @@ const Home = () => {
           <Header />
                <main className='page home'>
                     
-                    <section className="home__search search">
-                         <div className='search__container'>
-                              <div className="search__input">
+                    <section className="home__mainScreen mainScreen-home">
+                         <div className="mainScreen-home__container">
+                              <div className="mainScreen-home__search">
                                    <SearchFull />
-                              </div>
-                              <div className="search__text"><Link to="/employers">Я ищу сотрудника</Link></div>
-                              <div className="search__bottom">
-                                   <div className="search__stat">
-                                        <span>2103 <br /> вакансии</span> 
-                                        <span>1203 <br /> резюме</span> 
+                                   <div className="mainScreen-home__employers">
+                                        <Link to="/employers">Я ищу сотрудника</Link>
                                    </div>
-                                   <button className="search__button">Создать резюме</button>
+                              </div>
+                              <div className="mainScreen-home__bottom">
+                                   <div className="mainScreen-home__stats">
+                                        <div className="mainScreen-home__stat"><span>2103</span><br/>вакансии</div>
+                                        <div className="mainScreen-home__stat"><span>1203</span><br/>резюме</div>
+                                   </div>
+                                   <div className="mainScreen-home__button">
+                                        <div className="mainScreen-home__buttonWrap">
+                                             <Link to="/loginUser">Создать резюме</Link>
+                                        </div>
+                                   </div>
                               </div>
                          </div>
                     </section>
@@ -45,6 +53,7 @@ const Home = () => {
                                         <VacanciesCard path='/vacancies/1'/>
                                    </div>
                                    <div className="ribbon__ad">
+                                        <AdCourses />
                                         <Ad/>
                                         <Ad/>
                                         <Ad/>
