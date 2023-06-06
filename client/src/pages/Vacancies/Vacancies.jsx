@@ -9,7 +9,7 @@ import Button__blue from '../../ui/Buttons/Button__Blue/Button__blue';
 import {Link } from 'react-router-dom'
 
 import Button__grey from '../../ui/Buttons/Button__Grey/Button__grey';
-import Submit from '../../ui/Buttons/Submit/Submit'
+import AdCourses from '../../components/Ad_SewingWeb/Courses/AdCourses'
 
 import VacanciesCard from '../../pages/Home/components/VacanciesCard/VacanciesCard'
 
@@ -167,7 +167,7 @@ const Vacancies = () => {
                                         <VacanciesCard path='/vacancies/1'/>
                                    </div>
                                    <div className="ribbon__ad">
-                                        <Ad/>
+                                        <AdCourses />
                                         <Ad/>
                                         <Ad/>
                                         <Ad/>
