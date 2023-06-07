@@ -7,6 +7,8 @@ import AdCourses from '../../components/Ad_SewingWeb/Courses/AdCourses'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 
+import ProfIcon from '../../assets/Professions/ico.svg'
+
 import SearchFull from '../../components/Search/SearchFull'
 import Ad from '../../components/Ad/Ad'
 import VacanciesCard from './components/VacanciesCard/VacanciesCard'
@@ -37,6 +39,74 @@ const Home = () => {
                                              <Link to="/loginUser">Создать резюме</Link>
                                         </div>
                                    </div>
+                              </div>
+                         </div>
+                    </section>
+
+                    <section className='home__work work-home'>
+                         <div className="work-home__container">
+                              <div className="work-home__content">
+                                   <h2 className='work-home__title'>Работа в <span>Симферополе</span></h2>
+                                   <div className="work-home__card card-professions">
+                                        <div className="card-professions__item">
+                                             <div className="card-professions__body">
+                                                  <div className="card-professions__icon">
+                                                       <img src={ProfIcon} alt="" />
+                                                  </div>
+                                                  <div className="card-professions__title">Швея</div>
+                                                  <div className="card-professions__subTitle">10 вакансий</div>
+                                             </div>
+                                        </div>
+                                        <div className="card-professions__item">
+                                             <div className="card-professions__body">
+                                                  <div className="card-professions__icon">
+                                                       <img src={ProfIcon} alt="" />
+                                                  </div>
+                                                  <div className="card-professions__title">Швея</div>
+                                                  <div className="card-professions__subTitle">10 вакансий</div>
+                                             </div>
+                                        </div>
+                                        <div className="card-professions__item">
+                                             <div className="card-professions__body">
+                                                  <div className="card-professions__icon">
+                                                       <img src={ProfIcon} alt="" />
+                                                  </div>
+                                                  <div className="card-professions__title">Швея</div>
+                                                  <div className="card-professions__subTitle">10 вакансий</div>
+                                             </div>
+                                        </div>
+                                        <div className="card-professions__item">
+                                             <div className="card-professions__body">
+                                                  <div className="card-professions__icon">
+                                                       <img src={ProfIcon} alt="" />
+                                                  </div>
+                                                  <div className="card-professions__title">Швея</div>
+                                                  <div className="card-professions__subTitle">10 вакансий</div>
+                                             </div>
+                                        </div>
+                                        <div className="card-professions__item">
+                                             <div className="card-professions__body">
+                                                  <div className="card-professions__icon">
+                                                       <img src={ProfIcon} alt="" />
+                                                  </div>
+                                                  <div className="card-professions__title">Швея</div>
+                                                  <div className="card-professions__subTitle">10 вакансий</div>
+                                             </div>
+                                        </div>
+                                        <div className="card-professions__item">
+                                             <div className="card-professions__body">
+                                                  <div className="card-professions__icon">
+                                                       <img src={ProfIcon} alt="" />
+                                                  </div>
+                                                  <div className="card-professions__title">Швея</div>
+                                                  <div className="card-professions__subTitle">10 вакансий</div>
+                                             </div>
+                                        </div>
+                                        
+                                   </div>
+                                   <h4 className='work-home__link'>
+                                        <Link to="/professions">Показать еще</Link>
+                                   </h4>
                               </div>
                          </div>
                     </section>

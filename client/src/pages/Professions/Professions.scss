@@ -1,5 +1,5 @@
 .professions {
-     background: #FFFFFF;
+     background: #F3F5F9;
      &__title {
           margin-top: 40px;
           font-weight: 800;
@@ -16,8 +16,8 @@
 
 
           input {
-               width: 390px;
-               padding: 15px 15px;
+               width: 350px;
+               padding: 7px 10px;
                border: 1px solid #B4B1B1;
                border-radius: 10px 0 0 10px;
           }
@@ -31,9 +31,9 @@
 
 
           button {
-               padding: 6px 25px;
+               padding: 6px 20px;
                color: #fff;
-               font-size: 20px;
+               font-size: 17px;
                line-height: 24px;
                
           }

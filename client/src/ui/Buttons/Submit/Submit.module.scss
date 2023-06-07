@@ -1,23 +1,26 @@
 .submit {
 
-     background-color: #DB435F;
-     border-radius: 15px;
-     display: flex;
-     justify-content: center;
-     width: 100%;
+   
+     
+
      transition: all 0.2s ease-in;
 
-     &:hover {
-          background-color: #fa2c52;
-     }
 
-     &__button {
+
+     &__link {
+          border-radius: 15px;
+          display: flex;
+          justify-content: center;
           color: #fff;
           font-weight: 500;
           font-size: 17px;
           line-height: 21px;
           padding: 10px 0;
+          width: 100%;
+          background-color: #DB435F;
 
-
+          &:hover {
+               background-color: #fa2c52;
+          }
      }
 }

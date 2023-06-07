@@ -34,6 +34,13 @@ body,
    width: 100%;
 }
 
+[class*="__containerProfile"] {
+   max-width: 1400px;
+   padding: 0px 15px;
+   margin: 0px auto;
+   width: 100%;
+}
+
 .inactive__globalNavigation {
    border-bottom: 5px solid #0D1117;
 }
@@ -41,4 +48,13 @@ body,
 .active__globalNavigation {
    border-bottom: 5px solid #3490DF;
 
+}
+
+.active__profileNavigation {
+   background-color: #3692DC;
+   color: #fff !important;
+}
+
+.inactive__profileNavigation {
+   background-color: none;
 }

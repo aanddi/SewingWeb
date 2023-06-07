@@ -1,0 +1,18 @@
+.userProfile {
+
+	&__courses {
+	}
+
+}
+.courses-userProfile {
+          
+
+		&__coursesList {
+               display: flex;
+               flex-wrap: wrap;
+      
+               & > * {
+                    flex: 1 0 50%;
+               }
+		}
+}

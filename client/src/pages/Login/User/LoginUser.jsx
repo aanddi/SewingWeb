@@ -37,7 +37,7 @@ const LoginUser = () => {
                                         <form action="" className="loguser__form">
                                              <Input title="Телефон или Email" />
                                              <Input title="Пароль" type="password"/>
-                                             <Submit title='Войти' />
+                                             <Submit title='Войти' path="/user/profile/id/data"/>
                                         </form>
                                         <div className="loguser__pas"><h3>Забыли пароль?</h3></div>
                                         

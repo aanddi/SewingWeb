@@ -1,0 +1,15 @@
+.userProfile {
+
+	&__vacancies {
+	}
+
+}
+.vacancies-userProfile {
+
+		&__vacanciesList {
+      
+               & > * {
+                    margin-bottom: 30px;
+               }
+		}
+}

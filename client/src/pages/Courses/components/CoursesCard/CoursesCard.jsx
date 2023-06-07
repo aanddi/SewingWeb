@@ -36,7 +36,7 @@ const CoursesCard = (props) => {
                               <span>Симферополь, Учебный переулок 8</span>
                          </div>
                          <div className={style.card__button}>
-                               <Link to='/courses/1'>Подробней</Link>
+                               <Link to='/'>Подробней</Link>
                          </div>
                          
                </div>    

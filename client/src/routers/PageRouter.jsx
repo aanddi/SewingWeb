@@ -7,7 +7,6 @@ import Enterprises from '../pages/Enterprises/EnterprisesPage/Enterprises'
 import CoursesPage from '../pages/Courses/CoursesPage/Courses'
 import EnterprisesAbout from '../pages/Enterprises/EnterprisesAbout/EnterprisesAbout'
 import Vacancies from '../pages/Vacancies/Vacancies'
-import CoursesAbout from '../pages/Courses/CoursesAbout/CoursesAbout'
 
 const PageRouter = () => {
      return ( 
@@ -22,7 +21,6 @@ const PageRouter = () => {
             <Route path='/enterprises/1' element={ <EnterprisesAbout /> } />
 
             <Route path='/courses' element={ <CoursesPage /> } />
-            <Route path='/courses/1' element={ <CoursesAbout /> } />
 
             <Route path='/vacancies/1' element={<Vacancies/>}/>
             <Route path='/vacancies/2' element={<Vacancies/>}/>

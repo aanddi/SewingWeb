@@ -1,0 +1,78 @@
+.navbarProfile {
+     background-color: #EFF7FE;
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 300px;
+     min-height: 100vh;
+
+     &__content {
+          padding-top: 20px;
+   
+     }
+
+     &__icon {
+          text-align: center;
+     }
+
+     &__name {
+          font-size: 25px;
+          line-height: 23px;
+          color: #000000;
+          text-align: center;
+          padding: 15px 0 7px 0;
+     }
+
+     &__id {
+          font-size: 13px;
+          line-height: 16px;
+          color: #9A9696;
+          text-align: center;
+     }
+
+     &__nav {
+       
+     }
+
+
+     &__list {
+          margin-top: 20px;
+     }
+
+     &__item {
+          width: 100%;
+          text-align: center;
+          color: #000000;
+          margin-bottom: 6px;
+
+     &_exit {
+          color: #fc002e !important;
+          font-weight: 500;
+
+          &:hover {
+               background: #f8c6cf !important;
+               }
+     }
+  
+          a {
+               display: block;
+               font-size: 16px;
+               line-height: 23px;
+               text-align: center;
+               color: inherit;
+               padding: 20px;
+               color: inherit;
+
+               &:hover {
+                    background: #3692DC;
+                    color: #fff;
+     
+               }
+     
+          }
+
+
+     }
+
+ 
+}

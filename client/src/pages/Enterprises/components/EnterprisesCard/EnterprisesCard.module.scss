@@ -5,11 +5,10 @@
      margin-bottom: 30px;
 
      &__content {
-          background: linear-gradient(78.63deg, #E3F2FF 14.56%, #FEE7EB 99.33%);
+         background-color: #fff;
           border: 1px solid #B7B4B4;
-          box-shadow: 5px 10px 15px #d4d4d6;
+          box-shadow: 1px 1px 10px #c5c3c3;
           border-radius: 15px;
-
           height: 100%;
           padding: 17px 17px 25px 17px;
           position: relative;
@@ -17,10 +16,7 @@
           transition: all 0.2s ease-in;
 
           &:hover {
-               background: linear-gradient(78.63deg, #CDE8FF 14.56%, #FDCAD4 99.33%);
-               border: 1px solid #B7B4B4;
-               box-shadow: 15px 10px 15px #d4d4d6;
-               border-radius: 10px;
+               box-shadow: 7px 3px 10px #d4d4d6;
                color: #000;
                border-left: 10px solid #3692DC;
           }

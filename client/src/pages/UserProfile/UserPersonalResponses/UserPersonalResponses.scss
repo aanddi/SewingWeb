@@ -1,0 +1,15 @@
+.userProfile {
+
+	&__responses{
+	}
+
+}
+.responses-userProfile {
+
+		&__responsesList {
+      
+               & > * {
+                    margin-bottom: 30px;
+               }
+		}
+}

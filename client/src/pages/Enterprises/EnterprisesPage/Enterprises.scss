@@ -1,6 +1,7 @@
 .enterprises {
+     background-color: #F3F5F9;
 		&__header {
-               margin-top: 40px;    
+               margin-top: 60px;    
                display: flex;  
 		}
 
@@ -24,8 +25,8 @@
                border-radius: 10px;
 
                input {
-                    width: 390px;
-                    padding: 15px 15px;
+                    width: 395px;
+                    padding: 7px 10px;
                     border: 1px solid #B4B1B1;
                     border-radius: 10px 0 0 10px;
                 }
@@ -41,7 +42,7 @@
                button {
                     padding: 6px 25px;
                     color: #fff;
-                    font-size: 20px;
+                    font-size: 17px;
                     line-height: 24px;
                }
           }
