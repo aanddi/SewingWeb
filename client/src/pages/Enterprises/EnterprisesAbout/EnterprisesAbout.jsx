@@ -5,6 +5,7 @@ import Footer from '../../../components/Footer/Footer'
 
 import VacanciesCard from '../../Home/components/VacanciesCard/VacanciesCard'
 import Ad from '../../../components/Ad/Ad'
+import AdCourses from '../../../components/Ad_SewingWeb/Courses/AdCourses'
 
 import Mark from '../../../assets/Global-icon/mark.svg'
 import Logo from '../../../assets/Logo/LogoInterprises.svg'
@@ -122,6 +123,7 @@ const EnterprisesAbout = () => {
                                         <VacanciesCard path='/vacancies/1'/>
                                    </div>
                                    <div className="ribbon__ad">
+                                        <AdCourses />
                                         <Ad/>
                                         <Ad/>
                                         <Ad/>

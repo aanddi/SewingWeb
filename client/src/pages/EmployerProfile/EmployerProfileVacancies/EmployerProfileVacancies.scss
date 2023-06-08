@@ -1,0 +1,14 @@
+.vacancies-userProfile__add {
+     border: 1px solid #328EE3;
+     padding: 15px 30px;
+     margin-bottom: 30px;
+     border-radius: 7px;
+     display: inline-flex;
+     font-weight: 500;
+     font-size: 17px;
+
+     &:hover {
+          background-color: #328EE3;
+          color: #fff;
+     } 
+}

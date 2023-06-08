@@ -1,0 +1,13 @@
+.container {
+
+     display: flex;
+
+     &__navbar {
+          flex: 1 0 10%;
+
+     }
+
+     &__content {
+          flex: 1 0 80%;
+     }
+}

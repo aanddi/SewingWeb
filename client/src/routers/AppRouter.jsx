@@ -2,6 +2,7 @@ import LoginAndRegistration from './LoginAndRegistration'
 import PageRouter from './PageRouter';
 
 import UserAccount from './UserAccount';
+import EmployerAccount from './EmployerAccount';
 
 const AppRouter = () => {
      return ( 
@@ -9,6 +10,7 @@ const AppRouter = () => {
         <PageRouter />
         <LoginAndRegistration />
         <UserAccount />
+        <EmployerAccount />
       </>
       );
 }
