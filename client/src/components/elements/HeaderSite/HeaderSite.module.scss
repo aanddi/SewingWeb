@@ -1,0 +1,100 @@
+.header {
+  background-color: #1A1E24;
+  color: #FFFFFF;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 72px;
+  z-index: 9999;
+  box-sizing: border-box;
+
+
+  &__content {
+    display: flex;
+    align-items: center;
+    height: 75px;
+    justify-content: space-between;
+  }
+
+  &__logo {
+
+  }
+
+  &__menu {
+    height: 100%;
+    display: flex;
+    align-items: center;
+   
+  }
+
+  &__menuNav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  
+  }
+
+  &__menuList {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 30px;
+  }
+
+  &__menuItem {
+    height: 83%;
+    display: flex;
+    align-items: center;
+    border-bottom: 7px solid transparent;
+
+    &:hover {
+      border-bottom: 7px solid #328EE3;
+    }
+  }
+
+  &__menuLink {
+    height: 83%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+  }
+
+  &__control {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  &__city {
+
+  }
+
+  &__cityText {
+    font-size: 16px;
+
+  }
+
+  &__cityIcon {
+
+  }
+
+  &__login {
+
+  }
+
+  &__loginBtn {
+    font-size: 16px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: 1px solid #3490DF;
+    color: inherit;
+    transition: all 0.2s ease-in;
+    box-shadow: 2px 2px 5px #e9e3e340;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+      background-color: #3490DF;
+    }
+  }
+}
