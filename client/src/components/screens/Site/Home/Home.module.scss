@@ -1,0 +1,27 @@
+.home {
+  margin-top: 150px;
+  &__mainScreen {
+
+  }
+
+  &__prof {
+
+  }
+
+  &__ribbon {
+    display: flex;
+    gap: 80px;
+  }
+
+  &__vacansies {
+
+    & > * {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__ad {
+
+  }
+
+}

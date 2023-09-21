@@ -1,0 +1,148 @@
+@import '@/src/assets/styles/_variables.scss';
+
+
+.VCard {
+
+  border-radius: 10px;
+  border: 1px solid #E3E3E3;
+  background: radial-gradient(1158.68% 136.02% at 0% 50%, #F9FCFF 14.59%, rgba(254, 244, 242, 0.44) 87.26%);
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.15);
+
+  &__content {
+    padding: 23px 35px;
+  }
+
+  &__title {
+    color: #000;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  &__salary {
+    color: #000;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+
+  &__description {
+    color: #2F2E2E;
+    font-size: 15px;
+    line-height: 140%; 
+    letter-spacing: 0.15px;
+    margin: 14px 0 21px 0;
+  }
+
+  &__tags {
+    display: flex;
+    gap: 8px;
+  } 
+
+  &__tagsRec {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFECEF;
+    border-radius: 20px;
+    padding: 5px 8px;
+    gap: 5px;
+
+    &_svg {
+
+    }
+  
+    &_text {
+      color: $pink;
+      text-align: center;
+      font-size: 13px;
+    }
+  }
+
+  &__tagsElem {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E2E2E2;
+    border-radius: 20px;
+    padding: 5px 8px;
+    gap: 5px;
+
+    &_svg {
+
+    }
+
+    &_text {
+      color: #363535;
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+
+  &__company {
+
+    display: flex;
+    margin: 20px 0 5px 0;
+    gap: 6px;
+
+    &_svg {
+
+    }
+
+    &_name {
+      color: #000;
+      font-size: 15px;
+      font-style: normal;
+    }
+  }
+
+  &__adress {
+
+    display: flex;
+    gap: 6px;
+
+    &_svg {
+
+    }
+
+    &_name {
+      color: #000;
+      font-size: 15px;
+      font-style: normal;
+    }
+
+  }
+ 
+  &__button {
+
+    margin-top: 25px;
+
+    display: flex;
+    gap: 20px;
+
+    &_respond {
+      border-radius: 7px;
+      background: $blue;
+      padding: 10px 15px;
+      color: #FFF;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    &_checkphone {
+      border-radius: 7px;
+      border: 1px solid #DEDEDE;
+      background: #F3F3F3;
+      color: #050505;
+      font-size: 17px;
+      padding: 10px 20px;
+      cursor: pointer;
+
+      &_text {
+        user-select: none;
+      }
+    }
+  }
+  
+}
