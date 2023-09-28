@@ -6,11 +6,9 @@ const SiteLayout: FC<PropsWithChildren> = ({children}) => {
   return (
     <>
       <HeaderSite />
-      <main  className='page'>
-        <div className="page__container">
+        <main  className='page'>
           {children}
-        </div>
-      </main>
+        </main>
       <FooterSite />
     </>
   ) 

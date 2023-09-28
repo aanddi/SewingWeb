@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { FC } from 'react'
 import Link from 'next/link';
 import Image from "next/image";
 
@@ -9,11 +9,9 @@ import telegram from 'public/Footer/icon/telegram.svg'
 import youtube from 'public/Footer/icon/youtube.svg'
 import dzen from 'public/Footer/icon/dzen.svg'
 
-interface Props {
-  
-}
+interface Props {}
 
-const FooterSite: NextPage<Props> = (props) => {
+const FooterSite: FC<Props> = (props) => {
   return (
     <footer className={styles.footer}>
       <div className="footer__container">

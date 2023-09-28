@@ -10,8 +10,7 @@ import mark from 'public/icons/mark.svg'
 import adress from 'public/icons/adress.svg'
 
 import student from 'public/icons/student.svg'
-
-
+import pensioners from 'public/icons/pensioners.svg'
 
 const VacanciesCard: FC<IVacancies> = (props) => {
 
@@ -20,7 +19,7 @@ const VacanciesCard: FC<IVacancies> = (props) => {
 	return (
 			<div className={styles.VCard}>
 				<div className={styles.VCard__content}>
-					<div className={styles.VCard__title}>{props.title}</div>
+					<Link href='vacancies/1' className={styles.VCard__title}>{props.title}</Link>
 					<div className={styles.VCard__salary}>{props.salary}</div>
 					<div className={styles.VCard__description}>{props.description}</div>
 					<div className={styles.VCard__tags}>
@@ -29,22 +28,22 @@ const VacanciesCard: FC<IVacancies> = (props) => {
 								elem == 'Вакансия недели' 
 									? 
 										<div className={styles.VCard__tagsRec}>
-											<div className={styles.VCard__tagsRec_svg}><Image src={crown} alt={'рекомендация'}/></div>
+											<div className={styles.VCard__tagsRec_svg}><Image src={crown} alt={'Рекомендация'}/></div>
 											<div className={styles.VCard__tagsRec_text}>Вакансия недели</div>
 										</div>
-									: elem == 'Студенты' 
+								: elem == 'Студенты' 
 									? 
 										<div className={styles.VCard__tagsElem}>
-											<div className={styles.VCard__tagsElem_svg}><Image src={student} alt={'рекомендация'}/></div>
+											<div className={styles.VCard__tagsElem_svg}><Image src={student} alt={'Рекомендация'}/></div>
 											<div className={styles.VCard__tagsElem_text}>{elem}</div>
 										</div>
-									: elem == 'Пенсионерам'  	
+								: elem == 'Пенсионерам'  	
 									? 
 										<div className={styles.VCard__tagsElem}>
-											<div className={styles.VCard__tagsElem_svg}><Image src={crown} alt={'рекомендация'}/></div>
+											<div className={styles.VCard__tagsElem_svg}><Image src={pensioners} alt={'Рекомендация'}/></div>
 											<div className={styles.VCard__tagsElem_text}>{elem}</div>
 										</div>
-									: null
+								: null
 									);
 								})}
 						</div>

@@ -1,6 +1,7 @@
-.footer {
+@import '@/src/assets/styles/_variables.scss';
 
-  background-color: #1A1E24;
+.footer {
+  background-color: $dark;
 
   &__menu {
     margin-top: 41px;
@@ -9,7 +10,6 @@
   }
 
   &__item {
-
     &:not(:first-child) {
       padding-bottom: 8px;
     }
@@ -20,13 +20,13 @@
     font-size: 17px;
     line-height: 21px;
     margin-bottom: 17px;
-    color: #FFFFFF;
+    color: #fff;
   }
 
   &__link {
     font-size: 14px;
     line-height: 17px;
-    color: #FFFFFF;
+    color: #fff;
 
     &:hover {
       text-decoration: underline;
@@ -43,7 +43,7 @@
   &__bottom {
     display: flex;
     justify-content: space-between;
-    color: #878787;
+    color: $grey;
     margin-top: 18px;
     border-top: 1px solid #B4B4B4;
     padding: 24px 0px;

@@ -1,100 +1,87 @@
+@import '@/src/assets/styles/_variables.scss';
+
 .header {
-  background-color: #1A1E24;
+  background-color: $dark;
   color: #FFFFFF;
   position: fixed;
   top: 0;
   width: 100%;
-  height: 72px;
   z-index: 9999;
   box-sizing: border-box;
-
 
   &__content {
     display: flex;
     align-items: center;
-    height: 75px;
+    height: 64px;
     justify-content: space-between;
   }
 
-  &__logo {
-
-  }
-
-  &__menu {
-    height: 100%;
+  &__left {
     display: flex;
     align-items: center;
-   
+    gap: 55px;
   }
 
-  &__menuNav {
-    height: 100%;
-    display: flex;
-    align-items: center;
-  
-  }
+  &__logo {}
+
+  &__menu {}
+
+  &__menuNav {}
 
   &__menuList {
     display: flex;
     align-items: center;
-    height: 100%;
-    gap: 30px;
+    gap: 25px;
   }
 
-  &__menuItem {
-    height: 83%;
-    display: flex;
-    align-items: center;
-    border-bottom: 7px solid transparent;
-
-    &:hover {
-      border-bottom: 7px solid #328EE3;
-    }
-  }
+  &__menuItem {}
 
   &__menuLink {
-    height: 83%;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
+    font-size: 15px;
+    padding: 18.5px 0;
+
+    &_active {
+      border-bottom: 4px solid $blue;
+    }
+
+    &:hover {
+      border-bottom: 4px solid $blue;
+    }
   }
 
   &__control {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 60px;
   }
 
   &__city {
-
+    display: flex;
+    align-items: center;
+    gap: 7px;
   }
 
   &__cityText {
-    font-size: 16px;
-
+    font-size: 15px;
   }
 
-  &__cityIcon {
+  &__cityIcon {}
 
-  }
-
-  &__login {
-
-  }
+  &__login {}
 
   &__loginBtn {
-    font-size: 16px;
-    padding: 12px 25px;
+    font-size: 15px;
+    padding: 10px 25px;
     border-radius: 8px;
-    border: 1px solid #3490DF;
+    border: 1px solid $blue;
     color: inherit;
     transition: all 0.2s ease-in;
-    box-shadow: 2px 2px 5px #e9e3e340;
+    box-shadow: 2px 2px 19px 0px rgba(52, 144, 223, 0.25);
     cursor: pointer;
 
     &:hover {
       color: #fff;
-      background-color: #3490DF;
+      background-color: $blue;
     }
   }
 }

@@ -1,0 +1,228 @@
+@import '@/src/assets/styles/_variables.scss';
+
+.vacancies {
+  margin-top: 63px;
+  margin-bottom: 50px;
+
+  &__about {}
+
+  &__ribbon {}
+}
+
+.about {
+
+  &__wrapper {
+    display: flex;  
+    gap: 40px;
+  }
+
+  &__info {
+    flex: 1 0 60%;
+  }
+
+  &__header {
+    display: flex;
+    margin-top: 20px;
+    gap: 100px;
+  }
+
+  &__name {
+		font-weight: 900;
+		font-size: 40px;
+		line-height: 120%;
+		padding-bottom: 15px;
+    margin-top: 20px;
+		border-bottom: 1px solid grey;
+  }
+
+  &__requirements {}
+
+  &__item {
+    display: flex;
+
+    & > *:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    &_title {
+      font-weight: 700;
+      margin-right: 7px;
+      width: 120px;
+    }
+  
+    &_subTitle {}
+  }
+
+  &__favorites {
+
+    &_button {
+      border-radius: 10px;
+      border: 1px solid #A09F9F;
+      padding: 5px 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid #717070;
+      }
+    }
+  
+    &_date {
+      margin-top: 10px;
+      text-decoration-line: underline;
+    }
+  }
+
+  &__sideBar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 50px;
+    align-self: flex-start;
+  }
+
+  &__salary {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin: 30px 0 20px 0;
+  }
+
+  &__control {}
+
+  &__responds {
+    border-radius: 10px;
+    padding: 10px 0;
+    background: $blue;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $blueHover;
+    }
+  }
+
+  &__phone {
+    border-radius: 10px;
+    border: 1px solid #DEDEDE;
+    background: #F3F3F3;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__companyCard {
+    margin-top: 25px;
+  }
+
+  &__companyWrapper {
+    border-radius: 10px;
+    border: 1px solid #DBD7D7;
+    padding: 15px;
+  }
+
+  &__companyHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      margin-left: 5px;
+    }
+  }
+
+  &__companyName {
+    color: #328EE3;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__companyLogo {}
+
+  &__contactPerson {
+    margin: 19px 0 16px 0;
+  }
+
+  &__countVacancies {
+    margin-bottom: 20px;
+  }
+
+  &__reiting {
+    display: flex;
+    align-items: center;
+
+    p {
+      color: $blue;
+      text-decoration-line: underline;
+      margin-left: 10px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration-line: none;
+      }
+    }
+  }
+
+  &__description {
+    margin-top: 30px;
+  }
+
+  &__textBlock {
+    margin-bottom: 20px;
+
+    p {
+      text-align: justify;
+      line-height: 150%;
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 150%; 
+    margin-bottom: 6px;
+  }
+
+  &__skills {}
+
+  &__skillsBlock {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  &__skillsTitle {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 150%; 
+    margin-bottom: 6px;
+  }
+
+  &__skillsItem {
+    border-radius: 5px;
+    border: 1px solid $blue;
+    padding: 5px 10px;
+  }
+
+  &__map {
+    margin-top: 20px;
+
+    p{
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.ribbon {}
