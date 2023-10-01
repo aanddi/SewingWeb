@@ -55,11 +55,11 @@ const Employer: FC<IEmployer> = (props) => {
             <div className={styles.info__wrapper}>
               <Image src={pattern1} alt="" className={[styles.info__pattern, styles.info__pattern_top].join(' ')}/>
               <Image src={pattern2} alt=""  className={[styles.info__pattern, styles.info__pattern_rightTop].join(' ')}/>
-              {/*
               <Image src={pattern3} alt=""  className={[styles.info__pattern, styles.info__pattern_leftBottom].join(' ')}/>
-              <Image src={pattern4} alt=""  className={[styles.info__pattern, styles.info__pattern_centerBottom].join(' ')}/>
-              <Image src={pattern5} alt=""  className={[styles.info__pattern, styles.info__pattern_rightBottom].join(' ')}/>
+              {/*
+               <Image src={pattern4} alt=""  className={[styles.info__pattern, styles.info__pattern_centerBottom].join(' ')}/>
               */}
+              <Image src={pattern5} alt=""  className={[styles.info__pattern, styles.info__pattern_rightBottom].join(' ')}/>
               <h2 className={styles.info__title}>С чего начать поиск <br /> сотрудников?</h2>
               <div className={styles.info__cards}>
                 <Image src={arrowTop} alt=""  className={[styles.info__arrow, styles.info__arrow_top].join(' ')}/>

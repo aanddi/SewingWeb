@@ -1,0 +1,55 @@
+@import '@/src/assets/styles/_variables.scss';
+
+.profCard {
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.11);
+  transition: all 0.4s ease;
+
+  &:hover {
+    transform: translateY(-4%);
+    box-shadow: 10px 11px 4px 0px rgba(0, 0, 0, 0.11);
+  }
+
+  &__wrapper {
+    padding: 16px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  } 
+
+  &__header {
+    & > * {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__icon {
+
+  }
+
+  &__title {
+    color: $darkBlue;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__salary {
+    font-weight: 600;
+  }
+
+  &__vacanciesCount {
+    text-decoration-line: underline;
+  }
+
+  &__desc {
+    margin-top: 15px;
+    font-size: 13px;
+    line-height: 144%;
+    color: #464646;
+  }
+
+}

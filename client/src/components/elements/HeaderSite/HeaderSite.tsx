@@ -12,7 +12,8 @@ interface Props {}
 
 const HeaderSite: FC<Props> = (props) => {
 
-  const path = usePathname();
+  const path = usePathname(); 
+  const pathElem = String(path).split('/')
 
   return (
     <header className={styles.header}>
@@ -30,28 +31,40 @@ const HeaderSite: FC<Props> = (props) => {
                   <li className={styles.header__menuItem}>
                     <Link 
                       href="/" 
-                      className={path == '/' ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') : styles.header__menuLink}>
+                      className=
+                      {path == '/' || pathElem[1] == 'vacancies'
+                      ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') 
+                      : styles.header__menuLink}>
                         Найти работу
                     </Link>
                   </li>
                   <li className={styles.header__menuItem}>
                     <Link 
                       href="/employer" 
-                      className={path == '/employer' ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') : styles.header__menuLink}>
+                      className=
+                      {path == '/employer' 
+                        ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') 
+                        : styles.header__menuLink}>
                         Работодателю
                     </Link>
                   </li>
                   <li className={styles.header__menuItem}>
                     <Link 
                       href="/professions" 
-                      className={path == '/professions' ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') : styles.header__menuLink}>
+                      className=
+                      {path == '/professions' 
+                      ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') 
+                      : styles.header__menuLink}>
                         Профессии
                       </Link>
                   </li>
                   <li className={styles.header__menuItem}>
                     <Link 
                       href="/companies" 
-                      className={path == '/companies' ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') : styles.header__menuLink}>
+                      className=
+                      {path == '/companies' 
+                      ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') 
+                      : styles.header__menuLink}>
                         Предприятия
                     </Link>
                   </li>

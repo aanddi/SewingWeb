@@ -2,11 +2,8 @@
 
 .employer {
   margin-top: 63px;
-  margin-bottom: 50px;
 
-  &__main {
-
-  }
+  &__main {}
 
   &__info {}
 
@@ -42,7 +39,6 @@
 
   &__wrapper {
     position: relative;
-    height: 60vh;
     z-index: 2;
   }
 
@@ -103,16 +99,16 @@
     width: 500px;
     font-weight: 300;
     line-height: 130%;
+    padding-bottom: 100px;
   }
-
 }
 
 .info {
+  padding: 50px 0 50px 0;
 
   &__wrapper {
     position: relative;
-    height: 60vh;
-
+    padding-bottom: 100px;
   }
    &__pattern {
     position: absolute;
@@ -128,16 +124,16 @@
     }
 
     &_top {
-      top: -50px;
+      top: -130px;
     }
 
     &_rightTop {
-        top: 0;
-        right: 0;
+      top: 0;
+      right: 0;
     }
 
     &_leftBottom {
-      bottom: -141px;
+      bottom: -80px;
     }
 
     &_centerBottom {
@@ -146,7 +142,7 @@
     }
 
     &_rightBottom {
-      bottom: -170px;
+      bottom: -100px;
       right: 0;
     }
   }
@@ -156,7 +152,6 @@
     text-align: center;
     font-size: 35px;
     font-weight: 800;
-    padding-top: 40px;
   }
 
   &__cards {
@@ -165,7 +160,6 @@
     gap: 30px;
     margin-top: 100px;
     position: relative;
-
   }
 
   &__card {
@@ -191,7 +185,6 @@
 
   &__content {
     padding: 40px 25px;
-
   }
 
   &__number {
@@ -217,25 +210,19 @@
     min-width: 300px;
     margin: 50px 0 10px 0;
   }
-
 }
 
 .rates {
-
   background-color: #fff;
+  padding: 50px 0 50px 0;
 
-  height: 70vh;
-
-  &__wrapper {
-
-  }
+  &__wrapper {}
 
   &__title {
     color: $darkBlue;
     text-align: center;
     font-size: 35px;
     font-weight: 800;
-    padding-top: 40px;
   }
 
   &__cards {
@@ -247,32 +234,32 @@
   }
 
   &__card {
-    flex: 1 0 33%;
-
-
+    flex: 1 1 33%;
     height: 100%;
+    
   }
 
   &__content {
     padding: 30px 40px;
     display: flex;
     flex-direction: column;
-    border-radius: 31px 31px 10px 10px;
+    border-radius: 45px 45px 10px 10px;
     min-height: 100%;
-    box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.12);
-    background-color: #f6f9ff;
+    background: linear-gradient(138deg, rgba(52, 144, 223, 0.10) 21.98%, rgba(253, 119, 145, 0.10) 71.55%);
+    box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.21);
   }
 
   &__cardTitle {
     font-size: 25px;
     line-height: 29px;
     color: $darkBlue;
+    font-weight: 500;
   }
 
   &__efficiency {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   &__efficiencyNumber {
@@ -313,7 +300,7 @@
   &__list {
     & > *:not(:last-child) {
       margin-bottom: 10px;
-  }
+    }
   }
 
   &__item {
@@ -321,9 +308,7 @@
     align-items: center;
   }
 
-  &__icon {
-
-  }
+  &__icon {}
 
   &__text {
     font-size: 15px;
@@ -337,20 +322,20 @@
   }
 
   &__footer {
-    margin-top: 50px;
+    margin-top: 70px;
     font-size: 18px;
 
     & > * {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
   }
 
   &__salary {
-
+    font-weight: 500;
   }
 
   &__time {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   &__button {
@@ -363,17 +348,14 @@
     color: #fff;
     font-size: 18px;
   }
-
 }
 
 .feedback {
+  padding: 50px 0 50px 0;
 
-  &__wrapper {
-
-  }
+  &__wrapper {}
 
   &__card {
-    margin-top: 60px;
     border-radius: 50px;
     background: linear-gradient(270deg, rgba(50, 142, 227, 0.55) 0%, rgba(255, 255, 255, 0.00) 98.94%);
     box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.25);
@@ -472,5 +454,4 @@
     font-size: 16px;
     margin-top: 15px;
   }
-
 }
