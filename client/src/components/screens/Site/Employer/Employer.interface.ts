@@ -1,3 +1,1 @@
-export interface IEmployer {
-
-}
+export interface IEmployer {}

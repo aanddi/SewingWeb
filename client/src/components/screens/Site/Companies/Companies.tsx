@@ -1,18 +1,13 @@
-import SiteLayout from "@/src/components/layouts/Site/SiteLayout"
-import styles from "./Companies.module.scss"
+import { NextPage } from 'next'
 
-import { NextPage } from "next";
+import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
-interface Props {
-  
+import styles from './Companies.module.scss'
+
+interface Props {}
+
+const Companies: NextPage<Props> = props => {
+  return <SiteLayout>Предприятия</SiteLayout>
 }
 
-const Companies: NextPage<Props> = (props) => {
-  return (
-    <SiteLayout>
-      Предприятия
-    </SiteLayout>
-  ) 
-};
-
-export default Companies;
+export default Companies

@@ -1,13 +1,11 @@
-import { NextPage } from "next";
+import { NextPage } from 'next'
+import Head from 'next/head'
 
-import Companies from "@/src/components/screens/Site/Companies/Companies"
-import Head from "next/head";
+import Companies from '@/components/screens/Site/Companies/Companies'
 
-interface Props {
-  
-}
+interface Props {}
 
-const CompaniesPage: NextPage<Props> = (props) => {
+const CompaniesPage: NextPage<Props> = props => {
   return (
     <>
       <Head>
@@ -15,7 +13,7 @@ const CompaniesPage: NextPage<Props> = (props) => {
       </Head>
       <Companies />
     </>
-  ) 
-};
+  )
+}
 
-export default CompaniesPage;
+export default CompaniesPage

@@ -1,3 +1,1 @@
-export interface IVacancies {
-
-}
+export interface IVacancies {}

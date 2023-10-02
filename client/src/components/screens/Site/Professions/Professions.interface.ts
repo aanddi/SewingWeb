@@ -1,3 +1,1 @@
-export default interface IProfessions {
-
-}
+export default interface IProfessions {}

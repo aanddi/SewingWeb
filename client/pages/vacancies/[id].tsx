@@ -1,11 +1,11 @@
-import { NextPage } from "next";
+import { NextPage } from 'next'
+import Head from 'next/head'
 
-import Vacancies from "@/src/components/screens/Site/Vacancies/Vacancies"
-import Head from "next/head";
+import Vacancies from '@/components/screens/Site/Vacancies/Vacancies'
 
 interface Props {}
 
-const VacanciesPage: NextPage<Props> = (props) => {
+const VacanciesPage: NextPage<Props> = props => {
   return (
     <>
       <Head>
@@ -13,7 +13,7 @@ const VacanciesPage: NextPage<Props> = (props) => {
       </Head>
       <Vacancies />
     </>
-  ) 
-};
+  )
+}
 
-export default VacanciesPage;
+export default VacanciesPage
