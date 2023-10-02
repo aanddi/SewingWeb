@@ -1,7 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .professions {
-
   margin-top: 63px;
 
   &__head {}
@@ -13,9 +12,7 @@
   background-color: #fff;
   padding: 30px 0;
 
-  &__wrapper {
-
-  }
+  &__wrapper {}
 
   &__title {
     color: $darkBlue;
@@ -41,18 +38,19 @@
   &__search {
     display: flex;
     align-items: center;
-    padding: 10px 0 10px 10px;
+    padding: 0 0 0 10px;
     border: 1px solid $grey;
     border-radius: 5px;
     width: 300px;
     gap: 10px;
 
-    input {}
+    input {
+      padding: 10px 0 10px 10px;
+      width: 100%;
+    }
   }
 
-  &__icon {
-
-  }
+  &__icon {}
 
   &__button {
     background-color: $blue;
@@ -66,7 +64,6 @@
       background-color: $blueHover;
     }
   }
-
 }
 
 .ribbon {
@@ -74,9 +71,7 @@
   background-color: #F6FAFF;
   padding-bottom: 50px;
 
-  &__wrapper {
-
-  }
+  &__wrapper {}
 
   &__sort {
     display: flex;
@@ -90,16 +85,12 @@
     cursor: pointer;
     user-select: none;
  
-
     span {
       color: $blue;
-
     }
   }
 
-  &__icon {
-
-  }
+  &__icon {}
 
   &__sortMenu {
     position: absolute;
@@ -137,7 +128,6 @@
   &__sortItem {
     cursor: pointer;
 
-
     &:hover {
       background-color: #dce7fd;
     }
@@ -153,11 +143,5 @@
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 25px;
-
-    & > * {
-      display: flex;
-      flex: 1 0 30%;
-    }
   }
-
 }

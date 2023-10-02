@@ -17,8 +17,6 @@ const Professions: FC<IProfessions> = props => {
   const [sortActive, setSortActive] = useState(false)
   const [sortValue, setSortValue] = useState('по популярности')
 
-  console.log(sortActive)
-
   return (
     <SiteLayout>
       <div className={styles.professions}>

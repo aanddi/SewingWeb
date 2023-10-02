@@ -1,6 +1,7 @@
 @import '@/assets/styles/_variables.scss';
 
-.profCard {
+.companiesCard {
+  display: block;
   border-radius: 10px;
   background: #FFF;
   box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.11);
@@ -21,37 +22,51 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  } 
-
-  &__header {
-    & > * {
-      margin-bottom: 8px;
-    }
   }
 
-  &__icon {
-
-  }
-
-  &__title {
+  &__name {
     color: $darkBlue;
     font-size: 18px;
     font-weight: 600;
   }
 
-  &__salary {
-    font-weight: 600;
+  &__reviews {
+    display: flex;
+    align-items: center;  
+    gap: 10px;
+
+    span {
+      color: $blue;
+      font-weight: 500;
+      text-decoration-line: underline;
+    }
   }
 
-  &__vacanciesCount {
+  &__reviewsStar {
+    display: flex;
+    gap: 3px;
+  }
+
+  &__count {
+    font-weight: 500;
     text-decoration-line: underline;
   }
 
-  &__desc {
-    margin-top: 15px;
-    font-size: 13px;
-    line-height: 144%;
-    color: #464646;
+  &__logo {
+    img {
+      border-radius: 50px;
+    }
   }
 
+  &__items {
+    & > * {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 }
