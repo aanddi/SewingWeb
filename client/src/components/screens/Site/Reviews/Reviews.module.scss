@@ -1,0 +1,160 @@
+@import '@/assets/styles/_variables.scss';
+
+.reviews {
+  background-color: #fff;
+  margin-top: 64px;
+
+  &__wrapper {
+    display: flex;
+    gap: 70px;
+  }
+
+  &__content {
+    flex: 1 1 auto;
+
+    & > * {
+      margin-top: 50px;
+    }
+  }
+
+  &__aside {
+    img {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 70px;
+    }
+  }
+
+  &__block {}
+
+  &__title {
+    color: $darkBlue;
+    font-size: 25px;
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  &__contentReviews {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__card {
+    flex: 1 1 40%;
+    min-height: 100%;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.10);
+  }
+
+  &__cardReviews {}
+
+  &__cardAd {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__wrapperReviews {
+    padding: 15px 35px;
+    
+     & > *:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__grade {
+    display: flex;
+    align-items: center;
+
+    span {
+      color: $darkBlue;
+      font-size: 25px;
+      font-weight: 700;
+      margin-right: 15px;
+    }
+  }
+
+  &__star {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__desc {}
+
+  &__link {
+    color: $blue;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__text {
+    color: #6C6A6A;
+    line-height: 130%; 
+  }
+
+  &__btn {
+    display: inline-flex;
+    padding: 7px 20px;
+    color: #fff;
+    background-color: $blue;
+    border-radius: 5px;
+  }
+
+  &__pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &__ribbon {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-bottom: 50px;
+  }
+
+  &__ribbonItem {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background-color: $grey;
+      top: -20px;
+    }
+  }
+
+  &__itemHead {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__proffession {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  &__post {
+    font-size: 16px;
+  }
+
+  &__date {
+    margin-left: 10px;
+    color: $grey;
+  }
+
+  &__starBlock {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 10px;
+  }
+}

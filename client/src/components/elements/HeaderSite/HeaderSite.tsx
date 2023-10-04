@@ -93,14 +93,8 @@ const HeaderSite: FC<Props> = props => {
           </div>
 
           <div className={styles.header__control}>
-            <div className={styles.header__city}>
-              <div className={styles.header__cityText}>Город</div>
-              <div className={styles.header__cityIcon}>
-                <Image src={city} alt={'Город'} />
-              </div>
-            </div>
             <div className={styles.header__login}>
-              <div className={styles.header__loginBtn}>Войти</div>
+              <Link href="/login" className={styles.header__loginBtn}>Войти</Link>
             </div>
           </div>
         </div>

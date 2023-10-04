@@ -174,7 +174,7 @@
 
   &__vacansiesList {
     & > *:not(:first-child, :last-child) {
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
   }
 
@@ -193,7 +193,7 @@
     img {
       position: -webkit-sticky;
       position: sticky;
-      top: 100px;
+      top: 70px;
     }
   }
 }

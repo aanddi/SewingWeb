@@ -41,7 +41,7 @@ const CompanyHeader: FC<ICompanyHeader> = props => {
               <span className={styles.header__top}>17</span>
               <span className={styles.header__bot}>вакансий</span>
             </Link>
-            <Link href="/" className={styles.header__menuBlock}>
+            <Link href="/company/reviews" className={styles.header__menuBlock}>
               <span className={styles.header__top}>10</span>
               <span className={styles.header__bot}>отзывы</span>
             </Link>
