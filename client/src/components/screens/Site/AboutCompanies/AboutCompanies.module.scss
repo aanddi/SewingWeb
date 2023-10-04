@@ -1,1 +1,163 @@
 @import '@/assets/styles/_variables.scss';
+
+.aboutCompany {
+  background-color: #fff;
+  margin-top: 64px;
+
+  &__wrapper {
+    display: flex;
+    gap: 70px;
+  }
+
+  &__content {
+    flex: 1 1 auto;
+
+    & > * {
+      margin-top: 50px;
+    }
+  }
+
+  &__header {
+    margin-top: 40px;
+  }
+
+  &__aside {
+    img {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 70px;
+    }
+  }
+}
+
+.info {
+  display: flex;
+  gap: 60px;
+  margin-top: 30px;
+
+  &__block {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    color: #797979;
+    padding-right: 20px;
+  }
+
+  &__desc {}
+
+}
+
+.desc {
+  text-align: justify;
+  color: #696868;
+  line-height: 165%; 
+}
+
+.reviews {
+
+  &__title {
+    color: $darkBlue;
+    font-size: 25px;
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+  }
+
+  &__card {
+    flex: 1 1 40%;
+    min-height: 100%;
+
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.10);
+  }
+
+  &__cardReviews {}
+
+  &__cardAd {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__wrapper {
+    padding: 15px 35px;
+    
+     & > *:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__grade {
+    display: flex;
+    align-items: center;
+
+    span {
+      color: $darkBlue;
+      font-size: 25px;
+      font-weight: 700;
+      margin-right: 15px;
+    }
+  }
+
+  &__star {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__desc {
+    
+  }
+
+  &__link {
+    color: $blue;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__text {
+    color: #6C6A6A;
+    line-height: 130%; 
+  }
+
+  &__btn {
+    display: inline-flex;
+    padding: 7px 20px;
+    color: #fff;
+    background-color: $blue;
+    border-radius: 5px;
+  }
+  &__pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.vacancies {
+
+  &__title {
+    color: $darkBlue;
+    font-size: 25px;
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  &__ribbon {
+    & > *:not(:last-child) {
+      margin-bottom: 40px;
+    }
+  }
+}

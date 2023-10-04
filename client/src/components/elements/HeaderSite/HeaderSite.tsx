@@ -76,7 +76,7 @@ const HeaderSite: FC<Props> = props => {
                     <Link
                       href="/companies"
                       className={
-                        path == '/companies'
+                        path == '/companies' || pathElem[1] == 'company'
                           ? [
                               styles.header__menuLink,
                               styles.header__menuLink_active

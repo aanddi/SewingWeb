@@ -1,0 +1,76 @@
+@import '@/assets/styles/_variables.scss';
+
+.header {
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.20);
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 30px 10px 30px;
+  }
+
+  &__content {}
+
+  &__name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__title {
+    color: $darkBlue;
+    font-size: 35px;
+    font-weight: 900;
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    gap: 30px;
+  }
+
+  &__menuBlock {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-right: 20px;
+    cursor: pointer;
+
+    &_line::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background-color: $grey;
+    }
+  }
+
+  &__top {
+    text-align: center;
+    font-size: 18px;
+    color: $darkBlue;
+    font-weight: 800;
+    margin-bottom: 5px;
+  }
+
+  &__bot {
+    color: $blue;
+    font-size: 16px;
+
+    &:hover {
+      color: $blueHover;
+    }
+  }
+
+  &__logo {
+    img{
+      border-radius: 20px;
+    }
+  }
+}
