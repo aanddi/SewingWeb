@@ -1,0 +1,63 @@
+@import '@/assets/styles/_variables.scss';
+
+.employer {
+
+  &__title {
+    color: $darkBlue;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+  }
+
+  &__form {
+    margin-top: 30px;
+  }
+
+  &__item {
+    & > *:last-child {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__enter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    border-bottom: 1px solid $grey;
+    padding-bottom: 20px;
+  }
+
+  &__button {
+    display: inline-flex;
+    background-color: $pink;
+    color: #fff;
+    padding: 12px 40px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  &__forgot {
+    font-size: 16px;
+    color: $blue;
+  }
+
+  &__registration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 5px;
+    font-size: 15px;
+
+
+    span {
+      color: $blue;
+      cursor: pointer;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

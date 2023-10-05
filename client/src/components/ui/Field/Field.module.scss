@@ -1,0 +1,35 @@
+.field {
+  input {
+    padding: 7px 0 7px 10px;
+    border-radius: 5px;
+    border: 1px solid #C2BFBF;
+    width: 100%;
+  }
+
+  &__error {
+    color: red;
+    margin-top: 6px;
+    font-size: 12px;
+  }
+
+  &__errorBorder {
+    border: 1px solid red !important;
+  }
+
+  &__title {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 7px;
+    font-size: 15px;
+  }
+
+  &__head {
+    display: flex;
+    gap: 2px;
+  }
+
+  &__required {
+    color: red;
+    font-size: 15px;
+  }
+}

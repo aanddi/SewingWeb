@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 
-import Login from '@/components/screens/Auth/Login/Login'
+import Applicant from '@/components/screens/Auth/Login/Applicant/Applicant'
 
 interface Props {}
 
@@ -9,9 +9,9 @@ const HomePage: NextPage<Props> = props => {
   return (
     <>
       <Head>
-        <title>SewingWeb - найди работу легпрома у нас!</title>
+        <title>Вход в личный кабинет</title>
       </Head>
-      <Login />
+      <Applicant />
     </>
   )
 }

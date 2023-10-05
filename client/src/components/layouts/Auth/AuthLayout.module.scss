@@ -16,37 +16,33 @@
     flex: 1 1 60%;
   }
 
-  &__container {
+  &__wrapper {
     max-width: 500px;
-
+    margin-left: 70px;
     padding: 0px 15px;
 
   }
 
-  &__main {
-
-  }
+  &__main {}
 
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 30px;
+    margin-top: 50px;
   }
 
-  &__logo {
-
-  }
+  &__logo {}
 
   &__back {
-
+    padding: 10px;
   }
 
   &__choice {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 40px 0;
+    margin: 45px 0;
     text-align: center;
     cursor: pointer;
     transition: all .3s ease-in;
