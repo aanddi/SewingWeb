@@ -1,22 +1,26 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
-import styles from './Employer.module.scss'
 import AuthLayout from '@/components/layouts/Auth/AuthLayout'
 import Field from '@/components/ui/Field/Field'
-import { useForm } from 'react-hook-form'
+
+import styles from './Employer.module.scss'
 
 interface Props {}
 
 const Employer: FC<Props> = props => {
-
-  const {register, handleSubmit, reset, formState: {errors}} = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm({
     mode: 'onChange'
-  });
+  })
 
   const onSubmit = () => {
-
     reset()
   }
   return (
@@ -26,29 +30,36 @@ const Employer: FC<Props> = props => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.employer__form}>
         <div className={styles.employer__item}>
-          <Field {...register('phoneNumber', {
-            required: 'Обязательное поле'
-          })}
-          type={'text'}
-          title={'Телефон'}
-          star={true}
-          error={errors.phoneNumber?.message} />
+          <Field
+            {...register('phoneNumber', {
+              required: 'Обязательное поле'
+            })}
+            type={'text'}
+            title={'Телефон'}
+            star={true}
+            error={errors.phoneNumber?.message}
+          />
         </div>
         <div className={styles.employer__item}>
-          <Field {...register('password', {
-            required: 'Обязательное поле'
-          })}
-          type={'password'}
-          title={'Пароль'}
-          error={errors.password?.message} 
-          star={true}
+          <Field
+            {...register('password', {
+              required: 'Обязательное поле'
+            })}
+            type={'password'}
+            title={'Пароль'}
+            error={errors.password?.message}
+            star={true}
           />
         </div>
         <div className={styles.employer__enter}>
           <button className={styles.employer__button}>Войти</button>
-          <Link href='/' className={styles.employer__forgot}>Забыли пароль?</Link>
+          <Link href="/" className={styles.employer__forgot}>
+            Забыли пароль?
+          </Link>
         </div>
-        <Link href='/' className={styles.employer__registration}>Нет аккаунта?<span>Зарегистрироваться</span></Link>
+        <Link href="/" className={styles.employer__registration}>
+          Нет аккаунта?<span>Зарегистрироваться</span>
+        </Link>
       </form>
     </AuthLayout>
   )

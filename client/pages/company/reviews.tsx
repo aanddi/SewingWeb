@@ -1,6 +1,7 @@
-import Reviews from '@/components/screens/Site/Reviews/Reviews'
 import { NextPage } from 'next'
 import Head from 'next/head'
+
+import Reviews from '@/components/screens/Site/Reviews/Reviews'
 
 interface Props {}
 
