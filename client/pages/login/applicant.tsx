@@ -5,7 +5,7 @@ import Applicant from '@/components/screens/Auth/Login/Applicant/Applicant'
 
 interface Props {}
 
-const HomePage: NextPage<Props> = props => {
+const LoginApplicantPage: NextPage<Props> = props => {
   return (
     <>
       <Head>
@@ -16,4 +16,4 @@ const HomePage: NextPage<Props> = props => {
   )
 }
 
-export default HomePage
+export default LoginApplicantPage

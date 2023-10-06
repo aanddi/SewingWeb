@@ -1,0 +1,111 @@
+@import '@/assets/styles/_variables.scss';
+
+.employer {
+  background-color: #F6FAFF;
+  min-height: 100vh;
+
+  &__wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.14);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  &__item {
+    & > *:last-child {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__content {
+    padding: 30px;
+  }
+
+  &__formTitle {
+    color: $darkBlue;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 50px;
+  }
+
+  &__title {
+    color: $darkBlue;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    margin-top: 50px;
+  }
+
+  &__conсat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+
+    & > * {
+      flex: 1 1 50%;
+    }
+  }
+
+  &__password {
+    margin-top: 50px;
+  }
+
+  &__footer {
+    margin-top: 10px;
+    border-bottom: 1px solid $grey;
+    padding-bottom: 30px;
+  }
+
+  &__submit {
+    background-color: $blue;
+    width: 100%;
+    padding: 14px 0;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &__login {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
+
+    a {
+      color: $blue;
+      margin-left: 5px;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__forgot {
+    color: $grey;
+    margin-top: 10px;
+
+    span {
+      color: $blue;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

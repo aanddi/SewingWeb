@@ -1,6 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
-.employer {
+.applicant {
 
   &__title {
     color: $darkBlue;
@@ -28,6 +28,26 @@
     padding-bottom: 20px;
   }
 
+  &__login {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    span {
+      font-size: 16px;
+    }
+
+    a {
+      font-size: 16px;
+      font-weight: 500;
+      color: $blue;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
   &__button {
     display: inline-flex;
     background-color: $pink;
@@ -35,11 +55,16 @@
     padding: 12px 40px;
     border-radius: 5px;
     font-size: 16px;
+    font-weight: 500;
   }
 
   &__forgot {
-    font-size: 16px;
     color: $blue;
+
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__registration {
@@ -58,5 +83,12 @@
         text-decoration: underline;
       }
     }
+  }
+
+  &__agreement {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 150%;
+    color: $grey;
   }
 }

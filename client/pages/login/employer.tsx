@@ -5,7 +5,7 @@ import Employer from '@/components/screens/Auth/Login/Employer/Employer'
 
 interface Props {}
 
-const CompaniesPage: NextPage<Props> = props => {
+const LoginEmployerPage: NextPage<Props> = props => {
   return (
     <>
       <Head>
@@ -16,4 +16,4 @@ const CompaniesPage: NextPage<Props> = props => {
   )
 }
 
-export default CompaniesPage
+export default LoginEmployerPage

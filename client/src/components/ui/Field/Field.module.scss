@@ -1,9 +1,12 @@
+@import '@/assets/styles/_variables.scss';
+
 .field {
   input {
     padding: 7px 0 7px 10px;
     border-radius: 5px;
     border: 1px solid #C2BFBF;
     width: 100%;
+    font-size: 13px;
   }
 
   &__error {
@@ -14,6 +17,10 @@
 
   &__errorBorder {
     border: 1px solid red !important;
+
+    &::placeholder {
+      color: red !important;
+   }
   }
 
   &__title {

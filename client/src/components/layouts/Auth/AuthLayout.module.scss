@@ -34,8 +34,19 @@
 
   &__logo {}
 
-  &__back {
-    padding: 10px;
+  &__back {}
+
+  &__closeBg {
+    padding: 7px;
+    border-radius: 50px;
+    border: 1px solid $grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: #b1afaf;
+    }
   }
 
   &__choice {
@@ -93,5 +104,4 @@
       border-right: 1px solid $blue;
     }
   }
-
 }

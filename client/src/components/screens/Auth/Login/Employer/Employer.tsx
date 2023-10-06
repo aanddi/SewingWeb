@@ -38,6 +38,7 @@ const Employer: FC<Props> = props => {
             title={'Телефон'}
             star={true}
             error={errors.phoneNumber?.message}
+            placeholder="Введите номер телефона"
           />
         </div>
         <div className={styles.employer__item}>
@@ -49,6 +50,7 @@ const Employer: FC<Props> = props => {
             title={'Пароль'}
             error={errors.password?.message}
             star={true}
+            placeholder="Введите пароль"
           />
         </div>
         <div className={styles.employer__enter}>
@@ -57,7 +59,10 @@ const Employer: FC<Props> = props => {
             Забыли пароль?
           </Link>
         </div>
-        <Link href="/" className={styles.employer__registration}>
+        <Link
+          href="/register/employer"
+          className={styles.employer__registration}
+        >
           Нет аккаунта?<span>Зарегистрироваться</span>
         </Link>
       </form>
