@@ -7,7 +7,7 @@ const SiteLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <HeaderSite />
-      <main className="page">{children}</main>
+        <main className="page">{children}</main>
       <FooterSite />
     </>
   )
