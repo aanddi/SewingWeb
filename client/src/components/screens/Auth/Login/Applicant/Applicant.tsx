@@ -23,7 +23,7 @@ const applicant: FC<Props> = props => {
   const onSubmit = () => {
     reset()
   }
-  
+
   return (
     <AuthLayout>
       <div className={styles.applicant}>

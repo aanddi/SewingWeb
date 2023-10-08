@@ -18,9 +18,8 @@ export const applicant = [
   {
     views: 'Избранные вакансии',
     href: '/'
-  },
-
-];
+  }
+]
 
 export const employer = [
   {
@@ -30,7 +29,6 @@ export const employer = [
 
   {
     views: 'Тарифы',
-    href: '/nolayout',
-  },
- 
-];
+    href: '/nolayout'
+  }
+]
