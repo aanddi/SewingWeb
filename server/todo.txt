@@ -1,0 +1,3 @@
+yarn start:dev (запуск для динамического обновления)
+
+nest g resource test --no-spec (создание сущности)
