@@ -1,8 +1,8 @@
 {
   "name": "server",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "0.1.0",
+  "description": "SewingWeb",
+  "author": "Anval Team",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -42,7 +42,6 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "jest": "^29.5.0",
-    "pg": "^8.11.3",
     "prettier": "^3.0.0",
     "prisma": "^5.4.2",
     "source-map-support": "^0.5.21",

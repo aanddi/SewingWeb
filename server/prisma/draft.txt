@@ -1,0 +1,214 @@
+model work_experience {
+  work_experience_id Int
+  city               String? @db.VarChar(45)
+  company            String? @db.VarChar(45)
+  post               String? @db.VarChar(45)
+  start_time         String? @db.VarChar(45)
+  end_time           String? @db.VarChar(45)
+  experience         String? @db.VarChar(45)
+  Resume_resume_id   Int
+  resume             resume  @relation(fields: [Resume_resume_id], references: [resume_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Work_experience_Resume1")
+
+  @@id([work_experience_id, Resume_resume_id])
+  @@index([Resume_resume_id], map: "fk_Work_experience_Resume1_idx")
+}
+
+
+model users {
+  user_id                   Int                         @id
+  login                     String?                     @unique(map: "login_UNIQUE") @db.VarChar(45)
+  password                  String?                     @db.VarChar(45)
+  name                      String?                     @db.VarChar(45)
+  surname                   String?                     @db.VarChar(45)
+  email                     String?                     @db.VarChar(45)
+  phone                     String?                     @db.VarChar(45)
+  sex                       String?                     @db.VarChar(45)
+  DOB                       String?                     @db.VarChar(45)
+  city                      String?                     @db.VarChar(45)
+  citizenship               String?                     @db.VarChar(45)
+  favorites_vacansies       favorites_vacansies[]
+  institutional_information institutional_information[]
+  resume                    resume[]
+}
+
+
+
+model responses {
+  response_id            Int
+  Vacancies_vacancies_id Int
+  Resume_resume_id       Int
+  resume                 resume    @relation(fields: [Resume_resume_id], references: [resume_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Responses_Resume1")
+  vacancies              vacancies @relation(fields: [Vacancies_vacancies_id], references: [vacancies_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Vacancies_has_Resume_Vacancies1")
+
+  @@id([response_id, Vacancies_vacancies_id, Resume_resume_id])
+  @@index([Resume_resume_id], map: "fk_Responses_Resume1_idx")
+  @@index([Vacancies_vacancies_id], map: "fk_Vacancies_has_Resume_Vacancies1_idx")
+}
+
+
+model employers {
+  employer_id             Int                 @id
+  company_name            String?             @db.VarChar(45)
+  city_of_registration    String?             @db.VarChar(45)
+  industry                String?             @db.VarChar(45)
+  contact_person_fullname Int?
+  email                   String?             @db.VarChar(45)
+  phone                   String?             @db.VarChar(45)
+  password                String?             @db.VarChar(45)
+  favorites_resumes       favorites_resumes[]
+  vacancies               vacancies[]
+}
+
+model favorites_resumes {
+  Employers_employer_id Int
+  Resume_resume_id      Int
+  employers             employers @relation(fields: [Employers_employer_id], references: [employer_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Employers_has_Resume_Employers1")
+  resume                resume    @relation(fields: [Resume_resume_id], references: [resume_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Favorites_resumes_Resume1")
+
+  @@id([Employers_employer_id, Resume_resume_id])
+  @@index([Employers_employer_id], map: "fk_Employers_has_Resume_Employers1_idx")
+  @@index([Resume_resume_id], map: "fk_Favorites_resumes_Resume1_idx")
+}
+
+model favorites_vacansies {
+  Users_user_id          Int
+  Vacancies_vacancies_id Int
+  users                  users     @relation(fields: [Users_user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Users_has_Vacancies_Users1")
+  vacancies              vacancies @relation(fields: [Vacancies_vacancies_id], references: [vacancies_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Users_has_Vacancies_Vacancies1")
+
+  @@id([Users_user_id, Vacancies_vacancies_id])
+  @@index([Users_user_id], map: "fk_Users_has_Vacancies_Users1_idx")
+  @@index([Vacancies_vacancies_id], map: "fk_Users_has_Vacancies_Vacancies1_idx")
+}
+
+model institutional_information {
+  institutional_information_id Int
+  educational_level            String? @db.VarChar(45)
+  name_of_institution          String? @db.VarChar(45)
+  faculty                      Int?
+  specialization               String? @db.VarChar(45)
+  Users_user_id                Int
+  users                        users   @relation(fields: [Users_user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Institutional_information_Users1")
+
+  @@id([institutional_information_id, Users_user_id])
+  @@index([Users_user_id], map: "fk_Institutional_information_Users1_idx")
+}
+
+
+model employers {
+  employer_id             Int                 @id
+  company_name            String?             @db.VarChar(45)
+  city_of_registration    String?             @db.VarChar(45)
+  industry                String?             @db.VarChar(45)
+  contact_person_fullname Int?
+  email                   String?             @db.VarChar(45)
+  phone                   String?             @db.VarChar(45)
+  password                String?             @db.VarChar(45)
+  favorites_resumes       favorites_resumes[]
+  vacancies               vacancies[]
+}
+
+model favorites_resumes {
+  Employers_employer_id Int
+  Resume_resume_id      Int
+  employers             employers @relation(fields: [Employers_employer_id], references: [employer_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Employers_has_Resume_Employers1")
+  resume                resume    @relation(fields: [Resume_resume_id], references: [resume_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Favorites_resumes_Resume1")
+
+  @@id([Employers_employer_id, Resume_resume_id])
+  @@index([Employers_employer_id], map: "fk_Employers_has_Resume_Employers1_idx")
+  @@index([Resume_resume_id], map: "fk_Favorites_resumes_Resume1_idx")
+}
+
+model favorites_vacansies {
+  Users_user_id          Int
+  Vacancies_vacancies_id Int
+  users                  users     @relation(fields: [Users_user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Users_has_Vacancies_Users1")
+  vacancies              vacancies @relation(fields: [Vacancies_vacancies_id], references: [vacancies_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Users_has_Vacancies_Vacancies1")
+
+  @@id([Users_user_id, Vacancies_vacancies_id])
+  @@index([Users_user_id], map: "fk_Users_has_Vacancies_Users1_idx")
+  @@index([Vacancies_vacancies_id], map: "fk_Users_has_Vacancies_Vacancies1_idx")
+}
+
+model institutional_information {
+  institutional_information_id Int
+  educational_level            String? @db.VarChar(45)
+  name_of_institution          String? @db.VarChar(45)
+  faculty                      Int?
+  specialization               String? @db.VarChar(45)
+  Users_user_id                Int
+  users                        users   @relation(fields: [Users_user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Institutional_information_Users1")
+
+  @@id([institutional_information_id, Users_user_id])
+  @@index([Users_user_id], map: "fk_Institutional_information_Users1_idx")
+}
+
+
+
+
+
+model professions {
+  profession_id  Int         @default(autoincrement()) @id
+  name           String?     @db.VarChar(45)
+  average_salary String?     @db.VarChar(45)
+  description    String?     @db.VarChar(45)
+  resume         resume[]
+  vacancies      vacancies[]
+}
+
+
+model resume {
+  resume_id                 Int                 @default(autoincrement())
+  Users_user_id             Int
+  name                      String?             @db.VarChar(45)
+  surname                   String?             @db.VarChar(45)
+  age                       String?             @db.VarChar(45)
+  DOB                       String?             @db.VarChar(45)
+  city                      String?             @db.VarChar(45)
+  phone_number              String?             @db.VarChar(45)
+  citizenship               String?             @db.VarChar(45)
+  Professions_profession_id Int
+  skills                    String?             @db.VarChar(45)
+  languages                 String?             @db.VarChar(45)
+  salary                    String?             @db.VarChar(45)
+  photo                     String?             @db.VarChar(45)
+  favorites_resumes         favorites_resumes[]
+  responses                 responses[]
+  professions               professions         @relation(fields: [Professions_profession_id], references: [profession_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Resume_Professions1")
+  users                     users               @relation(fields: [Users_user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Resume_Users1")
+  work_experience           work_experience[]
+
+  @@id([resume_id, Users_user_id, Professions_profession_id])
+  @@index([Professions_profession_id], map: "fk_Resume_Professions1_idx")
+  @@index([Users_user_id], map: "fk_Resume_Users1_idx")
+}
+
+
+
+model vacancies {
+  vacancies_id              Int
+  Employers_employer_id     Int
+  Professions_profession_id Int
+  salary                    String?               @db.VarChar(45)
+  address                   String?               @db.VarChar(45)
+  metro_station             String?               @db.VarChar(45)
+  experience                String?               @db.VarChar(45)
+  employment                String?               @db.VarChar(45)
+  schedule                  String?               @db.VarChar(45)
+  description               String?               @db.VarChar(45)
+  title                     String?               @db.VarChar(45)
+  education                 String?               @db.VarChar(45)
+  shor_description          String?               @db.VarChar(45)
+  date_start                String?               @db.VarChar(45)
+  date_end                  String?               @db.VarChar(45)
+  favorites_vacansies       favorites_vacansies[]
+  responses                 responses[]
+  employers                 employers             @relation(fields: [Employers_employer_id], references: [employer_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Vacancies_Employers1")
+  professions               professions           @relation(fields: [Professions_profession_id], references: [profession_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_Vacancies_Professions1")
+
+  @@id([vacancies_id, Employers_employer_id, Professions_profession_id])
+  @@index([Employers_employer_id], map: "fk_Vacancies_Employers1_idx")
+  @@index([Professions_profession_id], map: "fk_Vacancies_Professions1_idx")
+}
+
+
