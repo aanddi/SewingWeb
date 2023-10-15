@@ -28,6 +28,7 @@ model User {
   patronymic String?
   email      String?  @unique()
   phone      String   @unique()
+  roll       String
 
   @@map("users")
 }
