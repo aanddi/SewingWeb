@@ -73,6 +73,7 @@ export class AuthService {
         surname: dto.surname,
         patronymic: dto.patronymic,
         phone: dto.phone,
+        role: dto.role,
         password: await hash(dto.password)
       }
     })
