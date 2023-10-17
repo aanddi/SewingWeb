@@ -7,17 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Profession {
-  id            Int       @id @default(autoincrement())
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime? @updatedAt @map("updated_at")
-  name          String    @unique @db.VarChar(45)
-  averageSalary Int       @map("average_salary")
-  desc          String    @db.VarChar(20)
 
-  @@map("professions")
-}
 
+
+//------------- Первичный пользователь -------------
+// пока не трогаю, хз чё там у тебя с логином
 model User {
   id         Int      @id @default(autoincrement())
   createdAt  DateTime @default(now()) @map("created_at")
@@ -28,15 +22,122 @@ model User {
   patronymic String?
   email      String?  @unique()
   phone      String   @unique()
-  role       String
 
-  @@map("users")
+  @@map("Users")
+}
+
+// ЛОГИКА СВЯЗИ: одной роли может принадлежать несколько пользователей(один ко многим), пока хз, может быть один к одному
+model Role {
+  id   Int    @id @default(autoincrement()) @map("role_id")
+  name String @map("role_name")
+  // user User[]
+
+  @@map("Roles")
+}
+
+// но правильно будет вот так
+// model User {
+//   id         Int      @id @default(autoincrement()) @map("user_id")
+//   createdAt  DateTime @default(now()) @map("created_at")
+//   updatedAt  DateTime @updatedAt @map("updated_at")
+//   phoneLogin String   @unique() @map("login")
+//   password   String   @unique()
+//   email      String?  @unique()
+//   role       Role     @relation(fields: [roleId], references: [id])
+//   roleId     Int
+
+//   @@map("Users")
+// }
+
+
+
+
+//------------- Соискатели и резюме -------------
+model JobSeeker {
+  id          Int       @id @default(autoincrement()) @map("job_seeker_id")
+  name        String?
+  surname     String?
+  patronymic  String?
+  sex         String?
+  DOB         DateTime?
+  city        String?
+  citizenship String?
+  languages   String?
+
+  @@map("Job_seekers")
+}
+
+model InstitutionalInfo {
+  id              Int     @id @default(autoincrement()) @map("institutional_information_id")
+  educationLevel  String  @map("educational_level")
+  institutionName String? @map("name_of_institution")
+  faculty         String?
+  specialization  String?
+}
+
+model Resume {
+  id            Int       @id @default(autoincrement()) @map("resume_id")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime? @updatedAt @map("updated_at")
+  name          String
+  surname       String
+  DOB           DateTime
+  sex           String
+  citizenship   String
+  city          String
+  phone_number  String
+  email         String
+  salary        String
+  workTimetable String?
+  skills        String
+  languages     String
+  about         String?
+
+  @@map("Resumes")
+}
+
+model WorkExperience {
+  id         Int       @id @default(autoincrement()) @map("work_experience_id")
+  city       String
+  company    String
+  post       String
+  startTime  DateTime? @map("start_time")
+  endTime    DateTime? @map("end_time")
+  experience String?
+
+  @@map("Work_experiences")
 }
 
 
-// доделать
+
+
+//------------- Работодатели и вакансии -------------
+// ЛОГИКА СВЯЗИ: однин работодатель может добавить одно контактное лицо(один к одному)
+model Employer {
+  id               Int            @id @default(autoincrement()) @map("employer_id")
+  companyName      String         @map("company_name")
+  inn              Int            @map("INN")
+  type             String
+  registrCity      String         @map("city_of_registration")
+  about            String
+  contactPersone   ContactPersone @relation(fields: [contactPersoneId], references: [id])
+  contactPersoneId Int            @unique
+
+  @@map("Employers")
+}
+
+model ContactPersone {
+  id       Int       @id @default(autoincrement()) @map("persone_id")
+  name     String
+  surname  String
+  post     String
+  employer Employer?
+
+  @@map("Contact_persones")
+}
+
 model Vacancy {
-  id             Int       @id @default(autoincrement())
+  id             Int       @id @default(autoincrement()) @map("vacancy_id")
   createdAt      DateTime  @default(now()) @map("created_at")
   updatedAt      DateTime? @updatedAt @map("updated_at")
   title          String
@@ -45,11 +146,27 @@ model Vacancy {
   address        String
   workExperience String    @map("work_experience")
   employment     String    @map("employment_type")
-  schedule       String
-  wokrTimeTable  String    @map("wokr_timetable")
-  education      String
-  date_start     String
-  date_end       String
+  wokrTimetable  String    @map("work_timetable")
+  education      String    @map("education_info")
 
-  @@map("vacancies")
+  // для подписки, мб надо мб нет, хз пока как сделать
+  date_start String
+  date_end   String
+
+  @@map("Vacancies")
 }
+
+
+
+
+// Профессии и отклики
+model Profession {
+  id            Int       @id @default(autoincrement())
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime? @updatedAt @map("updated_at")
+  name          String    @unique
+  averageSalary Int       @map("average_salary")
+  desc          String
+
+  @@map("Professions")
+} 
