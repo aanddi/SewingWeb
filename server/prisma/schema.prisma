@@ -8,12 +8,12 @@ datasource db {
 }
 
 model Profession {
-  id            Int      @id @default(autoincrement())
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
-  name          String   @unique @db.VarChar(45)
-  averageSalary Int      @map("average_salary")
-  desc          String   @db.VarChar(20)
+  id            Int       @id @default(autoincrement())
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime? @updatedAt @map("updated_at")
+  name          String    @unique @db.VarChar(45)
+  averageSalary Int       @map("average_salary")
+  desc          String    @db.VarChar(20)
 
   @@map("professions")
 }
@@ -31,4 +31,25 @@ model User {
   role       String
 
   @@map("users")
+}
+
+
+// доделать
+model Vacancy {
+  id             Int       @id @default(autoincrement())
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime? @updatedAt @map("updated_at")
+  title          String
+  salary         Int
+  desc           String
+  address        String
+  workExperience String    @map("work_experience")
+  employment     String    @map("employment_type")
+  schedule       String
+  wokrTimeTable  String    @map("wokr_timetable")
+  education      String
+  date_start     String
+  date_end       String
+
+  @@map("vacancies")
 }
