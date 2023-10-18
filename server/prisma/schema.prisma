@@ -238,8 +238,10 @@ model Profession {
 // ЛОГИКА СВЯЗИ: на одну вакансию может откликнуться несколько соискателей, нескольким соискателям может понравиться одна вакансия(многие ко многим). Определили явно, так как есть дополнительное поле id(нужно оно или нет, пока хз)
 model Responses {
   id        Int     @id @default(autoincrement()) @map("response_id")
+
   resumeId  Int     @map("resume_id")
   resume    Resume  @relation(fields: [resumeId], references: [id])
+  
   vacancyId Int     @map("vacancy_id")
   vacancy   Vacancy @relation(fields: [vacancyId], references: [id])
 } 
