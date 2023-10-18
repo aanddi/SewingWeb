@@ -1,18 +1,15 @@
 import { NextPage } from 'next'
-import Head from 'next/head'
 
 import Reviews from '@/components/screens/Site/Reviews/Reviews'
+import Meta from '@/components/ui/Meta/Meta'
 
 interface Props {}
 
 const RevieswPage: NextPage<Props> = props => {
   return (
-    <>
-      <Head>
-        <title>Компания</title>
-      </Head>
+    <Meta title='Отзывы'>
       <Reviews />
-    </>
+    </Meta>
   )
 }
 

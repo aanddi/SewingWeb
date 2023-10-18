@@ -2,6 +2,7 @@ import { saveToStorage } from './auth.helper'
 import { getContentType } from '@/api/api.helper'
 import { instance } from '@/api/api.interceptor'
 import axios from 'axios'
+
 import Cookies from 'js-cookie'
 
 import {
@@ -14,23 +15,27 @@ import {
 export const AuthService = {
 
   // метод для входа в систему
-  async login(type: 'login', data: ILogin) {
+  async login(data: ILogin) {
     const response = await instance<IAuthResponse>({
-      url: `/auth/${type}`,
+      url: `/auth/login`,
       method: 'POST',
       data
     })
     if (response.data.accessToken) saveToStorage(response.data)
+
+    return response.data
   },
 
   // метод для регистрации в системе
-  async register(type: 'register', data: IRegister) {
+  async register(data: IRegister) {
     const response = await instance<IAuthResponse>({
-      url: `/auth/${type}`,
+      url: `/auth/register`,
       method: 'POST',
       data
     })
     if (response.data.accessToken) saveToStorage(response.data)
+
+    return response.data
   },
 
   // метод для ? обновления токена ?

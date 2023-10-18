@@ -22,6 +22,9 @@ export interface ILogin {
 
 // входящие данные для регистрации в системе
 export interface IRegister {
+  name: string
+  surname: string
+  patronymic?: string
   phone: string
   password: string
   role: string

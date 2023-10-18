@@ -1,18 +1,15 @@
 import { NextPage } from 'next'
-import Head from 'next/head'
 
 import AboutCompanies from '@/components/screens/Site/AboutCompanies/AboutCompanies'
+import Meta from '@/components/ui/Meta/Meta'
 
 interface Props {}
 
 const AboutCompaniesPage: NextPage<Props> = props => {
   return (
-    <>
-      <Head>
-        <title>Компания</title>
-      </Head>
+    <Meta title="Предприятие">
       <AboutCompanies />
-    </>
+    </Meta>
   )
 }
 

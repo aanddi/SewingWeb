@@ -8,9 +8,6 @@ interface Props {}
 const RegistrEmployerPage: NextPage<Props> = props => {
   return (
     <>
-      <Head>
-        <title>Регистрация</title>
-      </Head>
       <Employer />
     </>
   )

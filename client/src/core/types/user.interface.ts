@@ -3,6 +3,7 @@ export interface IUser {
   phone: string
   name: string
   surname: string
+  patronymic?: string
   role: string
   password: string
 }

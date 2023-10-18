@@ -8,9 +8,6 @@ interface Props {}
 const LoginApplicantPage: NextPage<Props> = props => {
   return (
     <>
-      <Head>
-        <title>Вход в личный кабинет</title>
-      </Head>
       <Applicant />
     </>
   )
