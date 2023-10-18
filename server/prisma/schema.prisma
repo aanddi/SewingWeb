@@ -242,4 +242,4 @@ model Responses {
   resume    Resume  @relation(fields: [resumeId], references: [id])
   vacancyId Int     @map("vacancy_id")
   vacancy   Vacancy @relation(fields: [vacancyId], references: [id])
-}
+} 
