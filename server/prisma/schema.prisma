@@ -53,45 +53,71 @@ model Role {
 
 
 //------------- Соискатели и резюме -------------
+// ЛОГИКА СВЯЗИ: один пользователь может указать несколько образований(один ко многим)
+// ЛОГИКА СВЯЗИ С РЕЗЮМЕ: один пользователь может создать несколько резюме(один ко многим)
 model JobSeeker {
-  id          Int       @id @default(autoincrement()) @map("job_seeker_id")
-  name        String?
-  surname     String?
-  patronymic  String?
-  sex         String?
-  DOB         DateTime?
-  city        String?
-  citizenship String?
-  languages   String?
+  id                Int                 @id @default(autoincrement()) @map("job_seeker_id")
+  name              String?
+  surname           String?
+  patronymic        String?
+  sex               String?
+  DOB               DateTime?
+  city              String?
+  citizenship       String?
+  languages         String?
+
+  institutionalInfo InstitutionalInfo[]
+
+  resume            Resume[]
+
+  vacancy           Vacancy[] // избранные вакансии, которые добавлены соискателями
 
   @@map("Job_seekers")
 }
 
 model InstitutionalInfo {
-  id              Int     @id @default(autoincrement()) @map("institutional_information_id")
-  educationLevel  String  @map("educational_level")
-  institutionName String? @map("name_of_institution")
+  id              Int       @id @default(autoincrement()) @map("institutional_information_id")
+  educationLevel  String    @map("educational_level")
+  institutionName String?   @map("name_of_institution")
   faculty         String?
   specialization  String?
+
+  jobseekerId     Int
+  jobSeeker       JobSeeker @relation(fields: [jobseekerId], references: [id])
 }
 
+// ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одно резюме может быть создано на одну профессию(один к одному)
+// ЛОГИКА СВЯЗИ С ОПЫТОМ РАБОТЫ: одно резюме может включать несколько опытов работы(многие к одному)
+// ЛОГИКА СВЯЗИ С РАБОТОДАТЕЛЯМИ(ИЗБРАННЫЕ РЕЗЮМЕ): работодателю может понравиться разные резюме, одно резюме может понравиться разным соискателям(многие ко многим, пока не явно)
 model Resume {
-  id            Int       @id @default(autoincrement()) @map("resume_id")
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime? @updatedAt @map("updated_at")
-  name          String
-  surname       String
-  DOB           DateTime
-  sex           String
-  citizenship   String
-  city          String
-  phone_number  String
-  email         String
-  salary        String
-  workTimetable String?
-  skills        String
-  languages     String
-  about         String?
+  id             Int              @id @default(autoincrement()) @map("resume_id")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime?        @updatedAt @map("updated_at")
+  name           String
+  surname        String
+  DOB            DateTime
+  sex            String
+  citizenship    String
+  city           String
+  phone_number   String
+  email          String
+  salary         String
+  workTimetable  String?
+  skills         String
+  languages      String
+  about          String?
+
+  jobseekerId    Int
+  jobseeker      JobSeeker        @relation(fields: [jobseekerId], references: [id])
+
+  vacancy        Responses[]
+
+  professionId   Int              @unique
+  profession     Profession       @relation(fields: [professionId], references: [id])
+
+  workExperience WorkExperience[]
+
+  employer       Employer[] // избранные резюме, работодатели, которые добавили резюме в избранное
 
   @@map("Resumes")
 }
@@ -104,6 +130,9 @@ model WorkExperience {
   startTime  DateTime? @map("start_time")
   endTime    DateTime? @map("end_time")
   experience String?
+
+  resumeId   Int
+  resume     Resume    @relation(fields: [resumeId], references: [id])
 
   @@map("Work_experiences")
 }
@@ -120,8 +149,13 @@ model Employer {
   type             String
   registrCity      String         @map("city_of_registration")
   about            String
-  contactPersone   ContactPersone @relation(fields: [contactPersoneId], references: [id])
+  
   contactPersoneId Int            @unique
+  contactPersone   ContactPersone @relation(fields: [contactPersoneId], references: [id])
+
+  vacansy          Vacancy[]
+
+  resume           Resume[] // избранные резюме, которые добавлены работодателями
 
   @@map("Employers")
 }
@@ -131,35 +165,59 @@ model ContactPersone {
   name     String
   surname  String
   post     String
+
   employer Employer?
 
   @@map("Contact_persones")
 }
 
+// ЛОГИКА СВЯЗИ С РАБОТОДАТЕЛЯМИ: один работодатель может создать несколько вакансий(один ко многим)
+// ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одна вакансия может быть создана только на одноу профессию(один к одному)
+// ЛОГИКА СВЯЗИ С СОИСКАТЕЛЯМИ(ИЗБРАННЫЕ ВАКАНСИИ): одному соискателю может понравиться разные вакансии, одна вакансия может понравиться разным соискателям(многие ко многим, пока не явно)
 model Vacancy {
-  id             Int       @id @default(autoincrement()) @map("vacancy_id")
-  createdAt      DateTime  @default(now()) @map("created_at")
-  updatedAt      DateTime? @updatedAt @map("updated_at")
+  id             Int         @id @default(autoincrement()) @map("vacancy_id")
+  createdAt      DateTime    @default(now()) @map("created_at")
+  updatedAt      DateTime?   @updatedAt @map("updated_at")
   title          String
   salary         Int
   desc           String
   address        String
-  workExperience String    @map("work_experience")
-  employment     String    @map("employment_type")
-  wokrTimetable  String    @map("work_timetable")
-  education      String    @map("education_info")
+  workExperience String      @map("work_experience")
+  employment     String      @map("employment_type")
+  wokrTimetable  String      @map("work_timetable")
+  education      String      @map("education_info")
 
-  // для подписки, мб надо мб нет, хз пока как сделать
-  date_start String
-  date_end   String
+  employerId     Int         @unique
+  employer       Employer    @relation(fields: [employerId], references: [id])
 
-  @@map("Vacancies")
+  professionId   Int         @unique
+  profession     Profession  @relation(fields: [professionId], references: [id])
+
+  jobSeeker      JobSeeker[] // избранные вакансии, соискатели, которые доавлили вакансии
+
+  resume         Responses[]
+
+  date_start     String // для подписки, мб надо мб нет, хз пока как сделать
+  date_end       String
+
+  @@map("Vacansies")
 }
 
+// явный тип связи многие ко многим(по идее не нужен, но пусть пока будет)
+// model FavoriteVacansy {
+//   jobseekerId Int
+//   jobSeeker   JobSeeker @relation(fields: [jobseekerId], references: [id])
+//   vacancyId   Int
+//   vacancy     Vacancy   @relation(fields: [vacancyId], references: [id])
+
+//   @@map("Favorite_vacansies")
+//   @@id([jobseekerId, vacancyId]) // они не уникальны, поэтому @@id, а не @@unique
+// }
 
 
 
-// Профессии и отклики
+
+//------------- Профессии и отклики -------------
 model Profession {
   id            Int       @id @default(autoincrement())
   createdAt     DateTime  @default(now()) @map("created_at")
@@ -168,5 +226,18 @@ model Profession {
   averageSalary Int       @map("average_salary")
   desc          String
 
+  vacancy       Vacancy?
+
+  resume        Resume?
+
   @@map("Professions")
-} 
+}
+
+// ЛОГИКА СВЯЗИ: на одну вакансию может откликнуться несколько соискателей, нескольким соискателям может понравиться одна вакансия(многие ко многим). Определили явно, так как есть дополнительное поле id(нужно оно или нет, пока хз)
+model Responses {
+  id        Int     @id @default(autoincrement()) @map("response_id")
+  resumeId  Int
+  resume    Resume  @relation(fields: [resumeId], references: [id])
+  vacancyId Int
+  vacancy   Vacancy @relation(fields: [vacancyId], references: [id])
+}
