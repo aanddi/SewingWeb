@@ -2,6 +2,9 @@ import { IUser } from "@/core/types/user.interface"
 
 export interface IUserState {
   phone: string
+  roleId: number
+  name: string
+  surname: string
 }
 
 export interface ITokens {
@@ -27,7 +30,7 @@ export interface IRegister {
   patronymic?: string
   phone: string
   password: string
-  role: string
+  roleId: string
 }
 
 export interface IAuthResponse extends ITokens {

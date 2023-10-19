@@ -1,0 +1,118 @@
+@import '@/assets/styles/_variables.scss';
+
+.profileMenu {
+  position: relative;
+  &__photo {
+
+  }
+
+  &__menu {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    transform: translateY(-10%);
+    transition: all .2s ease-in;
+    z-index: 1000;
+
+    &_active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translate(0%);
+    }
+
+    &_unActive {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &__wrapper {
+    padding: 10px 0 10px 0;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.51);
+    width: 250px;
+    transition: all .4s ease-in;
+    color: $colorText;
+    font-size: 15px;
+  }
+
+  &__header {
+    cursor: pointer;
+    padding: 10px 0;
+    &:hover {
+      background-color: #ede9e9;
+    }
+  }
+
+  &__name {
+    font-weight: 500;
+    font-size: 16px;
+    padding-left: 10px;
+  }
+
+  &__tools {
+    margin-top: 10px;
+    font-size: 12px;
+    color: $grey;
+  }
+
+  &__button {
+    padding-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+
+    a {
+      text-align: center;
+      display: block;
+      color: #fff;
+      padding: 10px 0;
+      border-radius: 5px;
+      background-color: $blue;
+
+      &:hover {
+        background-color:$blueHover;
+      }
+    }
+  }
+
+  &__main {
+    margin-top: 10px;
+    border-top: 1px solid $grey;
+    border-bottom: 1px solid $grey;
+  }
+
+  &__list {
+    padding: 10px 0;
+
+    li {
+      padding-left: 10px;
+
+      a {
+        display: block;
+        padding: 15px 0;
+      }
+      
+      &:hover {
+        background-color: #e3ecfe;
+      }
+    }
+  }
+
+  &__logout {
+    margin-top: 10px;
+    color: $pink;
+    padding-left: 10px;
+  
+
+    span {
+      display: flex;
+      padding: 15px 0;
+      font-weight: 500;
+    }
+
+    &:hover {
+      background-color: #ffe2e2;
+    }
+  }
+}

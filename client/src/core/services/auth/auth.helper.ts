@@ -34,6 +34,6 @@ export const removeFromStorage = () => {
 
 // Запись в общий стор (токена и юзера)
 export const saveToStorage = (data: IAuthResponse) => {
-  saveToStorage(data)
+  saveTokensStorage(data)
   localStorage.setItem('user', JSON.stringify(data.user))
 }

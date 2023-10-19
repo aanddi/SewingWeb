@@ -1,15 +1,15 @@
 import { NextPage } from 'next'
-import Head from 'next/head'
 
-import Applicant from '@/components/screens/Auth/Login/Applicant/Applicant'
+import Applicant from '@/components/screens/Auth/Login/Login'
+import Meta from '@/components/ui/Meta/Meta'
 
 interface Props {}
 
 const LoginApplicantPage: NextPage<Props> = props => {
   return (
-    <>
+    <Meta title="Вход">
       <Applicant />
-    </>
+    </Meta>
   )
 }
 

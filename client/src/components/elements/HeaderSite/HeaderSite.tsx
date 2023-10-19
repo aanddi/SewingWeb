@@ -1,18 +1,24 @@
+import { useAuth } from '@/core/hooks/useAuth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
 
+import ProfileMenu from '../ProfileMenu/ProfileMenu'
+
 import styles from './HeaderSite.module.scss'
 
 import logoMenu from 'public/Logo/logoMenu.svg'
-import city from 'public/icons/headerAdress.svg'
+
 
 interface Props {}
 
 const HeaderSite: FC<Props> = props => {
   const path = usePathname()
   const pathElem = String(path).split('/')
+
+  const { user } = useAuth()
+
 
   return (
     <header className={styles.header}>
@@ -32,10 +38,7 @@ const HeaderSite: FC<Props> = props => {
                       href="/"
                       className={
                         path == '/' || pathElem[1] == 'vacancies'
-                          ? [
-                              styles.header__menuLink,
-                              styles.header__menuLink_active
-                            ].join(' ')
+                          ? [styles.header__menuLink, styles.header__menuLink_active].join(' ')
                           : styles.header__menuLink
                       }
                     >
@@ -47,10 +50,7 @@ const HeaderSite: FC<Props> = props => {
                       href="/employer"
                       className={
                         path == '/employer'
-                          ? [
-                              styles.header__menuLink,
-                              styles.header__menuLink_active
-                            ].join(' ')
+                          ? [styles.header__menuLink, styles.header__menuLink_active].join(' ')
                           : styles.header__menuLink
                       }
                     >
@@ -62,10 +62,7 @@ const HeaderSite: FC<Props> = props => {
                       href="/professions"
                       className={
                         path == '/professions'
-                          ? [
-                              styles.header__menuLink,
-                              styles.header__menuLink_active
-                            ].join(' ')
+                          ? [styles.header__menuLink, styles.header__menuLink_active].join(' ')
                           : styles.header__menuLink
                       }
                     >
@@ -77,10 +74,7 @@ const HeaderSite: FC<Props> = props => {
                       href="/companies"
                       className={
                         path == '/companies' || pathElem[1] == 'company'
-                          ? [
-                              styles.header__menuLink,
-                              styles.header__menuLink_active
-                            ].join(' ')
+                          ? [styles.header__menuLink, styles.header__menuLink_active].join(' ')
                           : styles.header__menuLink
                       }
                     >
@@ -94,9 +88,13 @@ const HeaderSite: FC<Props> = props => {
 
           <div className={styles.header__control}>
             <div className={styles.header__login}>
-              <Link href="/login/applicant" className={styles.header__loginBtn}>
-                Войти
-              </Link>
+              {user ? (
+                <ProfileMenu />
+              ) : (
+                <Link href="/auth/login" className={styles.header__loginBtn}>
+                  Войти
+                </Link>
+              )}
             </div>
           </div>
         </div>

@@ -40,7 +40,7 @@ export const AuthService = {
 
   // метод для ? обновления токена ?
   async getNewTokens() {
-    const refreshToken = Cookies.get('refresh-token')
+    const refreshToken = Cookies.get('refreshToken')
 
     const response = await axios.post<string, { data: IAuthResponse }>(
       process.env.SERVER_URL + '/auth/login/access-token',
@@ -52,6 +52,6 @@ export const AuthService = {
 
     if (response.data.accessToken) saveToStorage(response.data)
 
-    return response
+    return response.data
   }
 }

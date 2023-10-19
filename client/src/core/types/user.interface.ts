@@ -4,6 +4,6 @@ export interface IUser {
   name: string
   surname: string
   patronymic?: string
-  role: string
+  roleId: number
   password: string
 }

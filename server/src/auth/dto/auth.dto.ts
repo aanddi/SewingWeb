@@ -20,6 +20,5 @@ export class AuthDto {
   @IsString({ message: 'Пароль должен быть строкой' })
   password: string
 
-  @IsString({ message: 'Роль должна быть строкой' })
-  role: string
+  roleId: number
 }

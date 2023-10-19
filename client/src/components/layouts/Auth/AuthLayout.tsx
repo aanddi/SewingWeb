@@ -33,6 +33,7 @@ const AuthLayout: FC<IAuthLayout> = props => {
                   </div>
                 </div>
               </header>
+              {/*
               <div className={styles.auth__choice}>
                 <Link
                   href={
@@ -63,6 +64,7 @@ const AuthLayout: FC<IAuthLayout> = props => {
                   <span>Я работодатель</span>
                 </Link>
               </div>
+              */}
               {props.children}
             </div>
           </div>

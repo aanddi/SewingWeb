@@ -1,28 +1,41 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import AuthLayout from '@/components/layouts/Auth/AuthLayout'
 import Field from '@/components/ui/Field/Field'
 
-import styles from './Applicant.module.scss'
+import styles from './Login.module.scss'
+import { useAuth } from '@/core/hooks/useAuth'
+import { useActions } from '@/core/hooks/useActions'
+import { ILogin } from '@/core/store/user/user.interface'
+import { useAuthRedirect } from '@/core/hooks/useAuthRedirect'
 
 interface Props {}
 
-const applicant: FC<Props> = props => {
+const Login: FC<Props> = props => {
+  useAuthRedirect()
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm({
+  } = useForm<ILogin>({
     mode: 'onChange'
   })
 
-  const onSubmit = () => {
+  const onSubmit:SubmitHandler<ILogin> = (data) => {
+    login(data)
     reset()
   }
+
+  const { isLoading } = useAuth()
+  const {login} = useActions()
+
+  // JobSeeker - 1  |  Employer - 2
+  const [roleId, setRoleId] = useState(1 | 2)
 
   return (
     <AuthLayout>
@@ -34,20 +47,24 @@ const applicant: FC<Props> = props => {
         >
           <div className={styles.applicant__item}>
             <Field
-              {...register('phoneNumber', {
+              {...register('phone', {
                 required: 'Обязательное поле'
               })}
               type={'text'}
               title={'Телефон'}
               star={true}
-              error={errors.phoneNumber?.message}
+              error={errors.phone?.message}
               placeholder="Введите номер телефона"
             />
           </div>
           <div className={styles.applicant__item}>
             <Field
               {...register('password', {
-                required: 'Обязательное поле'
+                required: 'Обязательное поле',
+                minLength: {
+                  value: 8,
+                  message: 'Минимальная длинна пароля должна быть 8 символов'
+                }
               })}
               type={'password'}
               title={'Пароль'}
@@ -74,4 +91,4 @@ const applicant: FC<Props> = props => {
   )
 }
 
-export default applicant
+export default Login

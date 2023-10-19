@@ -58,7 +58,7 @@ export class AuthService {
     // Проверка на существующего юзера в бд по телефону
     const checkUser = await this.prisma.user.findUnique({
       where: {
-        phone: dto.phone
+        phone: dto.phone,
       }
     })
 
@@ -73,7 +73,7 @@ export class AuthService {
         surname: dto.surname,
         patronymic: dto.patronymic,
         phone: dto.phone,
-        role: dto.role,
+        roleId: +dto.roleId,
         password: await hash(dto.password)
       }
     })
@@ -106,7 +106,10 @@ export class AuthService {
   private returnUserFields(user: User) {
     return {
       id: user.id,
-      phone: user.phone
+      phone: user.phone,
+      roleId: user.roleId,
+      name: user.name,
+      surname: user.surname
     }
   }
 
