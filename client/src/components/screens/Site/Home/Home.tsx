@@ -17,37 +17,26 @@ const Home: FC<IHome> = props => {
   return (
     <SiteLayout>
       <div className={styles.home}>
-        <section
-          className={[styles.home__mainScreen, styles.mainScreen].join(' ')}
-        >
+        <section className={[styles.home__mainScreen, styles.mainScreen].join(' ')}>
           <div className="mainScreen__container">
             <div className={styles.mainScreen__wrapper}>
               <div className={styles.mainScreen__search}>
                 <div className={styles.mainScreen__search_content}>
                   <div className={styles.mainScreen__search_input}>
-                    <input
-                      type="text"
-                      placeholder="Должность или предприятие"
-                    />
+                    <input type="text" placeholder="Должность или предприятие" />
                   </div>
                   <div className={styles.mainScreen__search_filter}>
                     <Image src={Tools} alt="Фильтры" />
                   </div>
                   <div className={styles.mainScreen__search_button}>Найти</div>
                 </div>
-                <div className={styles.mainScreen__employee}>
-                  Я ищу сотрудника
-                </div>
+                <div className={styles.mainScreen__employee}>Я ищу сотрудника</div>
               </div>
               <div className={styles.mainScreen__bottom}>
                 <div className={styles.mainScreen__statistics}>
                   <div className={styles.mainScreen__statistics_block}>
-                    <h3 className={styles.mainScreen__statistics_count}>
-                      2103
-                    </h3>
-                    <p className={styles.mainScreen__statistics_text}>
-                      вакансии
-                    </p>
+                    <h3 className={styles.mainScreen__statistics_count}>2103</h3>
+                    <p className={styles.mainScreen__statistics_text}>вакансии</p>
                   </div>
                   <div className={styles.mainScreen__statistics_block}>
                     <h3 className={styles.mainScreen__statistics_count}>523</h3>
@@ -68,12 +57,8 @@ const Home: FC<IHome> = props => {
             <div className={styles.ribbon__wrapper}>
               <div className={styles.ribbon__vacansiesList}>
                 <div className={styles.ribbon__vacansiesTop}>
-                  <h3 className={styles.ribbon__vacansiesTop_count}>
-                    Найдено 5 вакансий
-                  </h3>
-                  <div className={styles.ribbon__vacansiesTop_filter}>
-                    Фильтр
-                  </div>
+                  <h3 className={styles.ribbon__vacansiesTop_count}>Найдено 5 вакансий</h3>
+                  <div className={styles.ribbon__vacansiesTop_filter}>Фильтр</div>
                 </div>
                 <VacanciesCard
                   _id={1}

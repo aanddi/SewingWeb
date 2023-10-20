@@ -28,42 +28,13 @@ const AuthLayout: FC<IAuthLayout> = props => {
                   <Image src={logo} alt={'SewingWeb ID'} />
                 </div>
                 <div className={styles.auth__back}>
-                  <div className={styles.auth__closeBg}>
+                  <Link href="/" className={styles.auth__closeBg}>
                     <Image src={close} alt={'x'} />
-                  </div>
+                  </Link>
                 </div>
               </header>
               {/*
-              <div className={styles.auth__choice}>
-                <Link
-                  href={
-                    pathElem[1] == 'login'
-                      ? '/login/applicant'
-                      : '/register/applicant'
-                  }
-                  className={
-                    pathElem[2] == 'applicant'
-                      ? [styles.auth__applicant, styles.auth__active].join(' ')
-                      : styles.auth__applicant
-                  }
-                >
-                  <span>Я соискатель</span>
-                </Link>
-                <Link
-                  href={
-                    pathElem[1] == 'login'
-                      ? '/login/employer'
-                      : '/register/employer'
-                  }
-                  className={
-                    pathElem[2] == 'employer'
-                      ? [styles.auth__employer, styles.auth__active].join(' ')
-                      : styles.auth__employer
-                  }
-                >
-                  <span>Я работодатель</span>
-                </Link>
-              </div>
+             
               */}
               {props.children}
             </div>

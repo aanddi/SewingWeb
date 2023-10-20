@@ -24,9 +24,7 @@ const CompaniesCard: FC<ICompaniesCard> = props => {
             </div>
             <div className={styles.companiesCard__item}>
               <Image src={count} alt="Подтверждено" />
-              <span className={styles.companiesCard__count}>
-                {props.count} вакансий
-              </span>
+              <span className={styles.companiesCard__count}>{props.count} вакансий</span>
             </div>
             <div className={styles.companiesCard__item}>
               <Image src={adress} alt="Подтверждено" />

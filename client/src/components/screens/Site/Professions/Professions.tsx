@@ -20,16 +20,12 @@ const Professions: FC<IProfessions> = props => {
   return (
     <SiteLayout>
       <div className={styles.professions}>
-        <section
-          onClick={() => setSortActive(false)}
-          className={[styles.professions__head, styles.head].join(' ')}
-        >
+        <section onClick={() => setSortActive(false)} className={[styles.professions__head, styles.head].join(' ')}>
           <div className="head__container">
             <div className={styles.head__wrapper}>
               <h1 className={styles.head__title}>Каталог профессий</h1>
               <p className={styles.head__subTitle}>
-                Мы собрали для Вас все профессии, которые имеются у нас на
-                платформе.
+                Мы собрали для Вас все профессии, которые имеются у нас на платформе.
               </p>
               <div className={styles.head__searchBlock}>
                 <div className={styles.head__search}>
@@ -44,63 +40,34 @@ const Professions: FC<IProfessions> = props => {
           </div>
         </section>
 
-        <section
-          className={[styles.professions__ribbon, styles.ribbon].join(' ')}
-        >
+        <section className={[styles.professions__ribbon, styles.ribbon].join(' ')}>
           <div className="ribbon__container">
             <div className={styles.ribbon__wrapper}>
-              <div
-                className={styles.ribbon__sort}
-                onClick={() => setSortActive(!sortActive)}
-              >
+              <div className={styles.ribbon__sort} onClick={() => setSortActive(!sortActive)}>
                 <div className={styles.ribbon__text}>
                   Сортировка <span>{sortValue}</span>
                 </div>
                 <div
                   className={
                     sortActive
-                      ? [
-                          styles.ribbon__sortMenu,
-                          styles.ribbon__sortMenu_active
-                        ].join(' ')
-                      : [
-                          styles.ribbon__sortMenu,
-                          styles.ribbon__sortMenu_unactive
-                        ].join(' ')
+                      ? [styles.ribbon__sortMenu, styles.ribbon__sortMenu_active].join(' ')
+                      : [styles.ribbon__sortMenu, styles.ribbon__sortMenu_unactive].join(' ')
                   }
                 >
                   <div className={styles.ribbon__sortWrapper}>
                     <ul className={styles.ribbon__sortList}>
-                      <li
-                        className={styles.ribbon__sortItem}
-                        onClick={() => setSortValue('по популярности')}
-                      >
-                        <Link
-                          className={styles.ribbon__sortLink}
-                          href="/professions"
-                        >
+                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по популярности')}>
+                        <Link className={styles.ribbon__sortLink} href="/professions">
                           по популярности
                         </Link>
                       </li>
-                      <li
-                        className={styles.ribbon__sortItem}
-                        onClick={() => setSortValue('по возрастанию зарплаты')}
-                      >
-                        <Link
-                          className={styles.ribbon__sortLink}
-                          href="/professions"
-                        >
+                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по возрастанию зарплаты')}>
+                        <Link className={styles.ribbon__sortLink} href="/professions">
                           по возрастанию зарплаты
                         </Link>
                       </li>
-                      <li
-                        className={styles.ribbon__sortItem}
-                        onClick={() => setSortValue('по убыванию зарплаты')}
-                      >
-                        <Link
-                          className={styles.ribbon__sortLink}
-                          href="/professions"
-                        >
+                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по убыванию зарплаты')}>
+                        <Link className={styles.ribbon__sortLink} href="/professions">
                           по убыванию зарплаты
                         </Link>
                       </li>
@@ -108,10 +75,7 @@ const Professions: FC<IProfessions> = props => {
                   </div>
                 </div>
                 <div className={styles.ribbon__icon}>
-                  <Image
-                    src={sortActive ? arrowTop : arrowBot}
-                    alt={sortActive ? 'Вверх' : 'Вниз'}
-                  />
+                  <Image src={sortActive ? arrowTop : arrowBot} alt={sortActive ? 'Вверх' : 'Вниз'} />
                 </div>
               </div>
               <div className={styles.ribbon__cards}>
@@ -119,73 +83,55 @@ const Professions: FC<IProfessions> = props => {
                   title={'Закройщик'}
                   salary={30000}
                   count={17}
-                  desc={
-                    'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'
-                  }
+                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
                 />
                 <ProfessionCard
                   title={'Закройщик'}
                   salary={30000}
                   count={17}
-                  desc={
-                    'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'
-                  }
+                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
                 />
                 <ProfessionCard
                   title={'Закройщик'}
                   salary={30000}
                   count={17}
-                  desc={
-                    'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'
-                  }
+                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
                 />
                 <ProfessionCard
                   title={'Закройщик'}
                   salary={30000}
                   count={17}
-                  desc={
-                    'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'
-                  }
+                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
                 />
                 <ProfessionCard
                   title={'Закройщик'}
                   salary={30000}
                   count={17}
-                  desc={
-                    'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'
-                  }
+                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
                 />
                 <ProfessionCard
                   title={'Закройщик'}
                   salary={30000}
                   count={17}
-                  desc={
-                    'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'
-                  }
+                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
                 />
                 <ProfessionCard
                   title={'Закройщик'}
                   salary={30000}
                   count={17}
-                  desc={
-                    'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'
-                  }
+                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
                 />
                 <ProfessionCard
                   title={'Закройщик'}
                   salary={30000}
                   count={17}
-                  desc={
-                    'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'
-                  }
+                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
                 />
                 <ProfessionCard
                   title={'Закройщик'}
                   salary={30000}
                   count={17}
-                  desc={
-                    'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'
-                  }
+                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
                 />
               </div>
             </div>

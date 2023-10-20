@@ -1,16 +1,13 @@
-// обвертка всего сайта, для проверки на роли 
+// обвертка всего сайта, для проверки на роли
 // отключаем страницы авторизации от серверного рендеринга
-
 import { TypeComponentAuthFields } from './auth-page.types'
-import { useActions } from '@/core/hooks/useActions'
-import { useAuth } from '@/core/hooks/useAuth'
-import {
-  getAccessToken,
-  getRefreshToken
-} from '@/core/services/auth/auth.helper'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { FC, PropsWithChildren, useEffect } from 'react'
+
+import { useActions } from '@/core/hooks/useActions'
+import { useAuth } from '@/core/hooks/useAuth'
+import { getAccessToken, getRefreshToken } from '@/core/services/auth/auth.helper'
 
 const DynamicCheckRole = dynamic(() => import('./CheckRole'), { ssr: false })
 
@@ -18,7 +15,6 @@ const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
   Component: { isOnlyEmployer, isOnlyJobSeeker },
   children
 }) => {
-
   const { user } = useAuth()
   const { checkAuth, logout } = useActions()
   const { pathname } = useRouter()
@@ -35,14 +31,10 @@ const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
     if (!refreshToken && user) logout()
   }, [pathname])
 
-  return ( 
-    isOnlyEmployer || isOnlyJobSeeker 
-    ?
-      <DynamicCheckRole
-        Component={{ isOnlyEmployer, isOnlyJobSeeker }}
-        children={children}
-      />
-    : <>{children}</>
+  return isOnlyEmployer || isOnlyJobSeeker ? (
+    <DynamicCheckRole Component={{ isOnlyEmployer, isOnlyJobSeeker }} children={children} />
+  ) : (
+    <>{children}</>
   )
 }
 

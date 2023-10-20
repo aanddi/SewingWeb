@@ -19,25 +19,13 @@ const CompanyHeader: FC<ICompanyHeader> = props => {
             <h1 className={styles.header__title}>Арттекс Крым</h1>
           </div>
           <div className={styles.header__menu}>
-            <Link
-              href="/"
-              className={[
-                styles.header__menuBlock,
-                styles.header__menuBlock_line
-              ].join(' ')}
-            >
+            <Link href="/" className={[styles.header__menuBlock, styles.header__menuBlock_line].join(' ')}>
               <span className={styles.header__top}>
                 <Image src={i} alt={'i'} height={18} />
               </span>
               <span className={styles.header__bot}>о компании</span>
             </Link>
-            <Link
-              href="/"
-              className={[
-                styles.header__menuBlock,
-                styles.header__menuBlock_line
-              ].join(' ')}
-            >
+            <Link href="/" className={[styles.header__menuBlock, styles.header__menuBlock_line].join(' ')}>
               <span className={styles.header__top}>17</span>
               <span className={styles.header__bot}>вакансий</span>
             </Link>

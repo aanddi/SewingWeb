@@ -30,9 +30,7 @@ const VacanciesCard: FC<IVacancies> = props => {
                 <div className={styles.VCard__tagsRec_svg}>
                   <Image src={crown} alt={'Рекомендация'} />
                 </div>
-                <div className={styles.VCard__tagsRec_text}>
-                  Вакансия недели
-                </div>
+                <div className={styles.VCard__tagsRec_text}>Вакансия недели</div>
               </div>
             ) : elem == 'Студенты' ? (
               <div key={elem} className={styles.VCard__tagsElem}>
@@ -68,19 +66,13 @@ const VacanciesCard: FC<IVacancies> = props => {
             <Link href="vacancies/1">Посмотреть</Link>
           </div>
           {checkNumber ? (
-            <div
-              onClick={() => setCheckNumber(!checkNumber)}
-              className={styles.VCard__button_checkphone}
-            >
+            <div onClick={() => setCheckNumber(!checkNumber)} className={styles.VCard__button_checkphone}>
               {props.phone}
             </div>
           ) : (
             <div
               onClick={() => setCheckNumber(!checkNumber)}
-              className={[
-                styles.VCard__button_checkphone,
-                styles.VCard__button_checkphone_text
-              ].join(' ')}
+              className={[styles.VCard__button_checkphone, styles.VCard__button_checkphone_text].join(' ')}
             >
               Показать номер
             </div>

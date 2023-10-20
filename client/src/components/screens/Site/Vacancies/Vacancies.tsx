@@ -28,17 +28,11 @@ const Vacancies: FC<IVacancies> = props => {
                       <p className={styles.about__item_subTitle}>от 1 года</p>
                     </div>
                     <div className={styles.about__item}>
-                      <h3 className={styles.about__item_title}>
-                        Тип занятости:
-                      </h3>
-                      <p className={styles.about__item_subTitle}>
-                        полная занятость
-                      </p>
+                      <h3 className={styles.about__item_title}>Тип занятости:</h3>
+                      <p className={styles.about__item_subTitle}>полная занятость</p>
                     </div>
                     <div className={styles.about__item}>
-                      <h3 className={styles.about__item_title}>
-                        График работы:
-                      </h3>
+                      <h3 className={styles.about__item_title}>График работы:</h3>
                       <p className={styles.about__item_subTitle}>полный день</p>
                     </div>
                     <div className={styles.about__item}>
@@ -51,72 +45,54 @@ const Vacancies: FC<IVacancies> = props => {
                       <Image src={favorite} alt={'избраное'} />
                       <span>Добавить в избраное</span>
                     </div>
-                    <div className={styles.about__favorites_date}>
-                      Вакансия опубликована 18.01.2023
-                    </div>
+                    <div className={styles.about__favorites_date}>Вакансия опубликована 18.01.2023</div>
                   </div>
                 </div>
                 <div className={styles.about__description}>
                   <div className={styles.about__textBlock}>
                     <div className={styles.about__title}>О нас</div>
                     <p>
-                      Набираем как на постоянную работу, так и на подработку.
-                      Просторный, светлый цех с высокими потолками, большими
-                      окнами, принудительной вытяжкой и свежим ремонтом, теплое
-                      производство с самым новым автоматическим оборудованием в
-                      шаговой доступности от метро. Благодаря самому новому
-                      оборудованию скорость пошива изделий увеличивается на
-                      20-30%, что выражается в вашем доходе.
+                      Набираем как на постоянную работу, так и на подработку. Просторный, светлый цех с высокими
+                      потолками, большими окнами, принудительной вытяжкой и свежим ремонтом, теплое производство с самым
+                      новым автоматическим оборудованием в шаговой доступности от метро. Благодаря самому новому
+                      оборудованию скорость пошива изделий увеличивается на 20-30%, что выражается в вашем доходе.
                     </p>
                   </div>
                   <div className={styles.about__textBlock}>
                     <div className={styles.about__title}>Требования:</div>
                     <p>
-                      Качество пошива; Знание и умение работать на промышленном
-                      швейном оборудовании; Внимательность и добросовестность;
-                      Рассматриваются кандидаты с опытом и без опыта работы
+                      Качество пошива; Знание и умение работать на промышленном швейном оборудовании; Внимательность и
+                      добросовестность; Рассматриваются кандидаты с опытом и без опыта работы
                     </p>
                   </div>
                   <div className={styles.about__textBlock}>
                     <div className={styles.about__title}>Обязаности:</div>
                     <p>
-                      Проведение мероприятий по пошиву одежды Отслеживание
-                      соответствия качества кроя требуемым параметрам
-                      Регулирование натяжение нитей и своевременная замена
-                      катушек Применение соответствующих методов пошива для
-                      разных типов изделий Подготовка материала к пошиву Чистка
-                      изготовленных изделий от мусора Оперативный контроль
-                      соответствия цвета материала, его типа и фактуры
-                      изготавливаемым изделиям Мониторинг состояния
-                      используемого оборудования
+                      Проведение мероприятий по пошиву одежды Отслеживание соответствия качества кроя требуемым
+                      параметрам Регулирование натяжение нитей и своевременная замена катушек Применение соответствующих
+                      методов пошива для разных типов изделий Подготовка материала к пошиву Чистка изготовленных изделий
+                      от мусора Оперативный контроль соответствия цвета материала, его типа и фактуры изготавливаемым
+                      изделиям Мониторинг состояния используемого оборудования
                     </p>
                   </div>
                   <div className={styles.about__textBlock}>
                     <div className={styles.about__title}>Условия:</div>
                     <p>
-                      Комфортное и просторное швейное производство,
-                      расположенное в шаговой доступности от метро (15 мин.п), с
-                      новым оборудованием, ремонтом, хорошим светом и
-                      промышленными кондиционерами во всех помещениях; Сдельная
-                      форма оплаты труда. Выплаты 2 раза в месяц без задержек;
-                      официальное оформление;
+                      Комфортное и просторное швейное производство, расположенное в шаговой доступности от метро (15
+                      мин.п), с новым оборудованием, ремонтом, хорошим светом и промышленными кондиционерами во всех
+                      помещениях; Сдельная форма оплаты труда. Выплаты 2 раза в месяц без задержек; официальное
+                      оформление;
                     </p>
                   </div>
                 </div>
                 <div className={styles.about__skills}>
                   <h3 className={styles.about__title}>Ключевые навыки:</h3>
                   <div className={styles.about__skillsBlock}>
-                    <p className={styles.about__skillsItem}>
-                      массовое производство
-                    </p>
+                    <p className={styles.about__skillsItem}>массовое производство</p>
                     <p className={styles.about__skillsItem}>работа в команде</p>
-                    <p className={styles.about__skillsItem}>
-                      массовое производство
-                    </p>
+                    <p className={styles.about__skillsItem}>массовое производство</p>
                     <p className={styles.about__skillsItem}>работа в команде</p>
-                    <p className={styles.about__skillsItem}>
-                      массовое производство
-                    </p>
+                    <p className={styles.about__skillsItem}>массовое производство</p>
                   </div>
                 </div>
                 <div className={styles.about__map}>
@@ -148,9 +124,7 @@ const Vacancies: FC<IVacancies> = props => {
                       <p className={styles.about__contactPerson}>
                         <span>Контактное лицо:</span> Мария Иванова
                       </p>
-                      <h4 className={styles.about__countVacancies}>
-                        3 вакансии на сайте
-                      </h4>
+                      <h4 className={styles.about__countVacancies}>3 вакансии на сайте</h4>
                       <div className={styles.about__reiting}>
                         <Image src={star} alt={'1'} />
                         <Image src={star} alt={'2'} />
@@ -166,9 +140,7 @@ const Vacancies: FC<IVacancies> = props => {
             </div>
           </div>
         </div>
-        <div
-          className={[styles.vacancies__ribbon, styles.ribbon].join(' ')}
-        ></div>
+        <div className={[styles.vacancies__ribbon, styles.ribbon].join(' ')}></div>
       </div>
     </SiteLayout>
   )

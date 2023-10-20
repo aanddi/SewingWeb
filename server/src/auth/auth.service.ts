@@ -64,7 +64,7 @@ export class AuthService {
 
     // если юзер найден, то отдаем ошибку 400
     if (checkUser)
-      throw new BadRequestException('Такой пользователь уже зарегестрирвоан с таким номер')
+      throw new BadRequestException('Такой пользователь уже зарегистрирована с таким номер')
 
     // создаем юзера в бд и хешируем пароль в бд
     const user = await this.prisma.user.create({

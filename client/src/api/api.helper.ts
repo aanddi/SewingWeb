@@ -3,16 +3,12 @@
 
 // почитать про это тут => https://reqbin.com/Article/ContentType
 export const getContentType = () => ({
-  'Content-Type' : 'application/json'
+  'Content-Type': 'application/json'
 })
 
 // обработка ошибки
 export const errorCatch = (error: any): string => {
   const message = error?.response?.data?.message
 
-  return message
-  ? typeof error.response.data.message === 'object'
-    ? message[0]
-    : message
-  : error.message
+  return message ? (typeof error.response.data.message === 'object' ? message[0] : message) : error.message
 }

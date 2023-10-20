@@ -2,18 +2,12 @@ import { saveToStorage } from './auth.helper'
 import { getContentType } from '@/api/api.helper'
 import { instance } from '@/api/api.interceptor'
 import axios from 'axios'
-
 import Cookies from 'js-cookie'
 
-import {
-  IAuthResponse,
-  ILogin,
-  IRegister
-} from '@/core/store/user/user.interface'
+import { IAuthResponse, ILogin, IRegister } from '@/core/store/user/user.interface'
 
 // общий обьект сервиса
 export const AuthService = {
-
   // метод для входа в систему
   async login(data: ILogin) {
     const response = await instance<IAuthResponse>({
@@ -27,7 +21,7 @@ export const AuthService = {
   },
 
   // метод для регистрации в системе
-  async register(data: IRegister) {
+  async registration(data: IRegister) {
     const response = await instance<IAuthResponse>({
       url: `/auth/register`,
       method: 'POST',

@@ -1,4 +1,4 @@
-import { Controller, Get, Query, ValidationPipe, UsePipes } from '@nestjs/common'
+import { Controller, Get, ValidationPipe, UsePipes, Param } from '@nestjs/common'
 import { ProfessionService } from './profession.service'
 
 
@@ -13,7 +13,7 @@ export class ProfessionController {
 
   @UsePipes(new ValidationPipe())
   @Get()
-  getSortBySalary(@Query('sort') sort: string) {
+  getSortBySalary(@Param('sort') sort: string) {
     return this.professionService.getSortBySalary(sort)
   }
 }

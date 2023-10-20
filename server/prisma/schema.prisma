@@ -7,9 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
-
 //------------- Первичный пользователь -------------
 // пока не трогаю, хз чё там у тебя с логином
 model User {
@@ -23,8 +20,8 @@ model User {
   email      String?  @unique()
   phone      String   @unique()
 
-  role       Role     @relation(fields: [roleId], references: [id])
-  roleId     Int
+  role   Role @relation(fields: [roleId], references: [id])
+  roleId Int
 
   @@map("Users")
 }
@@ -51,9 +48,6 @@ model Role {
 
 //   @@map("Users")
 // }
-
-
-
 
 //------------- Соискатели и резюме -------------
 // ЛОГИКА СВЯЗИ: один пользователь может указать несколько образований(один ко многим)
@@ -140,21 +134,21 @@ model WorkExperience {
   @@map("Work_experiences")
 }
 
-
-
-
 //------------- Работодатели и вакансии -------------
 // ЛОГИКА СВЯЗИ: однин работодатель может добавить одно контактное лицо(один к одному)
 model Employer {
-  id          Int    @id @default(autoincrement()) @map("employer_id")
-  companyName String @map("company_name")
-  inn         Int    @map("INN")
+  id          Int     @id @default(autoincrement()) @map("employer_id")
+  companyName String  @map("company_name")
+  inn         String  @unique() @map("INN")
   type        String
-  registrCity String @map("city_of_registration")
-  about       String
+  registrCity String? @map("city_of_registration")
+  about       String?
+  size        Int
+  contact     String
+  adress      String?
 
-  contactPersoneId Int            @unique @map("contact_persone_id")
-  contactPersone   ContactPersone @relation(fields: [contactPersoneId], references: [id])
+  //contactPersoneId Int?            @unique @map("contact_persone_id")
+  //contactPersone   ContactPersone? @relation(fields: [contactPersoneId], references: [id])
 
   vacansy Vacancy[]
 
@@ -163,16 +157,16 @@ model Employer {
   @@map("Employers")
 }
 
-model ContactPersone {
-  id      Int    @id @default(autoincrement()) @map("persone_id")
-  name    String
-  surname String
-  post    String
-
-  employer Employer?
-
-  @@map("Contact_persones")
-}
+// model ContactPersone {
+//  id      Int    @id @default(autoincrement()) @map("persone_id")
+//  name    String
+//  surname String
+//  post    String
+//
+// employer Employer?
+//
+// @@map("Contact_persones")
+//}
 
 // ЛОГИКА СВЯЗИ С РАБОТОДАТЕЛЯМИ: один работодатель может создать несколько вакансий(один ко многим)
 // ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одна вакансия может быть создана только на одноу профессию(один к одному)
@@ -219,9 +213,6 @@ model Vacancy {
 //   @@id([jobseekerId, vacancyId]) // они не уникальны, поэтому @@id, а не @@unique
 // }
 
-
-
-
 //------------- Профессии и отклики -------------
 model Profession {
   id            Int       @id @default(autoincrement())
@@ -240,11 +231,11 @@ model Profession {
 
 // ЛОГИКА СВЯЗИ: на одну вакансию может откликнуться несколько соискателей, нескольким соискателям может понравиться одна вакансия(многие ко многим). Определили явно, так как есть дополнительное поле id(нужно оно или нет, пока хз)
 model Responses {
-  id        Int     @id @default(autoincrement()) @map("response_id")
+  id Int @id @default(autoincrement()) @map("response_id")
 
-  resumeId  Int     @map("resume_id")
-  resume    Resume  @relation(fields: [resumeId], references: [id])
-  
+  resumeId Int    @map("resume_id")
+  resume   Resume @relation(fields: [resumeId], references: [id])
+
   vacancyId Int     @map("vacancy_id")
   vacancy   Vacancy @relation(fields: [vacancyId], references: [id])
-} 
+}

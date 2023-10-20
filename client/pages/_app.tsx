@@ -1,10 +1,11 @@
-import AuthProvider from '@/core/providers/aut-provider/AuthProvider'
-import { TypeComponentAuthFields } from '@/core/providers/aut-provider/auth-page.types'
-import { persistor, store } from '@/core/store/store'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+
+import AuthProvider from '@/core/providers/aut-provider/AuthProvider'
+import { TypeComponentAuthFields } from '@/core/providers/aut-provider/auth-page.types'
+import { persistor, store } from '@/core/store/store'
 
 import '@/assets/styles/globals.scss'
 
@@ -16,10 +17,7 @@ const queryClient = new QueryClient({
   }
 })
 
-export default function App({
-  Component,
-  pageProps
-}: AppProps & TypeComponentAuthFields) {
+export default function App({ Component, pageProps }: AppProps & TypeComponentAuthFields) {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>

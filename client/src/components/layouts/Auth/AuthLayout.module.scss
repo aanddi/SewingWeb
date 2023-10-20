@@ -30,6 +30,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 50px;
+    margin-bottom: 50px;
   }
 
   &__logo {}
@@ -37,15 +38,17 @@
   &__back {}
 
   &__closeBg {
-    padding: 7px;
+    padding: 9px;
     border-radius: 50px;
-    border: 1px solid $grey;
+    border: 1px solid #e8e6e6;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 
     &:hover {
-      background-color: #b1afaf;
+      background-color: #EBEDF0;
+      border: 1px solid #EBEDF0;
     }
   }
 
@@ -53,7 +56,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 45px 0;
     text-align: center;
     cursor: pointer;
     transition: all .3s ease-in;

@@ -1,5 +1,6 @@
-import { IAuthResponse, ITokens } from '@/core/store/user/user.interface'
 import Cookies from 'js-cookie'
+
+import { IAuthResponse, ITokens } from '@/core/store/user/user.interface'
 
 /*======= Работа с куки =======*/
 

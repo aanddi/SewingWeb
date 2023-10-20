@@ -1,5 +1,4 @@
 // получение данных из хранилища ???
-
 import { TypedUseSelectorHook, useSelector } from 'react-redux'
 
 import { TypeRootState } from '../store/store'

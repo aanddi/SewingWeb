@@ -15,12 +15,8 @@ const ProfessionCard: FC<IProfCard> = props => {
         <div className={styles.profCard__content}>
           <div className={styles.profCard__header}>
             <h3 className={styles.profCard__title}>{props.title}</h3>
-            <h4 className={styles.profCard__salary}>
-              {props.salary} руб. в среднем
-            </h4>
-            <h5 className={styles.profCard__vacanciesCount}>
-              {props.count} вакансий
-            </h5>
+            <h4 className={styles.profCard__salary}>{props.salary} руб. в среднем</h4>
+            <h5 className={styles.profCard__vacanciesCount}>{props.count} вакансий</h5>
           </div>
           <div className={styles.profCard__icon}>
             <Image src={icon} alt={'icon'} />

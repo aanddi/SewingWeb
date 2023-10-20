@@ -1,7 +1,8 @@
 import { errorCatch, getContentType } from './api.helper'
+import axios from 'axios'
+
 import { getAccessToken, removeFromStorage } from '@/core/services/auth/auth.helper'
 import { AuthService } from '@/core/services/auth/auth.service'
-import axios from 'axios'
 
 // создание экземпляра axios и настраиваем
 // будет использоваться для каждого запроса instanse.get() вместо axios.get()
@@ -16,8 +17,7 @@ export const instance = axios.create({
 instance.interceptors.request.use(config => {
   const accessToken = getAccessToken()
 
-  if (config && config.headers && accessToken)
-    config.headers.Authorization = `Bearer ${accessToken}`
+  if (config && config.headers && accessToken) config.headers.Authorization = `Bearer ${accessToken}`
 
   return config
 })
@@ -30,8 +30,7 @@ instance.interceptors.request.use(
     const originalRequest = error.config
     if (
       error?.response?.status === 401 &&
-      (errorCatch(error) === 'jwt expired' ||
-        errorCatch(error) === 'jwt must be provided') &&
+      (errorCatch(error) === 'jwt expired' || errorCatch(error) === 'jwt must be provided') &&
       error.config &&
       !error.config._isRetry
     ) {

@@ -1,15 +1,15 @@
-import { useAuth } from '@/core/hooks/useAuth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
+
+import { useAuth } from '@/core/hooks/useAuth'
 
 import ProfileMenu from '../ProfileMenu/ProfileMenu'
 
 import styles from './HeaderSite.module.scss'
 
 import logoMenu from 'public/Logo/logoMenu.svg'
-
 
 interface Props {}
 
@@ -18,7 +18,6 @@ const HeaderSite: FC<Props> = props => {
   const pathElem = String(path).split('/')
 
   const { user } = useAuth()
-
 
   return (
     <header className={styles.header}>

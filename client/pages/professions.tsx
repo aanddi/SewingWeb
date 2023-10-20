@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 
+import Meta from '@/components/Meta/Meta'
 import Professions from '@/components/screens/Site/Professions/Professions'
-import Meta from '@/components/ui/Meta/Meta'
 
 interface Props {}
 

@@ -15,7 +15,7 @@
 
   &__item {
     & > *:last-child {
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
   }
 
@@ -40,6 +40,10 @@
   &__forgot {
     font-size: 16px;
     color: $blue;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__registration {

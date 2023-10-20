@@ -18,7 +18,7 @@ const Meta: FC<PropsWithChildren<ISeo>> = ({ title, desc, children }) => {
   return (
     <>
       <Head>
-      <link rel="icon" type="image/ico" href="/favicon.ico" />
+        <link rel="icon" type="image/ico" href="/favicon.ico" />
         <title itemProp="headline">{titleMerge(title)}</title>
         {desc ? (
           <>
@@ -40,5 +40,3 @@ const Meta: FC<PropsWithChildren<ISeo>> = ({ title, desc, children }) => {
 }
 
 export default Meta
-
-

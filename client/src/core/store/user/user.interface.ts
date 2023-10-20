@@ -1,4 +1,4 @@
-import { IUser } from "@/core/types/user.interface"
+import { IUser } from '@/core/types/user.interface'
 
 export interface IUserState {
   phone: string
@@ -30,9 +30,9 @@ export interface IRegister {
   patronymic?: string
   phone: string
   password: string
-  roleId: string
+  roleId: number
 }
 
 export interface IAuthResponse extends ITokens {
-  user: IUser 
+  user: IUser
 }

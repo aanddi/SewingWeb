@@ -1,6 +1,35 @@
 @import '@/assets/styles/_variables.scss';
 
-.applicant {
+.register {
+
+  &__choice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    cursor: pointer;
+
+    margin-bottom: 40px;
+    border: 1px solid $blue;
+    border-radius: 40px;
+  }
+
+  &__choiceItem {
+    padding: 10px 10px;
+    flex: 1 1 50%;
+    transition: all .2s ease;
+    &_active {
+      background-color: $blue !important;
+      color: #fff !important;
+      user-select: none;
+      border-radius: 40px;
+    }
+
+    &_unActive {
+
+    }
+
+  }
 
   &__title {
     color: $darkBlue;
@@ -16,6 +45,10 @@
   &__item {
     & > *:last-child {
       margin-bottom: 30px;
+    }
+
+    &_nodisplay {
+
     }
   }
 
@@ -34,7 +67,7 @@
     gap: 5px;
 
     span {
-      font-size: 16px;
+      font-size: 14px;
     }
 
     a {
@@ -54,8 +87,9 @@
     color: #fff;
     padding: 12px 40px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
+    gap: 5px;
   }
 
   &__forgot {

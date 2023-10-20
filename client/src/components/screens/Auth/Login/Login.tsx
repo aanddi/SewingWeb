@@ -3,14 +3,16 @@ import Link from 'next/link'
 import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { ILogin } from '@/core/store/user/user.interface'
+
+import { useActions } from '@/core/hooks/useActions'
+import { useAuth } from '@/core/hooks/useAuth'
+import { useAuthRedirect } from '@/core/hooks/useAuthRedirect'
+
 import AuthLayout from '@/components/layouts/Auth/AuthLayout'
 import Field from '@/components/ui/Field/Field'
 
 import styles from './Login.module.scss'
-import { useAuth } from '@/core/hooks/useAuth'
-import { useActions } from '@/core/hooks/useActions'
-import { ILogin } from '@/core/store/user/user.interface'
-import { useAuthRedirect } from '@/core/hooks/useAuthRedirect'
 
 interface Props {}
 
@@ -26,25 +28,19 @@ const Login: FC<Props> = props => {
     mode: 'onChange'
   })
 
-  const onSubmit:SubmitHandler<ILogin> = (data) => {
+  const onSubmit: SubmitHandler<ILogin> = data => {
     login(data)
     reset()
   }
 
   const { isLoading } = useAuth()
-  const {login} = useActions()
-
-  // JobSeeker - 1  |  Employer - 2
-  const [roleId, setRoleId] = useState(1 | 2)
+  const { login } = useActions()
 
   return (
     <AuthLayout>
       <div className={styles.applicant}>
         <h1 className={styles.applicant__title}>Вход</h1>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className={styles.applicant__form}
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.applicant__form}>
           <div className={styles.applicant__item}>
             <Field
               {...register('phone', {
@@ -79,10 +75,7 @@ const Login: FC<Props> = props => {
               Забыли пароль?
             </Link>
           </div>
-          <Link
-            href="/register/applicant"
-            className={styles.applicant__registration}
-          >
+          <Link href="/auth/register" className={styles.applicant__registration}>
             Нет аккаунта?<span>Зарегистрироваться</span>
           </Link>
         </form>
