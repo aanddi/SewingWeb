@@ -178,10 +178,11 @@ model Vacancy {
   title          String
   salary         Int
   desc           String
+  skills         String
   address        String
   workExperience String    @map("work_experience")
   employment     String    @map("employment_type")
-  wokrTimetable  String    @map("work_timetable")
+  workTimetable  String    @map("work_timetable")
   education      String    @map("education_info")
 
   employerId Int      @unique @map("employer_id")
@@ -194,8 +195,8 @@ model Vacancy {
 
   resume Responses[]
 
-  date_start String // для подписки, мб надо мб нет, хз пока как сделать
-  date_end   String
+  // date_start String // для подписки, мб надо мб нет, хз пока как сделать
+  // date_end   String
 
   @@map("Vacansies")
 }
