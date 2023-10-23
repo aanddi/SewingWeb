@@ -10,22 +10,28 @@ import styles from './ProfileMenu.module.scss'
 
 import photoUser from 'public/Profiles/photo.svg'
 
-const ProfileMenu: FC = () => {
+interface Props {
+  modalOpen: boolean
+  closeModal: () => void
+  setModalOpen: any
+}
+
+const ProfileMenu: FC<Props> = ({ modalOpen, setModalOpen, closeModal }) => {
   const { user } = useAuth()
   const role = useCheckRole()
 
   const { logout } = useActions()
 
-  const [menuActive, setMenuActive] = useState(false)
+  //const [menuActive, setMenuActive] = useState(false)
   return (
-    <div className={styles.profileMenu}>
-      <div className={styles.profileMenu__photo} onClick={() => setMenuActive(!menuActive)}>
+    <div className={styles.profileMenu} onClick={e => e.stopPropagation()}>
+      <div className={styles.profileMenu__photo} onClick={() => setModalOpen(!modalOpen)}>
         <Image src={photoUser} alt="Фото" />
       </div>
 
       <div
         className={
-          menuActive
+          modalOpen
             ? [styles.profileMenu__menu, styles.profileMenu__menu_active].join(' ')
             : [styles.profileMenu__menu, styles.profileMenu__menu_unActive].join(' ')
         }

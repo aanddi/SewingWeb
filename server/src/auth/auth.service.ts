@@ -107,7 +107,7 @@ export class AuthService {
     return {
       id: user.id,
       phone: user.phone,
-      roleId: user.roleId,
+      roleId: +user.roleId,
       name: user.name,
       surname: user.surname
     }

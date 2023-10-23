@@ -23,6 +23,10 @@ model User {
   role   Role @relation(fields: [roleId], references: [id])
   roleId Int
 
+  jobSeeker JobSeeker?
+
+  employer Employer?
+
   @@map("Users")
 }
 
@@ -34,20 +38,6 @@ model Role {
 
   @@map("Roles")
 }
-
-// но правильно будет вот так
-// model User {
-//   id         Int      @id @default(autoincrement()) @map("user_id")
-//   createdAt  DateTime @default(now()) @map("created_at")
-//   updatedAt  DateTime @updatedAt @map("updated_at")
-//   phoneLogin String   @unique() @map("login")
-//   password   String   @unique()
-//   email      String?  @unique()
-//   role       Role     @relation(fields: [roleId], references: [id])
-//   roleId     Int
-
-//   @@map("Users")
-// }
 
 //------------- Соискатели и резюме -------------
 // ЛОГИКА СВЯЗИ: один пользователь может указать несколько образований(один ко многим)
@@ -62,6 +52,9 @@ model JobSeeker {
   city        String?
   citizenship String?
   languages   String?
+
+  userId Int            @unique @map("contact_persone_id")
+  user   User @relation(fields: [userId], references: [id])
 
   institutionalInfo InstitutionalInfo[]
 
@@ -147,8 +140,8 @@ model Employer {
   contact     String
   adress      String?
 
-  //contactPersoneId Int?            @unique @map("contact_persone_id")
-  //contactPersone   ContactPersone? @relation(fields: [contactPersoneId], references: [id])
+  userId Int            @unique @map("contact_persone_id")
+  user   User @relation(fields: [userId], references: [id])
 
   vacansy Vacancy[]
 
@@ -156,17 +149,6 @@ model Employer {
 
   @@map("Employers")
 }
-
-// model ContactPersone {
-//  id      Int    @id @default(autoincrement()) @map("persone_id")
-//  name    String
-//  surname String
-//  post    String
-//
-// employer Employer?
-//
-// @@map("Contact_persones")
-//}
 
 // ЛОГИКА СВЯЗИ С РАБОТОДАТЕЛЯМИ: один работодатель может создать несколько вакансий(один ко многим)
 // ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одна вакансия может быть создана только на одноу профессию(один к одному)

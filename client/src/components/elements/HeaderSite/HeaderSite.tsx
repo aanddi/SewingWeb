@@ -11,9 +11,13 @@ import styles from './HeaderSite.module.scss'
 
 import logoMenu from 'public/Logo/logoMenu.svg'
 
-interface Props {}
+interface Props {
+  modalOpen: boolean
+  closeModal: () => void;
+  setModalOpen: any;
+}
 
-const HeaderSite: FC<Props> = props => {
+const HeaderSite: FC<Props> = ({modalOpen ,setModalOpen, closeModal}) => {
   const path = usePathname()
   const pathElem = String(path).split('/')
 
@@ -88,7 +92,7 @@ const HeaderSite: FC<Props> = props => {
           <div className={styles.header__control}>
             <div className={styles.header__login}>
               {user ? (
-                <ProfileMenu />
+                <ProfileMenu modalOpen={modalOpen} setModalOpen={setModalOpen} closeModal={closeModal}/>
               ) : (
                 <Link href="/auth/login" className={styles.header__loginBtn}>
                   Войти

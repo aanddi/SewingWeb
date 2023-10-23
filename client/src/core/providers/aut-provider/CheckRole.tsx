@@ -17,7 +17,7 @@ const CheckRole: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
   if ((user && isOnlyEmployer) || (user && isOnlyJobSeeker)) return <>{children}</>
 
   // если юзер не залогинен его перекидывает на страницу логина
-  router.pathname !== '/auth' && router.replace('/auth')
+  router.pathname !== '/auth' && router.replace('/auth/login')
   return null
 }
 
