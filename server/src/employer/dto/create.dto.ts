@@ -31,5 +31,7 @@ export class CreateDto {
   @IsString({ message: 'Адресс компании должен быть строкой' })
   adress: string
 
+  userId: number
+
 
 }

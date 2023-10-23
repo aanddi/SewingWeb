@@ -28,7 +28,8 @@ export class EmployerService {
         size: dto.size,
         contact: dto.contact,
         adress: dto.adress,
-        inn: dto.inn
+        inn: dto.inn,
+        userId: dto.userId
       }
     })
 
