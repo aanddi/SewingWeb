@@ -1,6 +1,8 @@
 import { IUser } from '@/core/types/user.interface'
 
+// возвращаемые поля в localstorage
 export interface IUserState {
+  id: number
   phone: string
   roleId: number
   name: string
@@ -14,7 +16,8 @@ export interface ITokens {
 
 export interface IInitialState {
   user: IUserState | null
-  isLoading: boolean
+  isLoading: boolean,
+  error: string
 }
 
 // входящие данные для входа в систему
@@ -35,4 +38,5 @@ export interface IRegister {
 
 export interface IAuthResponse extends ITokens {
   user: IUser
+  error?: string
 }

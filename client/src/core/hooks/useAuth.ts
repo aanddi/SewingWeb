@@ -4,5 +4,5 @@ import { useTypedSelector } from './useTypedSelector'
 
 export const useAuth = () =>
   useTypedSelector(state => {
-    return state.user
+    return state?.user
   })

@@ -1,5 +1,4 @@
 export interface IEmployer {
-  id: number
   companyName: string
   inn: string
   type: string

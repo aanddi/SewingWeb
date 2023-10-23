@@ -15,8 +15,17 @@ export class EmployerService {
       }
     })
 
-    // если ИНН найден, то отдаем ошибку 400
+     // Проверка на существующую компанию по ИНН
+     const checkUser = await this.prisma.employer.findUnique({
+      where: {
+        userId: dto.userId
+      }
+    })
+
+    // ошибки 400
+    if (checkUser) throw new BadRequestException('Вы уже зарегистрировали компанию')
     if (checkInn) throw new BadRequestException('Такая компания уже зарегистрирована с таким ИНН')
+   
 
     // создаем компанию в бд
     const employer = await this.prisma.employer.create({
@@ -25,11 +34,11 @@ export class EmployerService {
         type: dto.type,
         registrCity: dto.registrCity,
         about: dto.about,
-        size: dto.size,
+        size: +dto.size,
         contact: dto.contact,
         adress: dto.adress,
         inn: dto.inn,
-        userId: dto.userId
+        userId: +dto.userId
       }
     })
 

@@ -140,7 +140,7 @@ model Employer {
   contact     String
   adress      String?
 
-  userId Int            @unique @map("contact_persone_id")
+  userId Int            @unique @map("userId")
   user   User @relation(fields: [userId], references: [id])
 
   vacansy Vacancy[]

@@ -8,6 +8,7 @@ import { ILogin } from '@/core/store/user/user.interface'
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useAuthRedirect } from '@/core/hooks/useAuthRedirect'
+import { useTypedSelector } from '@/core/hooks/useTypedSelector'
 
 import AuthLayout from '@/components/layouts/Auth/AuthLayout'
 import Field from '@/components/ui/Field/Field'
@@ -18,6 +19,8 @@ interface Props {}
 
 const Login: FC<Props> = props => {
   useAuthRedirect()
+
+  const error = useTypedSelector(state => state.user.error)
 
   const {
     register,
@@ -70,11 +73,17 @@ const Login: FC<Props> = props => {
             />
           </div>
           <div className={styles.applicant__enter}>
-            <button className={styles.applicant__button}>Войти</button>
-            <Link href="/" className={styles.applicant__forgot}>
-              Забыли пароль?
-            </Link>
+            <div className={styles.applicant__control}>
+              <button className={styles.applicant__button}>Войти</button>
+              <Link href="/" className={styles.applicant__forgot}>
+                Забыли пароль?
+              </Link>
+            </div>
+            <div className={styles.applicant__error}>{error}</div>
+
+          
           </div>
+
           <Link href="/auth/register" className={styles.applicant__registration}>
             Нет аккаунта?<span>Зарегистрироваться</span>
           </Link>

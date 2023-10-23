@@ -1,11 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { FC, useEffect, useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+
+import { IEmployer } from '@/core/types/employer.interface'
 
 import { useAuth } from '@/core/hooks/useAuth'
 import { useCheckRole } from '@/core/hooks/useCheckRole'
+import { employerService } from '@/core/services/employer/employer.service'
 
 import AuthLayout from '@/components/layouts/Auth/AuthLayout'
 import Field from '@/components/ui/Field/Field'
@@ -16,21 +19,37 @@ import logo from 'public/Logo/swId.svg'
 
 const RegisterCompany: FC = () => {
   const { user } = useAuth()
-  const role = useCheckRole()
   const router = useRouter()
-  if ((user && role == '_JOBSEEKER_') || !user) router.replace('/')
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm({
-    mode: 'onChange'
+  } = useForm<IEmployer>({
+    mode: 'onChange',
+    defaultValues: {
+      userId: user?.id
+    }
   })
 
-  const onSubmit = () => {
-    reset()
+  // ошибка сервера
+  const [serverErrorMessage, setServerErrorMessage] = useState<string | null>(null)
+
+  // запрос employerService
+  const create = async (data: IEmployer) => {
+    const response = await employerService.create(data)
+    setServerErrorMessage(response.message)
+    return response.statusCode
+  }
+
+  // при клике
+  const onSubmit: SubmitHandler<IEmployer> = async data => {
+    const isCreated = await create(data)
+    if (!isCreated) {
+      reset()
+      router.replace('/')
+    } else return isCreated
   }
 
   return (
@@ -44,13 +63,13 @@ const RegisterCompany: FC = () => {
           <div className={styles.employer__main}>
             <div className={styles.employer__item}>
               <Field
-                {...register('name', {
+                {...register('companyName', {
                   required: 'Обязательное поле'
                 })}
                 type={'text'}
                 title={'Название предприятия'}
                 star={true}
-                error={errors.name?.message}
+                error={errors.companyName?.message}
                 placeholder="Введите название предприятия"
               />
             </div>
@@ -71,11 +90,11 @@ const RegisterCompany: FC = () => {
             <div className={styles.employer__twoItem}>
               <div className={styles.employer__item}>
                 <Field
-                  {...register('city', {})}
+                  {...register('registrCity', {})}
                   type={'text'}
                   title={'Город регистрации'}
                   star={false}
-                  error={errors.city?.message}
+                  error={errors.registrCity?.message}
                   placeholder="Введите город регистрации"
                 />
               </div>
@@ -98,10 +117,10 @@ const RegisterCompany: FC = () => {
                 {...register('size', {
                   required: 'Обязательное поле'
                 })}
-                type={'text'}
+                type={'number'}
                 title={'Размер предприятия'}
                 star={true}
-                error={errors.inn?.message}
+                error={errors.size?.message}
                 placeholder="Введите размер предприятия"
               />
             </div>
@@ -122,14 +141,24 @@ const RegisterCompany: FC = () => {
                 type={'text'}
                 title={'Контакты'}
                 star={true}
-                error={errors.adress?.message}
+                error={errors.contact?.message}
                 placeholder="Введите номер телефона или сайт"
               />
             </div>
 
             <div className={styles.employer__footer}>
-              <button className={styles.employer__submit}>Найти сотродников!</button>
+              <button className={styles.employer__submit}>Найти сотрудников!</button>
             </div>
+            {serverErrorMessage ? (
+              <div className={styles.employer__response}>
+                <div className={styles.employer__errorResponse}>{serverErrorMessage}</div>
+                <Link href={'/'} className={styles.employer__later}>
+                  Заполнить позже (вы не сможете опубликовать вакансию!)
+                </Link>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </form>
