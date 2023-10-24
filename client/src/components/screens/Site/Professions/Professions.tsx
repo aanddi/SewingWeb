@@ -1,8 +1,11 @@
+import { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
-import IProfessions from './Professions.interface'
+import { IProfession } from '@/core/types/profession.interface'
+
+import { ProfessionService } from '@/core/services/profession/profession.service'
 
 import ProfessionCard from '@/components/elements/ProfessionCard/ProfessionCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
@@ -13,10 +16,11 @@ import arrowBot from 'public/Professions/arrowBot.svg'
 import arrowTop from 'public/Professions/arrowTop.svg'
 import search from 'public/Professions/search.svg'
 
-const Professions: FC<IProfessions> = props => {
+const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
   const [sortActive, setSortActive] = useState(false)
   const [sortValue, setSortValue] = useState('по популярности')
 
+  console.log(professions)
   return (
     <SiteLayout>
       <div className={styles.professions}>
@@ -62,12 +66,12 @@ const Professions: FC<IProfessions> = props => {
                         </Link>
                       </li>
                       <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по возрастанию зарплаты')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions">
+                        <Link className={styles.ribbon__sortLink} href="/professions?sort=asc">
                           по возрастанию зарплаты
                         </Link>
                       </li>
                       <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по убыванию зарплаты')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions">
+                        <Link className={styles.ribbon__sortLink} href="/professions?sort=desc">
                           по убыванию зарплаты
                         </Link>
                       </li>
@@ -79,60 +83,22 @@ const Professions: FC<IProfessions> = props => {
                 </div>
               </div>
               <div className={styles.ribbon__cards}>
-                <ProfessionCard
-                  title={'Закройщик'}
-                  salary={30000}
-                  count={17}
-                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
-                />
-                <ProfessionCard
-                  title={'Закройщик'}
-                  salary={30000}
-                  count={17}
-                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
-                />
-                <ProfessionCard
-                  title={'Закройщик'}
-                  salary={30000}
-                  count={17}
-                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
-                />
-                <ProfessionCard
-                  title={'Закройщик'}
-                  salary={30000}
-                  count={17}
-                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
-                />
-                <ProfessionCard
-                  title={'Закройщик'}
-                  salary={30000}
-                  count={17}
-                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
-                />
-                <ProfessionCard
-                  title={'Закройщик'}
-                  salary={30000}
-                  count={17}
-                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
-                />
-                <ProfessionCard
-                  title={'Закройщик'}
-                  salary={30000}
-                  count={17}
-                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
-                />
-                <ProfessionCard
-                  title={'Закройщик'}
-                  salary={30000}
-                  count={17}
-                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
-                />
-                <ProfessionCard
-                  title={'Закройщик'}
-                  salary={30000}
-                  count={17}
-                  desc={'Закройщик - мастер в ателье по ремонт  у и пошиву одежды по индивидуальным заказам.'}
-                />
+                {
+                  professions.length > 0 
+                  ?
+                  professions.map((profession, index) => {
+                    return (
+                      <ProfessionCard
+                        title={profession.name}
+                        salary={profession.averageSalary}
+                        count={17}
+                        desc={profession.desc}
+                      />
+                    )
+                  })
+                  :
+                  <div>Ой! Ошибка. Профессии не найдены</div> 
+                }
               </div>
             </div>
           </div>

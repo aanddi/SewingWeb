@@ -1,0 +1,38 @@
+@import '@/assets/styles/_variables.scss';
+
+.notFound {
+  margin-top: 64px;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__title {
+    color: $darkBlue;
+    text-align: center;
+    font-size: 35px;
+    font-weight: 600;
+  }
+
+  &__subTitle {
+    margin-top: 30px;
+    font-size: 15px;
+  }
+
+  &__link {
+    margin-top: 40px;
+    padding: 15px 60px;
+    background-color: $blue;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $blueHover;
+    }
+  }
+}

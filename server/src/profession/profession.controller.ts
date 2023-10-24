@@ -1,4 +1,4 @@
-import { Controller, Get, ValidationPipe, UsePipes, Param, HttpCode, Post, Body } from '@nestjs/common'
+import { Controller, Get, ValidationPipe, UsePipes, Param, HttpCode, Post, Body, Query } from '@nestjs/common'
 import { ProfessionService } from './profession.service'
 import { CreateProfessionDto } from './dto/create-profession.dto'
 import { Auth } from 'src/auth/decorators/auth.decorators'
@@ -15,7 +15,7 @@ export class ProfessionController {
 
   @UsePipes(new ValidationPipe())
   @Get()
-  getSortBySalary(@Param('sort') sort: string) {
+  getSortBySalary(@Query('sort') sort: string) {
     return this.professionService.getSortBySalary(sort)
   }
 

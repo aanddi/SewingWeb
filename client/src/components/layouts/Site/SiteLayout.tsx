@@ -9,7 +9,7 @@ const SiteLayout: FC<PropsWithChildren> = ({ children }) => {
   const closeModal = () => setModalOpen(false)
 
   return (
-    <div onClick={() => closeModal()}>
+    <div className='wrapper' onClick={() => closeModal()}>
       <HeaderSite modalOpen={modalOpen} setModalOpen={setModalOpen} closeModal={closeModal} />
       <main className="page">{children}</main>
       <FooterSite />
