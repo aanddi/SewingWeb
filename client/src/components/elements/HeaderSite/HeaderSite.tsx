@@ -13,11 +13,11 @@ import logoMenu from 'public/Logo/logoMenu.svg'
 
 interface Props {
   modalOpen: boolean
-  closeModal: () => void;
-  setModalOpen: any;
+  closeModal: () => void
+  setModalOpen: any
 }
 
-const HeaderSite: FC<Props> = ({modalOpen ,setModalOpen, closeModal}) => {
+const HeaderSite: FC<Props> = ({ modalOpen, setModalOpen, closeModal }) => {
   const path = usePathname()
   const pathElem = String(path).split('/')
 
@@ -92,7 +92,7 @@ const HeaderSite: FC<Props> = ({modalOpen ,setModalOpen, closeModal}) => {
           <div className={styles.header__control}>
             <div className={styles.header__login}>
               {user ? (
-                <ProfileMenu modalOpen={modalOpen} setModalOpen={setModalOpen} closeModal={closeModal}/>
+                <ProfileMenu modalOpen={modalOpen} setModalOpen={setModalOpen} closeModal={closeModal} />
               ) : (
                 <Link href="/auth/login" className={styles.header__loginBtn}>
                   Войти

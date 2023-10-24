@@ -10,25 +10,31 @@ import { AuthService } from '@/core/services/auth/auth.service'
 // джейнерики: IAuthResponse - это ответ на запрос (наш юзер)
 // ILogin - т.е data - это те поля или ифнформация, которую мы отправляем
 // делаем запрос с помощью AuthService и возвращаем ответ или ошибку
-export const login = createAsyncThunk<IAuthResponse, ILogin>('auth/login', async (data, thunkAPI) => {
-  try {
-    const response = await AuthService.login(data)
-    return response
-  } catch (error:any) {
-    return thunkAPI.rejectWithValue(error.response.data.message)
+export const login = createAsyncThunk<IAuthResponse, ILogin, { rejectValue: string }>(
+  'auth/login',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await AuthService.login(data)
+      return response
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
   }
-})
+)
 
 // Регистрация
 // та же логика что и логин
-export const registration = createAsyncThunk<IAuthResponse, IRegister>('auth/register', async (data, thunkAPI) => {
-  try {
-    const response = await AuthService.registration(data)
-    return response
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error)
+export const registration = createAsyncThunk<IAuthResponse, IRegister, { rejectValue: string }>(
+  'auth/register',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await AuthService.registration(data)
+      return response
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message)
+    }
   }
-})
+)
 
 // фейковый запрос на выход из аккаунта
 // забираем токены, если нет токенов(нет авторизации) то выходим

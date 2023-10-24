@@ -1,16 +1,14 @@
 import { NextPage } from 'next'
 
 import Meta from '@/components/Meta/Meta'
-import Applicant from '@/components/screens/Auth/Login/Login'
+import Login from '@/components/screens/Auth/Login/Login'
 
-interface Props {}
-
-const LoginApplicantPage: NextPage<Props> = props => {
+const LoginPage: NextPage = () => {
   return (
     <Meta title="Вход">
-      <Applicant />
+      <Login />
     </Meta>
   )
 }
 
-export default LoginApplicantPage
+export default LoginPage

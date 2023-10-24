@@ -11,7 +11,7 @@ export class AuthDto {
   @IsString({ message: 'Отчество должно быть строкой' })
   patronymic: string
 
-  @IsPhoneNumber('RU', { message: 'Телефон должен быть действительным номером телефона' })
+  @IsString()
   phone: string
 
   @MinLength(8, {

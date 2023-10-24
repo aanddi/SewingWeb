@@ -7,6 +7,10 @@
     border: 1px solid #C2BFBF;
     width: 100%;
     font-size: 13px;
+
+    &:focus {
+      border: 1px solid $blue !important;
+    }
   }
 
   &__error {

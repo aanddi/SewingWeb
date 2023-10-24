@@ -58,7 +58,7 @@ export class AuthService {
     // Проверка на существующего юзера в бд по телефону
     const checkUser = await this.prisma.user.findUnique({
       where: {
-        phone: dto.phone,
+        phone: dto.phone
       }
     })
 
@@ -122,11 +122,11 @@ export class AuthService {
       }
     })
 
-    // если юзер не найден, то отдаем ошибку 404
-    if (!user) throw new NotFoundException('Пользователь не найден')
-
     // валидируем пароль (user.password - пароль из бд)
     const isValid = await verify(user.password, dto.password)
+
+    // если юзер не найден, то отдаем ошибку 404
+    if (!user) throw new NotFoundException('Пользователь не найден')
 
     // если пароль не прошел валидацию кидаем ошибку 401
     if (!isValid) throw new UnauthorizedException('Не верный пароль')

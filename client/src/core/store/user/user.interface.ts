@@ -1,3 +1,5 @@
+import { SerializedError } from '@reduxjs/toolkit'
+
 import { IUser } from '@/core/types/user.interface'
 
 // возвращаемые поля в localstorage
@@ -16,8 +18,8 @@ export interface ITokens {
 
 export interface IInitialState {
   user: IUserState | null
-  isLoading: boolean,
-  error: string
+  isLoading: boolean
+  error: string | undefined
 }
 
 // входящие данные для входа в систему
@@ -38,5 +40,5 @@ export interface IRegister {
 
 export interface IAuthResponse extends ITokens {
   user: IUser
-  error?: string
+  error: string | undefined
 }

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { ILogin } from '@/core/store/user/user.interface'
@@ -9,19 +9,32 @@ import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useAuthRedirect } from '@/core/hooks/useAuthRedirect'
 import { useTypedSelector } from '@/core/hooks/useTypedSelector'
+import { validPhone } from '@/core/services/auth/auth.helper'
 
 import AuthLayout from '@/components/layouts/Auth/AuthLayout'
 import Field from '@/components/ui/Field/Field'
 
 import styles from './Login.module.scss'
 
-interface Props {}
+const Login: FC = () => {
+  // =========================================================
+  useAuthRedirect('/')
+  const { isLoading } = useAuth()
+  const { login } = useActions()
 
-const Login: FC<Props> = props => {
-  useAuthRedirect()
-
+  // ========== ERROR SERVER =============================
   const error = useTypedSelector(state => state.user.error)
 
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
+
+  // onChange Fielsd
+  const onChangeFields = () => setErrorMessage(undefined)
+
+  useEffect(() => {
+    setErrorMessage(error)
+  }, [error])
+
+  // ========== REACT HOOK FORM =============================
   const {
     register,
     handleSubmit,
@@ -31,13 +44,11 @@ const Login: FC<Props> = props => {
     mode: 'onChange'
   })
 
+  // submit form
   const onSubmit: SubmitHandler<ILogin> = data => {
     login(data)
-    reset()
   }
-
-  const { isLoading } = useAuth()
-  const { login } = useActions()
+  // =========================================================
 
   return (
     <AuthLayout>
@@ -47,7 +58,12 @@ const Login: FC<Props> = props => {
           <div className={styles.applicant__item}>
             <Field
               {...register('phone', {
-                required: 'Обязательное поле'
+                required: 'Обязательное поле',
+                onChange: () => onChangeFields(),
+                pattern: {
+                  value: validPhone,
+                  message: 'Введите корректный номер телефона. Пример +79780000000'
+                }
               })}
               type={'text'}
               title={'Телефон'}
@@ -60,6 +76,7 @@ const Login: FC<Props> = props => {
             <Field
               {...register('password', {
                 required: 'Обязательное поле',
+                onChange: () => onChangeFields(),
                 minLength: {
                   value: 8,
                   message: 'Минимальная длинна пароля должна быть 8 символов'
@@ -75,13 +92,11 @@ const Login: FC<Props> = props => {
           <div className={styles.applicant__enter}>
             <div className={styles.applicant__control}>
               <button className={styles.applicant__button}>Войти</button>
-              <Link href="/" className={styles.applicant__forgot}>
+              <Link href="/auth/remind" className={styles.applicant__forgot}>
                 Забыли пароль?
               </Link>
             </div>
-            <div className={styles.applicant__error}>{error}</div>
-
-          
+            <div className={styles.applicant__error}>{errorMessage}</div>
           </div>
 
           <Link href="/auth/register" className={styles.applicant__registration}>

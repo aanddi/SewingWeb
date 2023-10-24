@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
@@ -9,25 +8,36 @@ import { IRegister } from '@/core/store/user/user.interface'
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useAuthRedirect } from '@/core/hooks/useAuthRedirect'
+import { useTypedSelector } from '@/core/hooks/useTypedSelector'
+import { validPhone } from '@/core/services/auth/auth.helper'
 
 import AuthLayout from '@/components/layouts/Auth/AuthLayout'
 import Field from '@/components/ui/Field/Field'
 
 import styles from './Register.module.scss'
 
-interface Props {}
-
-const Register: FC<Props> = props => {
+const Register: FC = () => {
+  // =========================================================
+  useAuthRedirect('/')
+  const { isLoading } = useAuth()
   const { user } = useAuth()
-
   const { registration } = useActions()
-
   const router = useRouter()
-
   const [role, setRole] = useState('1')
 
-  if (user) useAuthRedirect()
+  // ========== ERROR SERVER =============================
+  const error = useTypedSelector(state => state.user.error)
 
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
+
+  // onChange Fielsd
+  const onChangeFields = () => setErrorMessage(undefined)
+
+  useEffect(() => {
+    setErrorMessage(error)
+  }, [error])
+
+  // ========== REACT HOOK FORM ===============================
   const {
     register,
     handleSubmit,
@@ -39,14 +49,20 @@ const Register: FC<Props> = props => {
     defaultValues: { roleId: +role }
   })
 
+  // submit form
   const onSubmit: SubmitHandler<IRegister> = data => {
     registration(data)
-    reset()
+
+    // баг здесь, не перекидывает, так как сверху асинк санк асинхронный и перекидывает на /
+    //if (user && errorMessage == undefined && role == '2') useAuthRedirect('/auth/registerCompany')
   }
 
+  // ========== ROLES =============================
   useEffect(() => {
     setValue('roleId', +role)
   }, [role, setValue])
+
+  // =========================================================
 
   return (
     <AuthLayout>
@@ -78,7 +94,8 @@ const Register: FC<Props> = props => {
           <div className={styles.register__item}>
             <Field
               {...register('name', {
-                required: 'Обязательное поле'
+                required: 'Обязательное поле',
+                onChange: () => onChangeFields()
               })}
               type={'text'}
               title={'Имя'}
@@ -90,7 +107,8 @@ const Register: FC<Props> = props => {
           <div className={styles.register__item}>
             <Field
               {...register('surname', {
-                required: 'Обязательное поле'
+                required: 'Обязательное поле',
+                onChange: () => onChangeFields()
               })}
               type={'text'}
               title={'Фамилия'}
@@ -102,7 +120,12 @@ const Register: FC<Props> = props => {
           <div className={styles.register__item}>
             <Field
               {...register('phone', {
-                required: 'Обязательное поле'
+                required: 'Обязательное поле',
+                onChange: () => onChangeFields(),
+                pattern: {
+                  value: validPhone,
+                  message: 'Введите корректный номер телефона. Пример +79780000000'
+                }
               })}
               type={'text'}
               title={'Номер телефона'}
@@ -114,7 +137,12 @@ const Register: FC<Props> = props => {
           <div className={styles.register__item}>
             <Field
               {...register('password', {
-                required: 'Обязательное поле'
+                required: 'Обязательное поле',
+                minLength: {
+                  value: 8,
+                  message: 'Минимальная длинна пароля должна быть 8 символов'
+                },
+                onChange: () => onChangeFields()
               })}
               type={'password'}
               title={'Пароль'}
@@ -125,18 +153,20 @@ const Register: FC<Props> = props => {
           </div>
 
           <div className={styles.register__enter}>
-            {role == '1' ? (
-              <button className={styles.register__button}>Продолжить как соискатель</button>
-            ) : role == '2' ? (
-              <button onClick={() => router.replace('/auth/registerCompany')} className={styles.register__button}>
-                Продолжить как работодатель
-              </button>
-            ) : null}
-            <div className={styles.register__login}>
-              <span>Есть аккаунт? </span>
-              <Link href="/auth/login">Войти</Link>
+            <div className={styles.register__control}>
+              {role == '1' ? (
+                <button className={styles.register__button}>Продолжить как соискатель</button>
+              ) : role == '2' ? (
+                <button className={styles.register__button}>Продолжить как работодатель</button>
+              ) : null}
+              <div className={styles.register__login}>
+                <span>Есть аккаунт? </span>
+                <Link href="/auth/login">Войти</Link>
+              </div>
             </div>
+            <div className={styles.register__error}>{errorMessage}</div>
           </div>
+
           <div className={styles.register__agreement}>
             Регистрируясь, вы принимаете условия <span className={styles.register__forgot}>Правил</span> и{' '}
             <span className={styles.register__forgot}>Соглашения</span> об использовании сайта sewingweb.ru и даете{' '}

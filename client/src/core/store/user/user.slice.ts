@@ -22,50 +22,61 @@ export const userSlice = createSlice({
   extraReducers: builder => {
     builder
 
+      //======= REGISTRATION ================================================
+
       // в процессе
       .addCase(registration.pending, state => {
         state.isLoading = true
+        state.error = undefined
       })
 
       // исполнено
       .addCase(registration.fulfilled, (state, { payload }) => {
         state.isLoading = false
-        state.user = payload.error
+        state.user = payload.user
+        state.error = undefined
       })
 
       // отклонено
-      .addCase(registration.rejected, (state) => {
+      .addCase(registration.rejected, (state, action) => {
         state.isLoading = false
+        state.error = action.payload as string
       })
 
-      //=======================================================
+      //======= LOGIN ================================================
 
       // в процессе
       .addCase(login.pending, state => {
         state.isLoading = true
+        state.error = undefined
       })
 
       // исполнено
       .addCase(login.fulfilled, (state, { payload }) => {
         state.isLoading = false
         state.user = payload.user
+        state.error = undefined
       })
 
       // отклонено
-      .addCase(login.rejected, (state, action ) => {
+      .addCase(login.rejected, (state, action) => {
         state.isLoading = false
-        state.error = action.payload as string
+        state.error = action.payload
       })
 
-      //=======================================================
+      //======= LOGOUT ================================================
+
       .addCase(logout.fulfilled, state => {
         state.isLoading = false
         state.user = null
+        state.error = undefined
       })
 
-      //=======================================================
+      //======= CHECKAUTH ================================================
+
       .addCase(checkAuth.fulfilled, (state, { payload }) => {
         state.user = payload.user
+        state.error = undefined
       })
   }
 })

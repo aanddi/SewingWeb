@@ -53,12 +53,21 @@
   }
 
   &__enter {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+
 
     border-bottom: 1px solid $grey;
     padding-bottom: 20px;
+  }
+
+  &__control {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__error {
+    color: red;
+    margin-top: 20px;
   }
 
   &__login {
