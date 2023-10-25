@@ -3,14 +3,15 @@ import { FC } from 'react'
 
 import { IVacancies } from './Vacancies.interface'
 
+import { AiOutlineHeart } from 'react-icons/ai'
+import { FaStar } from 'react-icons/fa'
+import { IoShieldCheckmarkSharp } from 'react-icons/io5'
+
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Vacancies.module.scss'
 
-import favorite from 'public/icons/favorite.svg'
-import logo from 'public/icons/logoCompany1.svg'
-import mark from 'public/icons/mark.svg'
-import star from 'public/icons/star.svg'
+import logo from 'public/Companies/logoCompany.svg'
 
 const Vacancies: FC<IVacancies> = props => {
   return (
@@ -42,7 +43,7 @@ const Vacancies: FC<IVacancies> = props => {
                   </div>
                   <div className={styles.about__favorites}>
                     <div className={styles.about__favorites_button}>
-                      <Image src={favorite} alt={'избраное'} />
+                      <AiOutlineHeart />
                       <span>Добавить в избраное</span>
                     </div>
                     <div className={styles.about__favorites_date}>Вакансия опубликована 18.01.2023</div>
@@ -114,7 +115,7 @@ const Vacancies: FC<IVacancies> = props => {
                     <div className={styles.about__companyWrapper}>
                       <div className={styles.about__companyHeader}>
                         <div className={styles.about__companyName}>
-                          <Image src={mark} alt={'Верификация'} />
+                          <IoShieldCheckmarkSharp style={{ color: '#3490DF' }} />
                           <span>ООО ТканьРФ</span>
                         </div>
                         <div className={styles.about__companyLogo}>
@@ -126,11 +127,11 @@ const Vacancies: FC<IVacancies> = props => {
                       </p>
                       <h4 className={styles.about__countVacancies}>3 вакансии на сайте</h4>
                       <div className={styles.about__reiting}>
-                        <Image src={star} alt={'1'} />
-                        <Image src={star} alt={'2'} />
-                        <Image src={star} alt={'3'} />
-                        <Image src={star} alt={'4'} />
-                        <Image src={star} alt={'5'} />
+                        <FaStar style={{ color: '#F4A815' }} size={15} />
+                        <FaStar style={{ color: '#F4A815' }} size={15} />
+                        <FaStar style={{ color: '#F4A815' }} size={15} />
+                        <FaStar style={{ color: '#F4A815' }} size={15} />
+                        <FaStar style={{ color: '#F4A815' }} size={15} />
                         <p>10 отзывов</p>
                       </div>
                     </div>
