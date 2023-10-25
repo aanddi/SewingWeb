@@ -1,20 +1,15 @@
-import { GetServerSideProps } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
 import { IProfession } from '@/core/types/profession.interface'
 
-import { ProfessionService } from '@/core/services/profession/profession.service'
+import { BiSearchAlt } from 'react-icons/bi'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import ProfessionCard from '@/components/elements/ProfessionCard/ProfessionCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Professions.module.scss'
-
-import arrowBot from 'public/Professions/arrowBot.svg'
-import arrowTop from 'public/Professions/arrowTop.svg'
-import search from 'public/Professions/search.svg'
 
 const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
   const [sortActive, setSortActive] = useState(false)
@@ -22,7 +17,7 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
 
   console.log(professions)
   return (
-    <SiteLayout>
+    <SiteLayout background={'#F6FAFF'}>
       <div className={styles.professions}>
         <section onClick={() => setSortActive(false)} className={[styles.professions__head, styles.head].join(' ')}>
           <div className="head__container">
@@ -34,7 +29,7 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
               <div className={styles.head__searchBlock}>
                 <div className={styles.head__search}>
                   <div className={styles.head__icon}>
-                    <Image src={search} alt={'Поиск'} />
+                    <BiSearchAlt style={{ color: '#BCBCBC' }} size={20} />
                   </div>
                   <input type="text" placeholder="Введите профессию" />
                 </div>
@@ -79,13 +74,15 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
                   </div>
                 </div>
                 <div className={styles.ribbon__icon}>
-                  <Image src={sortActive ? arrowTop : arrowBot} alt={sortActive ? 'Вверх' : 'Вниз'} />
+                  {sortActive ? (
+                    <IoIosArrowUp style={{ color: '#000' }} size={20} />
+                  ) : (
+                    <IoIosArrowDown style={{ color: '#000' }} size={20} />
+                  )}
                 </div>
               </div>
               <div className={styles.ribbon__cards}>
-                {
-                  professions.length > 0 
-                  ?
+                {professions.length > 0 ? (
                   professions.map((profession, index) => {
                     return (
                       <ProfessionCard
@@ -96,9 +93,9 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
                       />
                     )
                   })
-                  :
-                  <div>Ой! Ошибка. Профессии не найдены</div> 
-                }
+                ) : (
+                  <div>Ой! Ошибка. Профессии не найдены</div>
+                )}
               </div>
             </div>
           </div>

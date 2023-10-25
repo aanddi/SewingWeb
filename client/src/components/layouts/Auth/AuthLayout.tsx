@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { FC, PropsWithChildren, useState } from 'react'
+import { FC } from 'react'
+
+import { AiOutlineClose } from 'react-icons/ai'
 
 import styles from './AuthLayout.module.scss'
 
-import close from 'public/Auth/close.svg'
-import logo from 'public/Logo/swId.svg'
+import logo from 'public/Logo/logoAuth.svg'
 
 interface IAuthLayout {
   children: any
@@ -29,7 +30,7 @@ const AuthLayout: FC<IAuthLayout> = props => {
                 </div>
                 <div className={styles.auth__back}>
                   <Link href="/" className={styles.auth__closeBg}>
-                    <Image src={close} alt={'x'} />
+                    <AiOutlineClose size={15} />
                   </Link>
                 </div>
               </header>

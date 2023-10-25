@@ -1,16 +1,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import { IHome } from './Home.interface'
+
+import { IoIosArrowDown } from 'react-icons/io'
+import { LuSettings2 } from 'react-icons/lu'
 
 import VacanciesCard from '@/components/elements/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Home.module.scss'
 
-import Arrow from 'public/Home/arrow.svg'
-import Tools from 'public/Home/tools.svg'
 import ad from 'public/ad/ad.png'
 
 const Home: FC<IHome> = props => {
@@ -26,7 +27,7 @@ const Home: FC<IHome> = props => {
                     <input type="text" placeholder="Должность или предприятие" />
                   </div>
                   <div className={styles.mainScreen__search_filter}>
-                    <Image src={Tools} alt="Фильтры" />
+                    <LuSettings2 size={20} style={{ color: '#454B54' }} />
                   </div>
                   <div className={styles.mainScreen__search_button}>Найти</div>
                 </div>
@@ -44,7 +45,7 @@ const Home: FC<IHome> = props => {
                   </div>
                 </div>
                 <div className={styles.mainScreen__arrow}>
-                  <Image src={Arrow} alt={'Вниз'} />
+                  <IoIosArrowDown style={{ color: '#fff' }} size={40} />
                 </div>
                 <div className={styles.mainScreen__button}>Создать резюме</div>
               </div>

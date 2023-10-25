@@ -5,7 +5,7 @@ import NotFound from '@/components/screens/NotFound/NotFound'
 
 const NotFoundPage: NextPage = () => {
   return (
-    <Meta title='404'>
+    <Meta title="404">
       <NotFound />
     </Meta>
   )

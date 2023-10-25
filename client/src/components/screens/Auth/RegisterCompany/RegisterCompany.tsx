@@ -1,16 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { IEmployer } from '@/core/types/employer.interface'
 
 import { useAuth } from '@/core/hooks/useAuth'
-import { useCheckRole } from '@/core/hooks/useCheckRole'
 import { employerService } from '@/core/services/employer/employer.service'
 
-import AuthLayout from '@/components/layouts/Auth/AuthLayout'
 import Field from '@/components/ui/Field/Field'
 
 import styles from './RegisterCompany.module.scss'

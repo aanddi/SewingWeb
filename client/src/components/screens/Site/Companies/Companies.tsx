@@ -1,24 +1,22 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
 import ICompanies from './Companies.interface'
+
+import { BiSearchAlt } from 'react-icons/bi'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import CompaniesCard from '@/components/elements/CompaniesCard/CompaniesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Companies.module.scss'
 
-import arrowBot from 'public/Professions/arrowBot.svg'
-import arrowTop from 'public/Professions/arrowTop.svg'
-import search from 'public/Professions/search.svg'
-
 const Companies: FC<ICompanies> = props => {
   const [sortActive, setSortActive] = useState(false)
   const [sortValue, setSortValue] = useState('по популярности')
 
   return (
-    <SiteLayout>
+    <SiteLayout background={'#F6FAFF'}>
       <div className={styles.companies}>
         <section onClick={() => setSortActive(false)} className={[styles.companies__head, styles.head].join(' ')}>
           <div className="head__container">
@@ -28,7 +26,7 @@ const Companies: FC<ICompanies> = props => {
               <div className={styles.head__searchBlock}>
                 <div className={styles.head__search}>
                   <div className={styles.head__icon}>
-                    <Image src={search} alt={'Поиск'} />
+                    <BiSearchAlt style={{ color: '#BCBCBC' }} size={20} />
                   </div>
                   <input type="text" placeholder="Введите предприятие" />
                 </div>
@@ -102,7 +100,11 @@ const Companies: FC<ICompanies> = props => {
                   </div>
                 </div>
                 <div className={styles.ribbon__icon}>
-                  <Image src={sortActive ? arrowTop : arrowBot} alt={sortActive ? 'Вверх' : 'Вниз'} />
+                  {sortActive ? (
+                    <IoIosArrowUp style={{ color: '#000' }} size={20} />
+                  ) : (
+                    <IoIosArrowDown style={{ color: '#000' }} size={20} />
+                  )}
                 </div>
               </div>
               <div className={styles.ribbon__cards}>

@@ -10,7 +10,9 @@
 	"bracketSameLine": false,
   "importOrder": [
 		"<THIRD_PARTY_MODULES>",
-		"(.interface)$",
+		"(.interface)(.*)$",
+
+		"^react-icons",
 
 		"^@/core/(.*)$",
 		"^@/components/(.*)$",

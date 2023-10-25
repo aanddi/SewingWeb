@@ -1,16 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import ICompaniesCard from './CompaniesCard.interface'
 
+import { FaMapMarkerAlt, FaStar } from 'react-icons/fa'
+import { IoDocumentTextOutline, IoShieldCheckmarkSharp } from 'react-icons/io5'
+
 import styles from './CompaniesCard.module.scss'
 
-import count from 'public/Companies/countVacancies.svg'
 import logo from 'public/Companies/logoCompany.svg'
-import adress from 'public/icons/adress.svg'
-import mark from 'public/icons/mark.svg'
-import star from 'public/icons/star.svg'
 
 const CompaniesCard: FC<ICompaniesCard> = props => {
   return (
@@ -19,24 +18,24 @@ const CompaniesCard: FC<ICompaniesCard> = props => {
         <div className={styles.companiesCard__content}>
           <div className={styles.companiesCard__items}>
             <div className={styles.companiesCard__item}>
-              <Image src={mark} alt="Подтверждено" />
+              <IoShieldCheckmarkSharp style={{ color: '#3490DF' }} />
               <span className={styles.companiesCard__name}>{props.name}</span>
             </div>
             <div className={styles.companiesCard__item}>
-              <Image src={count} alt="Подтверждено" />
+              <IoDocumentTextOutline style={{ color: '#B7B7B7' }} />
               <span className={styles.companiesCard__count}>{props.count} вакансий</span>
             </div>
             <div className={styles.companiesCard__item}>
-              <Image src={adress} alt="Подтверждено" />
+              <FaMapMarkerAlt style={{ color: '#B7B7B7' }} />
               <span>{props.adress}</span>
             </div>
             <div className={styles.companiesCard__reviews}>
               <div className={styles.companiesCard__reviewsStar}>
-                <Image src={star} alt="Подтверждено" />
-                <Image src={star} alt="Подтверждено" />
-                <Image src={star} alt="Подтверждено" />
-                <Image src={star} alt="Подтверждено" />
-                <Image src={star} alt="Подтверждено" />
+                <FaStar style={{ color: '#F4A815' }} size={15} />
+                <FaStar style={{ color: '#F4A815' }} size={15} />
+                <FaStar style={{ color: '#F4A815' }} size={15} />
+                <FaStar style={{ color: '#F4A815' }} size={15} />
+                <FaStar style={{ color: '#F4A815' }} size={15} />
               </div>
               <span>{props.reviews} отзывов</span>
             </div>

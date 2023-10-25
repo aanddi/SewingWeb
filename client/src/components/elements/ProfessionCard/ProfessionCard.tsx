@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import IProfCard from './ProfessionCard.interface'
 

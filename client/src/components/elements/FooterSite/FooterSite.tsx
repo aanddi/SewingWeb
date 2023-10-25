@@ -4,10 +4,10 @@ import { FC } from 'react'
 
 import styles from './FooterSite.module.scss'
 
-import dzen from 'public/Footer/icon/dzen.svg'
-import telegram from 'public/Footer/icon/telegram.svg'
-import vk from 'public/Footer/icon/vk.svg'
-import youtube from 'public/Footer/icon/youtube.svg'
+import dzen from 'public/Footer/dzen.svg'
+import telegram from 'public/Footer/telegram.svg'
+import vk from 'public/Footer/vk.svg'
+import youtube from 'public/Footer/youtube.svg'
 
 interface Props {}
 

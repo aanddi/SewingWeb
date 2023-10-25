@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
@@ -8,7 +8,7 @@ import { useCheckRole } from '@/core/hooks/useCheckRole'
 
 import styles from './ProfileMenu.module.scss'
 
-import photoUser from 'public/Profiles/photo.svg'
+import photoUser from 'public/Profiles/photoUser.svg'
 
 interface Props {
   modalOpen: boolean

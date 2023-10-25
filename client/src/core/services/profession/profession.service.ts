@@ -15,5 +15,5 @@ export const ProfessionService = {
       url: `/profession/?sort=${sort}`,
       method: 'GET'
     })
-  },
+  }
 }

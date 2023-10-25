@@ -1,8 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import { IEmployer } from './Employer.interface'
+
+import { HiOutlineXMark } from 'react-icons/hi2'
+import { IoMdCheckmark } from 'react-icons/io'
 
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
@@ -13,15 +16,12 @@ import number2 from 'public/Employers/02.svg'
 import number3 from 'public/Employers/03.svg'
 import arrowBot from 'public/Employers/arrowBot.svg'
 import arrowTop from 'public/Employers/arrowTop.svg'
-import activeMark from 'public/Employers/check_mark.svg'
-import unactiveMark from 'public/Employers/cross_mark.svg'
 import head_img1 from 'public/Employers/head_img1.svg'
 import head_img2 from 'public/Employers/head_img2.svg'
 import head_line from 'public/Employers/head_line.svg'
 import pattern1 from 'public/Employers/pattern1.svg'
 import pattern2 from 'public/Employers/pattern2.svg'
 import pattern3 from 'public/Employers/pattern3.svg'
-import pattern4 from 'public/Employers/pattern4.svg'
 import pattern5 from 'public/Employers/pattern5.svg'
 
 const Employer: FC<IEmployer> = props => {
@@ -134,19 +134,19 @@ const Employer: FC<IEmployer> = props => {
                     <div className={styles.rates__list}>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Просмотр резюме соискателей</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Отклик по телефону</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={unactiveMark} alt={''} />
+                          <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
                         <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>
                           Продвижение в рассылке
@@ -154,7 +154,7 @@ const Employer: FC<IEmployer> = props => {
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={unactiveMark} alt={''} />
+                          <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
                         <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>
                           Приоритет в поиске
@@ -162,13 +162,13 @@ const Employer: FC<IEmployer> = props => {
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={unactiveMark} alt={''} />
+                          <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
                         <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Автоподбор резюме</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={unactiveMark} alt={''} />
+                          <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
                         <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>
                           Топ поиска на 7 дней
@@ -195,37 +195,37 @@ const Employer: FC<IEmployer> = props => {
                     <div className={styles.rates__list}>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Просмотр резюме соискателей</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Отклик по телефону</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Продвижение в рассылке</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Приоритет в поиске</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={unactiveMark} alt={''} />
+                          <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
                         <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Автоподбор резюме</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={unactiveMark} alt={''} />
+                          <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
                         <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>
                           Топ поиска на 7 дней
@@ -252,37 +252,37 @@ const Employer: FC<IEmployer> = props => {
                     <div className={styles.rates__list}>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Просмотр резюме соискателей</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Отклик по телефону</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Продвижение в рассылке</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Приоритет в поиске</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Автоподбор резюме</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
-                          <Image src={activeMark} alt={''} />
+                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
                         <p className={styles.rates__text}>Топ поиска на 7 дней</p>
                       </div>

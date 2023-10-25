@@ -1,17 +1,23 @@
-import { FC, PropsWithChildren, useRef, useState } from 'react'
+import { FC, PropsWithChildren, useState } from 'react'
 
 import FooterSite from '../../elements/FooterSite/FooterSite'
 import HeaderSite from '../../elements/HeaderSite/HeaderSite'
 
-const SiteLayout: FC<PropsWithChildren> = ({ children }) => {
+interface Props {
+  background?: string
+}
+
+const SiteLayout: FC<PropsWithChildren<Props>> = ({ children, background }) => {
   // закрытие модального меню
   const [modalOpen, setModalOpen] = useState(false)
   const closeModal = () => setModalOpen(false)
 
   return (
-    <div className='wrapper' onClick={() => closeModal()}>
+    <div className="wrapper" onClick={() => closeModal()}>
       <HeaderSite modalOpen={modalOpen} setModalOpen={setModalOpen} closeModal={closeModal} />
-      <main className="page">{children}</main>
+      <main style={{ backgroundColor: background }} className="page">
+        {children}
+      </main>
       <FooterSite />
     </div>
   )

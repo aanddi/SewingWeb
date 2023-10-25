@@ -1,7 +1,8 @@
 import IReviews from './Reviews.intraface'
 import Image from 'next/image'
-import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC } from 'react'
+
+import { FaStar } from 'react-icons/fa'
 
 import CompanyHeader from '@/components/elements/CompanyHeader/CompanyHeader'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
@@ -10,7 +11,6 @@ import styles from './Reviews.module.scss'
 
 import pattern from 'public/Companies/pattern.svg'
 import ad from 'public/ad/ad.png'
-import star from 'public/icons/star.svg'
 
 const Reviews: FC<IReviews> = props => {
   return (
@@ -28,11 +28,11 @@ const Reviews: FC<IReviews> = props => {
                       <div className={styles.reviews__grade}>
                         <span>4.2</span>
                         <div className={styles.reviews__star}>
-                          <Image src={star} alt={'1'} width={25} height={25} />
-                          <Image src={star} alt={'1'} width={25} height={25} />
-                          <Image src={star} alt={'1'} width={25} height={25} />
-                          <Image src={star} alt={'1'} width={25} height={25} />
-                          <Image src={star} alt={'1'} width={25} height={25} />
+                          <FaStar style={{ color: '#F4A815' }} size={25} />
+                          <FaStar style={{ color: '#F4A815' }} size={25} />
+                          <FaStar style={{ color: '#F4A815' }} size={25} />
+                          <FaStar style={{ color: '#F4A815' }} size={25} />
+                          <FaStar style={{ color: '#F4A815' }} size={25} />
                         </div>
                       </div>
                       <p className={styles.reviews__desc}>На основе 103 оценок</p>
@@ -58,11 +58,11 @@ const Reviews: FC<IReviews> = props => {
                     <span className={styles.reviews__date}>5 октября</span>
                   </div>
                   <div className={styles.reviews__starBlock}>
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
                   </div>
                 </div>
                 <div className={styles.reviews__ribbonItem}>
@@ -72,11 +72,11 @@ const Reviews: FC<IReviews> = props => {
                     <span className={styles.reviews__date}>5 октября</span>
                   </div>
                   <div className={styles.reviews__starBlock}>
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
                   </div>
                 </div>
                 <div className={styles.reviews__ribbonItem}>
@@ -86,11 +86,11 @@ const Reviews: FC<IReviews> = props => {
                     <span className={styles.reviews__date}>5 октября</span>
                   </div>
                   <div className={styles.reviews__starBlock}>
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
                   </div>
                 </div>
                 <div className={styles.reviews__ribbonItem}>
@@ -100,11 +100,11 @@ const Reviews: FC<IReviews> = props => {
                     <span className={styles.reviews__date}>5 октября</span>
                   </div>
                   <div className={styles.reviews__starBlock}>
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
-                    <Image src={star} alt={'1'} width={15} height={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
+                    <FaStar style={{ color: '#F4A815' }} size={15} />
                   </div>
                 </div>
               </section>
