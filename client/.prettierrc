@@ -10,6 +10,7 @@
 	"bracketSameLine": false,
   "importOrder": [
 		"<THIRD_PARTY_MODULES>",
+
 		"(.interface)(.*)$",
 
 		"^react-icons",
@@ -24,6 +25,7 @@
 
 		"^../(.*)",
 		"(.scss)$",
+		
 		"^public/(.*)$"
 	],
   "importOrderSeparation": true,
