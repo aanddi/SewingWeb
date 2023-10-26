@@ -1,1 +1,5 @@
-export default interface ICompanyHeader {}
+export default interface ICompanyHeader {
+  companyName: string
+  vacancy: number
+  reviews: number
+}

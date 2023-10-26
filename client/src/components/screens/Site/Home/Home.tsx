@@ -16,7 +16,7 @@ import ad from 'public/ad/ad.png'
 
 const Home: FC<IHome> = props => {
   return (
-    <SiteLayout>
+    <SiteLayout background={'#F6FAFF'}>
       <div className={styles.home}>
         <section className={[styles.home__mainScreen, styles.mainScreen].join(' ')}>
           <div className="mainScreen__container">

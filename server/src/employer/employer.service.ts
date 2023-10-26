@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { CreateDto } from './dto/create.dto'
 import { Employer } from '@prisma/client'
@@ -6,6 +6,37 @@ import { Employer } from '@prisma/client'
 @Injectable()
 export class EmployerService {
   constructor(private prisma: PrismaService) {}
+
+  async getAllEmployer() {
+    const employers = await this.prisma.employer.findMany({
+      select: {
+        id: true,
+        companyName: true,
+        inn: true,
+        type: true,
+        registrCity: true,
+        about: true,
+        size: true,
+        contact: true,
+        adress: true,
+        userId: true,
+      }
+    })
+
+    return employers
+  }
+
+  async getEmployerById(id: number) {
+    const company = await this.prisma.employer.findUnique({
+      where: {
+        id: id
+      }
+    })
+
+    if(!company) throw new NotFoundException('Компания не найдена')
+
+    return company
+  }
 
   async create(dto: CreateDto) {
     // Проверка на существующую компанию по ИНН

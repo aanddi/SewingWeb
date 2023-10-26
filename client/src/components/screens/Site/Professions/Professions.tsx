@@ -18,8 +18,8 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
   console.log(professions)
   return (
     <SiteLayout background={'#F6FAFF'}>
-      <div className={styles.professions}>
-        <section onClick={() => setSortActive(false)} className={[styles.professions__head, styles.head].join(' ')}>
+      <div className={styles.professions} onClick={() => setSortActive(false)}>
+        <section className={[styles.professions__head, styles.head].join(' ')}>
           <div className="head__container">
             <div className={styles.head__wrapper}>
               <h1 className={styles.head__title}>Каталог профессий</h1>
@@ -42,45 +42,48 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
         <section className={[styles.professions__ribbon, styles.ribbon].join(' ')}>
           <div className="ribbon__container">
             <div className={styles.ribbon__wrapper}>
-              <div className={styles.ribbon__sort} onClick={() => setSortActive(!sortActive)}>
-                <div className={styles.ribbon__text}>
-                  Сортировка <span>{sortValue}</span>
-                </div>
-                <div
-                  className={
-                    sortActive
-                      ? [styles.ribbon__sortMenu, styles.ribbon__sortMenu_active].join(' ')
-                      : [styles.ribbon__sortMenu, styles.ribbon__sortMenu_unactive].join(' ')
-                  }
-                >
-                  <div className={styles.ribbon__sortWrapper}>
-                    <ul className={styles.ribbon__sortList}>
-                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по популярности')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions">
-                          по популярности
-                        </Link>
-                      </li>
-                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по возрастанию зарплаты')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions?sort=asc">
-                          по возрастанию зарплаты
-                        </Link>
-                      </li>
-                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по убыванию зарплаты')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions?sort=desc">
-                          по убыванию зарплаты
-                        </Link>
-                      </li>
-                    </ul>
+              <span onClick={e => e.stopPropagation()}>
+                <div className={styles.ribbon__sort} onClick={() => setSortActive(!sortActive)}>
+                  <div className={styles.ribbon__text}>
+                    Сортировка <span>{sortValue}</span>
+                  </div>
+                  <div
+                    className={
+                      sortActive
+                        ? [styles.ribbon__sortMenu, styles.ribbon__sortMenu_active].join(' ')
+                        : [styles.ribbon__sortMenu, styles.ribbon__sortMenu_unactive].join(' ')
+                    }
+                  >
+                    <div className={styles.ribbon__sortWrapper}>
+                      <ul className={styles.ribbon__sortList}>
+                        <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по популярности')}>
+                          <Link className={styles.ribbon__sortLink} href="/professions">
+                            по популярности
+                          </Link>
+                        </li>
+                        <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по возрастанию зарплаты')}>
+                          <Link className={styles.ribbon__sortLink} href="/professions?sort=asc">
+                            по возрастанию зарплаты
+                          </Link>
+                        </li>
+                        <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по убыванию зарплаты')}>
+                          <Link className={styles.ribbon__sortLink} href="/professions?sort=desc">
+                            по убыванию зарплаты
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className={styles.ribbon__icon}>
+                    {sortActive ? (
+                      <IoIosArrowUp style={{ color: '#000' }} size={20} />
+                    ) : (
+                      <IoIosArrowDown style={{ color: '#000' }} size={20} />
+                    )}
                   </div>
                 </div>
-                <div className={styles.ribbon__icon}>
-                  {sortActive ? (
-                    <IoIosArrowUp style={{ color: '#000' }} size={20} />
-                  ) : (
-                    <IoIosArrowDown style={{ color: '#000' }} size={20} />
-                  )}
-                </div>
-              </div>
+              </span>
+
               <div className={styles.ribbon__cards}>
                 {professions.length > 0 ? (
                   professions.map((profession, index) => {
@@ -94,7 +97,7 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
                     )
                   })
                 ) : (
-                  <div>Ой! Ошибка. Профессии не найдены</div>
+                  <div className={styles.ribbon__error}>Ой! Ошибка. Профессии не найдены</div>
                 )}
               </div>
             </div>

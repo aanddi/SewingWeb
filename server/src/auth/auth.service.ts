@@ -125,6 +125,8 @@ export class AuthService {
     // валидируем пароль (user.password - пароль из бд)
     const isValid = await verify(user.password, dto.password)
 
+    
+
     // если юзер не найден, то отдаем ошибку 404
     if (!user) throw new NotFoundException('Пользователь не найден')
 

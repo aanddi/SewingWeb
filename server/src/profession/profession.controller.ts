@@ -1,8 +1,16 @@
-import { Controller, Get, ValidationPipe, UsePipes, Param, HttpCode, Post, Body, Query } from '@nestjs/common'
-import { ProfessionService } from './profession.service'
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Query,
+  UsePipes,
+  ValidationPipe
+} from '@nestjs/common'
 import { CreateProfessionDto } from './dto/create-profession.dto'
-import { Auth } from 'src/auth/decorators/auth.decorators'
-
+import { SortProfession } from './dto/sort.dto'
+import { ProfessionService } from './profession.service'
 
 @Controller('profession')
 export class ProfessionController {
@@ -13,12 +21,12 @@ export class ProfessionController {
     return this.professionService.getAllProfession()
   }
 
-  @UsePipes(new ValidationPipe())
   @Get()
-  getSortBySalary(@Query('sort') sort: string) {
+  getSortBySalary(@Query('sort') sort: SortProfession) {
     return this.professionService.getSortBySalary(sort)
   }
 
+  @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Post('create')
   async create(@Body() dto: CreateProfessionDto) {

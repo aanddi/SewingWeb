@@ -1,19 +1,20 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
-import { PrismaService } from 'src/prisma.service'
 import { Profession } from '@prisma/client'
+import { PrismaService } from 'src/prisma.service'
 import { CreateProfessionDto } from './dto/create-profession.dto'
-import { dot } from 'node:test/reporters'
 
 @Injectable()
 export class ProfessionService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   private returnProfessionsFields(profession: Profession) {
-    return [{
-      name: profession.name,
-      averageSalary: profession.averageSalary,
-      desc: profession.desc,
-    }]
+    return [
+      {
+        name: profession.name,
+        averageSalary: profession.averageSalary,
+        desc: profession.desc
+      }
+    ]
   }
 
   async getAllProfession() {
@@ -39,7 +40,6 @@ export class ProfessionService {
         desc: true
       }
     })
-
     return professions
   }
 
@@ -50,13 +50,13 @@ export class ProfessionService {
       }
     })
 
-    if (checkProf) throw new BadRequestException("Такая профессия уже есть")
+    if (checkProf) throw new BadRequestException('Такая профессия уже есть')
 
     const profession = await this.prisma.profession.create({
       data: {
         name: dto.name,
         averageSalary: dto.averageSalary,
-        desc: dto.desc,
+        desc: dto.desc
       }
     })
 
@@ -64,4 +64,4 @@ export class ProfessionService {
       professions: this.returnProfessionsFields(profession)
     }
   }
-} 
+}

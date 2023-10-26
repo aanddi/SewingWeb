@@ -21,26 +21,22 @@ const ProfessionsPage: NextPage<ProfessionsProps> = ({ professions }) => {
 }
 export default ProfessionsPage
 
-// ...
+// Рендеринг данных на стороне сервера
 export const getServerSideProps: GetServerSideProps<ProfessionsProps> = async context => {
   const sort = context.query.sort as string
-
+  
   try {
     let response
 
-    if (sort == undefined) {
-      response = await ProfessionService.getAll()
-    } else {
+    if(sort) {
       response = await ProfessionService.getBySorted(sort)
+    } else {
+      response = await ProfessionService.getAll()
     }
-
-    if (response.status !== 200) {
-      return { props: { professions: [] } }
-    }
-
+    
     return { props: { professions: response.data } }
+
   } catch (error) {
-    console.error('Failed to fetch professions: ', error)
-    return { props: { professions: [] } } // You might want to handle this differently
+    return { props: { professions: [] } } 
   }
 }

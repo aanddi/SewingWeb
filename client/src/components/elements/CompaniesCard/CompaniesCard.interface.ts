@@ -3,4 +3,5 @@ export default interface ICompaniesCard {
   count: number
   adress: string
   reviews: number
+  id: number
 }

@@ -13,7 +13,7 @@ import logo from 'public/Companies/logoCompany.svg'
 
 const CompaniesCard: FC<ICompaniesCard> = props => {
   return (
-    <Link href={`/company/${props.name}`} className={styles.companiesCard}>
+    <Link href={`/company/${props.id}`} className={styles.companiesCard}>
       <div className={styles.companiesCard__wrapper}>
         <div className={styles.companiesCard__content}>
           <div className={styles.companiesCard__items}>
@@ -26,7 +26,7 @@ const CompaniesCard: FC<ICompaniesCard> = props => {
               <span className={styles.companiesCard__count}>{props.count} вакансий</span>
             </div>
             <div className={styles.companiesCard__item}>
-              <FaMapMarkerAlt style={{ color: '#B7B7B7' }} />
+            <FaMapMarkerAlt style={{ color: '#B7B7B7' }} />
               <span>{props.adress}</span>
             </div>
             <div className={styles.companiesCard__reviews}>
