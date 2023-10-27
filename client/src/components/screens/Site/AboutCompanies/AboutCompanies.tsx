@@ -55,11 +55,7 @@ const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
               </section>
               <section className={[styles.aboutCompany__desc, styles.desc].join(' ')}>
                 <h3 className={styles.reviews__title}>О компании</h3>
-                {
-                  company.about 
-                  ? <div>{company.about}</div>
-                  : <div>Описание компании не указано</div>
-                }
+                {company.about ? <div>{company.about}</div> : <div>Описание компании не указано</div>}
               </section>
               <section className={[styles.aboutCompany__reviews, styles.reviews].join(' ')}>
                 <h3 className={styles.reviews__title}>Отзывы о предприятии</h3>

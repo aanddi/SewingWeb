@@ -11,7 +11,7 @@ interface AboutEmployerProps {
   company: IEmployer | null
 }
 
-const AboutCompaniesPage: NextPage<AboutEmployerProps> = ({company}) => {
+const AboutCompaniesPage: NextPage<AboutEmployerProps> = ({ company }) => {
   return (
     <Meta title="Предприятие">
       <AboutCompanies company={company} />

@@ -10,7 +10,7 @@ import styles from './CompanyHeader.module.scss'
 
 import logo from 'public/Companies/logoCompany.svg'
 
-const CompanyHeader: FC<ICompanyHeader> = ({companyName, vacancy, reviews}) => {
+const CompanyHeader: FC<ICompanyHeader> = ({ companyName, vacancy, reviews }) => {
   return (
     <div className={styles.header}>
       <div className={styles.header__wrapper}>
