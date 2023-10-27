@@ -8,24 +8,23 @@ datasource db {
 }
 
 //------------- Первичный пользователь -------------
-// пока не трогаю, хз чё там у тебя с логином
 model User {
-  id         Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
+  id         Int        @id @default(autoincrement())
+  createdAt  DateTime   @default(now()) @map("created_at")
+  updatedAt  DateTime   @updatedAt @map("updated_at")
   password   String
   name       String
   surname    String
   patronymic String?
-  email      String?  @unique()
-  phone      String   @unique()
+  email      String?    @unique()
+  phone      String     @unique()
+  
+  roleId     Int        @map("role_id")
+  role       Role       @relation(fields: [roleId], references: [id])
 
-  role   Role @relation(fields: [roleId], references: [id])
-  roleId Int
+  jobSeeker  JobSeeker?
 
-  jobSeeker JobSeeker?
-
-  employer Employer?
+  employer   Employer?
 
   @@map("Users")
 }
@@ -34,6 +33,7 @@ model User {
 model Role {
   id   Int    @id @default(autoincrement()) @map("role_id")
   name String @map("role_name")
+
   user User[]
 
   @@map("Roles")
@@ -42,47 +42,66 @@ model Role {
 //------------- Соискатели и резюме -------------
 // ЛОГИКА СВЯЗИ: один пользователь может указать несколько образований(один ко многим)
 // ЛОГИКА СВЯЗИ С РЕЗЮМЕ: один пользователь может создать несколько резюме(один ко многим)
+// ЛОГИКА СВЯЗИ С ОПЫТОМ РАБОТЫ: один соискатель, может добавить несколько опытов работы(многие к одному)
 model JobSeeker {
-  id          Int       @id @default(autoincrement()) @map("job_seeker_id")
-  name        String?
-  surname     String?
-  patronymic  String?
-  sex         String?
-  DOB         DateTime?
-  city        String?
-  citizenship String?
-  languages   String?
+  id                Int                 @id @default(autoincrement()) @map("job_seeker_id")
+  name              String?
+  surname           String?
+  patronymic        String?
+  sex               String?
+  DOB               DateTime?
+  city              String?
+  citizenship       String?
+  languages         String?
 
-  userId Int            @unique @map("contact_persone_id")
-  user   User @relation(fields: [userId], references: [id])
+  userId            Int                 @unique @map("contact_persone_id")
+  user              User                @relation(fields: [userId], references: [id])
 
   institutionalInfo InstitutionalInfo[]
 
-  resume Resume[]
+  workExperience    WorkExperience[]
 
-  vacancy Vacancy[] // избранные вакансии, которые добавлены соискателями
+  resume            Resume[]
+
+  vacancy           Vacancy[] // избранные вакансии, которые добавлены соискателями
 
   @@map("Job_seekers")
 }
 
 model InstitutionalInfo {
-  id              Int     @id @default(autoincrement()) @map("institutional_information_id")
-  educationLevel  String  @map("educational_level")
-  institutionName String? @map("name_of_institution")
+  id              Int       @id @default(autoincrement()) @map("institutional_information_id")
+  educationLevel  String    @map("educational_level")
+  institutionName String?   @map("name_of_institution")
   faculty         String?
   specialization  String?
 
-  jobseekerId Int       @map("job_seeker_id")
-  jobSeeker   JobSeeker @relation(fields: [jobseekerId], references: [id])
+  jobseekerId     Int       @map("job_seeker_id")
+  jobSeeker       JobSeeker @relation(fields: [jobseekerId], references: [id])
+
+  @@map("Institutional_informations")
 }
 
-// ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одно резюме может быть создано на одну профессию(один к одному)
-// ЛОГИКА СВЯЗИ С ОПЫТОМ РАБОТЫ: одно резюме может включать несколько опытов работы(многие к одному)
+model WorkExperience {
+  id          Int       @id @default(autoincrement()) @map("work_experience_id")
+  city        String
+  company     String
+  post        String
+  startTime   DateTime? @map("start_time")
+  endTime     DateTime? @map("end_time")
+  experience  String?
+
+  jobseekerId Int       @map("job_seeker_id")
+  jobSeeker   JobSeeker @relation(fields: [jobseekerId], references: [id])
+
+  @@map("Work_experiences")
+}
+
+// ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одно резюме может быть создано на одну профессию(один ко многим, так как не может быть уникальным)
 // ЛОГИКА СВЯЗИ С РАБОТОДАТЕЛЯМИ(ИЗБРАННЫЕ РЕЗЮМЕ): работодателю может понравиться разные резюме, одно резюме может понравиться разным соискателям(многие ко многим, пока не явно)
 model Resume {
-  id            Int       @id @default(autoincrement()) @map("resume_id")
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime? @updatedAt @map("updated_at")
+  id            Int         @id @default(autoincrement()) @map("resume_id")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime?   @updatedAt @map("updated_at")
   name          String
   surname       String
   DOB           DateTime
@@ -97,88 +116,71 @@ model Resume {
   languages     String
   about         String?
 
-  jobseekerId Int       @map("job_seeker_id")
-  jobseeker   JobSeeker @relation(fields: [jobseekerId], references: [id])
+  jobseekerId   Int         @map("job_seeker_id")
+  jobseeker     JobSeeker   @relation(fields: [jobseekerId], references: [id])
 
-  vacancy Responses[]
+  vacancy       Responses[]
 
-  professionId Int        @unique @map("profession_id")
-  profession   Profession @relation(fields: [professionId], references: [id])
+  professionId  Int         @map("profession_id")
+  profession    Profession  @relation(fields: [professionId], references: [id])
 
-  workExperience WorkExperience[]
-
-  employer Employer[] // избранные резюме, работодатели, которые добавили резюме в избранное
+  employer      Employer[] // избранные резюме, работодатели, которые добавили резюме в избранное
 
   @@map("Resumes")
-}
-
-model WorkExperience {
-  id         Int       @id @default(autoincrement()) @map("work_experience_id")
-  city       String
-  company    String
-  post       String
-  startTime  DateTime? @map("start_time")
-  endTime    DateTime? @map("end_time")
-  experience String?
-
-  resumeId Int    @map("resume_id")
-  resume   Resume @relation(fields: [resumeId], references: [id])
-
-  @@map("Work_experiences")
 }
 
 //------------- Работодатели и вакансии -------------
 // ЛОГИКА СВЯЗИ: однин работодатель может добавить одно контактное лицо(один к одному)
 model Employer {
-  id          Int     @id @default(autoincrement()) @map("employer_id")
-  companyName String  @map("company_name")
-  inn         String  @unique() @map("INN")
+  id          Int       @id @default(autoincrement()) @map("employer_id")
+  companyName String    @map("company_name")
+  inn         String    @unique() @map("INN")
   type        String
-  registrCity String? @map("city_of_registration")
+  registrCity String?   @map("city_of_registration")
   about       String?
   size        Int
   contact     String
   adress      String?
 
-  userId Int            @unique @map("userId")
-  user   User @relation(fields: [userId], references: [id])
+  userId      Int       @unique @map("userId")
+  user        User      @relation(fields: [userId], references: [id])
 
-  vacansy Vacancy[]
+  vacansy     Vacancy[]
 
-  resume Resume[] // избранные резюме, которые добавлены работодателями
+  resume      Resume[] // избранные резюме, которые добавлены работодателями
 
   @@map("Employers")
 }
 
 // ЛОГИКА СВЯЗИ С РАБОТОДАТЕЛЯМИ: один работодатель может создать несколько вакансий(один ко многим)
-// ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одна вакансия может быть создана только на одноу профессию(один к одному)
+// ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одна вакансия может быть создана только на одноу профессию(один ко многим, не может быть уникальным, так как разные вакансии, но профессии могут повторяться)
 // ЛОГИКА СВЯЗИ С СОИСКАТЕЛЯМИ(ИЗБРАННЫЕ ВАКАНСИИ): одному соискателю может понравиться разные вакансии, одна вакансия может понравиться разным соискателям(многие ко многим, пока не явно)
 model Vacancy {
-  id             Int       @id @default(autoincrement()) @map("vacancy_id")
-  createdAt      DateTime  @default(now()) @map("created_at")
-  updatedAt      DateTime? @updatedAt @map("updated_at")
-  title          String
-  salary         Int
-  desc           String
-  skills         String
-  address        String
-  workExperience String    @map("work_experience")
-  employment     String    @map("employment_type")
-  workTimetable  String    @map("work_timetable")
-  education      String    @map("education_info")
+  id              Int               @id @default(autoincrement()) @map("vacancy_id")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime?         @updatedAt @map("updated_at")
+  title           String
+  salary          Int
+  desc            String
+  skills          String
+  address         String
+  workExperience  String            @map("work_experience")
+  employment      String            @map("employment_type")
+  workTimetable   String            @map("work_timetable")
+  education       String            @map("education_info")
 
-  employerId Int      @unique @map("employer_id")
-  employer   Employer @relation(fields: [employerId], references: [id])
+  employerId      Int               @map("employer_id")
+  employer        Employer          @relation(fields: [employerId], references: [id])
 
-  professionId Int        @unique @map("profession_id")
-  profession   Profession @relation(fields: [professionId], references: [id])
+  professionId    Int               @map("profession_id")
+  profession      Profession        @relation(fields: [professionId], references: [id])
 
-  jobSeeker JobSeeker[] // избранные вакансии, соискатели, которые доавлили вакансии
+  jobSeeker       JobSeeker[] // избранные вакансии, соискатели, которые доавлили вакансии
 
-  resume Responses[]
+  resume          Responses[]
 
-  // date_start String // для подписки, мб надо мб нет, хз пока как сделать
-  // date_end   String
+  // date_start      String // для подписки, мб надо мб нет, хз пока как сделать
+  // date_end        String
 
   @@map("Vacansies")
 }
@@ -192,8 +194,8 @@ model Vacancy {
 //   vacancyId   Int
 //   vacancy     Vacancy   @relation(fields: [vacancyId], references: [id])
 
-//   @@map("Favorite_vacansies")
 //   @@id([jobseekerId, vacancyId]) // они не уникальны, поэтому @@id, а не @@unique
+//   @@map("Favorite_vacansies")
 // }
 
 //------------- Профессии и отклики -------------
@@ -205,19 +207,19 @@ model Profession {
   averageSalary Int       @map("average_salary")
   desc          String
 
-  vacancy Vacancy?
+  vacancy       Vacancy[]
 
-  resume Resume?
+  resume        Resume[]
 
   @@map("Professions")
 }
 
 // ЛОГИКА СВЯЗИ: на одну вакансию может откликнуться несколько соискателей, нескольким соискателям может понравиться одна вакансия(многие ко многим). Определили явно, так как есть дополнительное поле id(нужно оно или нет, пока хз)
 model Responses {
-  id Int @id @default(autoincrement()) @map("response_id")
+  id        Int     @id @default(autoincrement()) @map("response_id")
+  resumeId  Int     @map("resume_id")
 
-  resumeId Int    @map("resume_id")
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  resume    Resume  @relation(fields: [resumeId], references: [id])
 
   vacancyId Int     @map("vacancy_id")
   vacancy   Vacancy @relation(fields: [vacancyId], references: [id])
