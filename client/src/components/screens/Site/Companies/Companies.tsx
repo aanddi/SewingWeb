@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
-import ICompanies from './Companies.interface'
 import { IEmployer } from '@/core/types/employer.interface'
 
 import { BiSearchAlt } from 'react-icons/bi'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
+
+import { useOutside } from '@/core/hooks/useOutside'
 
 import CompaniesCard from '@/components/elements/CompaniesCard/CompaniesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
@@ -13,15 +14,15 @@ import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import styles from './Companies.module.scss'
 
 const Companies: FC<{ companies: IEmployer[] }> = ({ companies }) => {
-  const [sortActive, setSortActive] = useState(false)
+  const { isShow, setIsShow, ref } = useOutside(false)
   const [sortValue, setSortValue] = useState('по популярности')
 
   console.log(companies)
 
   return (
     <SiteLayout background={'#F6FAFF'}>
-      <div className={styles.companies} onClick={() => setSortActive(false)}>
-        <section onClick={() => setSortActive(false)} className={[styles.companies__head, styles.head].join(' ')}>
+      <div className={styles.companies}>
+        <section className={[styles.companies__head, styles.head].join(' ')}>
           <div className="head__container">
             <div className={styles.head__wrapper}>
               <h1 className={styles.head__title}>Каталог предприятий</h1>
@@ -71,47 +72,45 @@ const Companies: FC<{ companies: IEmployer[] }> = ({ companies }) => {
         <section className={[styles.companies__ribbon, styles.ribbon].join(' ')}>
           <div className="ribbon__container">
             <div className={styles.ribbon__wrapper}>
-              <span onClick={e => e.stopPropagation()}>
-                <div className={styles.ribbon__sort} onClick={() => setSortActive(!sortActive)}>
-                  <div className={styles.ribbon__text}>
-                    Сортировка <span>{sortValue}</span>
-                  </div>
-                  <div
-                    className={
-                      sortActive
-                        ? [styles.ribbon__sortMenu, styles.ribbon__sortMenu_active].join(' ')
-                        : [styles.ribbon__sortMenu, styles.ribbon__sortMenu_unactive].join(' ')
-                    }
-                  >
-                    <div className={styles.ribbon__sortWrapper}>
-                      <ul className={styles.ribbon__sortList}>
-                        <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по популярности')}>
-                          <Link className={styles.ribbon__sortLink} href="/professions">
-                            по количеству вакансий
-                          </Link>
-                        </li>
-                        <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по возрастанию зарплаты')}>
-                          <Link className={styles.ribbon__sortLink} href="/professions">
-                            по популярности
-                          </Link>
-                        </li>
-                        <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по убыванию зарплаты')}>
-                          <Link className={styles.ribbon__sortLink} href="/professions">
-                            по размеру предприятия
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className={styles.ribbon__icon}>
-                    {sortActive ? (
-                      <IoIosArrowUp style={{ color: '#000' }} size={20} />
-                    ) : (
-                      <IoIosArrowDown style={{ color: '#000' }} size={20} />
-                    )}
+              <div className={styles.ribbon__sort} onClick={() => setIsShow(!isShow)} ref={ref}>
+                <div className={styles.ribbon__text}>
+                  Сортировка <span>{sortValue}</span>
+                </div>
+                <div
+                  className={
+                    isShow
+                      ? [styles.ribbon__sortMenu, styles.ribbon__sortMenu_active].join(' ')
+                      : [styles.ribbon__sortMenu, styles.ribbon__sortMenu_unactive].join(' ')
+                  }
+                >
+                  <div className={styles.ribbon__sortWrapper}>
+                    <ul className={styles.ribbon__sortList}>
+                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по популярности')}>
+                        <Link className={styles.ribbon__sortLink} href="/professions">
+                          по количеству вакансий
+                        </Link>
+                      </li>
+                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по возрастанию зарплаты')}>
+                        <Link className={styles.ribbon__sortLink} href="/professions">
+                          по популярности
+                        </Link>
+                      </li>
+                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по убыванию зарплаты')}>
+                        <Link className={styles.ribbon__sortLink} href="/professions">
+                          по размеру предприятия
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-              </span>
+                <div className={styles.ribbon__icon}>
+                  {isShow ? (
+                    <IoIosArrowUp style={{ color: '#000' }} size={20} />
+                  ) : (
+                    <IoIosArrowDown style={{ color: '#000' }} size={20} />
+                  )}
+                </div>
+              </div>
               <div className={styles.ribbon__cards}>
                 {companies.length > 0 ? (
                   companies.map((company, index) => {

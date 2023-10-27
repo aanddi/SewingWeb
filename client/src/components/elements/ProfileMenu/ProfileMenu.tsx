@@ -5,33 +5,28 @@ import { FC } from 'react'
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useCheckRole } from '@/core/hooks/useCheckRole'
+import { useOutside } from '@/core/hooks/useOutside'
 
 import styles from './ProfileMenu.module.scss'
 
 import photoUser from 'public/Profiles/photoUser.svg'
 
-interface Props {
-  modalOpen: boolean
-  closeModal: () => void
-  setModalOpen: any
-}
-
-const ProfileMenu: FC<Props> = ({ modalOpen, setModalOpen, closeModal }) => {
+const ProfileMenu: FC = () => {
   const { user } = useAuth()
   const role = useCheckRole()
 
   const { logout } = useActions()
 
-  //const [menuActive, setMenuActive] = useState(false)
+  const { isShow, setIsShow, ref } = useOutside(false)
   return (
-    <div className={styles.profileMenu} onClick={e => e.stopPropagation()}>
-      <div className={styles.profileMenu__photo} onClick={() => setModalOpen(!modalOpen)}>
+    <div className={styles.profileMenu} ref={ref}>
+      <div className={styles.profileMenu__photo} onClick={() => setIsShow(!isShow)}>
         <Image src={photoUser} alt="Фото" />
       </div>
 
       <div
         className={
-          modalOpen
+          isShow
             ? [styles.profileMenu__menu, styles.profileMenu__menu_active].join(' ')
             : [styles.profileMenu__menu, styles.profileMenu__menu_unActive].join(' ')
         }

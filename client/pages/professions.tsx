@@ -24,19 +24,18 @@ export default ProfessionsPage
 // Рендеринг данных на стороне сервера
 export const getServerSideProps: GetServerSideProps<ProfessionsProps> = async context => {
   const sort = context.query.sort as string
-  
+
   try {
     let response
 
-    if(sort) {
+    if (sort) {
       response = await ProfessionService.getBySorted(sort)
     } else {
       response = await ProfessionService.getAll()
     }
-    
-    return { props: { professions: response.data } }
 
+    return { props: { professions: response.data } }
   } catch (error) {
-    return { props: { professions: [] } } 
+    return { props: { professions: [] } }
   }
 }
