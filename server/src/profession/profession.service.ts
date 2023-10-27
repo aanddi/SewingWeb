@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
-import { Profession } from '@prisma/client'
+import { Profession, Vacancy } from '@prisma/client'
 import { PrismaService } from 'src/prisma.service'
 import { CreateProfessionDto } from './dto/create-profession.dto'
 
@@ -41,6 +41,22 @@ export class ProfessionService {
       }
     })
     return professions
+  }
+
+  async getSortByCountVacansies(sort) {
+    const profession_vacansies = await this.prisma.profession.findMany({
+      orderBy: {
+        vacancy: {
+          _count: sort
+          }
+        },
+        select: {
+          name: true,
+          averageSalary: true,
+          desc: true
+        }
+      })
+      return profession_vacansies
   }
 
   async create(dto: CreateProfessionDto) {
