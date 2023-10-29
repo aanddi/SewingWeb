@@ -17,7 +17,7 @@ import { LoginDto } from './dto/login.dto'
 export class AuthService {
   constructor(
     private prisma: PrismaService,
-    private jwt: JwtService
+    private jwt: JwtService,
   ) {}
 
   async login(dto: LoginDto) {
@@ -77,6 +77,17 @@ export class AuthService {
         password: await hash(dto.password)
       }
     })
+
+    if (dto.roleId == 1) {
+      await this.prisma.jobSeeker.create({
+        data: {
+          name: dto.name,
+          surname: dto.surname,
+          patronymic: dto.patronymic,
+          userId: user.id
+        }
+      })
+    }
 
     // генерация новых токенов
     const tokens = await this.issueTokens(user.id)
