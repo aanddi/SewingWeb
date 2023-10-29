@@ -1,8 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateVacancyDto } from './dto/create-vacancy.dto';
 import { PrismaService } from 'src/prisma.service';
-import { Profession, Vacancy } from '@prisma/client';
-import { ne } from '@faker-js/faker';
+import { Vacancy } from '@prisma/client';
 
 @Injectable()
 export class VacancyService {
@@ -23,6 +22,7 @@ export class VacancyService {
     })
 
     return {
+      createdTime: vacancy.createdAt,
       title: vacancy.title,
       salary: vacancy.salary,
       desc: vacancy.desc,
@@ -49,8 +49,8 @@ export class VacancyService {
         employment: dto.employment,
         workTimetable: dto.workTimetable,
         education: dto.education,
-        professionId: dto.professionId,
-        employerId: dto.employerId,
+        professionId: +dto.professionId,
+        employerId: +dto.employerId,
       }
     })
 
