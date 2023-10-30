@@ -7,6 +7,29 @@ import { CreateProfessionDto } from './dto/create-profession.dto'
 export class ProfessionService {
   constructor(private prisma: PrismaService) {}
 
+
+  // чтоб избавиться от вложенности, нужно вытащить с объекта значение _count(не работает)
+  private returnProfessionFields(profession) {
+    return [
+      {
+        name: profession.name,
+        averageSalary: profession.averageSalary,
+        desc: profession.desc,
+        count_vacancy: profession._count.vacancy,
+      }
+    ]
+  }
+
+  private async averageSalaryCalc(profession: Profession) {
+    const averageSalary = await this.prisma.vacancy.groupBy({
+      by: ['professionId'],
+      _avg: {
+        salary: true,
+      },
+    });
+    return averageSalary
+  }
+
   async getAllProfession() {
     const professions = await this.prisma.profession.findMany({
       include: { 
@@ -15,7 +38,7 @@ export class ProfessionService {
             vacancy: true
           }
         }
-      }
+      },
     })
 
     return professions
