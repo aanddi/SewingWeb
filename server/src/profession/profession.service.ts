@@ -29,26 +29,25 @@ export class ProfessionService {
     return professions
   }
 
-  async getSortBySalary(sort) {
-    const professions = await this.prisma.profession.findMany({
-      orderBy: {
-        averageSalary: sort
-      },
-      select: {
-        name: true,
-        averageSalary: true,
-        desc: true
-      }
-    })
-    return professions
-  }
-
-  async getSortByCountVacansies(sort) {
-    const profession_vacansies = await this.prisma.profession.findMany({
-      orderBy: {
-        vacancy: {
-          _count: sort
+  async getSort(sort) {
+    if (sort == 'popular') {
+      const profession_vacansies = await this.prisma.profession.findMany({
+        orderBy: {
+          vacancy: {
+            _count: 'asc'
+            }
+          },
+          select: {
+            name: true,
+            averageSalary: true,
+            desc: true
           }
+        })
+        return profession_vacansies
+    } else {
+      const professions = await this.prisma.profession.findMany({
+        orderBy: {
+          averageSalary: sort
         },
         select: {
           name: true,
@@ -56,7 +55,8 @@ export class ProfessionService {
           desc: true
         }
       })
-      return profession_vacansies
+      return professions
+    }
   }
 
   async create(dto: CreateProfessionDto) {

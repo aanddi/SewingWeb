@@ -13,14 +13,8 @@ export class ProfessionController {
   }
 
   @Get()
-  getSortBySalary(@Query('sort') sort: SortProfession) {
-    return this.professionService.getSortBySalary(sort)
-  }
-
-  // пока кастыльно, что быстро пришло в голову
-  @Get('sort-by-vacancy')
-  getSortByCountVacansies(@Query('sort') sort: SortProfession) {
-    return this.professionService.getSortByCountVacansies(sort)
+  getSort(@Query('sort') sort: SortProfession) {
+    return this.professionService.getSort(sort)
   }
 
   @UsePipes(new ValidationPipe())
