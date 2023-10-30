@@ -7,22 +7,14 @@ import { CreateProfessionDto } from './dto/create-profession.dto'
 export class ProfessionService {
   constructor(private prisma: PrismaService) {}
 
-  private returnProfessionsFields(profession: Profession) {
-    return [
-      {
-        name: profession.name,
-        averageSalary: profession.averageSalary,
-        desc: profession.desc
-      }
-    ]
-  }
-
   async getAllProfession() {
     const professions = await this.prisma.profession.findMany({
-      select: {
-        name: true,
-        averageSalary: true,
-        desc: true
+      include: { 
+        _count: { // count(*)
+          select: {
+            vacancy: true
+          }
+        }
       }
     })
 
@@ -32,27 +24,31 @@ export class ProfessionService {
   async getSort(sort) {
     if (sort == 'popular') {
       const profession_vacansies = await this.prisma.profession.findMany({
+        include: {
+          _count: {
+            select: {
+              vacancy: true
+            }
+          }
+        },
         orderBy: {
           vacancy: {
-            _count: 'asc'
+            _count: 'desc'
             }
-          },
-          select: {
-            name: true,
-            averageSalary: true,
-            desc: true
           }
         })
         return profession_vacansies
     } else {
       const professions = await this.prisma.profession.findMany({
+        include: {
+          _count: {
+            select: {
+              vacancy: true
+            }
+          }
+        },
         orderBy: {
           averageSalary: sort
-        },
-        select: {
-          name: true,
-          averageSalary: true,
-          desc: true
         }
       })
       return professions
@@ -76,8 +72,6 @@ export class ProfessionService {
       }
     })
 
-    return {
-      professions: this.returnProfessionsFields(profession)
-    }
+    return profession
   }
 }
