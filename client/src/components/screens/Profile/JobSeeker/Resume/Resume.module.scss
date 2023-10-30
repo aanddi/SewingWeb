@@ -1,0 +1,47 @@
+@import '@/assets/styles/_variables.scss';
+
+.resume {
+  margin-top: 100px;
+  
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__control {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__controlBlock {
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    padding: 7px 50px;
+    color: #fff;
+    font-weight: 500;
+    gap: 10px;
+    cursor: pointer;
+
+    &_create {
+      background: #b3dcfe;
+
+      &:hover {
+        background: #a9d6fa;
+      }
+    }
+
+    &_delete {
+      background: #fedbdb;
+      color: red;
+
+      &:hover {
+        background: #facece;
+      }
+    }
+  }
+
+
+}

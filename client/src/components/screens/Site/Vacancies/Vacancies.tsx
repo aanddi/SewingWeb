@@ -7,15 +7,16 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import { FaStar } from 'react-icons/fa'
 import { IoShieldCheckmarkSharp } from 'react-icons/io5'
 
+import VacanciesTag from '@/components/elements/VacanciesTag/VacanciesTag'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Vacancies.module.scss'
 
 import logo from 'public/Companies/logoCompany.svg'
 
-const Vacancies: FC<IVacancies> = props => {
+const Vacancies: FC<IVacancies> = () => {
   return (
-    <SiteLayout>
+    <SiteLayout background={'#F6FAFF'}>
       <div className={styles.vacancies}>
         <div className={[styles.vacancies__about, styles.about].join(' ')}>
           <div className="about__container">
@@ -48,6 +49,9 @@ const Vacancies: FC<IVacancies> = props => {
                     </div>
                     <div className={styles.about__favorites_date}>Вакансия опубликована 18.01.2023</div>
                   </div>
+                </div>
+                <div className={styles.about__tags}>
+                  <VacanciesTag tags={['Вакансия недели', 'Студенты']} />
                 </div>
                 <div className={styles.about__description}>
                   <div className={styles.about__textBlock}>

@@ -58,7 +58,7 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
                   <div className={styles.ribbon__sortWrapper}>
                     <ul className={styles.ribbon__sortList}>
                       <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по популярности')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions">
+                        <Link className={styles.ribbon__sortLink} href="/professions?sort=popular">
                           по популярности
                         </Link>
                       </li>
@@ -89,9 +89,10 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
                   professions.map((profession, index) => {
                     return (
                       <ProfessionCard
+                        key={index}
                         title={profession.name}
                         salary={profession.averageSalary}
-                        count={17}
+                        count={profession._count.vacancy}
                         desc={profession.desc}
                       />
                     )

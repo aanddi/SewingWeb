@@ -40,12 +40,15 @@
   &__header {
     cursor: pointer;
     padding: 10px 0;
+    
     &:hover {
       background-color: #ede9e9;
     }
   }
 
   &__name {
+    display: flex;
+    flex-direction: column;
     font-weight: 500;
     font-size: 16px;
     padding-left: 10px;
@@ -57,22 +60,25 @@
     color: $grey;
   }
 
-  &__button {
+  &__buttons {
     padding-left: 10px;
-    margin-top: 10px;
-    margin-right: 10px;
+    margin: 10px 10px 0 0;
+  }
 
-    a {
-      text-align: center;
-      display: block;
-      color: #fff;
-      padding: 10px 0;
-      border-radius: 5px;
-      background-color: $blue;
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex: 1 1 100%;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 5px;
+    background-color: $blue;
 
-      &:hover {
-        background-color:$blueHover;
-      }
+    &:hover {
+      background-color: $blueHover;
     }
   }
 
@@ -100,6 +106,9 @@
   }
 
   &__logout {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     margin-top: 10px;
     color: $pink;
     padding-left: 10px;

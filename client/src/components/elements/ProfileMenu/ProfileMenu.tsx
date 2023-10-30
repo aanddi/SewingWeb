@@ -2,6 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
+import { IoExitOutline } from 'react-icons/io5'
+import { IoAddCircleOutline } from 'react-icons/io5'
+import { BiUpload } from 'react-icons/bi'
+
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useCheckRole } from '@/core/hooks/useCheckRole'
@@ -33,30 +37,40 @@ const ProfileMenu: FC = () => {
       >
         <div className={styles.profileMenu__wrapper}>
           <div className={styles.profileMenu__header}>
-            <div className={styles.profileMenu__name}>
+            <Link href="/profile/j_my" className={styles.profileMenu__name}>
               <span>
                 {user?.name} {user?.surname}
               </span>
               <div className={styles.profileMenu__tools}>Настроить аккаунт</div>
-            </div>
+            </Link>
           </div>
-          <div className={styles.profileMenu__button}>
-            {role == '_JOBSEEKER_' ? <Link href="/">Создать резюме</Link> : <Link href="/">Опубликовать вакансию</Link>}
+          <div className={styles.profileMenu__buttons}>
+            {role == '_JOBSEEKER_' ? (
+              <Link href="/profile/j_resume" className={styles.profileMenu__button}>
+                <IoAddCircleOutline size={20} />
+                <span>Создать резюме</span>
+              </Link>
+            ) : (
+              <Link className={styles.profileMenu__button} href="/">
+                <BiUpload size={20} />
+                <span>Опубликовать вакансию</span>
+              </Link>
+            )}
           </div>
           <nav className={styles.profileMenu__main}>
             {role == '_JOBSEEKER_' ? (
               <ul className={styles.profileMenu__list}>
                 <li>
-                  <Link href="/">Моё резюме</Link>
+                  <Link href="/profile/j_resume">Моё резюме</Link>
                 </li>
                 <li>
-                  <Link href="/">Мои отклики</Link>
+                  <Link href="/profile/j_responses">Мои отклики</Link>
                 </li>
                 <li>
-                  <Link href="/">Мои отзывы</Link>
+                  <Link href="/profile/j_reviews">Оставленные отзывы</Link>
                 </li>
                 <li>
-                  <Link href="/">Избранные вакансии</Link>
+                  <Link href="/profile/j_favorites">Избранные вакансии</Link>
                 </li>
               </ul>
             ) : (
@@ -77,6 +91,7 @@ const ProfileMenu: FC = () => {
             )}
           </nav>
           <div onClick={() => logout()} className={styles.profileMenu__logout}>
+            <IoExitOutline size={19} style={{ color: '#FD7791' }} />
             <span>Выйти</span>
           </div>
         </div>

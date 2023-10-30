@@ -1,0 +1,11 @@
+@import '@/assets/styles/_variables.scss';
+
+.title {
+  display: inline-flex;
+  color: $darkBlue;
+  font-size: 26px;
+  font-weight: 800;
+
+  border-bottom: 2px dashed $blue;
+  padding-bottom: 10px;
+}

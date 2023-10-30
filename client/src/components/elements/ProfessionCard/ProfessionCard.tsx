@@ -6,9 +6,19 @@ import IProfCard from './ProfessionCard.interface'
 
 import styles from './ProfessionCard.module.scss'
 
-import icon from 'public/Professions/iconProfCard.svg'
+import icon1 from 'public/Professions/icon1.svg'
+//import icon2 from 'public/Professions/icon2.svg'
+import icon3 from 'public/Professions/icon3.svg'
+import icon4 from 'public/Professions/icon4.svg'
+import icon5 from 'public/Professions/icon5.svg'
+
+const icons = [icon1, icon3, icon4, icon5];
 
 const ProfessionCard: FC<IProfCard> = props => {
+
+  // рандомная иконка на карточке
+  const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+
   return (
     <Link href="/" className={styles.profCard}>
       <div className={styles.profCard__wrapper}>
@@ -19,7 +29,7 @@ const ProfessionCard: FC<IProfCard> = props => {
             <h5 className={styles.profCard__vacanciesCount}>{props.count} вакансий</h5>
           </div>
           <div className={styles.profCard__icon}>
-            <Image src={icon} alt={'icon'} />
+            <Image src={randomIcon} alt={'icon'} />
           </div>
         </div>
         <p className={styles.profCard__desc}>{props.desc}</p>
