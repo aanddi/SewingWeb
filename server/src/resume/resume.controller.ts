@@ -12,10 +12,10 @@ export class ResumeController {
     return this.resumeService.create(dto)
   }
   
-  @Get('all/:jobSeekerId')
-  getAllJobSeekerResumes(@Param('jobSeekerId') jobSeekerId: string) {
-    return this.resumeService.getAllResumes(jobSeekerId)
-  }
+  // @Get('all/:jobSeekerId')
+  // getAllJobSeekerResumes(@Param('jobSeekerId') jobSeekerId: string) {
+  //   return this.resumeService.getAllResumes(jobSeekerId)
+  // }
 
   @Get(':id')
   getResumeById(@Param('id') id: string) {

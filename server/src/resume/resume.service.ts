@@ -30,20 +30,20 @@ export class ResumeService {
         })
     }
 
-    async getAllResumes(jobSeekerId: string) {
-        const resumes = await this.prisma.resume.findMany({
-            where: {
-                jobseekerId: +jobSeekerId
-            },
-            select: {
-                professionId: true,
-                salary: true,
-                updatedAt: true,
-            }
-        })
+    // async getAllResumes(jobSeekerId: string) {
+    //     const resumes = await this.prisma.resume.findMany({
+    //         where: {
+    //             jobseekerId: +jobSeekerId
+    //         },
+    //         select: {
+    //             professionId: true,
+    //             salary: true,
+    //             updatedAt: true,
+    //         }
+    //     })
 
-        return resumes
-    }
+    //     return resumes
+    // }
 
     async getResumeById(id: string) {
         const resume = await this.prisma.resume.findUnique({

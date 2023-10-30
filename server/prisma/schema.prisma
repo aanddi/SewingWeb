@@ -41,7 +41,7 @@ model Role {
 
 //------------- Соискатели и резюме -------------
 // ЛОГИКА СВЯЗИ: один пользователь может указать несколько образований(один ко многим)
-// ЛОГИКА СВЯЗИ С РЕЗЮМЕ: один пользователь может создать несколько резюме(один ко многим)
+// ЛОГИКА СВЯЗИ С РЕЗЮМЕ: один пользователь может создать одно резюме(один к одному)
 // ЛОГИКА СВЯЗИ С ОПЫТОМ РАБОТЫ: один соискатель, может добавить несколько опытов работы(многие к одному)
 model JobSeeker {
   id          Int       @id @default(autoincrement()) @map("job_seeker_id")
@@ -61,7 +61,7 @@ model JobSeeker {
 
   workExperience WorkExperience[]
 
-  resume Resume[]
+  resume Resume?
 
   vacancy Vacancy[] // избранные вакансии, которые добавлены соискателями
 
@@ -116,7 +116,7 @@ model Resume {
   languages     String
   about         String?
 
-  jobseekerId Int       @map("job_seeker_id")
+  jobseekerId Int       @unique @map("job_seeker_id")
   jobseeker   JobSeeker @relation(fields: [jobseekerId], references: [id])
 
   vacancy Responses[]
