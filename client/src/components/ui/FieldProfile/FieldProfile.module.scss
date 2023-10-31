@@ -1,0 +1,39 @@
+@import '@/assets/styles/_variables.scss';
+
+.field {
+
+  label {
+    display: flex;
+    align-items: center;
+  }
+
+  &__left {
+    width: 200px;
+  }
+
+  &__input {
+    display: flex;
+    flex: 1 1 100%;
+
+    input {
+      width: 100%;
+      padding: 10px 0 10px 10px;
+      border-radius: 5px;
+      border: 1px solid #C2BFBF;
+      font-size: 13px;
+  
+      &:hover {
+        cursor: text;
+      }
+  
+      &:focus {
+        border: 1px solid $blue !important;
+      }
+    }
+  }
+
+  &__required {
+    color: red;
+    font-size: 15px;
+  }
+}

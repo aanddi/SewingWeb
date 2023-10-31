@@ -9,39 +9,169 @@
     justify-content: space-between;
   }
 
-  &__control {
+  &__wrapper {
     display: flex;
-    align-items: center;
-    gap: 20px;
+    gap: 74px;
+    margin-top: 50px;
   }
 
-  &__controlBlock {
+  &__photo {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    span {
+      display: block;
+      margin-top: 10px;
+      color: $grey;
+    }
+  }
+
+  &__content {
+    flex: 1 1 100%;
+  }
+
+  &__add {
+    margin-top: 15px;
     display: flex;
     align-items: center;
-    border-radius: 6px;
-    padding: 7px 50px;
-    color: #fff;
-    font-weight: 500;
-    gap: 10px;
+    gap: 5px;
+    color: $pink;
     cursor: pointer;
 
-    &_create {
-      background: #b3dcfe;
-
-      &:hover {
-        background: #a9d6fa;
-      }
+    &:hover {
+      color: $pinkHover;
     }
+  }
 
-    &_delete {
-      background: #fedbdb;
-      color: red;
+  &__mainInfo {
+    display: flex;
+    justify-content: space-between;
+  }
 
-      &:hover {
-        background: #facece;
-      }
+  &__info {
+
+  }
+
+  &__infoBlock {
+
+  }
+
+  &__name {
+    color: $darkBlue;
+    font-size: 40px;
+    font-weight: 700;
+  }
+
+  &__post {
+    color: $darkBlue;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+
+  &__salary {
+    font-size: 17px;
+    margin-top: 10px;
+  }
+
+  &__fullInfo {
+    margin-top: 75px;
+
+  }
+
+  &__fullWrapper {
+    display: flex;
+    gap: 60px;
+  }
+
+  &__fullBlock {
+    display: flex;
+    align-items: center;
+
+  }
+
+  &__label {
+    width: 150px;
+    color: $grey
+  }
+
+  &__fullLeft {
+    & > *:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__fullRight {
+    & > *:not(:last-child) {
+      margin-bottom: 15px;
     }
   }
 
 
+
+&__body {
+  margin-top: 70px;
+  display: flex;
+  gap: 20px;
+
+}
+
+&__bodyBlock {
+  margin-bottom: 100px;
+}
+
+&__blockTitle {
+  font-weight: 600;
+  font-size: 20px;
+  color: $darkBlue;
+  margin-bottom: 10px;
+}
+
+&__blockSubTitle {
+  font-size: 14px;
+  color: $grey;
+  line-height: 150%;
+}
+
+&__titleModal {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+
+  &__sidebar {
+
+  }
+
+  &__barBlock {
+    display: block;
+    margin-bottom: 50px;
+    color: $blue;
+    text-align: center;
+
+    &:hover {
+      color: $blueHover;
+    }
+
+    h2 {
+      font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    span {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+  }
+
+
+  &__form {
+    margin-top: 30px;
+    & > *:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
 }

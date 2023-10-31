@@ -109,7 +109,7 @@ model Resume {
   citizenship   String
   city          String
   phoneNumber   String    @map("phone_number")
-  email         String
+  email         String?
   salary        String
   workTimetable String?
   skills        String
