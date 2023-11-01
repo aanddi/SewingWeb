@@ -7,7 +7,7 @@ import { IHome } from './Home.interface'
 import { IoIosArrowDown } from 'react-icons/io'
 import { LuSettings2 } from 'react-icons/lu'
 
-import VacanciesCard from '@/components/elements/VacanciesCard/VacanciesCard'
+import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Home.module.scss'

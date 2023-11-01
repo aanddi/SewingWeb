@@ -8,7 +8,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import { useOutside } from '@/core/hooks/useOutside'
 
-import CompaniesCard from '@/components/elements/CompaniesCard/CompaniesCard'
+import CompaniesCard from '@/components/elements/Company/CompaniesCard/CompaniesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Companies.module.scss'

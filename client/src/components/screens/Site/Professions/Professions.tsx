@@ -8,7 +8,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import { useOutside } from '@/core/hooks/useOutside'
 
-import ProfessionCard from '@/components/elements/ProfessionCard/ProfessionCard'
+import ProfessionCard from '@/components/elements/Professoin/ProfessionCard/ProfessionCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Professions.module.scss'

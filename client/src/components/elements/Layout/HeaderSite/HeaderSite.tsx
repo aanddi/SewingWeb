@@ -5,7 +5,7 @@ import { FC } from 'react'
 
 import { useAuth } from '@/core/hooks/useAuth'
 
-import ProfileMenu from '../ProfileMenu/ProfileMenu'
+import ProfileMenu from '../../Profile/ProfileMenu/ProfileMenu'
 
 import styles from './HeaderSite.module.scss'
 

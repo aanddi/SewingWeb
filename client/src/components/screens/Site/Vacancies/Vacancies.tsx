@@ -7,7 +7,7 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import { FaStar } from 'react-icons/fa'
 import { IoShieldCheckmarkSharp } from 'react-icons/io5'
 
-import VacanciesTag from '@/components/elements/VacanciesTag/VacanciesTag'
+import VacanciesTag from '@/components/elements/Vacancy/VacanciesTag/VacanciesTag'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Vacancies.module.scss'

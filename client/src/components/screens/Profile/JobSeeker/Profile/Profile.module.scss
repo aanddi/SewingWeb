@@ -2,4 +2,72 @@
 
 .profile {
   margin-top: 100px;
+  margin-bottom: 50px;
+
+  &__header {
+
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 100px;
+    margin-top: 50px;
+  }
+
+  &__photo {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      text-align: center;
+      display: block;
+      margin-top: 15px;
+      color: $grey;
+    }
+  }
+
+  &__content {
+    width: 60%;
+  }
+
+  &__field {
+    & > * {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__password {
+    display: flex;
+    align-items: center;
+    margin: 60px 0;
+  }
+
+  &__title {
+    width: 160px;
+  }
+
+  &__remind {
+    color: $blue;
+    text-decoration: underline;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  &__save {
+    background-color: $blue;
+    padding: 10px 40px;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+  }
 }

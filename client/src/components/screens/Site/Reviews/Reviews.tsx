@@ -4,7 +4,7 @@ import { FC } from 'react'
 
 import { FaStar } from 'react-icons/fa'
 
-import CompanyHeader from '@/components/elements/CompanyHeader/CompanyHeader'
+import CompanyHeader from '@/components/elements/Company/CompanyHeader/CompanyHeader'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './Reviews.module.scss'

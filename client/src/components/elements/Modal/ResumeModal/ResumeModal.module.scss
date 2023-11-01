@@ -9,27 +9,27 @@
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 9999999;
   opacity: 0;
-  display: flex;
-  justify-content: flex-end;
   pointer-events: none;
   transition: all .4s ease;
+  display: flex;
+  justify-content: flex-end;
+
+  &__wrapper {
+    height: 100vh;
+    background-color: #fff;
+  }
+
 
   &__content {
+    position: relative;
     border-radius: 7px;
     background: #fff;
     box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.03);
     backdrop-filter: blur(25px);
     height: 100vh;
     width: 650px;
-    position: relative;
-    z-index: 100;
     overflow-y: scroll;
-    overflow-x: hidden;
-
-  }
-
-  &__Mcontainer {
-    padding: 40px;
+    padding: 30px;
   }
 
   &__active {
@@ -37,22 +37,15 @@
     pointer-events: all;
   }
 
-  &__close {
-    position: absolute;
-    cursor: pointer;
-  }
-
   &__footer {
+    position: absolute;
+    bottom: 0;
     display: flex;
     align-items: center;
     background-color: #fff;
     padding: 30px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    width: 650px;
     box-shadow: 0 -10px 25px rgba(46,59,99,.08);
-    
   }
 
   &__button {
@@ -60,7 +53,6 @@
     border-radius: 5px;
     font-weight: 500;
     cursor: pointer;
-
 
     &_save {
       background-color: $blue;

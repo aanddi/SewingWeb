@@ -5,7 +5,7 @@ import { FC, useState } from 'react'
 import { FaPen } from 'react-icons/fa'
 import { IoIosAddCircleOutline } from 'react-icons/io'
 
-import ResumeModal from '@/components/elements/ResumeModal/ResumeModal'
+import ResumeModal from '@/components/elements/Modal/ResumeModal/ResumeModal'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
@@ -81,14 +81,18 @@ const Resume: FC = () => {
                   </div>
                 </div>
                 <aside className={styles.resume__sidebar}>
-                  <Link href="/" className={styles.resume__barBlock}>
-                    <h2>100</h2>
-                    <span>вакансий найдено для вас</span>
-                  </Link>
-                  <Link href="/" className={styles.resume__barBlock}>
-                    <h2>5</h2>
-                    <span>ваши отклики</span>
-                  </Link>
+                  <div className={styles.resume__sidebarWrapper}>
+                    <Link href="/" className={styles.resume__barBlock}>
+                      <h2>100</h2>
+                      <span>вакансий найдено для Вас</span>
+                    </Link>
+                  </div>
+                  <div className={styles.resume__sidebarWrapper}>
+                    <Link href="/" className={styles.resume__barBlock}>
+                      <h2>5</h2>
+                      <span>ваши отклики</span>
+                    </Link>
+                  </div>
                 </aside>
               </div>
               <div className={styles.resume__body}>

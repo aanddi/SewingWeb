@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react'
 
-import FooterSite from '../../elements/FooterSite/FooterSite'
-import HeaderSite from '../../elements/HeaderSite/HeaderSite'
+import FooterSite from '../../elements/Layout/FooterSite/FooterSite'
+import HeaderSite from '../../elements/Layout/HeaderSite/HeaderSite'
 
 interface Props {
   background?: string

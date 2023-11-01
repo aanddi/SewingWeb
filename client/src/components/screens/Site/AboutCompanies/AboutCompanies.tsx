@@ -1,13 +1,12 @@
 import Image from 'next/image'
 import { FC } from 'react'
 
-import IAboutCompanies from './AboutCompanies.interface'
 import { IEmployer } from '@/core/types/employer.interface'
 
 import { FaStar } from 'react-icons/fa'
 
-import CompanyHeader from '@/components/elements/CompanyHeader/CompanyHeader'
-import VacanciesCard from '@/components/elements/VacanciesCard/VacanciesCard'
+import CompanyHeader from '@/components/elements/Company/CompanyHeader/CompanyHeader'
+import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import styles from './AboutCompanies.module.scss'

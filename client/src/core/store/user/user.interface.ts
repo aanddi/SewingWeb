@@ -35,6 +35,7 @@ export interface IRegister {
   patronymic?: string
   phone: string
   password: string
+  email?: string
   roleId: number
 }
 
