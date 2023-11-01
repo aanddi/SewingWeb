@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { IRegister } from '@/core/store/user/user.interface'
+
+import { validMail, validPhone } from '@/core/helpers/valid-field'
 
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
@@ -73,7 +75,11 @@ const Profile: FC = () => {
                   />
                   <FieldProfile
                     {...register('phone', {
-                      required: 'Обязательное поле'
+                      required: 'Обязательное поле',
+                      pattern: {
+                        value: validPhone,
+                        message: 'Введите корректный номер телефона. Пример +79780000000'
+                      }
                     })}
                     type={'text'}
                     title={'Номер телефона'}
@@ -82,7 +88,12 @@ const Profile: FC = () => {
                     error={errors.phone?.message}
                   />
                   <FieldProfile
-                    {...register('email', {})}
+                    {...register('email', {
+                      pattern: {
+                        value: validMail,
+                        message: 'Введите корректную эл. почту. Пример mail@test.ru'
+                      }
+                    })}
                     type={'text'}
                     title={'Эл. почта'}
                     star={false}
@@ -97,7 +108,9 @@ const Profile: FC = () => {
                   </Link>
                 </div>
                 <div className={styles.profile__buttons}>
-                  <button className={styles.profile__save}>Сохранить</button>
+                  <button className={styles.profile__save}>
+                    Сохранить
+                  </button>
                   <div className={styles.profile__close}>Отменить</div>
                 </div>
               </form>

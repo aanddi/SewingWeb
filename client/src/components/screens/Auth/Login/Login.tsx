@@ -5,11 +5,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { ILogin } from '@/core/store/user/user.interface'
 
+import { validPhone } from '@/core/helpers/valid-field'
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useAuthRedirect } from '@/core/hooks/useAuthRedirect'
 import { useTypedSelector } from '@/core/hooks/useTypedSelector'
-import { validPhone } from '@/core/services/auth/auth.helper'
 
 import AuthLayout from '@/components/layouts/Auth/AuthLayout'
 import Field from '@/components/ui/Field/Field'

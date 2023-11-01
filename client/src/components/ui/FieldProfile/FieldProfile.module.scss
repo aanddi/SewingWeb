@@ -16,6 +16,7 @@
 
   &__input {
     display: flex;
+    flex-direction: column;
     flex: 1 1 100%;
 
     input {
@@ -38,5 +39,11 @@
   &__required {
     color: red;
     font-size: 15px;
+  }
+
+  &__error {
+    color: red;
+    margin-top: 7px;
+    font-size: 12px;
   }
 }

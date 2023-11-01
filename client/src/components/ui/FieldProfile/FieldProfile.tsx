@@ -14,9 +14,11 @@ const Field = forwardRef<HTMLInputElement, IFieldProfile>(({ title, error, type,
         </div>
         <div className={styles.field__input}>
           <input className={error ? styles.field__errorBorder : ' '} ref={ref} type={type} {...rest} />
+          {error && <div className={styles.field__error}>{error}</div>}
         </div>
+        
       </label>
-      {error && <div className={styles.field__error}>{error}</div>}
+      
     </div>
   )
 })

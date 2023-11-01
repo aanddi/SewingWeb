@@ -39,4 +39,4 @@ export const saveToStorage = (data: IAuthResponse) => {
   localStorage.setItem('user', JSON.stringify(data.user))
 }
 
-export const validPhone = /\+7\d{10}/
+
