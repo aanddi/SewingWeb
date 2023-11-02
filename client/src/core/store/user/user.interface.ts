@@ -6,8 +6,10 @@ import { IUser } from '@/core/types/user.interface'
 export interface IUserState {
   id: number
   phone: string
-  roleId: number
+  email?: string
   name: string
+  patronymic?: string
+  roleId: number
   surname: string
 }
 

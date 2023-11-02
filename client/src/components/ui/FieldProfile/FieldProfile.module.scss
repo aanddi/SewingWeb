@@ -24,7 +24,6 @@
       padding: 10px 0 10px 10px;
       border-radius: 5px;
       border: 1px solid #C2BFBF;
-      font-size: 13px;
   
       &:hover {
         cursor: text;
@@ -32,6 +31,10 @@
   
       &:focus {
         border: 1px solid $blue !important;
+      }
+
+      &::placeholder {
+        color: $grey;
       }
     }
   }

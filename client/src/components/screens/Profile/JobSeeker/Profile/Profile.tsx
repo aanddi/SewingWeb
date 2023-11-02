@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { IRegister } from '@/core/store/user/user.interface'
+import { IUser } from '@/core/types/user.interface'
 
 import { validMail, validPhone } from '@/core/helpers/valid-field'
 
@@ -14,22 +14,36 @@ import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 import styles from './Profile.module.scss'
 
 import photo from 'public/Profiles/photoUser.svg'
+import { useAuth } from '@/core/hooks/useAuth'
 
 const Profile: FC = () => {
+
+  const {user} = useAuth()
   // ========== REACT HOOK FORM =============================
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm<IRegister>({
-    mode: 'onChange'
+  } = useForm<IUser>({
+    mode: 'onChange',
+    defaultValues: {
+      name: user?.name,
+      surname: user?.surname,
+      patronymic: user?.patronymic,
+      phone: user?.phone,
+      email: user?.email
+    }
   })
 
   // submit form
-  const onSubmit: SubmitHandler<IRegister> = data => {
+  const onSubmit: SubmitHandler<IUser> = data => {
     console.log('df')
   }
+
+  const handleCancel = () => {
+    reset(); // Очищаем поля до дефолтных значений
+  };
 
   return (
     <SiteLayout background={'#fff'}>
@@ -41,7 +55,7 @@ const Profile: FC = () => {
           <div className={styles.profile__wrapper}>
             <div className={styles.profile__photo}>
               <Image width={120} src={photo} alt={'Фото'} />
-              <span>id: 1234</span>
+              <span>id: {user?.id}</span>
             </div>
             <div className={styles.profile__content}>
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -108,10 +122,8 @@ const Profile: FC = () => {
                   </Link>
                 </div>
                 <div className={styles.profile__buttons}>
-                  <button className={styles.profile__save}>
-                    Сохранить
-                  </button>
-                  <div className={styles.profile__close}>Отменить</div>
+                  <button className={styles.profile__save}>Сохранить</button>
+                  <div onClick={handleCancel} className={styles.profile__close}>Отменить</div>
                 </div>
               </form>
             </div>

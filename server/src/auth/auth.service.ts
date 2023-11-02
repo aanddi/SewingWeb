@@ -117,10 +117,12 @@ export class AuthService {
   private returnUserFields(user: User) {
     return {
       id: user.id,
-      phone: user.phone,
       roleId: +user.roleId,
       name: user.name,
-      surname: user.surname
+      surname: user.surname,
+      patronymic: user.patronymic,
+      phone: user.phone,
+      email: user.email,
     }
   }
 
