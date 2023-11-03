@@ -2,15 +2,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
-import { IHome } from './Home.interface'
-
-import { IoIosArrowDown } from 'react-icons/io'
-import { LuSettings2 } from 'react-icons/lu'
+import styles from './Home.module.scss'
 
 import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
-import styles from './Home.module.scss'
+import { IHome } from './Home.interface'
+
+import { IoIosArrowDown } from 'react-icons/io'
+import { LuSettings2 } from 'react-icons/lu'
 
 import ad from 'public/ad/ad.png'
 

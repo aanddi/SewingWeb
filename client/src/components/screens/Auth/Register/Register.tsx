@@ -3,18 +3,19 @@ import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import styles from './Register.module.scss'
+
+import AuthLayout from '@/components/layouts/Auth/AuthLayout'
+import Field from '@/components/ui/Field/Field'
+
 import { IRegister } from '@/core/store/user/user.interface'
 
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useAuthRedirect } from '@/core/hooks/useAuthRedirect'
 import { useTypedSelector } from '@/core/hooks/useTypedSelector'
-import { validPhone } from '@/core/services/auth/auth.helper'
 
-import AuthLayout from '@/components/layouts/Auth/AuthLayout'
-import Field from '@/components/ui/Field/Field'
-
-import styles from './Register.module.scss'
+import { validPhone } from '@/core/helpers/valid-field'
 
 const Register: FC = () => {
   // =========================================================

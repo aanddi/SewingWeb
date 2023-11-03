@@ -4,14 +4,15 @@ import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { IEmployer } from '@/core/types/employer.interface'
-
-import { useAuth } from '@/core/hooks/useAuth'
-import { employerService } from '@/core/services/employer/employer.service'
+import styles from './RegisterCompany.module.scss'
 
 import Field from '@/components/ui/Field/Field'
 
-import styles from './RegisterCompany.module.scss'
+import { IEmployer } from '@/core/types/employer.interface'
+
+import { employerService } from '@/core/services/employer/employer.service'
+
+import { useAuth } from '@/core/hooks/useAuth'
 
 import logo from 'public/Logo/swId.svg'
 

@@ -2,16 +2,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
-import { IoExitOutline } from 'react-icons/io5'
-import { IoAddCircleOutline } from 'react-icons/io5'
-import { BiUpload } from 'react-icons/bi'
+import styles from './ProfileMenu.module.scss'
 
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useCheckRole } from '@/core/hooks/useCheckRole'
 import { useOutside } from '@/core/hooks/useOutside'
 
-import styles from './ProfileMenu.module.scss'
+import { BiUpload } from 'react-icons/bi'
+import { IoExitOutline } from 'react-icons/io5'
+import { IoAddCircleOutline } from 'react-icons/io5'
 
 import photoUser from 'public/Profiles/photoUser.svg'
 

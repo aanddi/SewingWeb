@@ -1,17 +1,17 @@
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
-import { IEmployer } from '@/core/types/employer.interface'
-
-import { BiSearchAlt } from 'react-icons/bi'
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
-
-import { useOutside } from '@/core/hooks/useOutside'
+import styles from './Companies.module.scss'
 
 import CompaniesCard from '@/components/elements/Company/CompaniesCard/CompaniesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
-import styles from './Companies.module.scss'
+import { IEmployer } from '@/core/types/employer.interface'
+
+import { useOutside } from '@/core/hooks/useOutside'
+
+import { BiSearchAlt } from 'react-icons/bi'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 const Companies: FC<{ companies: IEmployer[] }> = ({ companies }) => {
   const { isShow, setIsShow, ref } = useOutside(false)

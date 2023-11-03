@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
+import styles from './Responses.module.scss'
+
 import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
-
-import styles from './Responses.module.scss'
 
 const Responses: FC = () => {
   return (

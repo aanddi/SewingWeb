@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
+import styles from './VacanciesTag.module.scss'
+
 import { RiUserHeartLine } from 'react-icons/Ri'
 import { FaCrown } from 'react-icons/fa'
 import { PiStudent } from 'react-icons/pi'
-
-import styles from './VacanciesTag.module.scss'
 
 interface TagArray {
   tags: string[]

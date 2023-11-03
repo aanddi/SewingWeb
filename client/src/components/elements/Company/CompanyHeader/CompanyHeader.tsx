@@ -3,10 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
+import styles from './CompanyHeader.module.scss'
+
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { IoShieldCheckmarkSharp } from 'react-icons/io5'
-
-import styles from './CompanyHeader.module.scss'
 
 import logo from 'public/Companies/logoCompany.svg'
 

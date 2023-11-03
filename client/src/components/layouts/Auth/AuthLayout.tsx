@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
 
-import { AiOutlineClose } from 'react-icons/ai'
-
 import styles from './AuthLayout.module.scss'
+
+import { AiOutlineClose } from 'react-icons/ai'
 
 import logo from 'public/Logo/logoAuth.svg'
 

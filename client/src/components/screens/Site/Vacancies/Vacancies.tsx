@@ -1,16 +1,16 @@
 import Image from 'next/image'
 import { FC } from 'react'
 
+import styles from './Vacancies.module.scss'
+
+import VacanciesTag from '@/components/elements/Vacancy/VacanciesTag/VacanciesTag'
+import SiteLayout from '@/components/layouts/Site/SiteLayout'
+
 import { IVacancies } from './Vacancies.interface'
 
 import { AiOutlineHeart } from 'react-icons/ai'
 import { FaStar } from 'react-icons/fa'
 import { IoShieldCheckmarkSharp } from 'react-icons/io5'
-
-import VacanciesTag from '@/components/elements/Vacancy/VacanciesTag/VacanciesTag'
-import SiteLayout from '@/components/layouts/Site/SiteLayout'
-
-import styles from './Vacancies.module.scss'
 
 import logo from 'public/Companies/logoCompany.svg'
 

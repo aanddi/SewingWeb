@@ -2,15 +2,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
-import { FaPen } from 'react-icons/fa'
-import { IoIosAddCircleOutline } from 'react-icons/io'
+import styles from './Resume.module.scss'
 
 import ResumeModal from '@/components/elements/Modal/ResumeModal/ResumeModal'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 
-import styles from './Resume.module.scss'
+import { FaPen } from 'react-icons/fa'
+import { IoIosAddCircleOutline } from 'react-icons/io'
 
 import photo from 'public/Profiles/photoUser.svg'
 

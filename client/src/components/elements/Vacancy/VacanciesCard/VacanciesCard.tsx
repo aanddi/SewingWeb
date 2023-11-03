@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
-import { IVacancies } from './VacanciesCard.interface'
+import styles from './VacanciesCard.module.scss'
 
-import { FaMapMarkerAlt } from 'react-icons/fa'
-import { IoShieldCheckmarkSharp } from 'react-icons/io5'
+import { IVacancies } from './VacanciesCard.interface'
 
 import VacanciesTag from '../VacanciesTag/VacanciesTag'
 
-import styles from './VacanciesCard.module.scss'
+import { FaMapMarkerAlt } from 'react-icons/fa'
+import { IoShieldCheckmarkSharp } from 'react-icons/io5'
 
 const VacanciesCard: FC<IVacancies> = props => {
   const [checkNumber, setCheckNumber] = useState(false)

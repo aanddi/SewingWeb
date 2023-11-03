@@ -1,8 +1,8 @@
 import { forwardRef } from 'react'
 
-import { IFieldProfile } from './FieldProfile.interface'
-
 import styles from './FieldProfile.module.scss'
+
+import { IFieldProfile } from './FieldProfile.interface'
 
 const Field = forwardRef<HTMLInputElement, IFieldProfile>(({ title, error, type, star, ...rest }, ref) => {
   return (
@@ -16,9 +16,7 @@ const Field = forwardRef<HTMLInputElement, IFieldProfile>(({ title, error, type,
           <input className={error ? styles.field__errorBorder : ' '} ref={ref} type={type} {...rest} />
           {error && <div className={styles.field__error}>{error}</div>}
         </div>
-        
       </label>
-      
     </div>
   )
 })

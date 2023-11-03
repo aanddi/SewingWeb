@@ -2,14 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
+import styles from './Employer.module.scss'
+
+import SiteLayout from '@/components/layouts/Site/SiteLayout'
+
 import { IEmployer } from './Employer.interface'
 
 import { HiOutlineXMark } from 'react-icons/hi2'
 import { IoMdCheckmark } from 'react-icons/io'
-
-import SiteLayout from '@/components/layouts/Site/SiteLayout'
-
-import styles from './Employer.module.scss'
 
 import number1 from 'public/Employers/01.svg'
 import number2 from 'public/Employers/02.svg'

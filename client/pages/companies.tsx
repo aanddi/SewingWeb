@@ -1,11 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next'
 
+import Meta from '@/components/Meta/Meta'
+import Companies from '@/components/screens/Site/Companies/Companies'
+
 import { IEmployer } from '@/core/types/employer.interface'
 
 import { employerService } from '@/core/services/employer/employer.service'
-
-import Meta from '@/components/Meta/Meta'
-import Companies from '@/components/screens/Site/Companies/Companies'
 
 interface EmployerProps {
   companies: IEmployer[]

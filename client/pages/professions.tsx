@@ -1,12 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useEffect, useState } from 'react'
 
+import Meta from '@/components/Meta/Meta'
+import Professions from '@/components/screens/Site/Professions/Professions'
+
 import { IProfession } from '@/core/types/profession.interface'
 
 import { ProfessionService } from '@/core/services/profession/profession.service'
-
-import Meta from '@/components/Meta/Meta'
-import Professions from '@/components/screens/Site/Professions/Professions'
 
 interface ProfessionsProps {
   professions: IProfession[]

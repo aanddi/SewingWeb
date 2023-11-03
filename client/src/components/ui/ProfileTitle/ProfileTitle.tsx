@@ -6,7 +6,7 @@ interface ITitle {
   title: string
 }
 
-const ProfileTitle: FC<ITitle> = ({title}) => {
+const ProfileTitle: FC<ITitle> = ({ title }) => {
   return <h1 className={styles.title}>{title}</h1>
 }
 

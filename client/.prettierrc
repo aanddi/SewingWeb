@@ -11,20 +11,26 @@
   "importOrder": [
 		"<THIRD_PARTY_MODULES>",
 
+		"(.scss)$",
+
+		"^@/components/(.*)$",
+
 		"(.interface)(.*)$",
 
-		"^react-icons",
-
+		"^@/core/services/(.*)$",
+		"^@/core/providers/(.*)$",
+		"^@/core/hooks/(.*)$",
+		"^@/core/store/(.*)$",
+		"^@/core/types/(.*)$",
+		"^@/core/helpers/(.*)$",
+		"^@/core/utils/(.*)$",
 		"^@/core/(.*)$",
-		"^@/components/(.*)$",
-		"^@/providers/(.*)$",
-		"^@/services/(.*)$",
+
 		"^@/assets/(.*)$",
-		"^@/types/(.*)$",
-		"^@/hooks/(.*)$",
 
 		"^../(.*)",
-		"(.scss)$",
+	
+		"^react-icons",
 		
 		"^public/(.*)$"
 	],

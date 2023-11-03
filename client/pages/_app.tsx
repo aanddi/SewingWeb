@@ -3,11 +3,12 @@ import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
+import '@/assets/styles/globals.scss'
+
 import AuthProvider from '@/core/providers/aut-provider/AuthProvider'
 import { TypeComponentAuthFields } from '@/core/providers/aut-provider/auth-page.types'
-import { persistor, store } from '@/core/store/store'
 
-import '@/assets/styles/globals.scss'
+import { persistor, store } from '@/core/store/store'
 
 const queryClient = new QueryClient({
   defaultOptions: {

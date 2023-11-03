@@ -3,6 +3,6 @@ export interface IProfession {
   averageSalary: number
   desc: string
   _count: {
-    vacancy: number;
-  };
+    vacancy: number
+  }
 }

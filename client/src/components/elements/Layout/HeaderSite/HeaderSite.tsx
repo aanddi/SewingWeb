@@ -3,11 +3,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
 
+import styles from './HeaderSite.module.scss'
+
 import { useAuth } from '@/core/hooks/useAuth'
 
 import ProfileMenu from '../../Profile/ProfileMenu/ProfileMenu'
-
-import styles from './HeaderSite.module.scss'
 
 import logoMenu from 'public/Logo/logoMenu.svg'
 

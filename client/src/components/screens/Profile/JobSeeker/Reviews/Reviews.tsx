@@ -1,12 +1,10 @@
 import { FC } from 'react'
 
+import styles from './Reviews.module.scss'
+
 import ProfileReviews from '@/components/elements/Profile/ProfileReviews/ProfileReviews'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
-
-import styles from './Reviews.module.scss'
-
-
 
 const Reviews: FC = () => {
   return (
@@ -20,7 +18,6 @@ const Reviews: FC = () => {
             <ProfileReviews />
             <ProfileReviews />
             <ProfileReviews />
-            
           </div>
         </div>
       </div>

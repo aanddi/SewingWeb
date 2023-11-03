@@ -3,9 +3,9 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 
-import SiteLayout from '@/components/layouts/Site/SiteLayout'
-
 import styles from './NotFound.module.scss'
+
+import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 const NotFound: FC = () => {
   const router = useRouter()

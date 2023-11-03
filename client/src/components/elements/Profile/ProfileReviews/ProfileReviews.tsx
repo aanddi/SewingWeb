@@ -1,12 +1,12 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC } from 'react'
-
-import { FaStar } from 'react-icons/fa'
 
 import styles from './ProfileReviews.module.scss'
 
+import { FaStar } from 'react-icons/fa'
+
 import logo from 'public/Companies/logoCompany.svg'
-import Link from 'next/link'
 
 const ResumeModal: FC = () => {
   return (
@@ -15,7 +15,9 @@ const ResumeModal: FC = () => {
         <div className={styles.reviews__logo}>
           <Image src={logo} alt={'Логотип'} width={40} height={40} />
         </div>
-        <Link href={'/company/2'} className={styles.reviews__name}>SewingWeb</Link>
+        <Link href={'/company/2'} className={styles.reviews__name}>
+          SewingWeb
+        </Link>
       </div>
       <div className={styles.reviews__content}>
         <div className={styles.reviews__ribbonItem}>

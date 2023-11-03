@@ -2,12 +2,12 @@ import IReviews from './Reviews.intraface'
 import Image from 'next/image'
 import { FC } from 'react'
 
-import { FaStar } from 'react-icons/fa'
+import styles from './Reviews.module.scss'
 
 import CompanyHeader from '@/components/elements/Company/CompanyHeader/CompanyHeader'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
-import styles from './Reviews.module.scss'
+import { FaStar } from 'react-icons/fa'
 
 import pattern from 'public/Companies/pattern.svg'
 import ad from 'public/ad/ad.png'

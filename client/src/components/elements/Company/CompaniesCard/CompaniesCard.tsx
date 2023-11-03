@@ -2,12 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
+import styles from './CompaniesCard.module.scss'
+
 import ICompaniesCard from './CompaniesCard.interface'
 
 import { FaMapMarkerAlt, FaStar } from 'react-icons/fa'
 import { IoDocumentTextOutline, IoShieldCheckmarkSharp } from 'react-icons/io5'
-
-import styles from './CompaniesCard.module.scss'
 
 import logo from 'public/Companies/logoCompany.svg'
 

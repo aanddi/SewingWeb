@@ -1,17 +1,17 @@
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
-import { IProfession } from '@/core/types/profession.interface'
-
-import { BiSearchAlt } from 'react-icons/bi'
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
-
-import { useOutside } from '@/core/hooks/useOutside'
+import styles from './Professions.module.scss'
 
 import ProfessionCard from '@/components/elements/Professoin/ProfessionCard/ProfessionCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
-import styles from './Professions.module.scss'
+import { IProfession } from '@/core/types/profession.interface'
+
+import { useOutside } from '@/core/hooks/useOutside'
+
+import { BiSearchAlt } from 'react-icons/bi'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
   const { isShow, setIsShow, ref } = useOutside(false)

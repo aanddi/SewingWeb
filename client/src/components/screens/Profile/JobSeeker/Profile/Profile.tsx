@@ -3,22 +3,22 @@ import Link from 'next/link'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { IUser } from '@/core/types/user.interface'
-
-import { validMail, validPhone } from '@/core/helpers/valid-field'
+import styles from './Profile.module.scss'
 
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 
-import styles from './Profile.module.scss'
+import { IUser } from '@/core/types/user.interface'
 
-import photo from 'public/Profiles/photoUser.svg'
 import { useAuth } from '@/core/hooks/useAuth'
 
-const Profile: FC = () => {
+import { validMail, validPhone } from '@/core/helpers/valid-field'
 
-  const {user} = useAuth()
+import photo from 'public/Profiles/photoUser.svg'
+
+const Profile: FC = () => {
+  const { user } = useAuth()
   // ========== REACT HOOK FORM =============================
   const {
     register,
@@ -42,8 +42,8 @@ const Profile: FC = () => {
   }
 
   const handleCancel = () => {
-    reset(); // Очищаем поля до дефолтных значений
-  };
+    reset() // Очищаем поля до дефолтных значений
+  }
 
   return (
     <SiteLayout background={'#fff'}>
@@ -123,7 +123,9 @@ const Profile: FC = () => {
                 </div>
                 <div className={styles.profile__buttons}>
                   <button className={styles.profile__save}>Сохранить</button>
-                  <div onClick={handleCancel} className={styles.profile__close}>Отменить</div>
+                  <div onClick={handleCancel} className={styles.profile__close}>
+                    Отменить
+                  </div>
                 </div>
               </form>
             </div>
