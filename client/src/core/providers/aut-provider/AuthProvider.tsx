@@ -5,10 +5,9 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { FC, PropsWithChildren, useEffect } from 'react'
 
-import { getAccessToken, getRefreshToken } from '@/core/services/auth/auth.helper'
-
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
+import { getAccessToken, getRefreshToken } from '@/core/services/auth/auth.helper'
 
 const DynamicCheckRole = dynamic(() => import('./CheckRole'), { ssr: false })
 

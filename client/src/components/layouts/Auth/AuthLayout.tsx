@@ -18,7 +18,7 @@ const AuthLayout: FC<IAuthLayout> = props => {
   const pathElem = String(path).split('/')
 
   return (
-    <main className="page">
+    <main className="page" style={{ backgroundColor: '#fff' }}>
       <div className={styles.auth}>
         <div className={styles.auth__image}></div>
         <div className={styles.auth__content}>

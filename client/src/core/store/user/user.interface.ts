@@ -41,6 +41,14 @@ export interface IRegister {
   roleId: number
 }
 
+export interface IUpdateUser {
+  name?: string
+  surname?: string
+  patronymic?: string
+  phone?: string
+  email?: string
+}
+
 export interface IAuthResponse extends ITokens {
   user: IUser
   error: string | undefined

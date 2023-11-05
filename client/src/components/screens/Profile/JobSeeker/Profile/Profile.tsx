@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import { useRouter } from 'next/router'
+import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import styles from './Profile.module.scss'
@@ -9,40 +10,67 @@ import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 
-import { IUser } from '@/core/types/user.interface'
-
-import { useAuth } from '@/core/hooks/useAuth'
+import { IUpdateUser } from '@/core/store/user/user.interface'
 
 import { validMail, validPhone } from '@/core/helpers/valid-field'
+import { useAuth } from '@/core/hooks/useAuth'
+import { AuthService } from '@/core/services/auth/auth.service'
 
 import photo from 'public/Profiles/photoUser.svg'
 
 const Profile: FC = () => {
+  // ========================================================
   const { user } = useAuth()
+  const userId = user?.id
+  const router = useRouter()
+
   // ========== REACT HOOK FORM =============================
+
+  // save error server
+  const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
+
+  // initial value fields
+  useEffect(() => {
+    if (user) {
+      setValue('name', user.name)
+      setValue('surname', user.surname)
+      setValue('patronymic', user.patronymic)
+      setValue('phone', user.phone)
+      setValue('email', user.email)
+    }
+  }, [user])
+
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors }
-  } = useForm<IUser>({
-    mode: 'onChange',
-    defaultValues: {
+  } = useForm<IUpdateUser>({
+    mode: 'onChange'
+  })
+
+  // submit form
+  const onSubmit: SubmitHandler<IUpdateUser> = async data => {
+    try {
+      const updatedData = await AuthService.update(userId, data)
+
+      // тут исправить, форма в иделе не должна перезагружаться
+      router.reload()
+    } catch (error: any) {
+      setErrorUpdate(error.response.data.message)
+    }
+  }
+
+  // reset field
+  const handleCancel = () => {
+    reset({
       name: user?.name,
       surname: user?.surname,
       patronymic: user?.patronymic,
       phone: user?.phone,
       email: user?.email
-    }
-  })
-
-  // submit form
-  const onSubmit: SubmitHandler<IUser> = data => {
-    console.log('df')
-  }
-
-  const handleCancel = () => {
-    reset() // Очищаем поля до дефолтных значений
+    })
   }
 
   return (
@@ -127,6 +155,7 @@ const Profile: FC = () => {
                     Отменить
                   </div>
                 </div>
+                <div className={styles.profile__errorText}>{errorUpdate}</div>
               </form>
             </div>
           </div>

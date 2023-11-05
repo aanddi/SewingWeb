@@ -12,12 +12,13 @@ import { JwtService } from '@nestjs/jwt'
 import { User } from '@prisma/client'
 import { verify } from 'argon2'
 import { LoginDto } from './dto/login.dto'
+import { UpdateUserDto } from './dto/update.dto'
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
-    private jwt: JwtService,
+    private jwt: JwtService
   ) {}
 
   async login(dto: LoginDto) {
@@ -78,17 +79,6 @@ export class AuthService {
       }
     })
 
-    if (dto.roleId == 1) {
-      await this.prisma.jobSeeker.create({
-        data: {
-          name: dto.name,
-          surname: dto.surname,
-          patronymic: dto.patronymic,
-          userId: user.id
-        }
-      })
-    }
-
     // генерация новых токенов
     const tokens = await this.issueTokens(user.id)
 
@@ -97,6 +87,70 @@ export class AuthService {
       ...tokens
     }
   }
+
+  async updateUser(dto: UpdateUserDto, id: number | undefined) {
+    const checkUser = await this.prisma.user.findUnique({
+      where: {
+        id: +id
+      }
+    })
+
+    if (dto.phone !== checkUser.phone) {
+      const checkPhone = await this.prisma.user.findUnique({
+        where: {
+          phone: dto.phone
+        }
+      })
+
+      if (checkPhone)
+        throw new BadRequestException(
+          'Введенный номер занят. Пожалуйста введите другой номер телефона'
+        )
+    }
+
+    if (dto.email !== checkUser.email) {
+      const checkEmail = await this.prisma.user.findUnique({
+        where: {
+          email: dto.email
+        }
+      })
+
+      if (checkEmail)
+        throw new BadRequestException('Введенная почта занята. Пожалуйста введите другую эл. почту')
+    }
+
+    const updatedUser = await this.prisma.user.update({
+      where: {
+        id: +id
+      },
+      data: {
+        name: dto.name,
+        surname: dto.surname,
+        patronymic: dto.patronymic,
+        phone: dto.phone,
+        email: dto.email
+      }
+    })
+
+    const user = this.prisma.user.findUnique({
+      where: {
+        id: +id
+      },
+      select: {
+        id: true,
+        roleId: true,
+        name: true,
+        surname: true,
+        patronymic: true,
+        phone: true,
+        email: true
+      }
+    })
+
+    return user
+  }
+
+  //===================================================================
 
   // генерация токенов
   private async issueTokens(userId: number) {
@@ -122,7 +176,7 @@ export class AuthService {
       surname: user.surname,
       patronymic: user.patronymic,
       phone: user.phone,
-      email: user.email,
+      email: user.email
     }
   }
 
@@ -137,8 +191,6 @@ export class AuthService {
 
     // валидируем пароль (user.password - пароль из бд)
     const isValid = await verify(user.password, dto.password)
-
-    
 
     // если юзер не найден, то отдаем ошибку 404
     if (!user) throw new NotFoundException('Пользователь не найден')

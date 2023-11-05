@@ -7,7 +7,6 @@ import '@/assets/styles/globals.scss'
 
 import AuthProvider from '@/core/providers/aut-provider/AuthProvider'
 import { TypeComponentAuthFields } from '@/core/providers/aut-provider/auth-page.types'
-
 import { persistor, store } from '@/core/store/store'
 
 const queryClient = new QueryClient({

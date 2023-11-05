@@ -17,13 +17,6 @@
 
 		"(.interface)(.*)$",
 
-		"^@/core/services/(.*)$",
-		"^@/core/providers/(.*)$",
-		"^@/core/hooks/(.*)$",
-		"^@/core/store/(.*)$",
-		"^@/core/types/(.*)$",
-		"^@/core/helpers/(.*)$",
-		"^@/core/utils/(.*)$",
 		"^@/core/(.*)$",
 
 		"^@/assets/(.*)$",

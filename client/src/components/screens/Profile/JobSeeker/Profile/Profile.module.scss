@@ -74,4 +74,10 @@
   &__close {
     cursor: pointer;
   }
+
+  &__errorText {
+    color: red;
+    margin-top: 15px;
+
+  }
 }

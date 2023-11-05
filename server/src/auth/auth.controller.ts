@@ -1,8 +1,18 @@
-import { Body, Controller, HttpCode, Post, UsePipes, ValidationPipe } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+  UsePipes,
+  ValidationPipe
+} from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
-import { RefreshTokenDto } from './dto/refresh-token.dto'
 import { LoginDto } from './dto/login.dto'
+import { RefreshTokenDto } from './dto/refresh-token.dto'
+import { UpdateUserDto } from './dto/update.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -27,5 +37,10 @@ export class AuthController {
   @Post('login/access-token')
   async getNewTokens(@Body() dto: RefreshTokenDto) {
     return this.authService.getNewTokens(dto)
+  }
+
+  @Put(':id')
+  async updateUser(@Param('id') id: number | undefined, @Body() dto: UpdateUserDto) {
+    return this.authService.updateUser(dto, id)
   }
 }

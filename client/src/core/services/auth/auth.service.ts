@@ -1,10 +1,12 @@
-import { saveToStorage } from './auth.helper'
+import { removeFromStorage, saveToStorage } from './auth.helper'
 import { getContentType } from '@/api/api.helper'
 import { instance } from '@/api/api.interceptor'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-import { IAuthResponse, ILogin, IRegister } from '@/core/store/user/user.interface'
+import { IAuthResponse, ILogin, IRegister, IUpdateUser } from '@/core/store/user/user.interface'
+
+import { persistor } from '@/core/store/store'
 
 // общий обьект сервиса
 export const AuthService = {
@@ -27,8 +29,17 @@ export const AuthService = {
       method: 'POST',
       data
     })
-    if (response.data.accessToken) saveToStorage(response.data)
 
+    return response.data
+  },
+
+  async update(id: number | undefined, data: IUpdateUser) {
+    const response = await instance({
+      url: `/auth/${id}`,
+      method: 'PUT',
+      data
+    })
+    if (response.data.accessToken) saveToStorage(response.data)
     return response.data
   },
 

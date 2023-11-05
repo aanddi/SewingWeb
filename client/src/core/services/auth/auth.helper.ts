@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-import { IAuthResponse, ITokens } from '@/core/store/user/user.interface'
+import { IAuthResponse, ITokens, IUpdateUser } from '@/core/store/user/user.interface'
 
 /*======= Работа с куки =======*/
 

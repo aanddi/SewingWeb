@@ -7,10 +7,10 @@ import { EmployerModule } from './employer/employer.module';
 import { VacancyModule } from './vacancy/vacancy.module';
 import { JobseekerModule } from './jobseeker/jobseeker.module';
 import { ResumeModule } from './resume/resume.module';
-import { UserModule } from './user/user.module';
+
 
 @Module({
-  imports: [ConfigModule.forRoot(), ProfessionModule, AuthModule, EmployerModule, VacancyModule, JobseekerModule, ResumeModule, UserModule],
+  imports: [ConfigModule.forRoot(), ProfessionModule, AuthModule, EmployerModule, VacancyModule, JobseekerModule, ResumeModule],
   providers: []
 })
 export class AppModule {}

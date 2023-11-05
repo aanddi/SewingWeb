@@ -17,8 +17,6 @@ const Companies: FC<{ companies: IEmployer[] }> = ({ companies }) => {
   const { isShow, setIsShow, ref } = useOutside(false)
   const [sortValue, setSortValue] = useState('по популярности')
 
-  console.log(companies)
-
   return (
     <SiteLayout background={'#F6FAFF'}>
       <div className={styles.companies}>
@@ -116,6 +114,7 @@ const Companies: FC<{ companies: IEmployer[] }> = ({ companies }) => {
                   companies.map((company, index) => {
                     return (
                       <CompaniesCard
+                        key={index}
                         name={company.companyName}
                         count={17}
                         adress={company.adress}

@@ -10,9 +10,8 @@ import Field from '@/components/ui/Field/Field'
 
 import { IEmployer } from '@/core/types/employer.interface'
 
-import { employerService } from '@/core/services/employer/employer.service'
-
 import { useAuth } from '@/core/hooks/useAuth'
+import { employerService } from '@/core/services/employer/employer.service'
 
 import logo from 'public/Logo/swId.svg'
 

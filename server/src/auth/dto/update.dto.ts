@@ -1,9 +1,11 @@
-import { IsOptional, IsString, MinLength } from 'class-validator'
+import { IsOptional, IsString } from 'class-validator'
 
-export class AuthDto {
+export class UpdateUserDto {
+  @IsOptional()
   @IsString({ message: 'Имя должно быть строкой' })
   name: string
 
+  @IsOptional()
   @IsString({ message: 'Фамилия должна быть строкой' })
   surname: string
 
@@ -11,14 +13,11 @@ export class AuthDto {
   @IsString({ message: 'Отчество должно быть строкой' })
   patronymic: string
 
-  @IsString()
+  @IsOptional()
+  @IsString({ message: 'Номер должно быть строкой' })
   phone: string
 
-  @MinLength(8, {
-    message: 'Пароль должен быть не менее 8 символов'
-  })
-  @IsString({ message: 'Пароль должен быть строкой' })
-  password: string
-
-  roleId: number
+  @IsOptional()
+  @IsString({ message: 'Почта должно быть строкой' })
+  email: string
 }
