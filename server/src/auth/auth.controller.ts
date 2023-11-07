@@ -13,6 +13,7 @@ import { AuthDto } from './dto/auth.dto'
 import { LoginDto } from './dto/login.dto'
 import { RefreshTokenDto } from './dto/refresh-token.dto'
 import { UpdateUserDto } from './dto/update.dto'
+import { Auth } from './decorators/auth.decorators'
 
 @Controller('auth')
 export class AuthController {
@@ -39,6 +40,7 @@ export class AuthController {
     return this.authService.getNewTokens(dto)
   }
 
+  @Auth()
   @Put(':id')
   async updateUser(@Param('id') id: number | undefined, @Body() dto: UpdateUserDto) {
     return this.authService.updateUser(dto, id)

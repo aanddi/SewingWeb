@@ -1,3 +1,4 @@
+import { menuEmployer, menuJobseeker } from './menu-data'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -60,33 +61,23 @@ const ProfileMenu: FC = () => {
           <nav className={styles.profileMenu__main}>
             {role == '_JOBSEEKER_' ? (
               <ul className={styles.profileMenu__list}>
-                <li>
-                  <Link href="/profile/j_resume">Моё резюме</Link>
-                </li>
-                <li>
-                  <Link href="/profile/j_responses">Мои отклики</Link>
-                </li>
-                <li>
-                  <Link href="/profile/j_reviews">Оставленные отзывы</Link>
-                </li>
-                <li>
-                  <Link href="/profile/j_favorites">Избранные вакансии</Link>
-                </li>
+                {menuJobseeker.map((item, index) => {
+                  return (
+                    <li key={index}>
+                      <Link href={item.link}>{item.name}</Link>
+                    </li>
+                  )
+                })}
               </ul>
             ) : (
               <ul className={styles.profileMenu__list}>
-                <li>
-                  <Link href="/">Информация о компании</Link>
-                </li>
-                <li>
-                  <Link href="/">Мои вакансии</Link>
-                </li>
-                <li>
-                  <Link href="/">Мои отзывы</Link>
-                </li>
-                <li>
-                  <Link href="/">Страница компании</Link>
-                </li>
+                {menuEmployer.map((item, index) => {
+                  return (
+                    <li key={index}>
+                      <Link href={item.link}>{item.name}</Link>
+                    </li>
+                  )
+                })}
               </ul>
             )}
           </nav>

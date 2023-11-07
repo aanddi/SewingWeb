@@ -44,22 +44,10 @@ model Role {
 // ЛОГИКА СВЯЗИ С РЕЗЮМЕ: один пользователь может создать одно резюме(один к одному)
 // ЛОГИКА СВЯЗИ С ОПЫТОМ РАБОТЫ: один соискатель, может добавить несколько опытов работы(многие к одному)
 model JobSeeker {
-  id          Int       @id @default(autoincrement()) @map("job_seeker_id")
-  name        String?
-  surname     String?
-  patronymic  String?
-  sex         String?
-  DOB         DateTime?
-  city        String?
-  citizenship String?
-  languages   String?
+  id Int @id @default(autoincrement()) @map("job_seeker_id")
 
   userId Int  @unique @map("user_id")
   user   User @relation(fields: [userId], references: [id])
-
-  institutionalInfo InstitutionalInfo[]
-
-  workExperience WorkExperience[]
 
   resume Resume?
 
@@ -75,8 +63,8 @@ model InstitutionalInfo {
   faculty         String?
   specialization  String?
 
-  jobseekerId Int       @map("job_seeker_id")
-  jobSeeker   JobSeeker @relation(fields: [jobseekerId], references: [id])
+  resumeId Int    @map("resume_id")
+  resume   Resume @relation(fields: [resumeId], references: [id])
 
   @@map("Institutional_informations")
 }
@@ -90,8 +78,8 @@ model WorkExperience {
   endTime    DateTime? @map("end_time")
   experience String?
 
-  jobseekerId Int       @map("job_seeker_id")
-  jobSeeker   JobSeeker @relation(fields: [jobseekerId], references: [id])
+  resumeId Int    @map("resume_id")
+  resume   Resume @relation(fields: [resumeId], references: [id])
 
   @@map("Work_experiences")
 }
@@ -104,17 +92,22 @@ model Resume {
   updatedAt     DateTime? @updatedAt @map("updated_at")
   name          String
   surname       String
-  DOB           DateTime
-  sex           String
-  citizenship   String
-  city          String
-  phoneNumber   String    @map("phone_number")
+  patronymic    String?
+  DOB           DateTime?
+  sex           String?
+  citizenship   String?
+  city          String?
+  phoneNumber   String?   @map("phone_number")
   email         String?
-  salary        String
+  salary        String?
   workTimetable String?
-  skills        String
-  languages     String
+  skills        String?
+  languages     String?
   about         String?
+
+  work_exp WorkExperience[]
+
+  eductional InstitutionalInfo[]
 
   jobseekerId Int       @unique @map("job_seeker_id")
   jobseeker   JobSeeker @relation(fields: [jobseekerId], references: [id])

@@ -63,6 +63,7 @@ export class AuthService {
       }
     })
 
+
     // если юзер найден, то отдаем ошибку 400
     if (checkUser)
       throw new BadRequestException('Такой пользователь уже зарегистрирована с таким номер')
@@ -79,12 +80,33 @@ export class AuthService {
       }
     })
 
+    // создание таблицы соискателя
+    const createJobSeeker = await this.prisma.jobSeeker.create({
+      data: {
+        userId: user.id
+      }
+    })
+
+    const createResume = await this.prisma.resume.create({
+      data: {
+        jobseekerId: createJobSeeker.id,
+        name: user.name,
+        surname: user.surname,
+        patronymic: user.patronymic,
+        professionId: 2
+      }
+    })
+
+
+
     // генерация новых токенов
     const tokens = await this.issueTokens(user.id)
 
     return {
       user: this.returnUserFields(user),
-      ...tokens
+      ...tokens,
+      ...createJobSeeker,
+      ...createResume
     }
   }
 
