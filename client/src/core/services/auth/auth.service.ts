@@ -1,12 +1,13 @@
-import { removeFromStorage, saveToStorage } from './auth.helper'
-import { getContentType } from '@/api/api.helper'
-import { instance } from '@/api/api.interceptor'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
 import { IAuthResponse, ILogin, IRegister, IUpdateUser } from '@/core/store/user/user.interface'
 
 import { persistor } from '@/core/store/store'
+
+import { removeFromStorage, saveToStorage } from './auth.helper'
+import { getContentType } from '@/api/api.helper'
+import { instance } from '@/api/api.interceptor'
 
 // общий обьект сервиса
 export const AuthService = {
@@ -48,7 +49,7 @@ export const AuthService = {
     const refreshToken = Cookies.get('refreshToken')
 
     const response = await axios.post<string, { data: IAuthResponse }>(
-      process.env.SERVER_URL + 'auth/login/access-token',
+      process.env.SERVER_URL + '/auth/login/access-token',
       { refreshToken },
       {
         headers: getContentType()

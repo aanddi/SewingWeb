@@ -1,6 +1,6 @@
-import { instance } from '@/api/api.interceptor'
-
 import { IEmployer } from '@/core/types/employer.interface'
+
+import { instance } from '@/api/api.interceptor'
 
 export const employerService = {
   async getEmployerById(id: string) {

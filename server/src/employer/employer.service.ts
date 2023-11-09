@@ -19,7 +19,7 @@ export class EmployerService {
         size: true,
         contact: true,
         adress: true,
-        userId: true,
+        userId: true
       }
     })
 
@@ -33,7 +33,7 @@ export class EmployerService {
       }
     })
 
-    if(!company) throw new NotFoundException('Компания не найдена')
+    if (!company) throw new NotFoundException('Компания не найдена')
 
     return company
   }
@@ -46,8 +46,8 @@ export class EmployerService {
       }
     })
 
-     // Проверка на существующую компанию по ИНН
-     const checkUser = await this.prisma.employer.findUnique({
+    // Проверка на существующую компанию по ИНН
+    const checkUser = await this.prisma.employer.findUnique({
       where: {
         userId: dto.userId
       }
@@ -56,7 +56,6 @@ export class EmployerService {
     // ошибки 400
     if (checkUser) throw new BadRequestException('Вы уже зарегистрировали компанию')
     if (checkInn) throw new BadRequestException('Такая компания уже зарегистрирована с таким ИНН')
-   
 
     // создаем компанию в бд
     const employer = await this.prisma.employer.create({

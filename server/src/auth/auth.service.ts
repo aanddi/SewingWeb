@@ -21,30 +21,10 @@ export class AuthService {
     private jwt: JwtService
   ) {}
 
+  //===================================================================
+
   async login(dto: LoginDto) {
     const user = await this.validateUser(dto)
-
-    // генерация новых токенов
-    const tokens = await this.issueTokens(user.id)
-
-    return {
-      user: this.returnUserFields(user),
-      ...tokens
-    }
-  }
-
-  async getNewTokens(dto: RefreshTokenDto) {
-    // верификация токена (раскрываем токен и забираем id юзера из 2й части токена - payload)
-    const result = await this.jwt.verifyAsync(dto.refreshToken)
-
-    // если не прошло, то возвращаем ошибку 401
-    if (!result) throw new UnauthorizedException('Неверный refresh token')
-
-    const user = await this.prisma.user.findUnique({
-      where: {
-        id: result.id
-      }
-    })
 
     // генерация новых токенов
     const tokens = await this.issueTokens(user.id)
@@ -63,12 +43,11 @@ export class AuthService {
       }
     })
 
-
     // если юзер найден, то отдаем ошибку 400
     if (checkUser)
       throw new BadRequestException('Такой пользователь уже зарегистрирована с таким номер')
 
-    // создаем юзера в бд и хешируем пароль в бд
+    // создаем юзера
     const user = await this.prisma.user.create({
       data: {
         name: dto.name,
@@ -80,33 +59,16 @@ export class AuthService {
       }
     })
 
-    // создание таблицы соискателя
-    const createJobSeeker = await this.prisma.jobSeeker.create({
-      data: {
-        userId: user.id
-      }
-    })
-
-    const createResume = await this.prisma.resume.create({
-      data: {
-        jobseekerId: createJobSeeker.id,
-        name: user.name,
-        surname: user.surname,
-        patronymic: user.patronymic,
-        professionId: 2
-      }
-    })
-
-
+    // создание профиля
+    if (user.roleId == 1) this.createJobseeker(user)
+    else this.createEmployer(user)
 
     // генерация новых токенов
     const tokens = await this.issueTokens(user.id)
 
     return {
       user: this.returnUserFields(user),
-      ...tokens,
-      ...createJobSeeker,
-      ...createResume
+      ...tokens
     }
   }
 
@@ -130,7 +92,7 @@ export class AuthService {
         )
     }
 
-    if (dto.email !== checkUser.email) {
+    if (dto.email && dto.email !== checkUser.email) {
       const checkEmail = await this.prisma.user.findUnique({
         where: {
           email: dto.email
@@ -172,7 +134,57 @@ export class AuthService {
     return user
   }
 
+  async getNewTokens(dto: RefreshTokenDto) {
+    // верификация токена (раскрываем токен и забираем id юзера из 2й части токена - payload)
+    const result = await this.jwt.verifyAsync(dto.refreshToken)
+
+    // если не прошло, то возвращаем ошибку 401
+    if (!result) throw new UnauthorizedException('Неверный refreshtoken')
+
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: result.id
+      }
+    })
+
+    // генерация новых токенов
+    const tokens = await this.issueTokens(user.id)
+
+    return {
+      user: this.returnUserFields(user),
+      ...tokens
+    }
+  }
+
   //===================================================================
+
+  // создание соискателя (jobseeker and resume)
+  private async createJobseeker(user: User) {
+    // создание резюме
+    const createResume = await this.prisma.resume.create({
+      data: {
+        name: user.name,
+        surname: user.surname,
+        patronymic: user.patronymic
+      }
+    })
+
+    // создание Jobseeker (соискателя) и вписываем айди созданного юзера
+    const createJobSeeker = await this.prisma.jobSeeker.create({
+      data: {
+        userId: user.id,
+        resumeId: createResume.id
+      }
+    })
+
+    return {
+      ...createJobSeeker,
+      ...createResume
+    }
+  }
+
+  // создание
+  private async createEmployer(user: User) {}
 
   // генерация токенов
   private async issueTokens(userId: number) {

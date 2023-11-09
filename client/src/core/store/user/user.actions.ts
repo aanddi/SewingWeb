@@ -1,10 +1,11 @@
-import { errorCatch } from '@/api/api.helper'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import { IAuthResponse, ILogin, IRegister } from './user.interface'
 
 import { removeFromStorage } from '@/core/services/auth/auth.helper'
 import { AuthService } from '@/core/services/auth/auth.service'
+
+import { errorCatch } from '@/api/api.helper'
 
 // логин
 // джейнерики: IAuthResponse - это ответ на запрос (наш юзер)

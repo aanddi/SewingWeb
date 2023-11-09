@@ -44,16 +44,17 @@ model Role {
 // ЛОГИКА СВЯЗИ С РЕЗЮМЕ: один пользователь может создать одно резюме(один к одному)
 // ЛОГИКА СВЯЗИ С ОПЫТОМ РАБОТЫ: один соискатель, может добавить несколько опытов работы(многие к одному)
 model JobSeeker {
-  id Int @id @default(autoincrement()) @map("job_seeker_id")
+  id Int @id @default(autoincrement()) @map("jobseeker_id")
 
   userId Int  @unique @map("user_id")
   user   User @relation(fields: [userId], references: [id])
 
-  resume Resume?
+  resume   Resume @relation(fields: [resumeId], references: [id])
+  resumeId Int    @unique @map("resume_id")
 
   vacancy Vacancy[] // избранные вакансии, которые добавлены соискателями
 
-  @@map("Job_seekers")
+  @@map("JobSeekers")
 }
 
 model InstitutionalInfo {
@@ -93,31 +94,24 @@ model Resume {
   name          String
   surname       String
   patronymic    String?
-  DOB           DateTime?
-  sex           String?
+  profession    String?
+  salary        Int?
+  gender        String?
+  DOB           String?
+  phoneNumber   String?   @map("phone_number")
   citizenship   String?
   city          String?
-  phoneNumber   String?   @map("phone_number")
   email         String?
-  salary        String?
-  workTimetable String?
-  skills        String?
   languages     String?
-  about         String?
+  workTimetable String?
 
-  work_exp WorkExperience[]
-
+  about      String?
+  work_exp   WorkExperience[]
   eductional InstitutionalInfo[]
 
-  jobseekerId Int       @unique @map("job_seeker_id")
-  jobseeker   JobSeeker @relation(fields: [jobseekerId], references: [id])
-
-  vacancy Responses[]
-
-  professionId Int        @map("profession_id")
-  profession   Profession @relation(fields: [professionId], references: [id])
-
-  employer Employer[] // избранные резюме, работодатели, которые добавили резюме в избранное
+  jobseeker JobSeeker?
+  vacancy   Responses[]
+  employer  Employer[] // избранные резюме, работодатели, которые добавили резюме в избранное
 
   @@map("Resumes")
 }
@@ -201,8 +195,6 @@ model Profession {
   desc          String
 
   vacancy Vacancy[]
-
-  resume Resume[]
 
   @@map("Professions")
 }

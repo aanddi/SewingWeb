@@ -1,6 +1,7 @@
-import { useAuth } from './useAuth'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+
+import { useAuth } from './useAuth'
 
 export const useAuthRedirect = (path: string) => {
   const { user } = useAuth()

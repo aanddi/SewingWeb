@@ -1,9 +1,10 @@
-import ICompanyHeader from './CompanyHeader.intraface'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
 import styles from './CompanyHeader.module.scss'
+
+import ICompanyHeader from './CompanyHeader.intraface'
 
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { IoShieldCheckmarkSharp } from 'react-icons/io5'

@@ -1,7 +1,6 @@
 import { IsString, IsOptional, MinLength } from 'class-validator'
 
 export class CreateDto {
-
   @MinLength(12, {
     message: 'ИНН должен состоять из 12 цифр'
   })
@@ -32,6 +31,4 @@ export class CreateDto {
   adress: string
 
   userId: number
-
-
 }

@@ -1,0 +1,68 @@
+
+.custom-select {
+ 
+  &__control {
+    background-color: transparent !important;
+    border: 1px solid $grey !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+    min-height: 33px !important;
+    height: 33px !important;
+    font-size: 13px !important;
+    font-family: $fontFamily !important;
+    font-weight: 400 !important;
+
+
+    &--menu-is-open {}
+   
+  }
+
+  &__option {
+
+  }
+
+  &__value-container {
+    height: 33px !important;
+    cursor: text !important;
+  }
+
+  &__input-container {}
+
+  &__input {
+    
+  }
+
+  // текст внутри
+  &__single-value {
+    font-family: $fontFamily !important;
+    color: $colorText !important;
+    font-weight: 400 !important;
+  }
+
+  &__indicators {
+    cursor: pointer;
+    height: 31px !important;
+
+  }
+
+  &__indicator {
+    color: $grey;
+  }
+
+  &__menu {
+
+  }
+
+  &__menu-list {
+    height: 200px !important;
+    background-color: #ffffff !important;
+  }
+
+  &__option {
+    cursor: pointer !important;
+    
+    &--is-focused {
+       //background-color: lighten($blue, 20%) !important;
+    }
+  } 
+}

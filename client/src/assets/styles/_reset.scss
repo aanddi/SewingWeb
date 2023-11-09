@@ -48,6 +48,17 @@ a {
 	text-decoration: none;
 }
 
-input, button, textarea {
-	all: unset;
+input,button, textarea:focus {
+	outline: none;
+	border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+.Select-menu-outer {
+  z-index: 9999;
 }

@@ -1,8 +1,9 @@
-import { TypeComponentAuthFields } from './auth-page.types'
 import { useRouter } from 'next/router'
 import { FC, PropsWithChildren } from 'react'
 
 import { useAuth } from '@/core/hooks/useAuth'
+
+import { TypeComponentAuthFields } from './auth-page.types'
 
 const CheckRole: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
   Component: { isOnlyEmployer, isOnlyJobSeeker },

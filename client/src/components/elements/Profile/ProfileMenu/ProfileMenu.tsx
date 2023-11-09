@@ -1,4 +1,3 @@
-import { menuEmployer, menuJobseeker } from './menu-data'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -9,6 +8,8 @@ import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useCheckRole } from '@/core/hooks/useCheckRole'
 import { useOutside } from '@/core/hooks/useOutside'
+
+import { menuEmployer, menuJobseeker } from './menu-data'
 
 import { BiUpload } from 'react-icons/bi'
 import { IoExitOutline } from 'react-icons/io5'

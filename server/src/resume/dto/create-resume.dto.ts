@@ -1,46 +1,46 @@
-import { IsDate, IsString } from "class-validator"
+import { IsDate, IsString } from 'class-validator'
 
 export class createResumeDto {
-    @IsString()
-    name: string
+  @IsString()
+  name: string
 
-    @IsString()
-    surname: string
+  @IsString()
+  surname: string
 
-    @IsDate()
-    DOB: Date
+  @IsDate()
+  DOB: Date
 
-    @IsString()
-    sex: string
+  @IsString()
+  sex: string
 
-    @IsString()
-    citizenship: string
+  @IsString()
+  citizenship: string
 
-    @IsString()
-    city: string
+  @IsString()
+  city: string
 
-    @IsString()
-    phoneNumber: string
+  @IsString()
+  phoneNumber: string
 
-    @IsString()
-    email: string
+  @IsString()
+  email: string
 
-    @IsString()
-    salary: string
+  @IsString()
+  salary: string
 
-    @IsString()
-    workTimetable: string
+  @IsString()
+  workTimetable: string
 
-    @IsString()
-    skills: string
+  @IsString()
+  skills: string
 
-    @IsString()
-    languages: string
-    
-    @IsString()
-    about: string
+  @IsString()
+  languages: string
 
-    jobseekerId: number
+  @IsString()
+  about: string
 
-    professionId: number
+  jobseekerId: number
+
+  professionId: number
 }

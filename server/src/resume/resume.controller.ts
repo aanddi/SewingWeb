@@ -1,6 +1,6 @@
-import { Controller, Post, HttpCode, Body, Get, Param, Delete } from '@nestjs/common';
-import { ResumeService } from './resume.service';
-import { createResumeDto } from './dto/create-resume.dto';
+import { Controller, Post, HttpCode, Body, Get, Param, Delete } from '@nestjs/common'
+import { ResumeService } from './resume.service'
+import { createResumeDto } from './dto/create-resume.dto'
 
 @Controller('resume')
 export class ResumeController {
@@ -11,7 +11,7 @@ export class ResumeController {
   // async createResume(@Body() dto: createResumeDto) {
   //   return this.resumeService.create(dto)
   // }
-  
+
   // // @Get('all/:jobSeekerId')
   // // getAllJobSeekerResumes(@Param('jobSeekerId') jobSeekerId: string) {
   // //   return this.resumeService.getAllResumes(jobSeekerId)

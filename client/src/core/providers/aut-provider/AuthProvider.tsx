@@ -1,6 +1,5 @@
 // обвертка всего сайта, для проверки на роли
 // отключаем страницы авторизации от серверного рендеринга
-import { TypeComponentAuthFields } from './auth-page.types'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { FC, PropsWithChildren, useEffect } from 'react'
@@ -8,6 +7,8 @@ import { FC, PropsWithChildren, useEffect } from 'react'
 import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { getAccessToken, getRefreshToken } from '@/core/services/auth/auth.helper'
+
+import { TypeComponentAuthFields } from './auth-page.types'
 
 const DynamicCheckRole = dynamic(() => import('./CheckRole'), { ssr: false })
 

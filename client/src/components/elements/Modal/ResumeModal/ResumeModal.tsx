@@ -17,22 +17,12 @@ const ResumeModal: FC<PropsWithChildren<Props>> = ({ active, setActive, children
   return (
     <>
       <div
-        className={active ? [styles.modal, styles.modal__active].join(' ') : styles.modal}
-        onClick={() => setActive(false)}
+        className={
+          active ? [styles.modal, styles.modal__active].join(' ') : [styles.modal, styles.modal__unactive].join(' ')
+        }
       >
-        <div className={styles.modal__wrapper}>
-          <div className={styles.modal__content} onClick={e => e.stopPropagation()}>
-            {children}
-          </div>
-          <div className={styles.modal__footer}>
-            <div className={[styles.modal__button, styles.modal__button_save].join(' ')}>Сохранить</div>
-            <div
-              className={[styles.modal__button, styles.modal__button_close].join(' ')}
-              onClick={() => setActive(false)}
-            >
-              Отмена
-            </div>
-          </div>
+        <div className={styles.modal__content} onClick={e => e.stopPropagation()}>
+          {children}
         </div>
       </div>
     </>

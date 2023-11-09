@@ -1,4 +1,3 @@
-import IReviews from './Reviews.intraface'
 import Image from 'next/image'
 import { FC } from 'react'
 
@@ -6,6 +5,8 @@ import styles from './Reviews.module.scss'
 
 import CompanyHeader from '@/components/elements/Company/CompanyHeader/CompanyHeader'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
+
+import IReviews from './Reviews.intraface'
 
 import { FaStar } from 'react-icons/fa'
 

@@ -20,8 +20,8 @@
     flex: 1 1 100%;
 
     input {
-      width: 100%;
-      padding: 10px 0 10px 10px;
+      flex: 1 1 100%;
+      padding: 8px 0 8px 10px;
       border-radius: 5px;
       border: 1px solid #C2BFBF;
   
@@ -35,8 +35,17 @@
 
       &::placeholder {
         color: $grey;
+        font-size: 12px;
       }
     }
+  }
+
+  &__errorBorder {
+    border: 1px solid red !important;
+
+    &::placeholder {
+      color: red !important;
+   }
   }
 
   &__required {

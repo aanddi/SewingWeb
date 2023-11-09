@@ -1,7 +1,14 @@
-import { Param, Put, Body, Controller, HttpCode, Post, Get } from '@nestjs/common';
-import { JobseekerService } from './jobseeker.service';
-import { createInstitutionalInfoDto, createWorkExperienceDto } from './dto/create-jobseeker-info.dto';
-import { updateInstitutionalInfoDto, updateJobseekerDto, updateWorkExperienceDto } from './dto/update-jobseeker-info.dto';
+import { Param, Put, Body, Controller, HttpCode, Post, Get } from '@nestjs/common'
+import { JobseekerService } from './jobseeker.service'
+import {
+  createInstitutionalInfoDto,
+  createWorkExperienceDto
+} from './dto/create-jobseeker-info.dto'
+import {
+  updateInstitutionalInfoDto,
+  updateJobseekerDto,
+  updateWorkExperienceDto
+} from './dto/update-jobseeker-info.dto'
 
 @Controller('jobseeker')
 export class JobseekerController {

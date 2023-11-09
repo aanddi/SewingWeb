@@ -1,8 +1,9 @@
-import { errorCatch, getContentType } from './api.helper'
 import axios from 'axios'
 
 import { getAccessToken, removeFromStorage } from '@/core/services/auth/auth.helper'
 import { AuthService } from '@/core/services/auth/auth.service'
+
+import { errorCatch, getContentType } from './api.helper'
 
 // создание экземпляра axios и настраиваем
 // будет использоваться для каждого запроса instanse.get() вместо axios.get()

@@ -1,7 +1,8 @@
-import { userSlice } from './user/user.slice'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+
+import { userSlice } from './user/user.slice'
 
 // совмещение всех редьюсеров
 const rootReducer = combineReducers({

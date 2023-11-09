@@ -1,6 +1,6 @@
-import { instance } from '@/api/api.interceptor'
-
 import { IProfession } from '@/core/types/profession.interface'
+
+import { instance } from '@/api/api.interceptor'
 
 export const ProfessionService = {
   async getAll() {

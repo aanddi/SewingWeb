@@ -1,39 +1,39 @@
-import { IsDate, IsString } from "class-validator"
+import { IsDate, IsString } from 'class-validator'
 
 export class createInstitutionalInfoDto {
-    @IsString()
-    educationLevel: string
+  @IsString()
+  educationLevel: string
 
-    @IsString()
-    institutionName: string
+  @IsString()
+  institutionName: string
 
-    @IsString()
-    faculty: string
-    
-    @IsString()
-    specialization: string
+  @IsString()
+  faculty: string
 
-    jobseekerId: number
+  @IsString()
+  specialization: string
+
+  jobseekerId: number
 }
 
 export class createWorkExperienceDto {
-    @IsString()
-    city: string
+  @IsString()
+  city: string
 
-    @IsString()
-    company: string
+  @IsString()
+  company: string
 
-    @IsString()
-    post: string
+  @IsString()
+  post: string
 
-    @IsDate()
-    startTime: Date
+  @IsDate()
+  startTime: Date
 
-    @IsDate()
-    endTime: Date
-    
-    @IsString()
-    experience: string
+  @IsDate()
+  endTime: Date
 
-    jobseekerId: number
+  @IsString()
+  experience: string
+
+  jobseekerId: number
 }

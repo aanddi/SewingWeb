@@ -1,13 +1,12 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateVacancyDto } from './dto/create-vacancy.dto';
-import { PrismaService } from 'src/prisma.service';
-import { Vacancy } from '@prisma/client';
+import { BadRequestException, Injectable } from '@nestjs/common'
+import { CreateVacancyDto } from './dto/create-vacancy.dto'
+import { PrismaService } from 'src/prisma.service'
+import { Vacancy } from '@prisma/client'
 
 @Injectable()
 export class VacancyService {
-
   constructor(private prisma: PrismaService) {}
-  
+
   private async returnVacancyInfo(vacancy: Vacancy) {
     const profession = await this.prisma.profession.findUnique({
       where: {
@@ -33,7 +32,7 @@ export class VacancyService {
       workTimetable: vacancy.workTimetable,
       education: vacancy.education,
       professionName: profession.name,
-      companyName: employer.companyName,
+      companyName: employer.companyName
     }
   }
 
@@ -50,7 +49,7 @@ export class VacancyService {
         workTimetable: dto.workTimetable,
         education: dto.education,
         professionId: +dto.professionId,
-        employerId: +dto.employerId,
+        employerId: +dto.employerId
       }
     })
 
@@ -64,7 +63,7 @@ export class VacancyService {
       }
     })
 
-    if (!vacancy) throw new BadRequestException("Вакансии с id: " + id + " нет в базе данных")
+    if (!vacancy) throw new BadRequestException('Вакансии с id: ' + id + ' нет в базе данных')
 
     return this.returnVacancyInfo(vacancy)
   }

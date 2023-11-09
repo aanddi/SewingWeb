@@ -1,34 +1,34 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsString } from 'class-validator'
 
 export class CreateVacancyDto {
-    @IsString()
-    title: string
+  @IsString()
+  title: string
 
-    @IsNumber()
-    salary: number
+  @IsNumber()
+  salary: number
 
-    @IsString()
-    desc: string
+  @IsString()
+  desc: string
 
-    @IsString()
-    skills: string
+  @IsString()
+  skills: string
 
-    @IsString()
-    address: string
+  @IsString()
+  address: string
 
-    @IsString()
-    workExperience: string
+  @IsString()
+  workExperience: string
 
-    @IsString()
-    employment: string
+  @IsString()
+  employment: string
 
-    @IsString()
-    workTimetable: string
+  @IsString()
+  workTimetable: string
 
-    @IsString()
-    education: string
+  @IsString()
+  education: string
 
-    professionId: number
+  professionId: number
 
-    employerId: number
+  employerId: number
 }

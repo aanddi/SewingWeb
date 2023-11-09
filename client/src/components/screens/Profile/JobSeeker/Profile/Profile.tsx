@@ -64,6 +64,8 @@ const Profile: FC = () => {
 
   // reset field
   const handleCancel = () => {
+    setErrorUpdate(null)
+
     reset({
       name: user?.name,
       surname: user?.surname,
@@ -109,7 +111,7 @@ const Profile: FC = () => {
                     error={errors.surname?.message}
                   />
                   <FieldProfile
-                    {...register('patronymic', {})}
+                    {...register('patronymic')}
                     type={'text'}
                     title={'Отчество'}
                     placeholder="Введите отчество"
@@ -133,7 +135,7 @@ const Profile: FC = () => {
                     {...register('email', {
                       pattern: {
                         value: validMail,
-                        message: 'Введите корректную эл. почту. Пример mail@test.ru'
+                        message: 'Введите корректную эл. почту. Пример: sewingweb@email.ru'
                       }
                     })}
                     type={'text'}

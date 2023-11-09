@@ -1,9 +1,10 @@
-import { checkAuth, login, logout, registration } from './user.actions'
 import { createSlice } from '@reduxjs/toolkit'
 
 import { IInitialState } from './user.interface'
 
 import { getLocalStorage } from '@/core/utils/localstorage.config'
+
+import { checkAuth, login, logout, registration } from './user.actions'
 
 // начальное значение состояния состояние нашего slice
 // забираем ил localstorage инфу

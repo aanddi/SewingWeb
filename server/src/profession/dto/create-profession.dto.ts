@@ -1,12 +1,12 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsString } from 'class-validator'
 
 export class CreateProfessionDto {
-    @IsString()
-    name: string
+  @IsString()
+  name: string
 
-    @IsNumber()
-    averageSalary: number
+  @IsNumber()
+  averageSalary: number
 
-    @IsString()
-    desc: string
+  @IsString()
+  desc: string
 }

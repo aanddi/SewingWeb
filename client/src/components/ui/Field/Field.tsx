@@ -1,7 +1,8 @@
-import { IField } from './Field.intreface'
 import { FC, forwardRef, useState } from 'react'
 
 import styles from './Field.module.scss'
+
+import { IField } from './Field.intreface'
 
 const Field = forwardRef<HTMLInputElement, IField>(({ title, error, type, star, ...rest }, ref) => {
   return (

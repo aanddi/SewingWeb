@@ -10,57 +10,29 @@
   z-index: 9999999;
   opacity: 0;
   pointer-events: none;
-  transition: all .4s ease;
+  transition: background-color .2s ease-in;
   display: flex;
   justify-content: flex-end;
-
-  &__wrapper {
-    height: 100vh;
-    background-color: #fff;
-  }
-
 
   &__content {
     position: relative;
     border-radius: 7px;
     background: #fff;
     box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.03);
-    backdrop-filter: blur(25px);
     height: 100vh;
-    width: 650px;
+    width: 750px;
     overflow-y: scroll;
-    padding: 30px;
   }
 
   &__active {
+    transform: translateX(0%);
     opacity: 1;
     pointer-events: all;
   }
 
-  &__footer {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    padding: 30px;
-    width: 650px;
-    box-shadow: 0 -10px 25px rgba(46,59,99,.08);
-  }
-
-  &__button {
-    padding: 10px 40px;
-    border-radius: 5px;
-    font-weight: 500;
-    cursor: pointer;
-
-    &_save {
-      background-color: $blue;
-      color: #fff;
-
-      &:hover {
-        background-color:$blueHover;
-      }
-    }
+  &__unactive {
+    transform: translateX(100%);
+    opacity: 0;
   }
 }
+
