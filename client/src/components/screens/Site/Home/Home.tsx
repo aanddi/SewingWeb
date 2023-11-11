@@ -47,7 +47,9 @@ const Home: FC<IHome> = props => {
                 <div className={styles.mainScreen__arrow}>
                   <IoIosArrowDown style={{ color: '#fff' }} size={40} />
                 </div>
-                <div className={styles.mainScreen__button}>Создать резюме</div>
+                <Link href={'/profile/j_resume'} className={styles.mainScreen__button}>
+                  Создать резюме
+                </Link>
               </div>
             </div>
           </div>

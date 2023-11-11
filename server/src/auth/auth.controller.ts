@@ -39,9 +39,10 @@ export class AuthController {
   async getNewTokens(@Body() dto: RefreshTokenDto) {
     return this.authService.getNewTokens(dto)
   }
-
-  @Auth()
+  
+  @UsePipes(new ValidationPipe())
   @Put(':id')
+  @Auth()
   async updateUser(@Param('id') id: number | undefined, @Body() dto: UpdateUserDto) {
     return this.authService.updateUser(dto, id)
   }

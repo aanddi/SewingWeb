@@ -1,4 +1,5 @@
 export interface IResume {
+  id: number
   name: string
   surname: string
   patronymic?: string
@@ -12,4 +13,5 @@ export interface IResume {
   email?: string
   languages?: string
   workTimetable?: string
+  about: string | undefined
 }

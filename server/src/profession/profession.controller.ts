@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  Query,
-  UsePipes,
-  ValidationPipe
-} from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common'
 import { CreateProfessionDto } from './dto/create-profession.dto'
 import { SortProfession } from './dto/sort.dto'
 import { ProfessionService } from './profession.service'

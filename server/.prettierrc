@@ -2,8 +2,9 @@
   "trailingComma": "none",
   "arrowParens": "avoid",
   "singleQuote": true,
-  "printWidth": 100,
+  "printWidth": 120, 
   "useTabs": false,
   "tabWidth": 2,
-  "semi": false
+  "semi": false,
+  "bracketSameLine": false
 }

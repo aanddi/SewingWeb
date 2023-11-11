@@ -63,7 +63,7 @@ export class ProfessionService {
 
     if (checkProf) throw new BadRequestException('Такая профессия уже есть')
 
-    const profession = await this.prisma.profession.create({
+    const professionItem = await this.prisma.profession.create({
       data: {
         name: dto.name,
         averageSalary: dto.averageSalary,
@@ -71,6 +71,6 @@ export class ProfessionService {
       }
     })
 
-    return profession
+    return professionItem
   }
 }

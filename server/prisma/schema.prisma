@@ -57,7 +57,7 @@ model JobSeeker {
   @@map("JobSeekers")
 }
 
-model InstitutionalInfo {
+model Education {
   id              Int     @id @default(autoincrement()) @map("institutional_information_id")
   educationLevel  String  @map("educational_level")
   institutionName String? @map("name_of_institution")
@@ -67,7 +67,7 @@ model InstitutionalInfo {
   resumeId Int    @map("resume_id")
   resume   Resume @relation(fields: [resumeId], references: [id])
 
-  @@map("Institutional_informations")
+  @@map("education_resume")
 }
 
 model WorkExperience {
@@ -82,7 +82,7 @@ model WorkExperience {
   resumeId Int    @map("resume_id")
   resume   Resume @relation(fields: [resumeId], references: [id])
 
-  @@map("Work_experiences")
+  @@map("experience_resume")
 }
 
 // ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одно резюме может быть создано на одну профессию(один ко многим, так как не может быть уникальным)
@@ -107,7 +107,7 @@ model Resume {
 
   about      String?
   work_exp   WorkExperience[]
-  eductional InstitutionalInfo[]
+  eductional Education[]
 
   jobseeker JobSeeker?
   vacancy   Responses[]

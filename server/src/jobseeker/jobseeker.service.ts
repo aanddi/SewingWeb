@@ -1,145 +1,76 @@
-import { Injectable, BadRequestException } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
-import {
-  createInstitutionalInfoDto,
-  createWorkExperienceDto
-} from './dto/create-jobseeker-info.dto'
-import {
-  updateInstitutionalInfoDto,
-  updateJobseekerDto,
-  updateWorkExperienceDto
-} from './dto/update-jobseeker-info.dto'
+import { UpdateAbout } from './dto/about-about'
+import { UpdateResume } from './dto/update-resume.dto'
 
 @Injectable()
 export class JobseekerService {
   constructor(private prisma: PrismaService) {}
 
-  //   async getById(id: string) {
-  //     const jobseeker = await this.prisma.jobSeeker.findUnique({
-  //       where: {
-  //         id: +id
-  //       },
-  //       select: {
-  //         name: true,
-  //         surname: true,
-  //         patronymic: true,
-  //         sex: true,
-  //         DOB: true,
-  //         city: true,
-  //         citizenship: true,
-  //         languages: true
-  //       }
-  //     })
+  async getResume(id: number) {
+    const jobseeker = await this.getJobseeker(id)
 
-  //     return jobseeker
-  //   }
+    const resume = await this.prisma.resume.findUnique({
+      where: {
+        id: jobseeker.resumeId
+      }
+    })
 
-  //   async updateJobSeeker(dto: updateJobseekerDto, id: string) {
-  //     const user = await this.prisma.jobSeeker.findUnique({
-  //       where: {
-  //         id: +id
-  //       }
-  //     })
+    if (!resume) throw new NotFoundException('Резюме не найдено')
 
-  //     if (!user) throw new BadRequestException('Пользователя нет в базе данных!')
+    return resume
+  }
 
-  //     const jobseeker = await this.prisma.jobSeeker.update({
-  //       where: {
-  //         id: +id
-  //       },
-  //       data: {
-  //         name: dto.name,
-  //         surname: dto.surname,
-  //         patronymic: dto.patronymic,
-  //         sex: dto.sex,
-  //         DOB: dto.DOB,
-  //         city: dto.city,
-  //         citizenship: dto.citizenship,
-  //         languages: dto.citizenship
-  //       }
-  //     })
+  async updateResume(id: number, dto: UpdateResume) {
+    const jobseeker = await this.getJobseeker(id)
 
-  //     await this.prisma.user.update({
-  //       where: {
-  //         id: jobseeker.userId
-  //       },
-  //       data: {
-  //         name: dto.name,
-  //         surname: dto.surname,
-  //         patronymic: dto.patronymic
-  //       }
-  //     })
+    const newResume = this.prisma.resume.update({
+      where: {
+        id: jobseeker.resumeId
+      },
+      data: {
+        name: dto.name,
+        surname: dto.surname,
+        patronymic: dto.patronymic,
+        profession: dto.profession,
+        salary: +dto.salary,
+        gender: dto.gender,
+        DOB: dto.DOB,
+        phoneNumber: dto.phoneNumber,
+        citizenship: dto.citizenship,
+        city: dto.city,
+        email: dto.email,
+        languages: dto.languages,
+        workTimetable: dto.workTimetable
+      }
+    })
 
-  //     return jobseeker
-  //   }
+    return newResume
+  }
 
-  //   async createInstitutionalInfo(dto: createInstitutionalInfoDto) {
-  //     const institutInfo = await this.prisma.institutionalInfo.create({
-  //       data: {
-  //         educationLevel: dto.educationLevel,
-  //         institutionName: dto.institutionName,
-  //         faculty: dto.faculty,
-  //         specialization: dto.specialization,
-  //         jobseekerId: dto.jobseekerId
-  //       }
-  //     })
+  async updateResumeAbout(id: number, dto: UpdateAbout) {
+    const jobseeker = await this.getJobseeker(id)
+    const update = await this.prisma.resume.update({
+      where: {
+        id: jobseeker.resumeId
+      },
+      data: {
+        about: dto.about
+      }
+    })
 
-  //     return institutInfo
-  //   }
+    return update.about
+  }
 
-  // async updateInstitutionalInfo(dto: updateInstitutionalInfoDto, id: string) {
-  //     const institutInfo = await this.prisma.institutionalInfo.update({
-  //         where: {
-  //             id: +id,
-  //         },
-  //         data: {
-  //             educationLevel: dto.educationLevel,
-  //             institutionName: dto.institutionName,
-  //             faculty: dto.faculty,
-  //             specialization: dto.specialization,
-  //         }
-  //     })
+  private async getJobseeker(id: number | string) {
+    const jobseeker = await this.prisma.jobSeeker.findUnique({
+      where: {
+        userId: +id
+      }
+    })
 
-  //     return institutInfo
-  // }
+    if (!jobseeker) throw new NotFoundException('Пользователь не найден')
 
-  //   async createWorkExperience(dto: createWorkExperienceDto) {
-  //     const workExperience = await this.prisma.workExperience.create({
-  //       data: {
-  //         city: dto.city,
-  //         company: dto.company,
-  //         post: dto.post,
-  //         startTime: dto.startTime,
-  //         endTime: dto.endTime,
-  //         experience: dto.experience,
-  //         jobseekerId: dto.jobseekerId
-  //       }
-  //     })
-
-  //     return workExperience
-  //   }
-
-  // async updateWorkExperience(dto: updateWorkExperienceDto, id: string) {
-  //     const employer = await this.prisma.workExperience.findUnique({
-  //         where: {
-  //             id: +id,
-  //         }
-  //     })
-
-  //     if (employer) throw new BadRequestException('У пользователя нет записей об опыте работы!')
-
-  //     const workExperience = await this.prisma.workExperience.update({
-  //         where: {
-  //             id: +id,
-  //         },
-  //         data: {
-  //             city: dto.city,
-  //             company: dto.company,
-  //             post: dto.post,
-  //             startTime: dto.startTime,
-  //             endTime: dto.endTime,
-  //             experience: dto.experience,
-  //         }
-  //     })
-  // }
+    return jobseeker
+  }
 }

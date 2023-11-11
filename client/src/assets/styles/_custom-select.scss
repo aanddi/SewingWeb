@@ -3,7 +3,7 @@
  
   &__control {
     background-color: transparent !important;
-    border: 1px solid $grey !important;
+   
     border-radius: 5px !important;
     box-shadow: none !important;
     min-height: 33px !important;
@@ -14,6 +14,10 @@
 
 
     &--menu-is-open {}
+
+    &:invalid {
+      border-color: red; /* Установите желаемый цвет границы */
+    } 
    
   }
 

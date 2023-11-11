@@ -1,0 +1,170 @@
+@import '@/assets/styles/_variables.scss';
+
+
+.formInfo {
+
+  margin-top: 30px;
+
+  &__block {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    flex: 1 1 100%;
+  }
+
+  &__label {
+    width: 200px;
+    display: flex;
+    gap: 3px;
+  }
+
+  &__error {
+    display: block;
+    color: red;
+    margin-top: 7px;
+    font-size: 12px;
+  }
+
+  &__required {
+    color: red;
+  }
+
+  &__rub {
+    margin-left: 10px;
+  }
+
+  &__dob {
+    display: flex;
+    align-items: center;
+  }
+
+  &__select {
+    flex: 1 1 100%;
+
+    & >* {
+      flex: 1 1 100%;
+    }
+  }
+
+  &__date {
+    width: 100%;
+
+    & > *:not(:last-child) {
+      padding-right: 10px;
+    }
+  }
+
+  &__dateWrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__input {
+    display: flex;
+
+    &_day {
+      flex: 1 1 20%;
+    }
+
+    &_month {
+      flex: 0 0 60%;
+
+      & >* {
+        flex: 0 0 100%;
+      }
+    }
+
+    &_year {
+      flex: 1 1 20%;
+    }
+    
+
+    input {
+      width: 100%;
+      padding: 8px 0 8px 10px;
+      border-radius: 5px;
+      border: 1px solid #C2BFBF;
+  
+      &:hover {
+        cursor: text;
+      }
+  
+      &:focus {
+        border: 1px solid $blue !important;
+      }
+
+      &::placeholder {
+        color: $grey;
+      }
+    }
+  }
+
+  &__radio {
+    margin-right: 15px;
+
+  }
+
+  &__radioInput {
+    transform:scale(1.3);
+    margin-right: 6px;
+    cursor: pointer;
+  }
+
+  &__footerError {
+    display: block;
+    color: red;
+    margin-left: 20px;
+  }
+
+  &__saveButton {
+    background-color: $blue;
+    padding: 10px 30px;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+
+    &:hover {
+      background-color: $blueHover;
+    }
+  }
+
+  &__resetButton {
+    cursor: pointer;
+  }
+
+  &__modalFooter {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display:flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #fff;
+    padding: 30px 30px 30px 40px;
+    box-shadow: 0 -10px 25px rgba(46,59,99,.08);
+  }
+
+  &__formContent {
+    margin-bottom: 15%;
+    padding: 10px 30px 30px 40px;
+
+    & > *:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+
+
+  &__titleModal {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}
