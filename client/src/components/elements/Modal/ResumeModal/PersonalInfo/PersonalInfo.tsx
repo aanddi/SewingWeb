@@ -36,6 +36,7 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
     value: elem.name,
     label: elem.name
   }))
+
   // ======================================
   const { user } = useAuth()
   const [gender, setGender] = useState('Мужчина')
@@ -61,8 +62,6 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
   const [year, setYear] = useState<string>('')
 
   const [fullDate, setFullDate] = useState<string>('')
-
-  console.log(`${day}.${month}.${year}`)
 
   // Обработчики изменения значений полей ввода
   const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,7 +114,6 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
     console.log(data)
     try {
       const response = await jobseekerService.updateResumeByIdUser(user?.id, data)
-      // refetch()
       queryClient.invalidateQueries({ queryKey: ['resume'] })
       setActive(false)
     } catch (error: any) {

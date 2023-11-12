@@ -1,9 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-  UnauthorizedException
-} from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { AuthDto } from './dto/auth.dto'
 import { RefreshTokenDto } from './dto/refresh-token.dto'
@@ -44,8 +39,7 @@ export class AuthService {
     })
 
     // если юзер найден, то отдаем ошибку 400
-    if (checkUser)
-      throw new BadRequestException('Такой пользователь уже зарегистрирована с таким номер')
+    if (checkUser) throw new BadRequestException('Такой пользователь уже зарегистрирована с таким номер')
 
     // создаем юзера
     const user = await this.prisma.user.create({
@@ -86,10 +80,7 @@ export class AuthService {
         }
       })
 
-      if (checkPhone)
-        throw new BadRequestException(
-          'Введенный номер занят. Пожалуйста введите другой номер телефона'
-        )
+      if (checkPhone) throw new BadRequestException('Введенный номер занят. Пожалуйста введите другой номер телефона')
     }
 
     if (dto.email && dto.email !== checkUser.email) {
@@ -99,8 +90,7 @@ export class AuthService {
         }
       })
 
-      if (checkEmail)
-        throw new BadRequestException('Введенная почта занята. Пожалуйста введите другую эл. почту')
+      if (checkEmail) throw new BadRequestException('Введенная почта занята. Пожалуйста введите другую эл. почту')
     }
 
     const updatedUser = await this.prisma.user.update({

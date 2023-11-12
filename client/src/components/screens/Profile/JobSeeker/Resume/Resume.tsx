@@ -1,19 +1,28 @@
+import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import styles from './Resume.module.scss'
 
 import AboutInfo from '@/components/elements/Modal/ResumeModal/AboutInfo/AboutInfo'
+import EditEducation from '@/components/elements/Modal/ResumeModal/EditEdication/EditEdication'
 import Education from '@/components/elements/Modal/ResumeModal/Education/Education'
 import PersonalInfo from '@/components/elements/Modal/ResumeModal/PersonalInfo/PersonalInfo'
 import WorkExperience from '@/components/elements/Modal/ResumeModal/WorkExperience/WorkExperience'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 
-import { useResume } from '@/core/hooks/useResume'
+import { IEducation } from '@/core/types/education.interface'
+import { IResume } from '@/core/types/resume.interface'
+import { IWorkExperience } from '@/core/types/work-experience.interface'
 
-import { FaPen } from 'react-icons/fa'
+import { useAuth } from '@/core/hooks/useAuth'
+import { EducationType } from '@/core/services/jobseeker/jobseeker.helper'
+import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { formatPrice } from '@/core/utils/format-price'
+
+import { BiSolidEditAlt } from 'react-icons/bi'
 import { IoIosAddCircleOutline } from 'react-icons/io'
 
 import photo from 'public/Profiles/photoUser.svg'
@@ -25,7 +34,46 @@ const Resume: FC = () => {
   const [activeModal3, setActiveModal3] = useState(false)
   const [activeModal4, setActiveModal4] = useState(false)
 
-  const { data: resume } = useResume()
+  const [edicationQQQ, setEdicationQQQ] = useState(null)
+  const [edicationId, setEdicationId] = useState<number | undefined>(undefined)
+  const [activeModal5, setActiveModal5] = useState(false)
+
+  const { user } = useAuth()
+  const userId = user?.id
+
+  const { data: resume } = useQuery<IResume>({
+    queryKey: ['resume', userId],
+    queryFn: async () => {
+      const response = await jobseekerService.getResumeByIdUser(userId)
+      return response
+    }
+  })
+
+  const resumeId = resume?.id
+
+  const { data: education } = useQuery<IEducation[]>({
+    queryKey: ['education'],
+    queryFn: async () => {
+      if (resumeId) {
+        const response = await jobseekerService.getAllEducationById(resumeId)
+        return response
+      }
+    },
+    enabled: !!resumeId // Эта опция указывает, что запрос будет выполнен только если resumeId существует
+  })
+
+  const { data: experience } = useQuery<IWorkExperience[]>({
+    queryKey: ['experience'],
+    queryFn: async () => {
+      if (resumeId) {
+        const response = await jobseekerService.getAllExperienceById(resumeId)
+        return response
+      }
+    },
+    enabled: !!resumeId
+  })
+
+  console.log(experience)
 
   return (
     <SiteLayout background={'#fff'}>
@@ -44,13 +92,14 @@ const Resume: FC = () => {
                   <div className={styles.resume__infoBlock}>
                     <div className={styles.resume__name}>
                       {resume?.surname} {resume?.name} {resume?.patronymic}
+                      {!resume?.surname && !resume?.name && !resume?.name ? <span>ФИО не указано</span> : null}
                     </div>
                     <div className={styles.resume__post}>
                       {resume?.profession ? <span>{resume?.profession}</span> : <span>Профессия не указана</span>}
                     </div>
                     <div className={styles.resume__salary}>
                       <span>Желаемый доход:</span>{' '}
-                      {resume?.salary ? <span>от {resume?.salary} руб.</span> : <span>не указан</span>}
+                      {resume?.salary ? <span>от {formatPrice(resume?.salary)} руб.</span> : <span>не указан</span>}
                     </div>
                   </div>
                   <div className={styles.resume__fullInfo}>
@@ -111,7 +160,7 @@ const Resume: FC = () => {
                     </div>
 
                     <div className={styles.resume__add} onClick={() => setActiveModal1(!activeModal1)}>
-                      <FaPen />
+                      <BiSolidEditAlt />
                       <span>Дополнить</span>
                     </div>
                   </div>
@@ -131,36 +180,117 @@ const Resume: FC = () => {
                   </div>
                 </aside>
               </div>
+
               <div className={styles.resume__body}>
                 <div className={styles.resume__bodyBlock}>
                   <div className={styles.resume__blockTitle}>Опыт работы</div>
-                  <div className={styles.resume__blockSubTitle}>
-                    Сведения о прошлом месте работы: должность, компания, период работы, функции и достижения.
+                  <div className={styles.resume__blockList}>
+                    {experience && experience?.length > 0 ? (
+                      experience ? (
+                        experience.map((elem, index) => {
+                          return (
+                            <div key={index} className={styles.resume__blockItem}>
+                              <div className={styles.resume__blockContent}>
+                                <div className={styles.resume__experienceBlock}>
+                                  <div className={styles.resume__experiencePost}>{elem.post}</div>
+                                  <p className={styles.resume__experienceGroupe}>
+                                    {elem.company}, {elem.city}
+                                  </p>
+                                </div>
+                                <div className={styles.resume__experienceTime}>
+                                  {elem.startTime} - {elem.untilNow ? 'настоящее время' : elem.endTime}
+                                </div>
+                                <p>{elem.experience}</p>
+                              </div>
+                              <div className={styles.resume__edit}>
+                                <BiSolidEditAlt size={15} style={{ color: '#3490DF' }} />
+                                <div className="">Редактировать</div>
+                              </div>
+                            </div>
+                          )
+                        })
+                      ) : null
+                    ) : (
+                      <div className={styles.resume__blockSubTitle}>
+                        Сведения о прошлом месте работы: должность, компания, период работы, функции и достижения.
+                      </div>
+                    )}
                   </div>
                   <div className={styles.resume__add} onClick={() => setActiveModal2(!activeModal2)}>
                     <IoIosAddCircleOutline style={{ color: '#DA435F' }} />
                     <span>Добавить</span>
                   </div>
                 </div>
+
                 <div className={styles.resume__bodyBlock}>
                   <div className={styles.resume__blockTitle}>Образование</div>
-                  <div className={styles.resume__blockSubTitle}>
-                    Полученное образование: учебное заведение, специальность, курсы повышения квалификации.
+                  <div className={styles.resume__blockList}>
+                    {education && education?.length > 0 ? (
+                      education ? (
+                        education.map((elem, index) => {
+                          return (
+                            <div className={styles.resume__blockItem} key={index}>
+                              <div className={styles.resume__blockContent}>
+                                <div className={styles.resume__educationBlock}>
+                                  <p className={styles.resume__educationLevel}>{elem.educationLevel}</p>
+                                  <p>{elem.institutionName}</p>
+                                </div>
+                                <div className={styles.resume__educationBlock}>
+                                  <p className={styles.resume__educationYear}>Год выпуска: {elem.yearEnding}</p>
+                                  <p>{elem.specialization}</p>
+                                </div>
+                              </div>
+                              <div className={styles.resume__edit}>
+                                <BiSolidEditAlt size={15} style={{ color: '#3490DF' }} />
+                                <div
+                                  className=""
+                                  onClick={async () => {
+                                    const response = await jobseekerService.getEducationById(elem.id)
+                                    setEdicationQQQ(response)
+                                    setActiveModal5(true)
+                                  }}
+                                >
+                                  Редактировать
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        })
+                      ) : null
+                    ) : (
+                      <div className={styles.resume__blockSubTitle}>
+                        Полученное образование: учебное заведение, специальность, курсы повышения квалификации.
+                      </div>
+                    )}
                   </div>
+
                   <div className={styles.resume__add} onClick={() => setActiveModal3(!activeModal3)}>
                     <IoIosAddCircleOutline style={{ color: '#DA435F' }} />
                     <span>Добавить</span>
                   </div>
                 </div>
-                <div className={styles.resume__bodyBlock}>
+
+                <div className={styles.resume__about}>
                   <div className={styles.resume__blockTitle}>О себе</div>
-                  <div className={styles.resume__blockSubTitle}>
-                    Сведения о прошлом месте работы: должность, компания, период работы, функции и достижения.
-                  </div>
-                  <div className={styles.resume__add} onClick={() => setActiveModal4(!activeModal4)}>
-                    <IoIosAddCircleOutline style={{ color: '#DA435F' }} />
-                    <span>Добавить</span>
-                  </div>
+                  {resume?.about ? (
+                    <>
+                      <p className={styles.resume__textAbout}>{resume?.about}</p>
+                      <div className={styles.resume__edit} onClick={() => setActiveModal4(!activeModal4)}>
+                        <BiSolidEditAlt size={15} style={{ color: '#3490DF' }} />
+                        <span>Редактировать</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={styles.resume__blockSubTitle}>
+                        Сведения о прошлом месте работы: должность, компания, период работы, функции и достижения.
+                      </div>
+                      <div className={styles.resume__add} onClick={() => setActiveModal4(!activeModal4)}>
+                        <IoIosAddCircleOutline style={{ color: '#DA435F' }} />
+                        <span>Добавить</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -168,12 +298,11 @@ const Resume: FC = () => {
         </div>
 
         <PersonalInfo resume={resume} active={activeModal1} setActive={setActiveModal1} />
-
         <WorkExperience resumeId={resume?.id} active={activeModal2} setActive={setActiveModal2} />
-
         <Education resumeId={resume?.id} active={activeModal3} setActive={setActiveModal3} />
-
         <AboutInfo about={resume?.about} active={activeModal4} setActive={setActiveModal4} />
+
+        <EditEducation edication={edicationQQQ} active={activeModal5} setActive={setActiveModal5} />
       </div>
     </SiteLayout>
   )

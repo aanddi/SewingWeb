@@ -26,7 +26,7 @@ model User {
 
   employer Employer?
 
-  @@map("Users")
+  @@map("users")
 }
 
 // ЛОГИКА СВЯЗИ: одной роли может принадлежать несколько пользователей(один ко многим), пока хз, может быть один к одному
@@ -36,7 +36,7 @@ model Role {
 
   user User[]
 
-  @@map("Roles")
+  @@map("roles")
 }
 
 //------------- Соискатели и резюме -------------
@@ -54,20 +54,20 @@ model JobSeeker {
 
   vacancy Vacancy[] // избранные вакансии, которые добавлены соискателями
 
-  @@map("JobSeekers")
+  @@map("jobseekers")
 }
 
 model Education {
-  id              Int     @id @default(autoincrement()) @map("institutional_information_id")
-  educationLevel  String  @map("educational_level")
-  institutionName String? @map("name_of_institution")
-  faculty         String?
-  specialization  String?
+  id              Int    @id @default(autoincrement()) @map("education_id")
+  educationLevel  String @map("educational_level")
+  institutionName String @map("name_of_institution")
+  specialization  String
+  yearEnding      String @map("year_of_ending")
 
   resumeId Int    @map("resume_id")
   resume   Resume @relation(fields: [resumeId], references: [id])
 
-  @@map("education_resume")
+  @@map("resume_education")
 }
 
 model WorkExperience {
@@ -75,14 +75,15 @@ model WorkExperience {
   city       String
   company    String
   post       String
-  startTime  DateTime? @map("start_time")
-  endTime    DateTime? @map("end_time")
+  startTime  String @map("start_time")
+  untilNow   Boolean?   @map("until_now")
+  endTime    String? @map("end_time")
   experience String?
 
   resumeId Int    @map("resume_id")
   resume   Resume @relation(fields: [resumeId], references: [id])
 
-  @@map("experience_resume")
+  @@map("resume_experience")
 }
 
 // ЛОГИКА СВЯЗИ С ПРОФЕССИЯМИ: одно резюме может быть создано на одну профессию(один ко многим, так как не может быть уникальным)
@@ -113,7 +114,7 @@ model Resume {
   vacancy   Responses[]
   employer  Employer[] // избранные резюме, работодатели, которые добавили резюме в избранное
 
-  @@map("Resumes")
+  @@map("resumes")
 }
 
 //------------- Работодатели и вакансии -------------
@@ -136,7 +137,7 @@ model Employer {
 
   resume Resume[] // избранные резюме, которые добавлены работодателями
 
-  @@map("Employers")
+  @@map("employers")
 }
 
 // ЛОГИКА СВЯЗИ С РАБОТОДАТЕЛЯМИ: один работодатель может создать несколько вакансий(один ко многим)
@@ -169,7 +170,7 @@ model Vacancy {
   // date_start      String // для подписки, мб надо мб нет, хз пока как сделать
   // date_end        String
 
-  @@map("Vacansies")
+  @@map("vacansies")
 }
 
 // явный тип связи многие ко многим(по идее не нужен, но пусть пока будет)
@@ -196,7 +197,7 @@ model Profession {
 
   vacancy Vacancy[]
 
-  @@map("Professions")
+  @@map("professions")
 }
 
 // ЛОГИКА СВЯЗИ: на одну вакансию может откликнуться несколько соискателей, нескольким соискателям может понравиться одна вакансия(многие ко многим). Определили явно, так как есть дополнительное поле id(нужно оно или нет, пока хз)

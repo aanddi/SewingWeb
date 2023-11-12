@@ -58,3 +58,8 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; 
 }
+
+textarea, input {
+	font-family: inherit;
+	font-size: inherit;
+}

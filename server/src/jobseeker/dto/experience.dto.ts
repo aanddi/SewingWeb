@@ -1,6 +1,9 @@
-export interface IWorkExperience {
+import { IsString } from 'class-validator'
+
+export class ExperienceDto {
   id: number
   resumeId: number
+  @IsString()
   city: string
   company: string
   post: string

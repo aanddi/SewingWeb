@@ -1,46 +1,41 @@
 @import '@/assets/styles/_variables.scss';
 
-
 .aboutInfo {
-
   margin-top: 30px;
 
-  &__block {
-    margin-top: 20px;
-    display: flex;
-    flex: 1 1 100%;
+  &__titleModal {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &__formContent {
+    margin-bottom: 15%;
+    padding: 10px 30px 30px 40px;
+
+    & > *:not(:last-child) {
+      margin-bottom: 30px;
+    }
   }
 
   &__textarea {
-  
-    min-height: 200px;
-
+    height: auto;
+    min-height: 400px;
+    min-width: 100%;
     border-radius: 8px;
     border: 1px solid $grey;
     font-size: 14px;
     background-color: #fff;
-    padding: 15px;
+    padding: 15px 0 15px 15px;
     margin: 0;
     box-shadow: none;
+    line-height: 150%;
+    font-size: 15px;
 
     &:focus {
       border: 1px solid $blue;
     }
-
   }
 
-  &__error {
-    display: block;
-    color: red;
-    margin-top: 7px;
-    font-size: 12px;
-  }
-
-  &__required {
-    color: red;
-  }
-
-  
   &__footerError {
     display: block;
     color: red;
@@ -69,29 +64,11 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-    display:flex;
+    display: flex;
     align-items: center;
     gap: 20px;
     background-color: #fff;
     padding: 30px 30px 30px 40px;
-    box-shadow: 0 -10px 25px rgba(46,59,99,.08);
-  }
-
-  &__formContent {
-    margin-bottom: 15%;
-    padding: 10px 30px 30px 40px;
-
-    & > *:not(:last-child) {
-      margin-bottom: 30px;
-    }
-  }
-
-  &__form {
-    margin-top: 30px;
-  }
-
-  &__titleModal {
-    font-size: 24px;
-    font-weight: 700;
+    box-shadow: 0 -10px 25px rgba(46, 59, 99, 0.08);
   }
 }

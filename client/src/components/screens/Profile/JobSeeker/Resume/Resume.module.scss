@@ -1,13 +1,7 @@
 @import '@/assets/styles/_variables.scss';
 
 .resume {
-  margin-top: 100px;
-  
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  margin: 100px 0;
 
   &__wrapper {
     display: flex;
@@ -15,30 +9,25 @@
     margin-top: 50px;
   }
 
-  &__photo {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-
-    span {
-      display: block;
-      margin-top: 10px;
-      color: $grey;
-    }
-  }
-
   &__content {
     flex: 1 1 100%;
   }
 
+  &__photo {
+    img {
+      border-radius: 100px;
+      box-shadow: 2px 2px 10px #9c9c9c;
+    }
+  }
+
   &__add {
     margin-top: 15px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 5px;
     color: $pink;
     cursor: pointer;
-
+    user-select: none;
     &:hover {
       color: $pinkHover;
     }
@@ -50,11 +39,9 @@
   }
 
   &__info {
-
   }
 
   &__infoBlock {
-
   }
 
   &__name {
@@ -76,9 +63,7 @@
   }
 
   &__fullInfo {
-    margin-top: 85px;
-    margin-bottom: 85px;
-
+    margin: 70px 0;
   }
 
   &__fullWrapper {
@@ -89,12 +74,11 @@
   &__fullBlock {
     display: flex;
     align-items: center;
-
   }
 
   &__label {
     width: 150px;
-    color: $grey
+    color: $grey;
   }
 
   &__fullLeft {
@@ -109,23 +93,107 @@
     }
   }
 
-
-
   &__body {
     display: flex;
-    gap: 20px;
-
+    flex-direction: column;
+    gap: 60px;
   }
 
   &__bodyBlock {
-    margin-bottom: 100px;
+  }
+
+  &__blockList {
+    & > *:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__blockItem {
+    & > * {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__blockContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__edit {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: $blue;
+    cursor: pointer;
+    margin-top: 10px;
+
+    &:hover {
+      color: $blueHover;
+    }
+  }
+
+  /*============================================*/
+
+  &__experiencePost {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  &__experienceTime {
+    color: $grey;
+  }
+
+  &__experienceBlock {
+    display: flex;
+    align-items: center;
+
+
+    & > *:first-child {
+      width: 200px;
+    }
+  }
+
+
+
+  /*============================================*/
+  &__education {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__educationBlock {
+    display: flex;
+    align-items: center;
+
+    & > *:first-child {
+      width: 200px;
+    }
+  }
+
+  &__educationYear {
+    color: $grey;
+  }
+
+  &__educationLevel {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  /*============================================*/
+
+  &__textAbout {
+    text-align: justify;
+    line-height: 160%;
+    font-size: 15px;
   }
 
   &__blockTitle {
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: 700;
+    font-size: 24px;
     color: $darkBlue;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   &__blockSubTitle {
@@ -134,18 +202,15 @@
     line-height: 150%;
   }
 
-
-
   &__sidebarWrapper {
-    box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     padding: 20px 50px;
     margin-bottom: 40px;
-
- 
   }
 
-  &__sidebar {}
+  &__sidebar {
+  }
 
   &__barBlock {
     display: block;
@@ -167,8 +232,4 @@
       line-height: 120%;
     }
   }
-
-
-
 }
-

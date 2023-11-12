@@ -1,26 +1,11 @@
 @import '@/assets/styles/_variables.scss';
 
-
 .workExperience {
-
   margin-top: 30px;
-  
-  &__block {
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
 
-  &__content {
-    display: flex;
-    align-items: center;
-    flex: 1 1 100%;
-  }
-
-  &__label {
-    width: 200px;
-    display: flex;
-    gap: 3px;
+  &__titleModal {
+    font-size: 24px;
+    font-weight: 700;
   }
 
   &__error {
@@ -34,86 +19,69 @@
     color: red;
   }
 
-  &__rub {
-    margin-left: 10px;
-  }
-
-  &__dob {
-    display: flex;
-    align-items: center;
-  }
-
   &__select {
     flex: 1 1 100%;
 
-    & >* {
+    & > * {
       flex: 1 1 100%;
     }
   }
 
-  &__date {
-    width: 100%;
-
-    & > *:not(:last-child) {
-      padding-right: 10px;
-    }
-  }
-
-  &__dateWrapper {
+  &__dateBlock {
     display: flex;
     align-items: center;
-    gap: 15px;
+
   }
 
-  &__input {
+  &__dateLabel {
     display: flex;
+    gap: 3px;
+    width: 250px;
+  }
 
-    &_day {
-      flex: 1 1 20%;
-    }
+  &__required {
+    color: red;
+  }
 
-    &_month {
-      flex: 0 0 60%;
-
-      & >* {
-        flex: 0 0 100%;
-      }
-    }
-
-    &_year {
-      flex: 1 1 20%;
-    }
-    
+  &__inputs {
+    display: flex;
+    gap: 15px;
+    width: 100%;
 
     input {
-      width: 100%;
-      padding: 8px 0 8px 10px;
-      border-radius: 5px;
-      border: 1px solid #C2BFBF;
-  
-      &:hover {
-        cursor: text;
-      }
-  
-      &:focus {
-        border: 1px solid $blue !important;
-      }
-
-      &::placeholder {
-        color: $grey;
-      }
+      border: 1px solid $grey;
+      border-radius: 6px;
+      width: 100px;
+      padding: 5px;
     }
   }
 
-  &__radio {
-    margin-right: 15px;
-
+  &__block {
   }
 
-  &__radioInput {
-    transform:scale(1.3);
-    margin-right: 6px;
-    cursor: pointer;
+  &__label {
+    margin-bottom: 15px;
+  }
+
+  &__textarea {
+    textarea {
+      height: auto;
+      min-height: 200px;
+      min-width: 100%;
+      border-radius: 8px;
+      border: 1px solid $grey;
+      font-size: 14px;
+      background-color: #fff;
+      padding: 15px 0 15px 15px;
+      margin: 0;
+      box-shadow: none;
+      line-height: 150%;
+      font-size: 15px;
+
+      &:focus {
+        border: 1px solid $blue;
+      }
+    }
   }
 
   &__footerError {
@@ -144,12 +112,12 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-    display:flex;
+    display: flex;
     align-items: center;
     gap: 20px;
     background-color: #fff;
     padding: 30px 30px 30px 40px;
-    box-shadow: 0 -10px 25px rgba(46,59,99,.08);
+    box-shadow: 0 -10px 25px rgba(46, 59, 99, 0.08);
   }
 
   &__formContent {
@@ -159,14 +127,5 @@
     & > *:not(:last-child) {
       margin-bottom: 30px;
     }
-  }
-
-  &__form {
-    margin-top: 30px;
-  }
-
-  &__titleModal {
-    font-size: 24px;
-    font-weight: 700;
   }
 }

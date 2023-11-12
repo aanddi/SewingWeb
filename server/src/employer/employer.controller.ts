@@ -1,14 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Param,
-  Post,
-  Query,
-  UsePipes,
-  ValidationPipe
-} from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Param, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common'
 import { EmployerService } from './employer.service'
 import { CreateDto } from './dto/create.dto'
 import { SortEmloyer } from './dto/sort.dto'

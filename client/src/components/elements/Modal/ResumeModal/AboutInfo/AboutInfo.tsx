@@ -37,7 +37,7 @@ const AboutInfo: FC<Props> = ({ about, active, setActive }) => {
   })
 
   useEffect(() => {
-    if (about !== undefined) {
+    if (about) {
       setValue('about', about)
     }
   }, [about])
@@ -53,7 +53,9 @@ const AboutInfo: FC<Props> = ({ about, active, setActive }) => {
   }
 
   const handleCancel = () => {
-    reset()
+    reset({
+      about: about
+    })
     setActive(false)
   }
 
@@ -61,8 +63,7 @@ const AboutInfo: FC<Props> = ({ about, active, setActive }) => {
     <ResumeModal active={active} setActive={setActive}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.aboutInfo}>
         <div className={styles.aboutInfo__formContent}>
-          <h2 className={styles.aboutInfo__titleModal}>Информацию о себе</h2>
-          <p>расскажите о ваших достоинствах, ....</p>
+          <h2 className={styles.aboutInfo__titleModal}>Информация о себе</h2>
           <div className={styles.aboutInfo__block}>
             <textarea className={styles.aboutInfo__textarea} {...register('about')} />
           </div>

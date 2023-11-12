@@ -1,9 +1,9 @@
-import { useQueryClient } from '@tanstack/react-query'
-import { Dispatch, FC, SetStateAction, useState } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 
-import styles from './Education.module.scss'
+import styles from './EditEdication.module.scss'
 
 import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeModal'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
@@ -11,16 +11,18 @@ import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 import { IEducation } from '@/core/types/education.interface'
 
 import { validNumber } from '@/core/helpers/valid-field'
+import { EducationType } from '@/core/services/jobseeker/jobseeker.helper'
 import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { educationLevel } from '@/core/utils/select-resume-data'
 
 interface Props {
-  resumeId: number | undefined
+  edication: any
   active: boolean
   setActive: Dispatch<SetStateAction<boolean>>
 }
 
-const Education: FC<Props> = ({ resumeId, active, setActive }) => {
+const EditEducation: FC<Props> = ({ edication, active, setActive }) => {
+  // ========================================================
   const queryClient = useQueryClient()
 
   // ========== REACT HOOK FORM =============================
@@ -39,12 +41,20 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
     mode: 'onChange'
   })
 
+  useEffect(() => {
+    if (edication) {
+      setValue('educationLevel', edication.educationLevel)
+      setValue('institutionName', edication.institutionName)
+      setValue('specialization', edication.specialization)
+      setValue('yearEnding', edication.yearEnding)
+    }
+  }, [edication, setValue])
+
   const onSubmit: SubmitHandler<IEducation> = async data => {
     try {
-      const respone = await jobseekerService.createEducation(resumeId, data)
+      const respone = await jobseekerService.updateEducation(edication.id, data)
       queryClient.invalidateQueries({ queryKey: ['education'] })
       setActive(false)
-      reset()
     } catch (error: any) {
       setErrorUpdate(error.response.data.message)
     }
@@ -54,18 +64,18 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
     reset()
     setActive(false)
   }
-
+  // ========================================================
   return (
     <ResumeModal active={active} setActive={setActive}>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.education}>
-        <div className={styles.education__formContent}>
-          <h2 className={styles.education__titleModal}>Добавить место учебы</h2>
-          <div className={styles.education__block}>
-            <div className={styles.education__label}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.editModal}>
+        <div className={styles.editModal__formContent}>
+          <h2 className={styles.editModal__titleModal}>Редактировать информацию</h2>
+          <div className={styles.editModal__block}>
+            <div className={styles.editModal__label}>
               <span>Уровень образования</span>
-              <span className={styles.education__required}>*</span>
+              <span className={styles.editModal__required}>*</span>
             </div>
-            <div className={styles.education__select}>
+            <div className={styles.editModal__select}>
               <Controller
                 name="educationLevel"
                 control={control}
@@ -76,10 +86,11 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
                     options={educationLevel ? educationLevel : []}
                     isMulti={false}
                     isSearchable={false}
+                    value={educationLevel ? educationLevel.find(option => option.value === field.value) : null}
                     placeholder=""
                     onChange={selectedOption => {
                       if (selectedOption) {
-                        field.onChange(selectedOption.value) // Сохраняем только значение value
+                        field.onChange(selectedOption.value)
                       }
                     }}
                     styles={{
@@ -91,7 +102,7 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
                   />
                 )}
               />
-              {errors.educationLevel && <span className={styles.education__error}>Укажите уровень образования</span>}
+              {errors.educationLevel && <span className={styles.editModal__error}>Укажите уровень образования</span>}
             </div>
           </div>
           <FieldProfile
@@ -126,16 +137,28 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
             error={errors.yearEnding?.message}
           />
         </div>
-        <div className={styles.education__modalFooter}>
-          <button className={styles.education__saveButton}>Сохранить</button>
-          <div className={styles.education__resetButton} onClick={handleCancel}>
-            Отменить
+        <div className={styles.editModal__modalFooter}>
+          <div className={styles.editModal__footerWrapper}>
+            <button className={styles.editModal__saveButton}>Сохранить</button>
+            <div className={styles.editModal__resetButton} onClick={handleCancel}>
+              Отменить
+            </div>
+            <span className={styles.editModal__footerError}>{errorUpdate}</span>
           </div>
-          <span className={styles.education__footerError}>{errorUpdate}</span>
+          <div
+            className={styles.editModal__deleteButton}
+            onClick={async () => {
+              const respone = await jobseekerService.deleteEducation(edication.id)
+              queryClient.invalidateQueries({ queryKey: ['education'] })
+              setActive(false)
+            }}
+          >
+            Удалить
+          </div>
         </div>
       </form>
     </ResumeModal>
   )
 }
 
-export default Education
+export default EditEducation
