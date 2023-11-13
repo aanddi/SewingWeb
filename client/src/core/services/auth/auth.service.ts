@@ -26,7 +26,7 @@ export const AuthService = {
   // метод для регистрации в системе
   async registration(data: IRegister) {
     const response = await instance<IAuthResponse>({
-      url: `/auth/register`,
+      url: `auth/register`,
       method: 'POST',
       data
     })
@@ -49,7 +49,7 @@ export const AuthService = {
     const refreshToken = Cookies.get('refreshToken')
 
     const response = await axios.post<string, { data: IAuthResponse }>(
-      process.env.SERVER_URL + '/auth/login/access-token',
+      process.env.SERVER_URL + 'auth/login/access-token',
       { refreshToken },
       {
         headers: getContentType()

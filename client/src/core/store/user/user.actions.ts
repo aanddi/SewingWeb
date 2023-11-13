@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import { IAuthResponse, ILogin, IRegister } from './user.interface'
 
-import { removeFromStorage } from '@/core/services/auth/auth.helper'
+import { removeFromStorage, saveToStorage } from '@/core/services/auth/auth.helper'
 import { AuthService } from '@/core/services/auth/auth.service'
 
 import { errorCatch } from '@/api/api.helper'
@@ -30,6 +30,7 @@ export const registration = createAsyncThunk<IAuthResponse, IRegister, { rejectV
   async (data, { rejectWithValue }) => {
     try {
       const response = await AuthService.registration(data)
+      if (response.accessToken) saveToStorage(response)
       return response
     } catch (error: any) {
       return rejectWithValue(error.response.data.message)

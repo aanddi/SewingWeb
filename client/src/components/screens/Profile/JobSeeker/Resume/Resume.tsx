@@ -200,7 +200,7 @@ const Resume: FC = () => {
                                 <div className={styles.resume__experienceTime}>
                                   {elem.startTime} - {elem.untilNow ? 'настоящее время' : elem.endTime}
                                 </div>
-                                <p>{elem.experience}</p>
+                                <p className={styles.resume__experienceText}>{elem.experience}</p>
                               </div>
                               <div className={styles.resume__edit}>
                                 <BiSolidEditAlt size={15} style={{ color: '#3490DF' }} />

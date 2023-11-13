@@ -148,13 +148,15 @@
     display: flex;
     align-items: center;
 
-
     & > *:first-child {
       width: 200px;
     }
   }
 
-
+  &__experienceText {
+    line-height: 160%;
+    font-size: 15px;
+  }
 
   /*============================================*/
   &__education {

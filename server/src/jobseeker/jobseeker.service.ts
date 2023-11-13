@@ -56,7 +56,7 @@ export class JobseekerService {
     const jobseeker = await this.getJobseeker(id)
     const update = await this.prisma.resume.update({
       where: {
-        id: jobseeker.resumeId
+        id: +jobseeker.resumeId
       },
       data: {
         about: dto.about
