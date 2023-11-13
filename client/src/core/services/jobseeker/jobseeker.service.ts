@@ -1,4 +1,5 @@
 import { IResume } from '@/core/types/resume.interface'
+import { IWorkExperience } from '@/core/types/work-experience.interface'
 
 import { EducationType, UpdateAbout } from './jobseeker.helper'
 import { instance } from '@/api/api.interceptor'
@@ -91,5 +92,43 @@ export const jobseekerService = {
     })
 
     return response.data
-  }
+  },
+
+  async createExperience(id: number | undefined, data: IWorkExperience) {
+    const response = await instance({
+      url: `jobseeker/createExperience/${id}`,
+      method: 'POST',
+      data
+    })
+
+    return response.data
+  },
+
+  async updateExperience(id: number | undefined, data: IWorkExperience) {
+    const response = await instance({
+      url: `jobseeker/updateExperience/${id}`,
+      method: 'PUT',
+      data
+    })
+
+    return response.data
+  },
+
+  async getExperienceById(id: number | undefined) {
+    const response = await instance({
+      url: `jobseeker/getExperienceById/${id}`,
+      method: 'GET'
+    })
+
+    return response.data
+  },
+
+  async deleteExperience(id: number | undefined) {
+    const response = await instance({
+      url: `jobseeker/deleteExperience/${id}`,
+      method: 'DELETE'
+    })
+
+    return response.data
+  },
 }

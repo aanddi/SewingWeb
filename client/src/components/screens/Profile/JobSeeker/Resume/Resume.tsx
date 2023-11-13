@@ -7,6 +7,7 @@ import styles from './Resume.module.scss'
 
 import AboutInfo from '@/components/elements/Modal/ResumeModal/AboutInfo/AboutInfo'
 import EditEducation from '@/components/elements/Modal/ResumeModal/EditEdication/EditEdication'
+import EditWorkexperience from '@/components/elements/Modal/ResumeModal/EditWorkExperience/EditWorkExperience'
 import Education from '@/components/elements/Modal/ResumeModal/Education/Education'
 import PersonalInfo from '@/components/elements/Modal/ResumeModal/PersonalInfo/PersonalInfo'
 import WorkExperience from '@/components/elements/Modal/ResumeModal/WorkExperience/WorkExperience'
@@ -34,9 +35,11 @@ const Resume: FC = () => {
   const [activeModal3, setActiveModal3] = useState(false)
   const [activeModal4, setActiveModal4] = useState(false)
 
-  const [edicationQQQ, setEdicationQQQ] = useState(null)
-  const [edicationId, setEdicationId] = useState<number | undefined>(undefined)
+  const [edicationItem, setEdicationItem] = useState(null)
+  const [experienceItem, setExperienceItem] = useState(null)
+
   const [activeModal5, setActiveModal5] = useState(false)
+  const [activeModal6, setActiveModal6] = useState(false)
 
   const { user } = useAuth()
   const userId = user?.id
@@ -73,7 +76,7 @@ const Resume: FC = () => {
     enabled: !!resumeId
   })
 
-  console.log(experience)
+
 
   return (
     <SiteLayout background={'#fff'}>
@@ -156,11 +159,11 @@ const Resume: FC = () => {
                             {resume?.workTimetable ? <span>{resume?.workTimetable}</span> : <span>не указано</span>}
                           </div>
                         </div>
-                      </div>
+                      </div>  
                     </div>
 
-                    <div className={styles.resume__add} onClick={() => setActiveModal1(!activeModal1)}>
-                      <BiSolidEditAlt />
+                    <div className={styles.resume__edit} onClick={() => setActiveModal1(!activeModal1)}>
+                      <BiSolidEditAlt size={15} style={{ color: '#3490DF' }}/>
                       <span>Дополнить</span>
                     </div>
                   </div>
@@ -204,7 +207,15 @@ const Resume: FC = () => {
                               </div>
                               <div className={styles.resume__edit}>
                                 <BiSolidEditAlt size={15} style={{ color: '#3490DF' }} />
-                                <div className="">Редактировать</div>
+                                <div
+                                  onClick={async () => {
+                                    const response = await jobseekerService.getExperienceById(elem.id)
+                                    setExperienceItem(response)
+                                    setActiveModal6(true)
+                                  }}
+                                >
+                                  Редактировать
+                                </div>
                               </div>
                             </div>
                           )
@@ -246,7 +257,7 @@ const Resume: FC = () => {
                                   className=""
                                   onClick={async () => {
                                     const response = await jobseekerService.getEducationById(elem.id)
-                                    setEdicationQQQ(response)
+                                    setEdicationItem(response)
                                     setActiveModal5(true)
                                   }}
                                 >
@@ -302,7 +313,8 @@ const Resume: FC = () => {
         <Education resumeId={resume?.id} active={activeModal3} setActive={setActiveModal3} />
         <AboutInfo about={resume?.about} active={activeModal4} setActive={setActiveModal4} />
 
-        <EditEducation edication={edicationQQQ} active={activeModal5} setActive={setActiveModal5} />
+        <EditEducation edication={edicationItem} active={activeModal5} setActive={setActiveModal5} />
+        <EditWorkexperience experience={experienceItem} active={activeModal6} setActive={setActiveModal6} />
       </div>
     </SiteLayout>
   )

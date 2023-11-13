@@ -79,13 +79,13 @@ export class JobseekerController {
   //======= WorkExperience =================================================
 
   @Get('getAllExperienceById/:id') // id resume
-  @Auth()
+  // @Auth()
   async getAllExperienceById(@Param('id') id: number) {
     return this.jobseekerService.getAllExperienceById(id)
   }
 
   @Get('getExperienceById/:id') // id experience
-  @Auth()
+  // @Auth()
   async getExperienceById(@Param('id') id: number) {
     return this.jobseekerService.getExperienceById(id)
   }
@@ -93,20 +93,20 @@ export class JobseekerController {
   @UsePipes(new ValidationPipe())
   @Post('createExperience/:id') // id resume
   @HttpCode(200)
-  @Auth()
+  // @Auth()
   async createExperience(@Param('id') id: number, @Body() dto: ExperienceDto) {
     return this.jobseekerService.createExperience(id, dto)
   }
 
   @UsePipes(new ValidationPipe())
   @Put('updateExperience/:id') // id experience
-  @Auth()
+  // @Auth()
   async updateExperience(@Param('id') id: number, @Body() dto: ExperienceDto) {
     return this.jobseekerService.updateExperience(id, dto)
   }
 
   @Delete('deleteExperience/:id') // id experience
-  @Auth()
+  // @Auth()
   async deleteExperience(@Param('id') id: number) {
     return this.jobseekerService.deleteExperience(id)
   }

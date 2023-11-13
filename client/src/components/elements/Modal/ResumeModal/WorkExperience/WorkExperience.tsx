@@ -1,4 +1,5 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
+import { Dispatch, FC, SetStateAction, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 
@@ -18,28 +19,24 @@ interface Props {
 }
 
 const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
+  const queryClient = useQueryClient()
+
   const [monthStart, setMonthStart] = useState<string>('')
   const [yearStart, setYearStart] = useState<string>('')
-  const [combineStart, setCombineStart] = useState<string>('')
-
-  useEffect(() => {
-    setCombineStart(`${monthStart} ${yearStart}`)
-  }, [monthStart, monthStart])
 
   const [monthEnd, setMonthEnd] = useState<string>('')
   const [yearEnd, setYearEnd] = useState<string>('')
-  const [combineEnd, setCombineEnd] = useState<string>('')
 
-  useEffect(() => {
-    setCombineEnd(`${monthEnd} ${yearEnd}`)
-  }, [monthEnd, yearEnd])
+  const [untilNow, setuUntilNow] = useState(false)
 
   const handleYearStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYearStart(e.target.value)
+    setValue('startTime', `${monthStart} ${e.target.value}`)
   }
 
   const handleYearEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYearEnd(e.target.value)
+    setValue('endTime', `${monthEnd} ${e.target.value}`)
   }
 
   // ========== REACT HOOK FORM =============================
@@ -60,6 +57,13 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
 
   const onSubmit: SubmitHandler<IWorkExperience> = async data => {
     console.log(data)
+    // try {
+    //   const response = await jobseekerService.createExperience(resumeId, data)
+    //   queryClient.invalidateQueries({ queryKey: ['experience'] })
+    //   setActive(false)
+    // } catch (error: any) {
+    //   setErrorUpdate(error.response.data.message)
+    // }
   }
 
   const handleCancel = () => {
@@ -86,7 +90,7 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
               required: 'Укажите название компании'
             })}
             type={'text'}
-            title={'Город'}
+            title={'Компания'}
             star={true}
             error={errors.company?.message}
           />
@@ -106,40 +110,43 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
               <span className={styles.workExperience__required}>*</span>
             </div>
             <div className={styles.workExperience__inputs}>
-              <Controller
-                name="startTime"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <>
-                    <Select
-                      classNamePrefix="custom-select"
-                      options={mouth ? mouth : []}
-                      isMulti={false}
-                      isSearchable={false}
-                      placeholder="Месяц"
-                      onChange={selectedOption => {
-                        if (selectedOption) {
-                          field.onChange(`${selectedOption.value}.${yearStart}`)
-                        }
-                      }}
-                      styles={{
-                        control: (provided, state) => ({
-                          ...provided,
-                          borderColor: errors.startTime ? '#EB0000' : provided.borderColor
-                        })
-                      }}
-                    />
-                    <input
-                      type="number"
-                      placeholder="Год"
-                      onChange={e => handleYearStartChange(e)}
-                      style={errors.startTime ? { borderColor: 'red' } : undefined}
-                    />
-                    {errors.startTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
-                  </>
-                )}
-              />
+              <div className={styles.workExperience__input}>
+                <Controller
+                  name="startTime"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <>
+                      <Select
+                        classNamePrefix="custom-select"
+                        options={mouth ? mouth : []}
+                        isMulti={false}
+                        isSearchable={false}
+                        placeholder="Месяц"
+                        onChange={selectedOption => {
+                          if (selectedOption) {
+                            setMonthStart(selectedOption.label)
+                            field.onChange(`${selectedOption.label} ${yearStart}`)
+                          }
+                        }}
+                        styles={{
+                          control: (provided, state) => ({
+                            ...provided,
+                            borderColor: errors.startTime ? '#EB0000' : provided.borderColor
+                          })
+                        }}
+                      />
+                      <input
+                        type="number"
+                        placeholder="Год"
+                        onChange={e => handleYearStartChange(e)}
+                        style={errors.startTime ? { borderColor: 'red' } : undefined}
+                      />
+                      {errors.startTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
+                    </>
+                  )}
+                />
+              </div>
             </div>
           </div>
 
@@ -149,40 +156,56 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
               <span className={styles.workExperience__required}>*</span>
             </div>
             <div className={styles.workExperience__inputs}>
-              <Controller
-                name="endTime"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <>
-                    <Select
-                      classNamePrefix="custom-select"
-                      options={mouth ? mouth : []}
-                      isMulti={false}
-                      isSearchable={false}
-                      placeholder="Месяц"
-                      onChange={selectedOption => {
-                        if (selectedOption) {
-                          field.onChange(`${selectedOption.value}.${yearEnd}`)
-                        }
-                      }}
-                      styles={{
-                        control: (provided, state) => ({
-                          ...provided,
-                          borderColor: errors.endTime ? '#EB0000' : provided.borderColor
-                        })
-                      }}
-                    />
-                    <input
-                      type="number"
-                      placeholder="Год"
-                      onChange={e => handleYearEndChange(e)}
-                      style={errors.endTime ? { borderColor: 'red' } : undefined}
-                    />
-                    {errors.endTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
-                  </>
-                )}
-              />
+              <div className={styles.workExperience__input}>
+                <Controller
+                  name="endTime"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <>
+                      <Select
+                        classNamePrefix="custom-select"
+                        options={mouth ? mouth : []}
+                        isMulti={false}
+                        isSearchable={false}
+                        value={untilNow ? '' : ''}
+                        placeholder="Месяц"
+                        isDisabled={untilNow}
+                        onChange={selectedOption => {
+                          if (selectedOption) {
+                            setMonthEnd(selectedOption.label)
+                            field.onChange(`${selectedOption.label} ${yearEnd}`)
+                          }
+                        }}
+                        styles={{
+                          control: (provided, state) => ({
+                            ...provided,
+                            borderColor: errors.endTime ? '#EB0000' : provided.borderColor
+                          })
+                        }}
+                      />
+                      <input
+                        type="number"
+                        placeholder="Год"
+                        onChange={e => handleYearEndChange(e)}
+                        style={errors.endTime ? { borderColor: 'red' } : undefined}
+                        disabled={untilNow}
+                        value={untilNow ? '' : yearEnd}
+                      />
+                      {errors.endTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
+                    </>
+                  )}
+                />
+              </div>
+              <div className={styles.workExperience__checkbox}>
+                <input
+                  {...register('untilNow')}
+                  type="checkbox"
+                  checked={untilNow}
+                  onChange={() => setuUntilNow(!untilNow)}
+                />
+                <span>По настоящее время</span>
+              </div>
             </div>
           </div>
 

@@ -20,19 +20,6 @@
     }
   }
 
-  &__add {
-    margin-top: 15px;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    color: $pink;
-    cursor: pointer;
-    user-select: none;
-    &:hover {
-      color: $pinkHover;
-    }
-  }
-
   &__mainInfo {
     display: flex;
     justify-content: space-between;
@@ -127,9 +114,24 @@
     color: $blue;
     cursor: pointer;
     margin-top: 10px;
+    font-weight: 500;
 
     &:hover {
       color: $blueHover;
+    }
+  }
+
+  &__add {
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: $pink;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+      color: $pinkHover;
     }
   }
 
