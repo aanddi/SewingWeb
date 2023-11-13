@@ -53,9 +53,8 @@ export class AuthService {
       }
     })
 
-    // создание профиля
+    // создание профиля соискателя
     if (user.roleId == 1) this.createJobseeker(user)
-    else this.createEmployer(user)
 
     // генерация новых токенов
     const tokens = await this.issueTokens(user.id)
@@ -172,9 +171,6 @@ export class AuthService {
       ...createResume
     }
   }
-
-  // создание
-  private async createEmployer(user: User) {}
 
   // генерация токенов
   private async issueTokens(userId: number) {

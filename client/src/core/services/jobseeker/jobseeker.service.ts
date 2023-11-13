@@ -130,5 +130,5 @@ export const jobseekerService = {
     })
 
     return response.data
-  },
+  }
 }

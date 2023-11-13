@@ -68,10 +68,6 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
     setDay(e.target.value)
   }
 
-  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setYear(e.target.value)
-  }
-
   // ========== REACT HOOK FORM =============================
 
   // save error server
@@ -116,13 +112,27 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
       const response = await jobseekerService.updateResumeByIdUser(user?.id, data)
       queryClient.invalidateQueries({ queryKey: ['resume'] })
       setActive(false)
+      reset()
     } catch (error: any) {
       setErrorUpdate(error.response.data.message)
     }
   }
 
   const handleCancel = () => {
-    reset()
+    reset({
+      name: resume?.name,
+      surname: resume?.surname,
+      patronymic: resume?.patronymic,
+      profession: resume?.profession,
+      salary: resume?.salary,
+      DOB: resume?.DOB,
+      phoneNumber: resume?.phoneNumber,
+      citizenship: resume?.citizenship,
+      city: resume?.city,
+      email: resume?.email,
+      languages: resume?.languages,
+      workTimetable: resume?.workTimetable
+    })
     setActive(false)
   }
 
@@ -311,7 +321,10 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
                         type="number"
                         placeholder="Год"
                         value={year}
-                        onChange={handleYearChange}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          setYear(e.target.value)
+                          field.onChange(`${day}.${month}.${e.target.value}`)
+                        }}
                         style={errors.DOB ? { borderColor: '#EB0000' } : undefined}
                       />
                     </div>

@@ -8,19 +8,6 @@
     font-weight: 700;
   }
 
-  &__formContent {
-    margin-bottom: 15%;
-    padding: 10px 30px 30px 40px;
-
-    & > *:not(:last-child) {
-      margin-bottom: 30px;
-    }
-  }
-
-  &__label {
-    margin-bottom: 15px;
-  }
-
   &__error {
     display: block;
     color: red;
@@ -57,6 +44,7 @@
 
   &__inputs {
     display: flex;
+    flex-direction: column;
     gap: 15px;
     width: 100%;
 
@@ -66,6 +54,25 @@
       width: 100px;
       padding: 5px;
     }
+  }
+
+  &__input {
+    display: flex;
+    gap: 15px;
+  }
+
+  &__checkbox {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    input {
+      width: auto;
+      transform: scale(1.2);
+    }
+  }
+
+  &__block {
   }
 
   &__label {
@@ -119,26 +126,22 @@
 
   &__modalFooter {
     position: fixed;
-    width: 750px;
+    width: 100%;
     bottom: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 20px;
     background-color: #fff;
     padding: 30px 30px 30px 40px;
     box-shadow: 0 -10px 25px rgba(46, 59, 99, 0.08);
   }
 
-  &__footerWrapper {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
+  &__formContent {
+    margin-bottom: 15%;
+    padding: 10px 30px 30px 40px;
 
-  &__deleteButton {
-    color: red;
-    cursor: pointer;
-    margin-right: 80px;
+    & > *:not(:last-child) {
+      margin-bottom: 30px;
+    }
   }
 }

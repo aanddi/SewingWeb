@@ -18,7 +18,7 @@ const HeaderSite: FC = () => {
   const { user } = useAuth()
 
   return (
-    <header className={styles.header}>
+    <header id="header" className={styles.header}>
       <div className="header__container">
         <div className={styles.header__content}>
           <div className={styles.header__left}>

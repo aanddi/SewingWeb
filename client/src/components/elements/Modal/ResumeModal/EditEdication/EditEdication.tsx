@@ -55,6 +55,7 @@ const EditEducation: FC<Props> = ({ edication, active, setActive }) => {
       const respone = await jobseekerService.updateEducation(edication.id, data)
       queryClient.invalidateQueries({ queryKey: ['education'] })
       setActive(false)
+      reset()
     } catch (error: any) {
       setErrorUpdate(error.response.data.message)
     }

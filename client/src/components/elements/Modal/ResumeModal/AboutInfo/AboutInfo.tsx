@@ -47,6 +47,7 @@ const AboutInfo: FC<Props> = ({ about, active, setActive }) => {
       const updateAbout = await jobseekerService.updateAboutResume(user?.id, data)
       queryClient.invalidateQueries({ queryKey: ['resume'] })
       setActive(false)
+      reset()
     } catch (error: any) {
       setErrorUpdate(error.response.data.message)
     }

@@ -1,5 +1,4 @@
 import { GetServerSideProps, NextPage } from 'next'
-import { useEffect, useState } from 'react'
 
 import Meta from '@/components/Meta/Meta'
 import Professions from '@/components/screens/Site/Professions/Professions'

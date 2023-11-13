@@ -186,7 +186,7 @@ export class JobseekerService {
         id: +id
       }
     })
-    if(!experience) throw new Error('dsfsdfsf')
+    if (!experience) throw new Error('dsfsdfsf')
     const updateExperience = await this.prisma.workExperience.update({
       where: {
         id: +experience.id

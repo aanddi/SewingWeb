@@ -20,21 +20,13 @@ interface Props {
 }
 
 const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
+  // ========== DATE =============================
   const [monthStart, setMonthStart] = useState<string>('')
   const [yearStart, setYearStart] = useState<string>('')
-  const [combineStart, setCombineStart] = useState<string>('')
-
-  useEffect(() => {
-    setCombineStart(`${monthStart} ${yearStart}`)
-  }, [monthStart, monthStart])
-
   const [monthEnd, setMonthEnd] = useState<string>('')
   const [yearEnd, setYearEnd] = useState<string>('')
-  const [combineEnd, setCombineEnd] = useState<string>('')
 
-  useEffect(() => {
-    setCombineEnd(`${monthEnd} ${yearEnd}`)
-  }, [monthEnd, yearEnd])
+  const [untilNow, setUntilNow] = useState(false)
 
   const handleYearStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYearStart(e.target.value)
@@ -64,12 +56,20 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
 
   useEffect(() => {
     if (experience) {
+      const [startMonth, startYear] = experience.startTime.split(' ')
+      const [endMonth, endYear] = experience.endTime.split(' ')
+
+      setMonthStart(startMonth)
+      setYearStart(startYear)
+      setMonthEnd(endMonth)
+      setYearEnd(endYear)
+
       setValue('city', experience.city)
       setValue('company', experience.company)
       setValue('post', experience.post)
-      setValue('startTime', experience.startTime)
+      setValue('startTime', `${startMonth} ${startYear}`)
       setValue('untilNow', experience.untilNow)
-      setValue('endTime', experience.endTime)
+      setValue('endTime', `${endMonth} ${endYear}`)
       setValue('experience', experience.experience)
     }
   }, [experience, setValue])
@@ -79,6 +79,7 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
       const respone = await jobseekerService.updateExperience(experience.id, data)
       queryClient.invalidateQueries({ queryKey: ['experience'] })
       setActive(false)
+      reset()
     } catch (error: any) {
       setErrorUpdate(error.response.data.message)
     }
@@ -87,6 +88,14 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
   const handleCancel = () => {
     reset()
     setActive(false)
+  }
+
+  const yearRules = {
+    required: 'Укажите дату начало работы',
+    pattern: {
+      value: /^\d{4}$/,
+      message: 'Год должен состоять из четырех цифр'
+    }
   }
   // ========================================================
   return (
@@ -121,89 +130,121 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
             star={true}
             error={errors.post?.message}
           />
+
           <div className={styles.editModal__dateBlock}>
             <div className={styles.editModal__dateLabel}>
               <span>Начало работы</span>
               <span className={styles.editModal__required}>*</span>
             </div>
             <div className={styles.editModal__inputs}>
-              <Controller
-                name="startTime"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <>
-                    <Select
-                      classNamePrefix="custom-select"
-                      options={mouth ? mouth : []}
-                      isMulti={false}
-                      isSearchable={false}
-                      placeholder="Месяц"
-                      onChange={selectedOption => {
-                        if (selectedOption) {
-                          field.onChange(`${selectedOption.value}.${yearStart}`)
-                        }
-                      }}
-                      styles={{
-                        control: (provided, state) => ({
-                          ...provided,
-                          borderColor: errors.startTime ? '#EB0000' : provided.borderColor
-                        })
-                      }}
-                    />
-                    <input
-                      type="number"
-                      placeholder="Год"
-                      onChange={e => handleYearStartChange(e)}
-                      style={errors.startTime ? { borderColor: 'red' } : undefined}
-                    />
-                    {errors.startTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
-                  </>
-                )}
-              />
+              <div className={styles.editModal__input}>
+                <Controller
+                  name="startTime"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <>
+                      <Select
+                        classNamePrefix="custom-select"
+                        options={mouth ? mouth : []}
+                        isMulti={false}
+                        isSearchable={false}
+                        placeholder="Месяц"
+                        value={mouth.find(option => option.label == monthStart)}
+                        onChange={selectedOption => {
+                          if (selectedOption && typeof selectedOption !== 'string') {
+                            setMonthStart(selectedOption.label)
+                            setValue('startTime', `${selectedOption.label} ${yearStart}`)
+                          }
+                        }}
+                        styles={{
+                          control: (provided, state) => ({
+                            ...provided,
+                            borderColor: errors.startTime ? '#EB0000' : provided.borderColor
+                          })
+                        }}
+                      />
+                      <input
+                        type="number"
+                        placeholder="Год"
+                        value={yearStart}
+                        onChange={e => {
+                          if (e.target.value.length) {
+                            setYearStart(e.target.value)
+                            setValue('startTime', `${monthStart} ${e.target.value}`)
+                          }
+                        }}
+                        style={errors.startTime ? { borderColor: 'red' } : undefined}
+                      />
+                      {errors.startTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
+                    </>
+                  )}
+                />
+              </div>
             </div>
           </div>
 
           <div className={styles.editModal__dateBlock}>
             <div className={styles.editModal__dateLabel}>
               <span>Конец работы</span>
-              <span className={styles.editModal__required}>*</span>
+              {untilNow ? null : <span className={styles.editModal__required}>*</span>}
             </div>
             <div className={styles.editModal__inputs}>
-              <Controller
-                name="endTime"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <>
-                    <Select
-                      classNamePrefix="custom-select"
-                      options={mouth ? mouth : []}
-                      isMulti={false}
-                      isSearchable={false}
-                      placeholder="Месяц"
-                      onChange={selectedOption => {
-                        if (selectedOption) {
-                          field.onChange(`${selectedOption.value}.${yearEnd}`)
-                        }
-                      }}
-                      styles={{
-                        control: (provided, state) => ({
-                          ...provided,
-                          borderColor: errors.endTime ? '#EB0000' : provided.borderColor
-                        })
-                      }}
-                    />
-                    <input
-                      type="number"
-                      placeholder="Год"
-                      onChange={e => handleYearEndChange(e)}
-                      style={errors.endTime ? { borderColor: 'red' } : undefined}
-                    />
-                    {errors.endTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
-                  </>
-                )}
-              />
+              <div className={styles.editModal__input}>
+                <Controller
+                  name="endTime"
+                  control={control}
+                  rules={{ required: !untilNow }}
+                  render={({ field }) => (
+                    <>
+                      <Select
+                        classNamePrefix="custom-select"
+                        options={mouth ? mouth : []}
+                        isMulti={false}
+                        isSearchable={false}
+                        value={untilNow ? '' : mouth.find(option => option.label == monthEnd)}
+                        placeholder="Месяц"
+                        isDisabled={untilNow}
+                        onChange={selectedOption => {
+                          if (selectedOption && typeof selectedOption !== 'string') {
+                            setMonthEnd(selectedOption.label)
+                            setValue('endTime', `${selectedOption.label} ${yearEnd}`)
+                          }
+                        }}
+                        styles={{
+                          control: (provided, state) => ({
+                            ...provided,
+                            borderColor: errors.endTime ? '#EB0000' : provided.borderColor
+                          })
+                        }}
+                      />
+                      <input
+                        type="number"
+                        placeholder="Год"
+                        onChange={e => {
+                          setYearEnd(e.target.value)
+                          setValue('endTime', `${monthEnd} ${e.target.value}`)
+                        }}
+                        style={errors.endTime ? { borderColor: 'red' } : undefined}
+                        disabled={untilNow}
+                        value={untilNow ? '' : yearEnd}
+                      />
+                      {errors.endTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
+                    </>
+                  )}
+                />
+              </div>
+              <div className={styles.editModal__checkbox}>
+                <input
+                  {...register('untilNow')}
+                  type="checkbox"
+                  checked={untilNow}
+                  onChange={() => {
+                    setUntilNow(!untilNow)
+                  }}
+                />
+                <span>По настоящее время</span>
+              </div>
             </div>
           </div>
 
@@ -216,23 +257,11 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
         </div>
 
         <div className={styles.editModal__modalFooter}>
-          <div className={styles.editModal__footerWrapper}>
-            <button className={styles.editModal__saveButton}>Сохранить</button>
-            <div className={styles.editModal__resetButton} onClick={handleCancel}>
-              Отменить
-            </div>
-            <span className={styles.editModal__footerError}>{errorUpdate}</span>
+          <button className={styles.editModal__saveButton}>Сохранить</button>
+          <div className={styles.editModal__resetButton} onClick={handleCancel}>
+            Отменить
           </div>
-          <div
-            className={styles.editModal__deleteButton}
-            onClick={async () => {
-              const respone = await jobseekerService.deleteExperience(experience.id)
-              queryClient.invalidateQueries({ queryKey: ['experience'] })
-              setActive(false)
-            }}
-          >
-            Удалить
-          </div>
+          <span className={styles.editModal__footerError}>{errorUpdate}</span>
         </div>
       </form>
     </ResumeModal>

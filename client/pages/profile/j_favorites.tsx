@@ -1,15 +1,16 @@
-import { NextPage } from 'next'
-
 import Meta from '@/components/Meta/Meta'
 import Favorites from '@/components/screens/Profile/JobSeeker/Favorites/Favorites'
-import Reviews from '@/components/screens/Profile/JobSeeker/Reviews/Reviews'
 
-const FavoritesPage: NextPage = () => {
+import { NextPageAuth } from '@/core/providers/aut-provider/auth-page.types'
+
+const FavoritesPage: NextPageAuth = () => {
   return (
     <Meta title="Избранные вакансии">
       <Favorites />
     </Meta>
   )
 }
+
+FavoritesPage.isOnlyJobSeeker = true
 
 export default FavoritesPage

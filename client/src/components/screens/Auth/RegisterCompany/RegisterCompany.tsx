@@ -13,7 +13,7 @@ import { IEmployer } from '@/core/types/employer.interface'
 import { useAuth } from '@/core/hooks/useAuth'
 import { employerService } from '@/core/services/employer/employer.service'
 
-import logo from 'public/Logo/swId.svg'
+import logo from 'public/Logo/logoAuth.svg'
 
 const RegisterCompany: FC = () => {
   const { user } = useAuth()

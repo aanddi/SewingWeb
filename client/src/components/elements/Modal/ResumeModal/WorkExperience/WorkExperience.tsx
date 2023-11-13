@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { Dispatch, FC, SetStateAction, useState } from 'react'
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 
@@ -10,6 +10,7 @@ import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 
 import { IWorkExperience } from '@/core/types/work-experience.interface'
 
+import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { mouth } from '@/core/utils/select-resume-data'
 
 interface Props {
@@ -21,13 +22,14 @@ interface Props {
 const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
   const queryClient = useQueryClient()
 
+  // ========== DATE =============================
+
   const [monthStart, setMonthStart] = useState<string>('')
   const [yearStart, setYearStart] = useState<string>('')
-
   const [monthEnd, setMonthEnd] = useState<string>('')
   const [yearEnd, setYearEnd] = useState<string>('')
 
-  const [untilNow, setuUntilNow] = useState(false)
+  const [untilNow, setUntilNow] = useState(false)
 
   const handleYearStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYearStart(e.target.value)
@@ -57,13 +59,16 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
 
   const onSubmit: SubmitHandler<IWorkExperience> = async data => {
     console.log(data)
-    // try {
-    //   const response = await jobseekerService.createExperience(resumeId, data)
-    //   queryClient.invalidateQueries({ queryKey: ['experience'] })
-    //   setActive(false)
-    // } catch (error: any) {
-    //   setErrorUpdate(error.response.data.message)
-    // }
+    try {
+      const response = await jobseekerService.createExperience(resumeId, data)
+      queryClient.invalidateQueries({ queryKey: ['experience'] })
+      setActive(false)
+      reset()
+      setValue('startTime', '')
+      setValue('endTime', '')
+    } catch (error: any) {
+      setErrorUpdate(error.response.data.message)
+    }
   }
 
   const handleCancel = () => {
@@ -124,7 +129,7 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
                         isSearchable={false}
                         placeholder="Месяц"
                         onChange={selectedOption => {
-                          if (selectedOption) {
+                          if (selectedOption && typeof selectedOption !== 'string') {
                             setMonthStart(selectedOption.label)
                             field.onChange(`${selectedOption.label} ${yearStart}`)
                           }
@@ -153,14 +158,14 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
           <div className={styles.workExperience__dateBlock}>
             <div className={styles.workExperience__dateLabel}>
               <span>Конец работы</span>
-              <span className={styles.workExperience__required}>*</span>
+              {untilNow ? null : <span className={styles.workExperience__required}>*</span>}
             </div>
             <div className={styles.workExperience__inputs}>
               <div className={styles.workExperience__input}>
                 <Controller
                   name="endTime"
                   control={control}
-                  rules={{ required: true }}
+                  rules={{ required: !untilNow }}
                   render={({ field }) => (
                     <>
                       <Select
@@ -168,13 +173,15 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
                         options={mouth ? mouth : []}
                         isMulti={false}
                         isSearchable={false}
-                        value={untilNow ? '' : ''}
+                        value={untilNow ? '' : mouth.find(option => option.label == monthEnd)}
                         placeholder="Месяц"
                         isDisabled={untilNow}
                         onChange={selectedOption => {
-                          if (selectedOption) {
+                          if (selectedOption && typeof selectedOption !== 'string') {
                             setMonthEnd(selectedOption.label)
                             field.onChange(`${selectedOption.label} ${yearEnd}`)
+                          } else {
+                            field.onChange('') // reset field value when no option is selected
                           }
                         }}
                         styles={{
@@ -202,7 +209,9 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
                   {...register('untilNow')}
                   type="checkbox"
                   checked={untilNow}
-                  onChange={() => setuUntilNow(!untilNow)}
+                  onChange={() => {
+                    setUntilNow(!untilNow)
+                  }}
                 />
                 <span>По настоящее время</span>
               </div>

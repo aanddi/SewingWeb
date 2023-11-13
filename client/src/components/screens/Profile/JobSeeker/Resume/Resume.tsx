@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 
 import styles from './Resume.module.scss'
 
@@ -19,7 +19,6 @@ import { IResume } from '@/core/types/resume.interface'
 import { IWorkExperience } from '@/core/types/work-experience.interface'
 
 import { useAuth } from '@/core/hooks/useAuth'
-import { EducationType } from '@/core/services/jobseeker/jobseeker.helper'
 import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { formatPrice } from '@/core/utils/format-price'
 
@@ -75,8 +74,6 @@ const Resume: FC = () => {
     },
     enabled: !!resumeId
   })
-
-
 
   return (
     <SiteLayout background={'#fff'}>
@@ -159,11 +156,11 @@ const Resume: FC = () => {
                             {resume?.workTimetable ? <span>{resume?.workTimetable}</span> : <span>не указано</span>}
                           </div>
                         </div>
-                      </div>  
+                      </div>
                     </div>
 
                     <div className={styles.resume__edit} onClick={() => setActiveModal1(!activeModal1)}>
-                      <BiSolidEditAlt size={15} style={{ color: '#3490DF' }}/>
+                      <BiSolidEditAlt size={15} style={{ color: '#3490DF' }} />
                       <span>Дополнить</span>
                     </div>
                   </div>

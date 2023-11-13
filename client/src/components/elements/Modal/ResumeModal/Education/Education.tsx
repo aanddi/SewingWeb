@@ -74,6 +74,7 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
                   <Select
                     classNamePrefix="custom-select"
                     options={educationLevel ? educationLevel : []}
+                    value={field.value ? educationLevel.find(option => option.value === field.value) : null}
                     isMulti={false}
                     isSearchable={false}
                     placeholder=""

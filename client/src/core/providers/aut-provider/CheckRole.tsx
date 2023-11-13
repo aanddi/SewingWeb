@@ -14,11 +14,23 @@ const CheckRole: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
 
   const router = useRouter()
 
-  // если авторизация есть и странице нужена приватность то возвращаем страницу
-  if ((user && isOnlyEmployer) || (user && isOnlyJobSeeker)) return <>{children}</>
+  // авторизованный иходр странице нужен нужный тип пользователя юто возвращаем страницу
+  if (user) {
+    if ((isOnlyEmployer && user.roleId === 2) || (isOnlyJobSeeker && user.roleId === 1)) {
+      return <>{children}</>
+    } else {
+      router.replace('/not-found')
+      return null
+    }
+  }
 
-  // если юзер не залогинен его перекидывает на страницу логина
-  router.pathname !== '/auth' && router.replace('/auth/login')
+  // если юзер не залогиивается на страницу лого пользователь не авторизован, редирект на логин
+  if (router.pathname !== '/auth') {
+    router.replace('/auth/login')
+    return null
+  }
+
+  // если юзер уже на странице "/auth Оставить пользователя на этой странице
   return null
 }
 

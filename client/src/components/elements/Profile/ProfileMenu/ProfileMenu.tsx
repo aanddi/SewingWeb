@@ -39,7 +39,7 @@ const ProfileMenu: FC = () => {
       >
         <div className={styles.profileMenu__wrapper}>
           <div className={styles.profileMenu__header}>
-            <Link href="/profile/j_my" className={styles.profileMenu__name}>
+            <Link href="/profile/my" className={styles.profileMenu__name}>
               <span>
                 {user?.name} {user?.surname}
               </span>
@@ -53,7 +53,7 @@ const ProfileMenu: FC = () => {
                 <span>Создать резюме</span>
               </Link>
             ) : (
-              <Link className={styles.profileMenu__button} href="/">
+              <Link className={styles.profileMenu__button} href="/profile/e_add-vacancy">
                 <BiUpload size={20} />
                 <span>Опубликовать вакансию</span>
               </Link>

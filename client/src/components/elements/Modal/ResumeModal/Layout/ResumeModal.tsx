@@ -10,8 +10,24 @@ interface Props {
 const ResumeModal: FC<PropsWithChildren<Props>> = ({ active, setActive, children }) => {
   // блок скролла
   useEffect(() => {
-    if (active) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = 'visible'
+    const headerElement = document.getElementById('header')
+    const scrollbarWidth = window.innerWidth - document.body.clientWidth
+
+    if (active) {
+      document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = `${scrollbarWidth}px`
+
+      if (headerElement) {
+        headerElement.style.right = `${scrollbarWidth}px`
+      }
+    } else {
+      document.body.style.overflow = 'initial'
+      document.body.style.paddingRight = '0px'
+
+      if (headerElement) {
+        headerElement.style.right = '0px'
+      }
+    }
   }, [active])
 
   return (
