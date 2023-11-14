@@ -1,6 +1,6 @@
 import { IsString, IsOptional, MinLength } from 'class-validator'
 
-export class CreateDto {
+export class EmployerDto {
   @MinLength(12, {
     message: 'ИНН должен состоять из 12 цифр'
   })

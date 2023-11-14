@@ -25,5 +25,21 @@ export const employerService = {
     })
       .then(res => res.data)
       .catch(err => err.response.data)
+  },
+
+  async update(id: number | undefined, data: IEmployer) {
+    const response = await instance<IEmployer>({
+      url: `/employer/update/${id}`,
+      method: 'PUT',
+      data
+    })
+    return response.data
+  },
+
+  async getEmployerByUserId(id: number | undefined) {
+    return await instance<IEmployer>({
+      url: `/employer/getByUserId/${id}`,
+      method: 'GET'
+    })
   }
 }

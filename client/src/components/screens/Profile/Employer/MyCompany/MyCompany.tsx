@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,8 +7,12 @@ import 'react-quill/dist/quill.snow.css'
 
 import styles from './MyCompany.module.scss'
 
+import UpdateCompany from '@/components/elements/Modal/UpdateCompany/UpdateCompany'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
+
+import { useAuth } from '@/core/hooks/useAuth'
+import { employerService } from '@/core/services/employer/employer.service'
 
 import { BiSolidEditAlt } from 'react-icons/bi'
 import { IoIosAddCircleOutline } from 'react-icons/io'
@@ -15,10 +20,25 @@ import { IoIosAddCircleOutline } from 'react-icons/io'
 import logo from 'public/Companies/logoCompany.svg'
 
 const QuillNoSSRWrapper = dynamic(async () => (await import('react-quill')).default, { ssr: false })
+
 const MyCompany: FC = () => {
   const [value, setValue] = useState('')
-
   const [showTextEditor, setShowTextEditor] = useState(false)
+  const [activeModal1, setActiveModal1] = useState(false)
+
+  const { user } = useAuth()
+  const userId = user?.id
+
+  const { data: employer } = useQuery({
+    queryKey: ['employer', userId],
+    queryFn: async () => {
+      const response = await employerService.getEmployerByUserId(userId)
+      return response.data
+    }
+  })
+
+  console.log(employer)
+
   return (
     <SiteLayout background={'#fff'}>
       <div className={styles.company}>
@@ -32,7 +52,11 @@ const MyCompany: FC = () => {
               <div className={styles.company__mainInfo}>
                 <div className={styles.company__info}>
                   <div className={styles.company__infoBlock}>
-                    <div className={styles.company__name}>Название компании</div>
+                    {employer?.companyName ? (
+                      <div className={styles.company__name}>{employer?.companyName}</div>
+                    ) : (
+                      <div className={styles.company__name}>Название компании</div>
+                    )}
                   </div>
                   <div className={styles.company__fullInfo}>
                     <div className={styles.company__fullWrapper}>
@@ -40,19 +64,19 @@ const MyCompany: FC = () => {
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>ИНН:</div>
                           <div className={styles.company__desc}>
-                            <span>11111111111</span>
+                            {employer?.inn ? <span>{employer?.inn}</span> : <span>не указано</span>}
                           </div>
                         </div>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Тип предприятия:</div>
                           <div className={styles.company__desc}>
-                            <span>Ателье</span>
+                            {employer?.type ? <span>{employer?.type}</span> : <span>не указано</span>}
                           </div>
                         </div>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Размер предприятия:</div>
                           <div className={styles.company__desc}>
-                            <span>Ателье</span>
+                            {employer?.size ? <span>{employer?.size}</span> : <span>не указано</span>}
                           </div>
                         </div>
                       </div>
@@ -60,24 +84,24 @@ const MyCompany: FC = () => {
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Контакты:</div>
                           <div className={styles.company__desc}>
-                            <span>+79787408141</span>
+                            {employer?.contact ? <span>{employer?.contact}</span> : <span>не указано</span>}
                           </div>
                         </div>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Адрес:</div>
                           <div className={styles.company__desc}>
-                            <span>г. Симферополь</span>
+                            {employer?.adress ? <span>{employer?.adress}</span> : <span>не указано</span>}
                           </div>
                         </div>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Город регистрации:</div>
                           <div className={styles.company__desc}>
-                            <span>г. Москва</span>
+                            {employer?.registrCity ? <span>{employer?.registrCity}</span> : <span>не указано</span>}
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className={styles.company__edit}>
+                    <div className={styles.company__edit} onClick={() => setActiveModal1(true)}>
                       <BiSolidEditAlt size={15} style={{ color: '#3490DF' }} />
                       <span>Дополнить</span>
                     </div>
@@ -95,13 +119,25 @@ const MyCompany: FC = () => {
               <div className={styles.company__body}>
                 <div className={styles.company__about}>
                   <div className={styles.company__blockTitle}>О компании</div>
-                  <div className={styles.company__blockSubTitle}>
-                    Полученное образование: учебное заведение, специальность, курсы повышения квалификации.
-                  </div>
-                  <div className={styles.company__add} onClick={() => setShowTextEditor(!showTextEditor)}>
-                    <IoIosAddCircleOutline style={{ color: '#DA435F' }} />
-                    <span>Добавить</span>
-                  </div>
+                  {employer?.about ? (
+                    <>
+                      <p>{employer?.about}</p>
+                      <div className={styles.company__edit} onClick={() => setShowTextEditor(!showTextEditor)}>
+                        <BiSolidEditAlt size={15} style={{ color: '#3490DF' }} />
+                        <span>Редактировать</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={styles.company__blockSubTitle}>
+                        Полученное образование: учебное заведение, специальность, курсы повышения квалификации.
+                      </div>
+                      <div className={styles.company__add} onClick={() => setShowTextEditor(!showTextEditor)}>
+                        <IoIosAddCircleOutline style={{ color: '#DA435F' }} />
+                        <span>Добавить</span>
+                      </div>
+                    </>
+                  )}
 
                   <div
                     className={
@@ -117,6 +153,7 @@ const MyCompany: FC = () => {
             </div>
           </div>
         </div>
+        <UpdateCompany employer={employer} active={activeModal1} setActive={setActiveModal1} />
       </div>
     </SiteLayout>
   )

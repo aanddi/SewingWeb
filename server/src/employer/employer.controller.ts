@@ -1,26 +1,40 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Auth } from 'src/auth/decorators/auth.decorators'
+import { EmployerDto } from './dto/employer.dto'
 import { EmployerService } from './employer.service'
-import { CreateDto } from './dto/create.dto'
-import { SortEmloyer } from './dto/sort.dto'
 
 @Controller('employer')
 export class EmployerController {
   constructor(private readonly employerService: EmployerService) {}
 
-  @UsePipes(new ValidationPipe())
-  @HttpCode(200)
-  @Post('create')
-  async create(@Body() dto: CreateDto) {
-    return this.employerService.create(dto)
+  @Get()
+  getAllEmployer() {
+    return this.employerService.getAllEmployer()
   }
 
-  @Get(':id')
+  @Get(':id') // id employer
   async getEmployerById(@Param('id') id: string) {
     return this.employerService.getEmployerById(+id)
   }
 
-  @Get()
-  getAllEmployer() {
-    return this.employerService.getAllEmployer()
+  @Get('getByUserId/:id') // user id
+  async getByUserId(@Param('id') id: string) {
+    return this.employerService.getByUserId(+id)
+  }
+
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
+  @Post('create')
+  // @Auth()
+  async create(@Body() dto: EmployerDto) {
+    return this.employerService.create(dto)
+  }
+
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
+  @Put('update/:id') // id employer
+  // @Auth()
+  async updateEmployer(@Param('id') id: number, @Body() dto: EmployerDto) {
+    return this.employerService.updateEmployer(id, dto)
   }
 }
