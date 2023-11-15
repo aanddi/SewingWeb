@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -8,22 +9,29 @@ import { useActions } from '@/core/hooks/useActions'
 import { useAuth } from '@/core/hooks/useAuth'
 import { useCheckRole } from '@/core/hooks/useCheckRole'
 import { useOutside } from '@/core/hooks/useOutside'
+import { EmployerService } from '@/core/services/employer/employer.service'
 
 import { menuEmployer, menuJobseeker } from './menu-data'
 
 import { BiUpload } from 'react-icons/bi'
-import { IoExitOutline } from 'react-icons/io5'
-import { IoAddCircleOutline } from 'react-icons/io5'
+import { IoAddCircleOutline, IoExitOutline } from 'react-icons/io5'
 
 import photoUser from 'public/Profiles/photoUser.svg'
 
 const ProfileMenu: FC = () => {
   const { user } = useAuth()
   const role = useCheckRole()
-
   const { logout } = useActions()
-
   const { isShow, setIsShow, ref } = useOutside(false)
+
+  const { data: employerId } = useQuery({
+    queryKey: ['employerId', user?.id],
+    queryFn: async () => {
+      const response = await EmployerService.getEmployerByUserId(user?.id)
+      return response.data.id
+    }
+  })
+
   return (
     <div className={styles.profileMenu} ref={ref}>
       <div className={styles.profileMenu__photo} onClick={() => setIsShow(!isShow)}>
@@ -79,6 +87,9 @@ const ProfileMenu: FC = () => {
                     </li>
                   )
                 })}
+                <li>
+                  <Link href={`/company/${employerId}`}>Страница предприятия</Link>
+                </li>
               </ul>
             )}
           </nav>

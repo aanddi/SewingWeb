@@ -29,7 +29,7 @@ export class EmployerService {
   async getEmployerById(id: number) {
     const company = await this.prisma.employer.findUnique({
       where: {
-        id: id
+        id: +id
       }
     })
 
@@ -39,63 +39,17 @@ export class EmployerService {
   }
 
   async getByUserId(id: number) {
+    if (!id) throw new NotFoundException('Вы не зарегистрировали предприятие')
     const company = await this.prisma.employer.findUnique({
       where: {
-        userId: id
+        userId: +id
       }
     })
-
-    if (!company) throw new NotFoundException('Компания не найдена')
 
     return company
   }
 
   async create(dto: EmployerDto) {
-    const employer = await this.createEmployer(dto)
-
-    return employer
-  }
-
-  async updateEmployer(id: number, dto: EmployerDto) {
-    const check = await this.prisma.employer.findUnique({
-      where: {
-        id: +id
-      }
-    })
-
-    if (!check) {
-      return await this.createEmployer(dto)
-    } else {
-      const employer = await this.prisma.employer.update({
-        where: {
-          id: +id
-        },
-        data: {
-          companyName: dto.companyName,
-          inn: dto.inn,
-          type: dto.type,
-          registrCity: dto.registrCity,
-          about: dto.about,
-          size: +dto.size,
-          contact: dto.contact,
-          adress: dto.adress
-        }
-      })
-
-      return employer
-    }
-  }
-
-  // возвращаемые поля
-  private returnEmployerFields(employer: Employer) {
-    return {
-      id: employer.id,
-      name: employer.companyName,
-      inn: employer.inn
-    }
-  }
-
-  private async createEmployer(dto: EmployerDto) {
     // Проверка на существующую компанию по ИНН
     const checkInn = await this.prisma.employer.findUnique({
       where: {
@@ -132,6 +86,76 @@ export class EmployerService {
     // возвращаемые поля
     return {
       employer: this.returnEmployerFields(employer)
+    }
+  }
+
+  async updateEmployer(id: number, dto: EmployerDto) {
+    if (dto.inn) await this.checkUniqueInn(dto.inn, id)
+
+    if (dto.about) {
+      const employer = await this.prisma.employer.update({
+        where: {
+          id: +id
+        },
+        data: {
+          about: dto.about
+        }
+      })
+      return employer
+    } else {
+      const employer = await this.prisma.employer.update({
+        where: {
+          id: +id
+        },
+        data: {
+          companyName: dto.companyName,
+          inn: dto.inn,
+          type: dto.type,
+          registrCity: dto.registrCity,
+          size: +dto.size,
+          contact: dto.contact,
+          adress: dto.adress
+        }
+      })
+      return employer
+    }
+  }
+
+  async getCountVacancy(id: number) {
+    if (!id) throw new NotFoundException('Вы не зарегистрировали предприятие')
+
+    const count = await this.prisma.vacancy.count({
+      where: {
+        employerId: +id
+      }
+    })
+
+    return count
+  }
+
+  // возвращаемые поля
+  private returnEmployerFields(employer: Employer) {
+    return {
+      id: employer.id,
+      name: employer.companyName,
+      inn: employer.inn
+    }
+  }
+
+  private async checkUniqueInn(inn: string, id: number) {
+    const checkInnNotOwn = await this.prisma.employer.findFirst({
+      where: {
+        id: +id
+      }
+    })
+    if (inn !== checkInnNotOwn.inn) {
+      const checkINN = await this.prisma.employer.findUnique({
+        where: {
+          inn: inn
+        }
+      })
+
+      if (checkINN) throw new BadRequestException('Такая компания уже существует под таким ИНН')
     }
   }
 }

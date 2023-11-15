@@ -2,7 +2,7 @@ import { IEmployer } from '@/core/types/employer.interface'
 
 import { instance } from '@/api/api.interceptor'
 
-export const employerService = {
+export const EmployerService = {
   async getEmployerById(id: string) {
     return await instance<IEmployer>({
       url: `/employer/${id}`,
@@ -18,13 +18,12 @@ export const employerService = {
   },
 
   async create(data: IEmployer) {
-    return instance<IEmployer>({
+    const response = await instance<IEmployer>({
       url: `/employer/create`,
       method: 'POST',
       data
     })
-      .then(res => res.data)
-      .catch(err => err.response.data)
+    return response.data
   },
 
   async update(id: number | undefined, data: IEmployer) {
@@ -39,6 +38,13 @@ export const employerService = {
   async getEmployerByUserId(id: number | undefined) {
     return await instance<IEmployer>({
       url: `/employer/getByUserId/${id}`,
+      method: 'GET'
+    })
+  },
+
+  async getCountVacany(id: number | undefined) {
+    return await instance<number>({
+      url: `/employer/getCountVacany/${id}`,
       method: 'GET'
     })
   }

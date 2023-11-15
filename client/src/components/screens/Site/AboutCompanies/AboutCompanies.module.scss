@@ -38,26 +38,24 @@
   &__block {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   &__title {
-    color: #797979;
-    padding-right: 20px;
+    color: $grey;
+    width: 150px;
   }
 
-  &__desc {}
-
+  &__desc {
+  }
 }
 
 .desc {
   text-align: justify;
-  color: #696868;
-  line-height: 165%; 
+  line-height: 165%;
 }
 
 .reviews {
-
   &__title {
     color: $darkBlue;
     font-size: 25px;
@@ -69,7 +67,6 @@
     display: flex;
     justify-content: space-between;
     gap: 10px;
-
   }
 
   &__card {
@@ -77,11 +74,12 @@
     min-height: 100%;
 
     border-radius: 10px;
-    background: #FFF;
-    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.10);
+    background: #fff;
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.1);
   }
 
-  &__cardReviews {}
+  &__cardReviews {
+  }
 
   &__cardAd {
     position: relative;
@@ -90,8 +88,8 @@
 
   &__wrapper {
     padding: 15px 35px;
-    
-     & > *:not(:last-child) {
+
+    & > *:not(:last-child) {
       margin-bottom: 15px;
     }
   }
@@ -114,7 +112,6 @@
   }
 
   &__desc {
-    
   }
 
   &__link {
@@ -128,8 +125,8 @@
   }
 
   &__text {
-    color: #6C6A6A;
-    line-height: 130%; 
+    color: #6c6a6a;
+    line-height: 130%;
   }
 
   &__btn {
@@ -147,7 +144,6 @@
 }
 
 .vacancies {
-
   &__title {
     color: $darkBlue;
     font-size: 25px;

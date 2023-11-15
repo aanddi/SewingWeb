@@ -1,0 +1,54 @@
+.ql-editor {
+  min-height: 300px !important;
+  line-height: 150%;
+  font-size: 15px;
+}
+
+.ql-editor .ql-size-small {
+  font-size: 12px !important;
+}
+
+.ql-editor .ql-size-large {
+  font-size: 16px !important;
+}
+
+.ql-editor .ql-size-huge {
+  font-size: 18px !important;
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+/*=====================================================*/
+
+.about-text {
+  line-height: 150%;
+  font-size: 15px;
+
+  .ql-size-small {
+    font-size: 12px !important;
+  }
+
+  .ql-size-large {
+    font-size: 16px !important;
+  }
+
+  .ql-size-huge {
+    font-size: 18px !important;
+  }
+
+  ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+}

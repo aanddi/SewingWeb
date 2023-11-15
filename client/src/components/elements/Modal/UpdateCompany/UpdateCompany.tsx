@@ -1,20 +1,18 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import Select from 'react-select'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import styles from './UpdateCompany.module.scss'
 
 import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeModal'
+import ErrorForm from '@/components/ui/ErrorForm/ErrorForm'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 
-import { IEducation } from '@/core/types/education.interface'
 import { IEmployer } from '@/core/types/employer.interface'
 
 import { validNumber } from '@/core/helpers/valid-field'
-import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
-import { educationLevel } from '@/core/utils/select-resume-data'
-import { employerService } from '@/core/services/employer/employer.service'
+import { useAuth } from '@/core/hooks/useAuth'
+import { EmployerService } from '@/core/services/employer/employer.service'
 
 interface Props {
   employer: IEmployer | undefined
@@ -24,6 +22,7 @@ interface Props {
 
 const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
   const queryClient = useQueryClient()
+  const { user } = useAuth()
 
   // ========== REACT HOOK FORM =============================
 
@@ -38,7 +37,10 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
     control,
     formState: { errors }
   } = useForm<IEmployer>({
-    mode: 'onChange'
+    mode: 'onChange',
+    defaultValues: {
+      userId: user?.id
+    }
   })
 
   useEffect(() => {
@@ -50,19 +52,28 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
       setValue('size', employer?.size)
       setValue('contact', employer?.contact)
       setValue('adress', employer?.adress)
-      
     }
   }, [employer, setValue])
 
   const onSubmit: SubmitHandler<IEmployer> = async data => {
-    console.log(data)
-    try {
-      const respone = await employerService.update(employer?.id, data)
-      queryClient.invalidateQueries({ queryKey: ['employer'] })
-      setActive(false)
-      reset()
-    } catch (error: any) {
-      setErrorUpdate(error.response.data.message)
+    if (!employer) {
+      try {
+        const respone = await EmployerService.create(data)
+        reset()
+        setActive(false)
+        queryClient.invalidateQueries({ queryKey: ['employer'] })
+      } catch (error: any) {
+        setErrorUpdate(error.response.data.message)
+      }
+    } else {
+      try {
+        const respone = await EmployerService.update(employer?.id, data)
+        reset()
+        setActive(false)
+        queryClient.invalidateQueries({ queryKey: ['employer'] })
+      } catch (error: any) {
+        setErrorUpdate(error.response.data.message)
+      }
     }
   }
 
@@ -74,8 +85,9 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
       registrCity: employer?.registrCity,
       size: employer?.size,
       contact: employer?.contact,
-      adress: employer?.adress,
+      adress: employer?.adress
     })
+    setErrorUpdate(null)
     setActive(false)
   }
 
@@ -150,8 +162,7 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
           />
 
           <FieldProfile
-            {...register('registrCity', {
-            })}
+            {...register('registrCity', {})}
             type={'text'}
             title={'Город регистрации'}
             star={false}
@@ -163,7 +174,7 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
           <div className={styles.updateCompany__resetButton} onClick={handleCancel}>
             Отменить
           </div>
-          <span className={styles.updateCompany__footerError}>{errorUpdate}</span>
+          <ErrorForm>{errorUpdate}</ErrorForm>
         </div>
       </form>
     </ResumeModal>

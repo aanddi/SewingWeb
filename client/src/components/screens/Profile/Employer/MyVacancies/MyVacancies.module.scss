@@ -1,0 +1,113 @@
+@import '@/assets/styles/_variables.scss';
+
+.vacancies {
+  margin: 100px 0;
+
+  &__wrapper {
+    width: 900px;
+  }
+
+  &__add {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #eaf7fe;
+    color: #2c8acc;
+    padding: 12px 40px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #dae7ee;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__list {
+    margin-top: 50px;
+
+    & > *:not(:last-child) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__statusItem {
+    
+  }
+
+  &__controlPanel {
+    width: 100%;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.11);
+    margin-bottom: 15px;
+  }
+
+  &__panelWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 35px;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__item {
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &_responses {
+      color: $blue;
+    }
+
+    &_edit {
+      color: $darkBlue;
+    }
+
+    &_toarchive {
+      color: red;
+    }
+
+    &_toactive {
+      color: green;
+    }
+  }
+
+  &__dates {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__date {
+    color: $grey;
+    font-size: 12px;
+  }
+
+  &__status {
+
+  }
+
+  &__statusItem {
+    display: flex;
+    align-items: center;
+
+  }
+}

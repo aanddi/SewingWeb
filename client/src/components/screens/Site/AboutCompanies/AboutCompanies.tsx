@@ -4,6 +4,7 @@ import { FC } from 'react'
 import styles from './AboutCompanies.module.scss'
 
 import CompanyHeader from '@/components/elements/Company/CompanyHeader/CompanyHeader'
+import AboutText from '@/components/elements/EditText/AboutText'
 import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
@@ -17,7 +18,7 @@ import ad from 'public/ad/ad.png'
 const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
   console.log(company)
   return (
-    <SiteLayout>
+    <SiteLayout background={'#fff'}>
       <div className={styles.aboutCompany}>
         <div className="aboutCompany__container">
           <div className={styles.aboutCompany__wrapper}>
@@ -29,32 +30,36 @@ const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
                 <div className={styles.info__left}>
                   <div className={styles.info__block}>
                     <h3 className={styles.info__title}>ИНН: </h3>
-                    <p className={styles.info__desc}>{company.inn}</p>
+                    <p className={styles.info__desc}>{company.inn ? company.inn : 'Не указано'}</p>
                   </div>
                   <div className={styles.info__block}>
-                    <h3 className={styles.info__title}>Тип предприятия: </h3>
-                    <p className={styles.info__desc}>{company.type}</p>
+                    <h3 className={styles.info__title}>Адрес: </h3>
+                    <p className={styles.info__desc}>{company.adress ? company.adress : 'Не указано'}</p>
                   </div>
-
                   <div className={styles.info__block}>
-                    <h3 className={styles.info__title}>Размер компании: </h3>
-                    <p className={styles.info__desc}>{company.size}</p>
+                    <h3 className={styles.info__title}>Контакты: </h3>
+                    <p className={styles.info__desc}>{company.contact ? company.contact : 'Не указано'}</p>
                   </div>
                 </div>
                 <div className={styles.info__right}>
                   <div className={styles.info__block}>
-                    <h3 className={styles.info__title}>Адрес: </h3>
-                    <p className={styles.info__desc}>{company.adress}</p>
+                    <h3 className={styles.info__title}>Тип предприятия: </h3>
+                    <p className={styles.info__desc}>{company.type ? company.type : 'Не указано'}</p>
+                  </div>
+
+                  <div className={styles.info__block}>
+                    <h3 className={styles.info__title}>Размер компании: </h3>
+                    <p className={styles.info__desc}>{company.size ? company.size : 'Не указано'}</p>
                   </div>
                   <div className={styles.info__block}>
-                    <h3 className={styles.info__title}>Контакты </h3>
-                    <p className={styles.info__desc}>{company.contact}</p>
+                    <h3 className={styles.info__title}>Город регистрации: </h3>
+                    <p className={styles.info__desc}>{company.registrCity ? company.registrCity : 'Не указано'}</p>
                   </div>
                 </div>
               </section>
               <section className={[styles.aboutCompany__desc, styles.desc].join(' ')}>
                 <h3 className={styles.reviews__title}>О компании</h3>
-                {company.about ? <div>{company.about}</div> : <div>Описание компании не указано</div>}
+                {company.about ? <AboutText about={company.about} /> : <div>Описание компании не указано</div>}
               </section>
               <section className={[styles.aboutCompany__reviews, styles.reviews].join(' ')}>
                 <h3 className={styles.reviews__title}>Отзывы о предприятии</h3>

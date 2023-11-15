@@ -1,0 +1,83 @@
+@import '@/assets/styles/_variables.scss';
+
+.editorAbout {
+  &__blockTitle {
+    font-weight: 700;
+    font-size: 24px;
+    color: $darkBlue;
+    margin-bottom: 15px;
+  }
+
+  &__blockSubTitle {
+    font-size: 14px;
+    color: $grey;
+    line-height: 150%;
+  }
+
+  &__add {
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: $pink;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+      color: $pinkHover;
+    }
+  }
+
+  &__edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: $blue;
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: 500;
+
+    &:hover {
+      color: $blueHover;
+    }
+  }
+
+  &__blockList {
+    &_active {
+      display: block;
+    }
+
+    &_unactive {
+      display: none;
+    }
+  }
+
+  &__blockNone {
+    display: none;
+  }
+
+  &__footerControl {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 20px;
+  }
+
+  &__saveButton {
+    background-color: $blue;
+    padding: 10px 30px;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+
+    &:hover {
+      background-color: $blueHover;
+    }
+  }
+
+  &__resetButton {
+    cursor: pointer;
+  }
+}

@@ -5,7 +5,7 @@ import Companies from '@/components/screens/Site/Companies/Companies'
 
 import { IEmployer } from '@/core/types/employer.interface'
 
-import { employerService } from '@/core/services/employer/employer.service'
+import { EmployerService } from '@/core/services/employer/employer.service'
 
 interface EmployerProps {
   companies: IEmployer[]
@@ -23,7 +23,7 @@ export default CompaniesPage
 
 export const getServerSideProps: GetServerSideProps<EmployerProps> = async context => {
   try {
-    const response = await employerService.getEmployerAll()
+    const response = await EmployerService.getEmployerAll()
 
     return { props: { companies: response.data } }
   } catch (error) {

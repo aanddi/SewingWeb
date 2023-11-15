@@ -5,7 +5,7 @@ import AboutCompanies from '@/components/screens/Site/AboutCompanies/AboutCompan
 
 import { IEmployer } from '@/core/types/employer.interface'
 
-import { employerService } from '@/core/services/employer/employer.service'
+import { EmployerService } from '@/core/services/employer/employer.service'
 
 interface AboutEmployerProps {
   company: IEmployer | null
@@ -22,7 +22,7 @@ const AboutCompaniesPage: NextPage<AboutEmployerProps> = ({ company }) => {
 export const getServerSideProps: GetServerSideProps<AboutEmployerProps> = async context => {
   const id = context.params?.id as string
   try {
-    const response = await employerService.getEmployerById(id)
+    const response = await EmployerService.getEmployerById(id)
 
     if (response.data !== undefined) {
       return { props: { company: response.data } }

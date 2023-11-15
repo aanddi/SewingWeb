@@ -4,7 +4,7 @@ import { IWorkExperience } from '@/core/types/work-experience.interface'
 import { EducationType, UpdateAbout } from './jobseeker.helper'
 import { instance } from '@/api/api.interceptor'
 
-export const jobseekerService = {
+export const JobseekerService = {
   async getResumeByIdUser(id: number | undefined) {
     const response = await instance<IResume>({
       url: `jobseeker/getResume/${id}`,

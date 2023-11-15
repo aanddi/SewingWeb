@@ -6,7 +6,7 @@ import styles from './Employer.module.scss'
 
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
-import { IEmployer } from './Employer.interface'
+import { IEmployer } from '@/core/types/employer.interface'
 
 import { HiOutlineXMark } from 'react-icons/hi2'
 import { IoMdCheckmark } from 'react-icons/io'

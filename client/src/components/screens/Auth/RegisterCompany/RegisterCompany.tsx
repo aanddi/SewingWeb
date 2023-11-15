@@ -11,7 +11,7 @@ import Field from '@/components/ui/Field/Field'
 import { IEmployer } from '@/core/types/employer.interface'
 
 import { useAuth } from '@/core/hooks/useAuth'
-import { employerService } from '@/core/services/employer/employer.service'
+import { EmployerService } from '@/core/services/employer/employer.service'
 
 import logo from 'public/Logo/logoAuth.svg'
 
@@ -36,7 +36,7 @@ const RegisterCompany: FC = () => {
 
   // запрос employerService
   const create = async (data: IEmployer) => {
-    const response = await employerService.create(data)
+    const response = await EmployerService.create(data)
     setServerErrorMessage(response.message)
     return response.statusCode
   }

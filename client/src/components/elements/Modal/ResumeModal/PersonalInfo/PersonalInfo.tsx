@@ -6,6 +6,7 @@ import Select, { MultiValue } from 'react-select'
 import styles from './PersonalInfo.module.scss'
 
 import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeModal'
+import Error from '@/components/ui/ErrorForm/ErrorForm'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 
 import { IResume } from '@/core/types/resume.interface'
@@ -215,7 +216,7 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
                   />
                 )}
               />
-              {errors.profession && <span className={styles.formInfo__error}>Обязательное поле</span>}
+              {errors.profession && <Error>Обязательное поле</Error>}
             </div>
           </div>
 

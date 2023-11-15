@@ -19,15 +19,11 @@ export const menuJobseeker = [
 
 export const menuEmployer = [
   {
-    name: 'Информация о компании',
+    name: 'Информация о предприятии',
     link: '/profile/e_company'
   },
   {
     name: 'Мои вакансии',
     link: '/profile/e_vacancies'
-  },
-  {
-    name: 'Страница компании',
-    link: '/'
   }
 ]

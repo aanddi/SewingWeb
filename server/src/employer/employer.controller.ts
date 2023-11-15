@@ -25,7 +25,7 @@ export class EmployerController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Post('create')
-  // @Auth()
+  @Auth()
   async create(@Body() dto: EmployerDto) {
     return this.employerService.create(dto)
   }
@@ -33,8 +33,13 @@ export class EmployerController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Put('update/:id') // id employer
-  // @Auth()
+  @Auth()
   async updateEmployer(@Param('id') id: number, @Body() dto: EmployerDto) {
     return this.employerService.updateEmployer(id, dto)
+  }
+
+  @Get('getCountVacany/:id') // id employer
+  async getCountVacancy(@Param('id') id: string) {
+    return this.employerService.getCountVacancy(+id)
   }
 }
