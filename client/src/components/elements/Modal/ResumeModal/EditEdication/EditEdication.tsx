@@ -12,7 +12,7 @@ import { IEducation } from '@/core/types/education.interface'
 
 import { validNumber } from '@/core/helpers/valid-field'
 import { EducationType } from '@/core/services/jobseeker/jobseeker.helper'
-import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { educationLevel } from '@/core/utils/select-resume-data'
 
 interface Props {
@@ -52,7 +52,7 @@ const EditEducation: FC<Props> = ({ edication, active, setActive }) => {
 
   const onSubmit: SubmitHandler<IEducation> = async data => {
     try {
-      const respone = await jobseekerService.updateEducation(edication.id, data)
+      const respone = await JobseekerService.updateEducation(edication.id, data)
       queryClient.invalidateQueries({ queryKey: ['education'] })
       setActive(false)
       reset()
@@ -149,7 +149,7 @@ const EditEducation: FC<Props> = ({ edication, active, setActive }) => {
           <div
             className={styles.editModal__deleteButton}
             onClick={async () => {
-              const respone = await jobseekerService.deleteEducation(edication.id)
+              const respone = await JobseekerService.deleteEducation(edication.id)
               queryClient.invalidateQueries({ queryKey: ['education'] })
               setActive(false)
             }}

@@ -19,7 +19,7 @@ import { IResume } from '@/core/types/resume.interface'
 import { IWorkExperience } from '@/core/types/work-experience.interface'
 
 import { useAuth } from '@/core/hooks/useAuth'
-import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { formatPrice } from '@/core/utils/format-price'
 
 import { BiSolidEditAlt } from 'react-icons/bi'
@@ -46,7 +46,7 @@ const Resume: FC = () => {
   const { data: resume } = useQuery<IResume>({
     queryKey: ['resume', userId],
     queryFn: async () => {
-      const response = await jobseekerService.getResumeByIdUser(userId)
+      const response = await JobseekerService.getResumeByIdUser(userId)
       return response
     }
   })
@@ -57,7 +57,7 @@ const Resume: FC = () => {
     queryKey: ['education'],
     queryFn: async () => {
       if (resumeId) {
-        const response = await jobseekerService.getAllEducationById(resumeId)
+        const response = await JobseekerService.getAllEducationById(resumeId)
         return response
       }
     },
@@ -68,7 +68,7 @@ const Resume: FC = () => {
     queryKey: ['experience'],
     queryFn: async () => {
       if (resumeId) {
-        const response = await jobseekerService.getAllExperienceById(resumeId)
+        const response = await JobseekerService.getAllExperienceById(resumeId)
         return response
       }
     },
@@ -206,7 +206,7 @@ const Resume: FC = () => {
                                 <BiSolidEditAlt size={15} style={{ color: '#3490DF' }} />
                                 <div
                                   onClick={async () => {
-                                    const response = await jobseekerService.getExperienceById(elem.id)
+                                    const response = await JobseekerService.getExperienceById(elem.id)
                                     setExperienceItem(response)
                                     setActiveModal6(true)
                                   }}
@@ -253,7 +253,7 @@ const Resume: FC = () => {
                                 <div
                                   className=""
                                   onClick={async () => {
-                                    const response = await jobseekerService.getEducationById(elem.id)
+                                    const response = await JobseekerService.getEducationById(elem.id)
                                     setEdicationItem(response)
                                     setActiveModal5(true)
                                   }}

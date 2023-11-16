@@ -13,7 +13,7 @@ import { IResume } from '@/core/types/resume.interface'
 
 import { validMail, validPhone } from '@/core/helpers/valid-field'
 import { useAuth } from '@/core/hooks/useAuth'
-import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { ProfessionService } from '@/core/services/profession/profession.service'
 import { citizenship, languages, mouth, workTimetable } from '@/core/utils/select-resume-data'
 
@@ -110,7 +110,7 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
   const onSubmit: SubmitHandler<IResume> = async data => {
     console.log(data)
     try {
-      const response = await jobseekerService.updateResumeByIdUser(user?.id, data)
+      const response = await JobseekerService.updateResumeByIdUser(user?.id, data)
       queryClient.invalidateQueries({ queryKey: ['resume'] })
       setActive(false)
       reset()

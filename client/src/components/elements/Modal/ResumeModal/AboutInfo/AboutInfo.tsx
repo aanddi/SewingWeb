@@ -8,7 +8,7 @@ import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeMo
 
 import { useAuth } from '@/core/hooks/useAuth'
 import { UpdateAbout } from '@/core/services/jobseeker/jobseeker.helper'
-import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 
 interface Props {
   about: string | undefined
@@ -44,7 +44,7 @@ const AboutInfo: FC<Props> = ({ about, active, setActive }) => {
 
   const onSubmit: SubmitHandler<UpdateAbout> = async (data: UpdateAbout) => {
     try {
-      const updateAbout = await jobseekerService.updateAboutResume(user?.id, data)
+      const updateAbout = await JobseekerService.updateAboutResume(user?.id, data)
       queryClient.invalidateQueries({ queryKey: ['resume'] })
       setActive(false)
       reset()

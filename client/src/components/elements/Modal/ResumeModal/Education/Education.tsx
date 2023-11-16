@@ -11,7 +11,7 @@ import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 import { IEducation } from '@/core/types/education.interface'
 
 import { validNumber } from '@/core/helpers/valid-field'
-import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { educationLevel } from '@/core/utils/select-resume-data'
 
 interface Props {
@@ -41,7 +41,7 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
 
   const onSubmit: SubmitHandler<IEducation> = async data => {
     try {
-      const respone = await jobseekerService.createEducation(resumeId, data)
+      const respone = await JobseekerService.createEducation(resumeId, data)
       queryClient.invalidateQueries({ queryKey: ['education'] })
       setActive(false)
       reset()

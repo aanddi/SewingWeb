@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, FC, SetStateAction, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 
@@ -10,7 +10,7 @@ import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 
 import { IWorkExperience } from '@/core/types/work-experience.interface'
 
-import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { mouth } from '@/core/utils/select-resume-data'
 
 interface Props {
@@ -60,7 +60,7 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
   const onSubmit: SubmitHandler<IWorkExperience> = async data => {
     console.log(data)
     try {
-      const response = await jobseekerService.createExperience(resumeId, data)
+      const response = await JobseekerService.createExperience(resumeId, data)
       queryClient.invalidateQueries({ queryKey: ['experience'] })
       setActive(false)
       reset()

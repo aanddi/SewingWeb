@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { IResume } from '../types/resume.interface'
 
-import { jobseekerService } from '../services/jobseeker/jobseeker.service'
+import { JobseekerService } from '../services/jobseeker/jobseeker.service'
 
 import { useAuth } from './useAuth'
 
@@ -12,7 +12,7 @@ export const useResume = () => {
   return useQuery<IResume>({
     queryKey: ['resume', userId],
     queryFn: async () => {
-      const response = await jobseekerService.getResumeByIdUser(userId)
+      const response = await JobseekerService.getResumeByIdUser(userId)
       return response
     }
   })

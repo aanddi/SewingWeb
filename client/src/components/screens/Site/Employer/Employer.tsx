@@ -294,7 +294,9 @@ const Employer: FC<IEmployer> = props => {
                   </div>
                 </div>
               </div>
-              <div className={styles.rates__button}>Опубликовать вакансию</div>
+              <Link href={'/profile/e_add-vacancy'} className={styles.rates__button}>
+                Опубликовать вакансию
+              </Link>
             </div>
           </div>
         </section>

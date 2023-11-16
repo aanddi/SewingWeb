@@ -1,9 +1,324 @@
 @import '@/assets/styles/_variables.scss';
 
+.tarif {
+  position: relative;
+  border-radius: 20px;
+  background: linear-gradient(354.92deg, #3162fb 5.11%, #172942 164.07%);
+  box-shadow:
+    0 6px 14px rgba(0, 24, 53, 0.07),
+    0 -2px 9px rgba(0, 24, 53, 0.03),
+    0 20px 30px 10px rgba(0, 24, 53, 0.03);
+
+  &__tarifWrapper {
+    padding: 40px;
+    color: #fff;
+  }
+
+  &__img {
+    position: absolute;
+    top: 37px;
+    right: 56px;
+  }
+
+  &__question {
+  }
+
+  &__mainText {
+    margin: 20px 0;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  &__redirect {
+    margin-top: 20px;
+    display: inline-flex;
+    border-radius: 8px;
+    font-weight: 500;
+    background-color: #fff;
+    padding: 10px 20px;
+    color: $blue;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #e0dfdf;
+    }
+  }
+}
+
 .addVacancy {
   margin: 100px 0;
 
+  &__content {
+    margin-top: 30px;
+    border-radius: 30px;
+    background: #fff;
+    box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__header {
+    margin-bottom: 30px;
+  }
+
   &__wrapper {
     width: 900px;
+  }
+
+  &__inputs {
+    & > * {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__input {
+    &_conditions {
+      input {
+        width: 50%;
+      }
+    }
+  }
+
+  &__line {
+    margin: 35px 0;
+    border-bottom: 1px dashed $blue;
+  }
+
+  &__salaryBlock {
+    display: flex;
+    align-items: center;
+  }
+
+  &__salary {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    input {
+      padding: 8px 0 8px 10px;
+      border-radius: 5px;
+      border: 1px solid #c2bfbf;
+
+      &:focus {
+        border-color: $blue;
+      }
+    }
+  }
+
+  &__rub {
+    font-weight: 500;
+  }
+
+  &__labelSalary {
+    width: 250px;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+
+  &__titleBlock {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+
+  &__shortDesc {
+    margin-bottom: 25px;
+
+    textarea {
+      box-sizing: border-box;
+      border-radius: 8px;
+      padding: 15px;
+      line-height: 20px;
+      min-width: 100%;
+      max-width: 100%;
+      max-height: 100px;
+      min-height: 100px;
+      border: 1px solid $grey;
+
+      &:focus {
+        border-color: $blue;
+      }
+    }
+  }
+
+  &__help {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px !important;
+  }
+
+  &__helpText {
+    color: $grey;
+    font-size: 13px;
+    line-height: 150%;
+  }
+
+  &__helpLink {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &__required {
+    color: red;
+  }
+
+  &__tags {
+    display: flex;
+  }
+
+  &__tagsLabel {
+    width: 250px;
+  }
+
+  &__tagsList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    input {
+      transform: scale(1.2);
+    }
+  }
+
+  &__desc {
+    margin-top: 50px;
+  }
+
+  &__footer {
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    border-top: 1px solid $grey;
+    padding-top: 30px;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &_post {
+      color: #fff;
+      background-color: $blue;
+
+      &:hover {
+        background-color: $blueHover;
+      }
+    }
+
+    &_save {
+      color: $blue;
+      background-color: #eaf7fe;
+
+      &:hover {
+        background-color: #dae7ee;
+      }
+    }
+  }
+
+  &__cards {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__card {
+    flex: 1 1 33.33%;
+  }
+
+  &__cardWrapper {
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid #3490df;
+      box-shadow: none;
+    }
+  }
+
+  &__cardTitle {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  &__efficiency {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+  }
+
+  &__efficiencyNumber {
+    font-size: 30px;
+    margin-right: 10px;
+    line-height: 150%;
+    font-weight: 600;
+
+    &_one {
+      color: $blue;
+    }
+
+    &_two {
+      color: #f16b84;
+    }
+
+    &_three {
+      color: #eb193f;
+    }
+  }
+
+  &__efficiencyDesc {
+    line-height: 120%;
+    font-weight: 500;
+
+    &_one {
+      color: $blue;
+    }
+
+    &_two {
+      color: #f16b84;
+    }
+
+    &_three {
+      color: #eb193f;
+    }
+  }
+
+  &__cardFooter {
+    p {
+      line-height: 150%;
+    }
+  }
+
+  &__cardSalary {
+    font-size: 15px;
+    font-weight: 500;
   }
 }

@@ -10,7 +10,6 @@ import ErrorForm from '@/components/ui/ErrorForm/ErrorForm'
 
 import { IEmployer } from '@/core/types/employer.interface'
 
-import { useAuth } from '@/core/hooks/useAuth'
 import { EmployerService } from '@/core/services/employer/employer.service'
 
 import AboutText from '../../EditText/AboutText'

@@ -27,3 +27,8 @@ body{
   width: 100%;
   height: 100%; 
 }
+
+input:disabled {
+  background: #edecec;
+  cursor: not-allowed !important;
+}

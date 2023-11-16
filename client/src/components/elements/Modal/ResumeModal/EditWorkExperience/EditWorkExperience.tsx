@@ -10,7 +10,7 @@ import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 
 import { IWorkExperience } from '@/core/types/work-experience.interface'
 
-import { jobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { mouth } from '@/core/utils/select-resume-data'
 
 interface Props {
@@ -76,7 +76,7 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
 
   const onSubmit: SubmitHandler<IWorkExperience> = async data => {
     try {
-      const respone = await jobseekerService.updateExperience(experience.id, data)
+      const respone = await JobseekerService.updateExperience(experience.id, data)
       queryClient.invalidateQueries({ queryKey: ['experience'] })
       setActive(false)
       reset()
