@@ -71,13 +71,13 @@ model Education {
 }
 
 model WorkExperience {
-  id         Int       @id @default(autoincrement()) @map("work_experience_id")
+  id         Int      @id @default(autoincrement()) @map("work_experience_id")
   city       String
   company    String
   post       String
-  startTime  String @map("start_time")
-  untilNow   Boolean?   @map("until_now")
-  endTime    String? @map("end_time")
+  startTime  String   @map("start_time")
+  untilNow   Boolean? @map("until_now")
+  endTime    String?  @map("end_time")
   experience String?
 
   resumeId Int    @map("resume_id")
@@ -148,14 +148,24 @@ model Vacancy {
   createdAt      DateTime  @default(now()) @map("created_at")
   updatedAt      DateTime? @updatedAt @map("updated_at")
   title          String
-  salary         Int
-  desc           String
-  skills         String
-  address        String
+  minSalary      Int?      @map("min_salary")
+  maxSalary      Int?      @map("max_salary")
+  descCard       String    @map("desc_card")
+  descMain       String    @map("desc_main")
+  city           String
+  adress         String
+  skills         String?
   workExperience String    @map("work_experience")
-  employment     String    @map("employment_type")
   workTimetable  String    @map("work_timetable")
+  employmentType String    @map("employment_type")
   education      String    @map("education_info")
+  tags           String
+  fullName       String    @map("full_name")
+  phoneNumber    String    @map("phone_number")
+  contact        String?
+  status         Boolean
+  dateStart      DateTime  @map("date_start")
+  dateEnd        DateTime  @map("date_end")
 
   employerId Int      @map("employer_id")
   employer   Employer @relation(fields: [employerId], references: [id])
@@ -163,14 +173,26 @@ model Vacancy {
   professionId Int        @map("profession_id")
   profession   Profession @relation(fields: [professionId], references: [id])
 
+  tarifId Int          @map("tarif_id")
+  tarif   VacancyTarif @relation(fields: [tarifId], references: [id])
+
   jobSeeker JobSeeker[] // избранные вакансии, соискатели, которые доавлили вакансии
 
   resume Responses[]
 
-  // date_start      String // для подписки, мб надо мб нет, хз пока как сделать
-  // date_end        String
-
   @@map("vacansies")
+}
+
+model VacancyTarif {
+  id     Int     @id @default(autoincrement()) @map("tarif_id")
+  name   String
+  salary Int
+  time   Int
+  desc   String? @map("description")
+
+  vacancy Vacancy[]
+
+  @@map("tarif_vacancy")
 }
 
 // явный тип связи многие ко многим(по идее не нужен, но пусть пока будет)

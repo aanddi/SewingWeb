@@ -12,10 +12,7 @@ import { TypeComponentAuthFields } from './auth-page.types'
 
 const DynamicCheckRole = dynamic(() => import('./CheckRole'), { ssr: false })
 
-const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
-  Component: { isOnlyEmployer, isOnlyJobSeeker },
-  children
-}) => {
+const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({ Component: { isOnlyEmployer, isOnlyJobSeeker }, children }) => {
   const { user } = useAuth()
   const { checkAuth, logout } = useActions()
   const { pathname } = useRouter()

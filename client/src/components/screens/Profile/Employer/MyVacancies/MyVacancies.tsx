@@ -38,9 +38,7 @@ const MyVacancies: FC = () => {
                       <Link href={'/'} className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}>
                         Редактировать
                       </Link>
-                      <div className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}>
-                        Снять с публикации
-                      </div>
+                      <div className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}>Снять с публикации</div>
                     </div>
                     <div className={styles.vacancies__dates}>
                       <p className={styles.vacancies__date}>Начало: 14.03.2003</p>
@@ -85,13 +83,9 @@ const MyVacancies: FC = () => {
                         Редактировать
                       </Link>
                       {!status ? (
-                        <div className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}>
-                          Снять с публикации
-                        </div>
+                        <div className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}>Снять с публикации</div>
                       ) : (
-                        <div className={[styles.vacancies__item, styles.vacancies__item_toactive].join(' ')}>
-                          Опубликовать
-                        </div>
+                        <div className={[styles.vacancies__item, styles.vacancies__item_toactive].join(' ')}>Опубликовать</div>
                       )}
                     </div>
                     <div className={styles.vacancies__dates}>

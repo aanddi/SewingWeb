@@ -102,26 +102,13 @@ const Companies: FC<{ companies: IEmployer[] }> = ({ companies }) => {
                   </div>
                 </div>
                 <div className={styles.ribbon__icon}>
-                  {isShow ? (
-                    <IoIosArrowUp style={{ color: '#000' }} size={20} />
-                  ) : (
-                    <IoIosArrowDown style={{ color: '#000' }} size={20} />
-                  )}
+                  {isShow ? <IoIosArrowUp style={{ color: '#000' }} size={20} /> : <IoIosArrowDown style={{ color: '#000' }} size={20} />}
                 </div>
               </div>
               <div className={styles.ribbon__cards}>
                 {companies.length > 0 ? (
                   companies.map((company, index) => {
-                    return (
-                      <CompaniesCard
-                        key={index}
-                        name={company.companyName}
-                        count={17}
-                        adress={company.adress}
-                        reviews={10}
-                        id={company.id}
-                      />
-                    )
+                    return <CompaniesCard key={index} name={company.companyName} count={17} adress={company.adress} reviews={10} id={company.id} />
                   })
                 ) : (
                   <div className={styles.ribbon__error}>Ой! Ошибка. Предприятия не найдены</div>

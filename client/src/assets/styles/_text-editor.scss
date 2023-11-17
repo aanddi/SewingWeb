@@ -6,7 +6,6 @@
 
 .ql-toolbar.ql-snow {
   border: 1px solid $grey !important;
-
   border-radius: 10px;
 }
 
@@ -16,6 +15,19 @@
   border: 1px solid $grey !important;
   border-top: none !important;
   border-radius: 0 0 10px 10px;
+}
+
+.error-text-edit .ql-container.ql-snow {
+  margin-top: -10px;
+  padding-top: 10px;
+  border: 1px solid red !important;
+  border-top: none !important;
+  border-radius: 0 0 10px 10px;
+}
+
+.error-text-edit .ql-toolbar.ql-snow{
+  border: 1px solid red !important;
+  border-radius: 10px;
 }
 
 .ql-editor .ql-size-small {

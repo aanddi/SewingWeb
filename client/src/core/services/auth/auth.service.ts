@@ -3,11 +3,10 @@ import Cookies from 'js-cookie'
 
 import { IAuthResponse, ILogin, IRegister, IUpdateUser } from '@/core/store/user/user.interface'
 
-import { persistor } from '@/core/store/store'
+import { getContentType } from '@/core/api/api.helper'
+import { instance } from '@/core/api/api.interceptor'
 
-import { removeFromStorage, saveToStorage } from './auth.helper'
-import { getContentType } from '@/api/api.helper'
-import { instance } from '@/api/api.interceptor'
+import { saveToStorage } from './auth.helper'
 
 // общий обьект сервиса
 export const AuthService = {

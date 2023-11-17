@@ -45,11 +45,7 @@ const HeaderSite: FC = () => {
                   <li className={styles.header__menuItem}>
                     <Link
                       href="/employer"
-                      className={
-                        path == '/employer'
-                          ? [styles.header__menuLink, styles.header__menuLink_active].join(' ')
-                          : styles.header__menuLink
-                      }
+                      className={path == '/employer' ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') : styles.header__menuLink}
                     >
                       Работодателю
                     </Link>
@@ -58,9 +54,7 @@ const HeaderSite: FC = () => {
                     <Link
                       href="/professions"
                       className={
-                        path == '/professions'
-                          ? [styles.header__menuLink, styles.header__menuLink_active].join(' ')
-                          : styles.header__menuLink
+                        path == '/professions' ? [styles.header__menuLink, styles.header__menuLink_active].join(' ') : styles.header__menuLink
                       }
                     >
                       Профессии

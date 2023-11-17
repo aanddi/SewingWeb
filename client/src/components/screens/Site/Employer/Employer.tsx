@@ -45,8 +45,7 @@ const Employer: FC<IEmployer> = props => {
                 </Link>
               </div>
               <p className={styles.main__description}>
-                Вакансия — это объявление о поиске сотрудника. Опишите, кто нужен, и выбирайте лучших среди
-                откликнувшихся.
+                Вакансия — это объявление о поиске сотрудника. Опишите, кто нужен, и выбирайте лучших среди откликнувшихся.
               </p>
               <Image src={head_line} alt="" className={[styles.main__pattern, styles.main__pattern_line].join(' ')} />
               <Image src={head_img1} alt="" className={[styles.main__pattern, styles.main__pattern_img1].join(' ')} />
@@ -59,24 +58,12 @@ const Employer: FC<IEmployer> = props => {
           <div className="info__container">
             <div className={styles.info__wrapper}>
               <Image src={pattern1} alt="" className={[styles.info__pattern, styles.info__pattern_top].join(' ')} />
-              <Image
-                src={pattern2}
-                alt=""
-                className={[styles.info__pattern, styles.info__pattern_rightTop].join(' ')}
-              />
-              <Image
-                src={pattern3}
-                alt=""
-                className={[styles.info__pattern, styles.info__pattern_leftBottom].join(' ')}
-              />
+              <Image src={pattern2} alt="" className={[styles.info__pattern, styles.info__pattern_rightTop].join(' ')} />
+              <Image src={pattern3} alt="" className={[styles.info__pattern, styles.info__pattern_leftBottom].join(' ')} />
               {/*
                <Image src={pattern4} alt=""  className={[styles.info__pattern, styles.info__pattern_centerBottom].join(' ')}/>
               */}
-              <Image
-                src={pattern5}
-                alt=""
-                className={[styles.info__pattern, styles.info__pattern_rightBottom].join(' ')}
-              />
+              <Image src={pattern5} alt="" className={[styles.info__pattern, styles.info__pattern_rightBottom].join(' ')} />
               <h2 className={styles.info__title}>
                 С чего начать поиск <br /> сотрудников?
               </h2>
@@ -124,9 +111,7 @@ const Employer: FC<IEmployer> = props => {
                   <div className={styles.rates__content}>
                     <div className={styles.rates__cardTitle}>Вакансия Стандарт</div>
                     <div className={styles.rates__efficiency}>
-                      <p className={[styles.rates__efficiencyNumber, styles.rates__efficiencyNumber_one].join(' ')}>
-                        x1
-                      </p>
+                      <p className={[styles.rates__efficiencyNumber, styles.rates__efficiencyNumber_one].join(' ')}>x1</p>
                       <p className={[styles.rates__efficiencyDesc, styles.rates__efficiencyDesc_one].join(' ')}>
                         обычная <br /> эффективность
                       </p>
@@ -148,17 +133,13 @@ const Employer: FC<IEmployer> = props => {
                         <div className={styles.rates__icon}>
                           <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
-                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>
-                          Продвижение в рассылке
-                        </p>
+                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Продвижение в рассылке</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
                           <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
-                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>
-                          Приоритет в поиске
-                        </p>
+                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Приоритет в поиске</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
@@ -170,9 +151,7 @@ const Employer: FC<IEmployer> = props => {
                         <div className={styles.rates__icon}>
                           <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
-                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>
-                          Топ поиска на 7 дней
-                        </p>
+                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Топ поиска на 7 дней</p>
                       </div>
                     </div>
                     <div className={styles.rates__footer}>
@@ -185,9 +164,7 @@ const Employer: FC<IEmployer> = props => {
                   <div className={styles.rates__content}>
                     <div className={styles.rates__cardTitle}>Вакансия Премиум</div>
                     <div className={styles.rates__efficiency}>
-                      <div className={[styles.rates__efficiencyNumber, styles.rates__efficiencyNumber_two].join(' ')}>
-                        x2
-                      </div>
+                      <div className={[styles.rates__efficiencyNumber, styles.rates__efficiencyNumber_two].join(' ')}>x2</div>
                       <div className={[styles.rates__efficiencyDesc, styles.rates__efficiencyDesc_two].join(' ')}>
                         в 3 раза <br /> эффективность
                       </div>
@@ -227,9 +204,7 @@ const Employer: FC<IEmployer> = props => {
                         <div className={styles.rates__icon}>
                           <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
-                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>
-                          Топ поиска на 7 дней
-                        </p>
+                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Топ поиска на 7 дней</p>
                       </div>
                     </div>
                     <div className={styles.rates__footer}>
@@ -242,9 +217,7 @@ const Employer: FC<IEmployer> = props => {
                   <div className={styles.rates__content}>
                     <div className={styles.rates__cardTitle}>Вакансия Pro</div>
                     <div className={styles.rates__efficiency}>
-                      <div className={[styles.rates__efficiencyNumber, styles.rates__efficiencyNumber_three].join(' ')}>
-                        x6
-                      </div>
+                      <div className={[styles.rates__efficiencyNumber, styles.rates__efficiencyNumber_three].join(' ')}>x6</div>
                       <div className={[styles.rates__efficiencyDesc, styles.rates__efficiencyDesc_three].join(' ')}>
                         в 6 раз <br /> эффективность
                       </div>
@@ -310,9 +283,7 @@ const Employer: FC<IEmployer> = props => {
                   <div className={styles.feedback__contentWrapper}>
                     <div className={styles.feedback__left}>
                       <h4 className={styles.feedback__write}>Напишите или позвоните</h4>
-                      <p className={styles.feedback__desc}>
-                        Техническая поддержка и менеджеры ответят на все ваши вопросы:
-                      </p>
+                      <p className={styles.feedback__desc}>Техническая поддержка и менеджеры ответят на все ваши вопросы:</p>
                       <div className={styles.feedback__contacts}>
                         <p className={styles.feedback__contactsItem}>+79780000000</p>
                         <p className={styles.feedback__contactsItem}>mailto:your@mail.ru</p>
@@ -320,15 +291,10 @@ const Employer: FC<IEmployer> = props => {
                     </div>
                     <div className={styles.feedback__right}>
                       <input type="text" placeholder="Ваша электронная почта" className={styles.feedback__input} />
-                      <textarea
-                        cols={30}
-                        rows={10}
-                        placeholder="Вашe сообщение"
-                        className={styles.feedback__textarea}
-                      ></textarea>
+                      <textarea cols={30} rows={10} placeholder="Вашe сообщение" className={styles.feedback__textarea}></textarea>
                       <p className={styles.feedback__agreement}>
-                        Нажимая кнопку «Отправить», вы принимаете условия <span>Правил</span> и <span>Соглашения</span>{' '}
-                        об использовании сайта SewingWeb.ru
+                        Нажимая кнопку «Отправить», вы принимаете условия <span>Правил</span> и <span>Соглашения</span> об использовании сайта
+                        SewingWeb.ru
                       </p>
                       <div className={styles.feedback__submit}>Отправить</div>
                     </div>

@@ -69,35 +69,25 @@ const MyCompany: FC = () => {
                       <div className={styles.company__fullLeft}>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>ИНН:</div>
-                          <div className={styles.company__desc}>
-                            {employer?.inn ? <span>{employer?.inn}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.company__desc}>{employer?.inn ? <span>{employer?.inn}</span> : <span>не указано</span>}</div>
                         </div>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Тип предприятия:</div>
-                          <div className={styles.company__desc}>
-                            {employer?.type ? <span>{employer?.type}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.company__desc}>{employer?.type ? <span>{employer?.type}</span> : <span>не указано</span>}</div>
                         </div>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Размер предприятия:</div>
-                          <div className={styles.company__desc}>
-                            {employer?.size ? <span>{employer?.size}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.company__desc}>{employer?.size ? <span>{employer?.size}</span> : <span>не указано</span>}</div>
                         </div>
                       </div>
                       <div className={styles.company__fullRight}>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Контакты:</div>
-                          <div className={styles.company__desc}>
-                            {employer?.contact ? <span>{employer?.contact}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.company__desc}>{employer?.contact ? <span>{employer?.contact}</span> : <span>не указано</span>}</div>
                         </div>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Адрес:</div>
-                          <div className={styles.company__desc}>
-                            {employer?.adress ? <span>{employer?.adress}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.company__desc}>{employer?.adress ? <span>{employer?.adress}</span> : <span>не указано</span>}</div>
                         </div>
                         <div className={styles.company__fullBlock}>
                           <div className={styles.company__label}>Город регистрации:</div>

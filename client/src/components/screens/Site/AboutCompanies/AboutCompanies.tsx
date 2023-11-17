@@ -83,9 +83,7 @@ const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
                   <div className={[styles.reviews__cardAd, styles.reviews__card].join(' ')}>
                     <Image className={styles.reviews__pattern} src={pattern} alt={' '} />
                     <div className={styles.reviews__wrapper}>
-                      <p className={styles.reviews__text}>
-                        Ваши отзывы помогают людям принимать взвешенные карьерные решения.
-                      </p>
+                      <p className={styles.reviews__text}>Ваши отзывы помогают людям принимать взвешенные карьерные решения.</p>
                       <div className={styles.reviews__btn}>Оставить отзыв</div>
                     </div>
                   </div>

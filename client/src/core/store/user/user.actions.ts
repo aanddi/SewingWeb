@@ -2,26 +2,22 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import { IAuthResponse, ILogin, IRegister } from './user.interface'
 
+import { errorCatch } from '@/core/api/api.helper'
 import { removeFromStorage, saveToStorage } from '@/core/services/auth/auth.helper'
 import { AuthService } from '@/core/services/auth/auth.service'
-
-import { errorCatch } from '@/api/api.helper'
 
 // логин
 // джейнерики: IAuthResponse - это ответ на запрос (наш юзер)
 // ILogin - т.е data - это те поля или ифнформация, которую мы отправляем
 // делаем запрос с помощью AuthService и возвращаем ответ или ошибку
-export const login = createAsyncThunk<IAuthResponse, ILogin, { rejectValue: string }>(
-  'auth/login',
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await AuthService.login(data)
-      return response
-    } catch (error: any) {
-      return rejectWithValue(error.response.data.message)
-    }
+export const login = createAsyncThunk<IAuthResponse, ILogin, { rejectValue: string }>('auth/login', async (data, { rejectWithValue }) => {
+  try {
+    const response = await AuthService.login(data)
+    return response
+  } catch (error: any) {
+    return rejectWithValue(error.response.data.message)
   }
-)
+})
 
 // Регистрация
 // та же логика что и логин

@@ -98,8 +98,7 @@ const Resume: FC = () => {
                       {resume?.profession ? <span>{resume?.profession}</span> : <span>Профессия не указана</span>}
                     </div>
                     <div className={styles.resume__salary}>
-                      <span>Желаемый доход:</span>{' '}
-                      {resume?.salary ? <span>от {formatPrice(resume?.salary)} руб.</span> : <span>не указан</span>}
+                      <span>Желаемый доход:</span> {resume?.salary ? <span>от {formatPrice(resume?.salary)} руб.</span> : <span>не указан</span>}
                     </div>
                   </div>
                   <div className={styles.resume__fullInfo}>
@@ -107,15 +106,11 @@ const Resume: FC = () => {
                       <div className={styles.resume__fullLeft}>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>Дата рождения:</div>
-                          <div className={styles.resume__desc}>
-                            {resume?.DOB ? <span>{resume?.DOB}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.resume__desc}>{resume?.DOB ? <span>{resume?.DOB}</span> : <span>не указано</span>}</div>
                         </div>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>Пол:</div>
-                          <div className={styles.resume__desc}>
-                            {resume?.gender ? <span>{resume?.gender}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.resume__desc}>{resume?.gender ? <span>{resume?.gender}</span> : <span>не указано</span>}</div>
                         </div>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>Номер телефона:</div>
@@ -125,9 +120,7 @@ const Resume: FC = () => {
                         </div>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>Эл. почта:</div>
-                          <div className={styles.resume__desc}>
-                            {resume?.email ? <span>{resume?.email}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.resume__desc}>{resume?.email ? <span>{resume?.email}</span> : <span>не указано</span>}</div>
                         </div>
                       </div>
                       <div className={styles.resume__fullRight}>
@@ -139,16 +132,12 @@ const Resume: FC = () => {
                         </div>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>Город:</div>
-                          <div className={styles.resume__desc}>
-                            {resume?.city ? <span>{resume?.city}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.resume__desc}>{resume?.city ? <span>{resume?.city}</span> : <span>не указано</span>}</div>
                         </div>
 
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>Язык:</div>
-                          <div className={styles.resume__desc}>
-                            {resume?.languages ? <span>{resume?.languages}</span> : <span>не указано</span>}
-                          </div>
+                          <div className={styles.resume__desc}>{resume?.languages ? <span>{resume?.languages}</span> : <span>не указано</span>}</div>
                         </div>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>График работы:</div>

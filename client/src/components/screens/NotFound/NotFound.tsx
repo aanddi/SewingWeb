@@ -18,9 +18,7 @@ const NotFound: FC = () => {
               <Image src={notFound} alt={'404'} width={250} />
             </div>
             <div className={styles.notFound__title}>К сожалению, такой страницы нет</div>
-            <div className={styles.notFound__subTitle}>
-              Но у нас много других страниц, где можно найти работу или сотрудника
-            </div>
+            <div className={styles.notFound__subTitle}>Но у нас много других страниц, где можно найти работу или сотрудника</div>
             <button onClick={() => router.back()} className={styles.notFound__link}>
               Вернутся назад
             </button>

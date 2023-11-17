@@ -76,16 +76,36 @@
   }
 
   &__input {
-    &_conditions {
-      input {
-        width: 50%;
-      }
-    }
+ 
   }
 
   &__line {
     margin: 35px 0;
     border-bottom: 1px dashed $blue;
+  }
+
+  &__selectBlock {
+    display: flex;
+    align-items: center;
+  }
+
+  &__select {
+    width: 100%;
+  }
+
+  &__conditions {
+   
+  }
+
+  &__selectLabel {
+    width: 250px;
+  }
+
+  &__errorField {
+    display: block;
+    color: red;
+    font-size: 12px;
+    margin-top: 7px;
   }
 
   &__salaryBlock {
@@ -205,24 +225,35 @@
     margin-top: 60px;
     display: flex;
     align-items: center;
-    gap: 50px;
+    gap: 20px;
     border-top: 1px solid $grey;
     padding-top: 30px;
+
+ 
+  }
+
+  &__error {
+    margin-top: 20px;
   }
 
   &__button {
+    all: unset;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 15px 30px;
+    justify-content: center;
+    gap: 7px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 30px;
     border-radius: 8px;
     cursor: pointer;
+    width: 200px;
+  
 
     &_post {
       color: #fff;
       background-color: $blue;
+
 
       &:hover {
         background-color: $blueHover;
@@ -247,19 +278,26 @@
 
   &__card {
     flex: 1 1 33.33%;
+
+ 
   }
 
   &__cardWrapper {
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-radius: 20px;
     background: #fff;
-    box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 12px 0px rgba(0, 0, 0, 0.25);
     padding: 20px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
+    &_active {
+      border: 2px solid $blue;
+       box-shadow: none;
+    }
+
     &:hover {
-      border: 1px solid #3490df;
+      border: 2px solid #3490df;
       box-shadow: none;
     }
   }
@@ -281,15 +319,15 @@
     line-height: 150%;
     font-weight: 600;
 
-    &_one {
+    &_1 {
       color: $blue;
     }
 
-    &_two {
+    &_2 {
       color: #f16b84;
     }
 
-    &_three {
+    &_3 {
       color: #eb193f;
     }
   }
@@ -298,15 +336,15 @@
     line-height: 120%;
     font-weight: 500;
 
-    &_one {
+    &_1 {
       color: $blue;
     }
 
-    &_two {
+    &_2 {
       color: #f16b84;
     }
 
-    &_three {
+    &_3 {
       color: #eb193f;
     }
   }

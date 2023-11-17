@@ -161,13 +161,7 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
             error={errors.adress?.message}
           />
 
-          <FieldProfile
-            {...register('registrCity', {})}
-            type={'text'}
-            title={'Город регистрации'}
-            star={false}
-            error={errors.registrCity?.message}
-          />
+          <FieldProfile {...register('registrCity', {})} type={'text'} title={'Город регистрации'} star={false} error={errors.registrCity?.message} />
         </div>
         <div className={styles.updateCompany__modalFooter}>
           <button className={styles.updateCompany__saveButton}>Сохранить</button>

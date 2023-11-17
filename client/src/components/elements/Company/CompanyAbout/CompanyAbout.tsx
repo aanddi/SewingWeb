@@ -116,12 +116,7 @@ const CompanyAbout: FC<Props> = ({ about, idEmployer }) => {
                   field.onChange(value) // Обновление значения поля
                 }}
                 modules={{
-                  toolbar: [
-                    [{ size: [] }],
-                    ['bold', 'italic', 'underline', 'strike'],
-                    [{ list: 'ordered' }, { list: 'bullet' }],
-                    ['clean']
-                  ]
+                  toolbar: [[{ size: [] }], ['bold', 'italic', 'underline', 'strike'], [{ list: 'ordered' }, { list: 'bullet' }], ['clean']]
                 }}
               />
             )}

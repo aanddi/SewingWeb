@@ -25,9 +25,7 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
           <div className="head__container">
             <div className={styles.head__wrapper}>
               <h1 className={styles.head__title}>Каталог профессий</h1>
-              <p className={styles.head__subTitle}>
-                Мы собрали для Вас все профессии, которые имеются у нас на платформе.
-              </p>
+              <p className={styles.head__subTitle}>Мы собрали для Вас все профессии, которые имеются у нас на платформе.</p>
               <div className={styles.head__searchBlock}>
                 <div className={styles.head__search}>
                   <div className={styles.head__icon}>
@@ -76,11 +74,7 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
                   </div>
                 </div>
                 <div className={styles.ribbon__icon}>
-                  {isShow ? (
-                    <IoIosArrowUp style={{ color: '#242424' }} size={20} />
-                  ) : (
-                    <IoIosArrowDown style={{ color: '#242424' }} size={20} />
-                  )}
+                  {isShow ? <IoIosArrowUp style={{ color: '#242424' }} size={20} /> : <IoIosArrowDown style={{ color: '#242424' }} size={20} />}
                 </div>
               </div>
 

@@ -1,8 +1,9 @@
 import { IResume } from '@/core/types/resume.interface'
 import { IWorkExperience } from '@/core/types/work-experience.interface'
 
+import { instance } from '@/core/api/api.interceptor'
+
 import { EducationType, UpdateAbout } from './jobseeker.helper'
-import { instance } from '@/api/api.interceptor'
 
 export const JobseekerService = {
   async getResumeByIdUser(id: number | undefined) {

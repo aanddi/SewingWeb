@@ -5,10 +5,7 @@ import { useAuth } from '@/core/hooks/useAuth'
 
 import { TypeComponentAuthFields } from './auth-page.types'
 
-const CheckRole: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
-  Component: { isOnlyEmployer, isOnlyJobSeeker },
-  children
-}) => {
+const CheckRole: FC<PropsWithChildren<TypeComponentAuthFields>> = ({ Component: { isOnlyEmployer, isOnlyJobSeeker }, children }) => {
   // проверка на залогиненного пользователя с помощью кастомного хука
   const { user } = useAuth()
 

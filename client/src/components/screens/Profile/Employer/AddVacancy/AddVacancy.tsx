@@ -1,18 +1,28 @@
+import { useQuery } from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
-import { useForm } from 'react-hook-form'
+import { FC, useEffect, useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import 'react-quill/dist/quill.snow.css'
+import Select, { MultiValue } from 'react-select'
 
 import styles from './AddVacancy.module.scss'
 
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
+import ErrorForm from '@/components/ui/ErrorForm/ErrorForm'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 
-import { CiSaveDown2 } from 'react-icons/ci'
-import { CiSaveUp2 } from 'react-icons/ci'
+import { ITarifVacancy } from '@/core/types/tarif-vacancy.interface'
+import { IVacancy } from '@/core/types/vacancy.interface'
+
+import { useEmployer } from '@/core/hooks/useEmployer'
+import { useProfessions } from '@/core/hooks/useProfessions'
+import { VacancyService } from '@/core/services/vacancy/vacancy.service'
+import { education, employmentType, skills, tagsList, workExperience, workTimetable } from '@/core/utils/select-vacancy-data'
+
+import { CiSaveDown2, CiSaveUp2 } from 'react-icons/ci'
 import { FiInfo } from 'react-icons/fi'
 
 import img from 'public/Employers/imageBaner01.svg'
@@ -20,6 +30,52 @@ import img from 'public/Employers/imageBaner01.svg'
 const QuillNoSSRWrapper = dynamic(async () => (await import('react-quill')).default, { ssr: false })
 
 const AddVacancy: FC = () => {
+  const [desc, setDesc] = useState('')
+  const { data: employer } = useEmployer()
+
+  const employerId = employer?.id
+
+  // ========== TARIF AND PAY =============================
+  const { data: tarifs } = useQuery<ITarifVacancy[]>({
+    queryKey: ['tarifVacancy'],
+    queryFn: async () => {
+      const response = await VacancyService.getTarif()
+      return response.data
+    }
+  })
+
+  const [activeTarif, setActiveTarif] = useState<number | undefined>(undefined)
+
+  // ========== TAGS =============================
+  const [tags, setTags] = useState<string[]>([])
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    const isChecked = e.target.checked
+
+    // Если чекбокс выбран, добавляем значение в data
+    if (isChecked) {
+      setTags([...tags, value])
+    } else {
+      // Если чекбокс снят, удаляем значение из data
+      setTags(tags.filter(item => item !== value))
+    }
+  }
+
+  // ========== PROFESSIONS =============================
+
+  const { data: professions } = useProfessions()
+
+  const profession = professions?.map(elem => ({
+    value: elem.id,
+    label: elem.name
+  }))
+
+  // ========== REACT HOOK FORM =============================
+
+  // save error server
+  const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
+
   const {
     register,
     handleSubmit,
@@ -27,10 +83,62 @@ const AddVacancy: FC = () => {
     setValue,
     control,
     formState: { errors }
-  } = useForm({
+  } = useForm<IVacancy>({
     mode: 'onChange',
-    defaultValues: {}
+    defaultValues: {
+      employerId: employerId
+    }
   })
+
+  useEffect(() => {
+    const tagsString = tags.join(', ')
+    if (tags) {
+      setValue('tags', tagsString)
+    }
+
+    if (activeTarif) {
+      setValue('tarifId', activeTarif)
+    }
+
+    if (activeTarif !== undefined && tarifs) {
+      setValue('tarifId', activeTarif)
+
+      //======= DATE =============
+      const date = new Date('2023-11-16T22:52:50.265Z')
+
+      const start = date.toISOString()
+      setValue('dateStart', start)
+
+      console.log(tarifs[activeTarif].id)
+
+      date.setDate(date.getDate() + tarifs[activeTarif].time)
+
+      const end = date.toISOString()
+      setValue('dateEnd', end)
+    }
+  }, [tags, activeTarif, tarifs, setValue])
+
+  const onSubmit: SubmitHandler<IVacancy> = async data => {
+    data.status = true
+    try {
+      const response = await VacancyService.create(data)
+      reset()
+    } catch (error: any) {
+      setErrorUpdate(error.response.data.message)
+    }
+  }
+
+  const onSave: SubmitHandler<IVacancy> = async data => {
+    data.status = false
+    console.log(data)
+    try {
+      const response = await VacancyService.create(data)
+      reset()
+    } catch (error: any) {
+      setErrorUpdate(error.response.data.message)
+    }
+  }
+
   return (
     <SiteLayout background={'#fff'}>
       <div className={styles.addVacancy}>
@@ -48,7 +156,7 @@ const AddVacancy: FC = () => {
             </div>
           </div>
           <div className={styles.addVacancy__content}>
-            <div className={styles.addVacancy__wrapper}>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.addVacancy__wrapper}>
               <div className={styles.addVacancy__header}>
                 <ProfileTitle title={'Добавить вакансию'} />
               </div>
@@ -62,39 +170,68 @@ const AddVacancy: FC = () => {
                 </div>
                 <div className={styles.addVacancy__inputs}>
                   <FieldProfile
-                    // {...register('companyName', {
-                    //   required: 'Укажите название предприятия'
-                    // })}
+                    {...register('title', {
+                      required: 'Укажите название вакансии'
+                    })}
                     type={'text'}
                     title={'Название вакансии'}
                     star={true}
-                    // error={errors.companyName?.message}
+                    error={errors.title?.message}
                   />
-                  <FieldProfile
-                    // {...register('companyName', {
-                    //   required: 'Укажите название предприятия'
-                    // })}
-                    type={'text'}
-                    title={'Профессия'}
-                    star={true}
-                    // error={errors.companyName?.message}
-                  />
+                  <div className={styles.addVacancy__selectBlock}>
+                    <div className={styles.addVacancy__selectLabel}>
+                      <span>Должность</span>
+                      <span className={styles.addVacancy__required}>*</span>
+                    </div>
+                    <div className={styles.addVacancy__select}>
+                      <Controller
+                        name="professionId"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <Select
+                            classNamePrefix="custom-select"
+                            options={profession ? profession : []}
+                            placeholder=""
+                            isSearchable
+                            value={profession ? profession.find(option => option.value === field.value) : null}
+                            hideSelectedOptions={false}
+                            isMulti={false}
+                            noOptionsMessage={() => 'Нет такой профессии'}
+                            onChange={selectedOption => {
+                              if (selectedOption) {
+                                field.onChange(selectedOption.value) // Сохраняем только значение value
+                              }
+                            }}
+                            styles={{
+                              control: (provided, state) => ({
+                                ...provided,
+                                borderColor: errors?.professionId ? '#EB0000' : provided.borderColor
+                              })
+                            }}
+                          />
+                        )}
+                      />
+                      {errors.professionId && <span className={styles.addVacancy__errorField}>Укажите подходящую профессию</span>}
+                    </div>
+                  </div>
                 </div>
                 <div className={styles.addVacancy__salaryBlock}>
                   <div className={styles.addVacancy__labelSalary}>Зарплата</div>
                   <div className={styles.addVacancy__salary}>
                     <div className={styles.addVacancy__salaryVield}>
-                      <input type="number" placeholder="от" />
+                      <input {...register('minSalary')} type="number" placeholder="от" />
                     </div>
                     <span>—</span>
 
                     <div className={styles.addVacancy__salaryVield}>
-                      <input type="number" placeholder="до" />
+                      <input {...register('maxSalary')} type="number" placeholder="до" />
                     </div>
                     <span className={styles.addVacancy__rub}>руб. / мес</span>
                   </div>
                 </div>
               </div>
+
               <div className={styles.addVacancy__line}></div>
               <div className={styles.addVacancy__shortDesc}>
                 <h3 className={styles.addVacancy__titleBlock}>Описание и требования</h3>
@@ -109,104 +246,215 @@ const AddVacancy: FC = () => {
                   <span>Краткое описание на карточке вакансии</span>
                   <span className={styles.addVacancy__required}>*</span>
                 </div>
-                <textarea></textarea>
+                <textarea
+                  {...register('descCard', {
+                    required: 'Укажите описание вакансии'
+                  })}
+                  style={errors.descCard ? { borderColor: 'red' } : undefined}
+                ></textarea>
+                {errors.descCard && <span className={styles.addVacancy__errorField}>Укажите описание карточки вакансии</span>}
               </div>
               <div className={styles.addVacancy__inputs}>
                 <FieldProfile
-                  // {...register('companyName', {
-                  //   required: 'Укажите название предприятия'
-                  // })}
+                  {...register('city', {
+                    required: 'Укажите город'
+                  })}
                   type={'text'}
                   title={'Город'}
                   star={true}
-                  // error={errors.companyName?.message}
+                  error={errors.city?.message}
                 />
                 <FieldProfile
-                  // {...register('companyName', {
-                  //   required: 'Укажите название предприятия'
-                  // })}
+                  {...register('adress', {
+                    required: 'Укажите адрес'
+                  })}
                   type={'text'}
                   title={'Адрес'}
                   star={true}
-                  // error={errors.companyName?.message}
+                  error={errors.adress?.message}
                 />
-                <FieldProfile
-                  // {...register('companyName', {
-                  //   required: 'Укажите название предприятия'
-                  // })}
-                  type={'text'}
-                  title={'Ключевые навыки'}
-                  star={true}
-                  placeholder="добавить навык"
-                  // error={errors.companyName?.message}
-                />
-                <div className={[styles.addVacancy__input, styles.addVacancy__input_conditions].join(' ')}>
-                  <FieldProfile
-                    // {...register('companyName', {
-                    //   required: 'Укажите название предприятия'
-                    // })}
-                    type={'text'}
-                    title={'Опыт работы'}
-                    star={true}
-                    // error={errors.companyName?.message}
-                  />
+                <div className={styles.addVacancy__selectBlock}>
+                  <div className={styles.addVacancy__selectLabel}>
+                    <span>Ключевые навыки </span>
+                  </div>
+                  <div className={styles.addVacancy__select}>
+                    <Controller
+                      name="skills"
+                      control={control}
+                      rules={{ required: false }}
+                      render={({ field }) => (
+                        <Select
+                          classNamePrefix="custom-select"
+                          options={skills ? skills : []}
+                          placeholder=""
+                          isMulti={true}
+                          // value={skills}
+                          onChange={(selectedOptions: MultiValue<{ value: string; label: string }>) => {
+                            const selectedValues = selectedOptions.map(option => option.value).join(', ')
+                            field.onChange(selectedValues)
+                            // setWorkTime(selectedOptions)
+                          }}
+                        />
+                      )}
+                    />
+                  </div>
                 </div>
-                <div className={[styles.addVacancy__input, styles.addVacancy__input_conditions].join(' ')}>
-                  <FieldProfile
-                    // {...register('companyName', {
-                    //   required: 'Укажите название предприятия'
-                    // })}
-                    type={'text'}
-                    title={'Тип занятости'}
-                    star={true}
 
-                    // error={errors.companyName?.message}
-                  />
+                <div className={styles.addVacancy__selectBlock}>
+                  <div className={styles.addVacancy__selectLabel}>
+                    <span>Опыт работы </span>
+                    <span className={styles.addVacancy__required}>*</span>
+                  </div>
+                  <div className={[styles.addVacancy__select, styles.addVacancy__select_conditions].join(' ')}>
+                    <Controller
+                      name="workExperience"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Select
+                          classNamePrefix="custom-select"
+                          options={workExperience ? workExperience : []}
+                          placeholder=""
+                          value={workExperience ? workExperience.find(option => option.value === field.value) : null}
+                          hideSelectedOptions={false}
+                          isMulti={false}
+                          onChange={selectedOption => {
+                            if (selectedOption) {
+                              field.onChange(selectedOption.value) // Сохраняем только значение value
+                            }
+                          }}
+                          styles={{
+                            control: (provided, state) => ({
+                              ...provided,
+                              borderColor: errors?.workExperience ? '#EB0000' : provided.borderColor
+                            })
+                          }}
+                        />
+                      )}
+                    />
+                    {errors.workExperience && <span className={styles.addVacancy__errorField}>Укажите опыт работы</span>}
+                  </div>
                 </div>
-                <div className={[styles.addVacancy__input, styles.addVacancy__input_conditions].join(' ')}>
-                  <FieldProfile
-                    // {...register('companyName', {
-                    //   required: 'Укажите название предприятия'
-                    // })}
-                    type={'text'}
-                    title={'График работы'}
-                    star={true}
 
-                    // error={errors.companyName?.message}
-                  />
+                <div className={styles.addVacancy__selectBlock}>
+                  <div className={styles.addVacancy__selectLabel}>
+                    <span>Тип занятости </span>
+                    <span className={styles.addVacancy__required}>*</span>
+                  </div>
+                  <div className={[styles.addVacancy__select, styles.addVacancy__select_conditions].join(' ')}>
+                    <Controller
+                      name="employmentType"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Select
+                          classNamePrefix="custom-select"
+                          options={employmentType ? employmentType : []}
+                          placeholder=""
+                          value={employmentType ? employmentType.find(option => option.value === field.value) : null}
+                          hideSelectedOptions={false}
+                          isMulti={false}
+                          onChange={selectedOption => {
+                            if (selectedOption) {
+                              field.onChange(selectedOption.value) // Сохраняем только значение value
+                            }
+                          }}
+                          styles={{
+                            control: (provided, state) => ({
+                              ...provided,
+                              borderColor: errors?.employmentType ? '#EB0000' : provided.borderColor
+                            })
+                          }}
+                        />
+                      )}
+                    />
+                    {errors.workExperience && <span className={styles.addVacancy__errorField}>Укажите тип занятости</span>}
+                  </div>
                 </div>
-                <div className={[styles.addVacancy__input, styles.addVacancy__input_conditions].join(' ')}>
-                  <FieldProfile
-                    // {...register('companyName', {
-                    //   required: 'Укажите название предприятия'
-                    // })}
-                    type={'text'}
-                    title={'Образование'}
-                    star={false}
 
-                    // error={errors.companyName?.message}
-                  />
+                <div className={styles.addVacancy__selectBlock}>
+                  <div className={styles.addVacancy__selectLabel}>
+                    <span>График работы </span>
+                    <span className={styles.addVacancy__required}>*</span>
+                  </div>
+                  <div className={[styles.addVacancy__select, styles.addVacancy__select_conditions].join(' ')}>
+                    <Controller
+                      name="workTimetable"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Select
+                          classNamePrefix="custom-select"
+                          options={workTimetable ? workTimetable : []}
+                          placeholder=""
+                          value={workTimetable ? workTimetable.find(option => option.value === field.value) : null}
+                          hideSelectedOptions={false}
+                          isMulti={false}
+                          onChange={selectedOption => {
+                            if (selectedOption) {
+                              field.onChange(selectedOption.value) // Сохраняем только значение value
+                            }
+                          }}
+                          styles={{
+                            control: (provided, state) => ({
+                              ...provided,
+                              borderColor: errors?.workTimetable ? '#EB0000' : provided.borderColor
+                            })
+                          }}
+                        />
+                      )}
+                    />
+                    {errors.workExperience && <span className={styles.addVacancy__errorField}>Укажите график работы</span>}
+                  </div>
+                </div>
+
+                <div className={styles.addVacancy__selectBlock}>
+                  <div className={styles.addVacancy__selectLabel}>
+                    <span>Образование </span>
+                    <span className={styles.addVacancy__required}>*</span>
+                  </div>
+                  <div className={[styles.addVacancy__select, styles.addVacancy__select_conditions].join(' ')}>
+                    <Controller
+                      name="education"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Select
+                          classNamePrefix="custom-select"
+                          options={education ? education : []}
+                          placeholder=""
+                          value={education ? education.find(option => option.value === field.value) : null}
+                          hideSelectedOptions={false}
+                          isMulti={false}
+                          onChange={selectedOption => {
+                            if (selectedOption) {
+                              field.onChange(selectedOption.value) // Сохраняем только значение value
+                            }
+                          }}
+                          styles={{
+                            control: (provided, state) => ({
+                              ...provided,
+                              borderColor: errors?.education ? '#EB0000' : provided.borderColor
+                            })
+                          }}
+                        />
+                      )}
+                    />
+                    {errors.education && <span className={styles.addVacancy__errorField}>Укажите опыт образование</span>}
+                  </div>
                 </div>
               </div>
               <div className={styles.addVacancy__tags}>
                 <div className={styles.addVacancy__tagsLabel}>Вакансия подходит для</div>
                 <div className={styles.addVacancy__tagsList}>
-                  <div className={styles.addVacancy__tag}>
-                    <input type="checkbox" />
-                    <span>Студентов</span>
-                  </div>
-                  <div className={styles.addVacancy__tag}>
-                    <input type="checkbox" />
-                    <span>Пенсионеров(Возвраст 60+)</span>
-                  </div>
-                  <div className={styles.addVacancy__tag}>
-                    <input type="checkbox" />
-                    <span>Соискателей с инвалидностью</span>
-                  </div>
-                  <div className={styles.addVacancy__tag}>
-                    <input type="checkbox" />
-                    <span>Иностранных граждан</span>
-                  </div>
+                  {tagsList.map((item, index) => {
+                    return (
+                      <div className={styles.addVacancy__tag}>
+                        <input type="checkbox" value={item.value} onChange={handleCheckboxChange} />
+                        <span>{item.label}</span>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
               <div className={styles.addVacancy__desc}>
@@ -221,17 +469,25 @@ const AddVacancy: FC = () => {
                   <span>Описание вакансии</span>
                   <span className={styles.addVacancy__required}>*</span>
                 </div>
-
-                <QuillNoSSRWrapper
-                  modules={{
-                    toolbar: [
-                      [{ size: [] }],
-                      ['bold', 'italic', 'underline', 'strike'],
-                      [{ list: 'ordered' }, { list: 'bullet' }],
-                      ['clean']
-                    ]
-                  }}
+                <Controller
+                  name="descMain"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <QuillNoSSRWrapper
+                      value={field.value || ''}
+                      onChange={value => {
+                        field.onChange(value)
+                        setDesc(value)
+                      }}
+                      className={errors.descMain || field.value == '<p><br></p>' ? 'error-text-edit' : undefined}
+                      modules={{
+                        toolbar: [[{ size: [] }], ['bold', 'italic', 'underline', 'strike'], [{ list: 'ordered' }, { list: 'bullet' }], ['clean']]
+                      }}
+                    />
+                  )}
                 />
+                {errors.descMain || desc === '<p><br></p>' ? <span className={styles.addVacancy__errorField}>Укажите описание вакансии</span> : null}
               </div>
               <div className={styles.addVacancy__line}></div>
               <div className={styles.addVacancy__contactPerson}>
@@ -244,37 +500,26 @@ const AddVacancy: FC = () => {
                 </div>
                 <div className={styles.addVacancy__inputs}>
                   <FieldProfile
-                    // {...register('companyName', {
-                    //   required: 'Укажите название предприятия'
-                    // })}
+                    {...register('fullName', {
+                      required: 'Укажите контактное лицо'
+                    })}
                     type={'text'}
                     title={'ФИО'}
                     star={true}
-
-                    // error={errors.companyName?.message}
+                    error={errors.fullName?.message}
                   />
 
                   <FieldProfile
-                    // {...register('companyName', {
-                    //   required: 'Укажите название предприятия'
-                    // })}
+                    {...register('phoneNumber', {
+                      required: 'Укажите номер телефона контактного лица'
+                    })}
                     type={'text'}
                     title={'Номер телефона'}
                     star={true}
-
-                    // error={errors.companyName?.message}
+                    error={errors.phoneNumber?.message}
                   />
 
-                  <FieldProfile
-                    // {...register('companyName', {
-                    //   required: 'Укажите название предприятия'
-                    // })}
-                    type={'text'}
-                    title={'Другой способ связи'}
-                    star={false}
-
-                    // error={errors.companyName?.message}
-                  />
+                  <FieldProfile {...register('contact')} type={'text'} title={'Другой способ связи'} star={false} />
                 </div>
               </div>
               <div className={styles.addVacancy__line}></div>
@@ -293,97 +538,57 @@ const AddVacancy: FC = () => {
                   </div>
                 </div>
                 <div className={styles.addVacancy__cards}>
-                  <div className={styles.addVacancy__card}>
-                    <div className={styles.addVacancy__cardWrapper}>
-                      <div className={styles.addVacancy__cardTitle}>Вакансия Стандарт</div>
-                      <div className={styles.addVacancy__efficiency}>
+                  {tarifs?.map((elem, index) => {
+                    return (
+                      <div key={index} className={styles.addVacancy__card} onClick={() => setActiveTarif(index)}>
                         <div
-                          className={[
-                            styles.addVacancy__efficiencyNumber,
-                            styles.addVacancy__efficiencyNumber_one
-                          ].join(' ')}
+                          className={
+                            tarifs && activeTarif == index
+                              ? [styles.addVacancy__cardWrapper, styles.addVacancy__cardWrapper_active].join(' ')
+                              : styles.addVacancy__cardWrapper
+                          }
                         >
-                          x1
-                        </div>
-                        <div
-                          className={[styles.addVacancy__efficiencyDesc, styles.addVacancy__efficiencyDesc_one].join(
-                            ' '
-                          )}
-                        >
-                          в 1 раз <br /> эффективность
-                        </div>
-                      </div>
-                      <div className={styles.addVacancy__cardFooter}>
-                        <p className={styles.addVacancy__cardSalary}>0 рублей</p>
-                        <p>публикация на 7 дней</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.addVacancy__card}>
-                    <div className={styles.addVacancy__cardWrapper}>
-                      <div className={styles.addVacancy__cardTitle}>Вакансия Премиум</div>
-                      <div className={styles.addVacancy__efficiency}>
-                        <div
-                          className={[
-                            styles.addVacancy__efficiencyNumber,
-                            styles.addVacancy__efficiencyNumber_two
-                          ].join(' ')}
-                        >
-                          x3
-                        </div>
-                        <div
-                          className={[styles.addVacancy__efficiencyDesc, styles.addVacancy__efficiencyDesc_two].join(
-                            ' '
-                          )}
-                        >
-                          в 3 раз <br /> эффективность
+                          <div className={styles.addVacancy__cardTitle}>Вакансия {elem.name}</div>
+                          <div className={styles.addVacancy__efficiency}>
+                            <div
+                              className={[styles.addVacancy__efficiencyNumber, styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]].join(' ')}
+                            >
+                              x{index + 1}
+                            </div>
+                            <div className={[styles.addVacancy__efficiencyDesc, styles[`addVacancy__efficiencyDesc_${(index % 3) + 1}`]].join(' ')}>
+                              в {index + 1} раз <br /> эффективность
+                            </div>
+                          </div>
+                          <div className={styles.addVacancy__cardFooter}>
+                            <p className={styles.addVacancy__cardSalary}>{elem.salary} рублей</p>
+                            <p>публикация на {elem.time} дней</p>
+                          </div>
                         </div>
                       </div>
-                      <div className={styles.addVacancy__cardFooter}>
-                        <p className={styles.addVacancy__cardSalary}>999 рублей</p>
-                        <p>публикация на 15 дней</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.addVacancy__card}>
-                    <div className={styles.addVacancy__cardWrapper}>
-                      <div className={styles.addVacancy__cardTitle}>Вакансия Про</div>
-                      <div className={styles.addVacancy__efficiency}>
-                        <div
-                          className={[
-                            styles.addVacancy__efficiencyNumber,
-                            styles.addVacancy__efficiencyNumber_three
-                          ].join(' ')}
-                        >
-                          x6
-                        </div>
-                        <div
-                          className={[styles.addVacancy__efficiencyDesc, styles.addVacancy__efficiencyDesc_three].join(
-                            ' '
-                          )}
-                        >
-                          в 6 раз <br /> эффективность
-                        </div>
-                      </div>
-                      <div className={styles.addVacancy__cardFooter}>
-                        <p className={styles.addVacancy__cardSalary}>1990 рублей</p>
-                        <p>публикация на 25 дней</p>
-                      </div>
-                    </div>
-                  </div>
+                    )
+                  })}
                 </div>
               </div>
               <div className={styles.addVacancy__footer}>
-                <div className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
-                  <CiSaveUp2 size={20} style={{ color: '#fff', strokeWidth: '1' }} />
-                  <span> Разместить вакансию</span>
-                </div>
-                <div className={[styles.addVacancy__button, styles.addVacancy__button_save].join(' ')}>
+                {activeTarif !== undefined && tarifs && tarifs[activeTarif].salary == 0 ? (
+                  <button className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
+                    <span>Опубликовать вакансию</span>
+                  </button>
+                ) : (
+                  <div className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
+                    <span>Перейти к оплате</span>
+                  </div>
+                )}
+
+                <div onClick={handleSubmit(onSave)} className={[styles.addVacancy__button, styles.addVacancy__button_save].join(' ')}>
                   <CiSaveDown2 size={20} style={{ strokeWidth: '1' }} />
                   <span>Сохранить вакансию</span>
                 </div>
               </div>
-            </div>
+              <p className={styles.addVacancy__error}>
+                <ErrorForm>{errorUpdate}</ErrorForm>
+              </p>
+            </form>
           </div>
         </div>
       </div>

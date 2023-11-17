@@ -32,11 +32,7 @@ const ResumeModal: FC<PropsWithChildren<Props>> = ({ active, setActive, children
 
   return (
     <>
-      <div
-        className={
-          active ? [styles.modal, styles.modal__active].join(' ') : [styles.modal, styles.modal__unactive].join(' ')
-        }
-      >
+      <div className={active ? [styles.modal, styles.modal__active].join(' ') : [styles.modal, styles.modal__unactive].join(' ')}>
         <div className={styles.modal__content} onClick={e => e.stopPropagation()}>
           {children}
         </div>

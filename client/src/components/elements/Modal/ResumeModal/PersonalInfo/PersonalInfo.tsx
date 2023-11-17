@@ -13,6 +13,7 @@ import { IResume } from '@/core/types/resume.interface'
 
 import { validMail, validPhone } from '@/core/helpers/valid-field'
 import { useAuth } from '@/core/hooks/useAuth'
+import { useProfessions } from '@/core/hooks/useProfessions'
 import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { ProfessionService } from '@/core/services/profession/profession.service'
 import { citizenship, languages, mouth, workTimetable } from '@/core/utils/select-resume-data'
@@ -25,13 +26,7 @@ interface IPersonalInfo {
 
 const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
   // ========== Professions =============================
-  const { data: professions } = useQuery({
-    queryKey: ['profession'],
-    queryFn: async () => {
-      const response = await ProfessionService.getAll()
-      return response.data
-    }
-  })
+  const { data: professions } = useProfessions()
 
   const profession = professions?.map(elem => ({
     value: elem.name,
@@ -108,7 +103,6 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
 
   // submit forma
   const onSubmit: SubmitHandler<IResume> = async data => {
-    console.log(data)
     try {
       const response = await JobseekerService.updateResumeByIdUser(user?.id, data)
       queryClient.invalidateQueries({ queryKey: ['resume'] })
@@ -174,13 +168,7 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
             error={errors.surname?.message}
           />
 
-          <FieldProfile
-            {...register('patronymic')}
-            type={'text'}
-            title={'Отчество'}
-            star={false}
-            error={errors.patronymic?.message}
-          />
+          <FieldProfile {...register('patronymic')} type={'text'} title={'Отчество'} star={false} error={errors.patronymic?.message} />
 
           <div className={styles.formInfo__block}>
             <div className={styles.formInfo__label}>
