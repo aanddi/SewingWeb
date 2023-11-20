@@ -1,4 +1,4 @@
-import { IMyVacancy, IRibbonResponse, IVacancyResponse } from './vacancy.interface'
+import { IMyVacancy, IRibbonById, IRibbonResponse, IVacancyResponse } from './vacancy.interface'
 import { ITarifVacancy } from '@/core/types/tarif-vacancy.interface'
 import { IVacancy } from '@/core/types/vacancy.interface'
 
@@ -16,6 +16,13 @@ export const VacancyService = {
   async getRibbon(page: number) {
     return instance<IRibbonResponse>({
       url: `/vacancy/ribbon/?page=${page}`,
+      method: 'GET'
+    })
+  },
+
+  async getRibbonById(id: number) {
+    return instance<IRibbonById>({
+      url: `/vacancy/ribbon/${id}`,
       method: 'GET'
     })
   },

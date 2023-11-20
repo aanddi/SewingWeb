@@ -19,14 +19,16 @@ import pattern from 'public/Companies/pattern.svg'
 import ad from 'public/ad/ad.png'
 
 const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
-  const { data: vacancies } = useQuery({
+
+  const { data: ribbonVacancies } = useQuery({
     queryKey: ['vacancies'],
     queryFn: async () => {
-      const response = await VacancyService.getMyVacancies(company.id)
-      return response
+      const response = await VacancyService.getRibbonById(company.id)
+      return response.data
     },
     enabled: !!company
   })
+
   return (
     <SiteLayout background={'#fff'}>
       <div className={styles.aboutCompany}>
@@ -34,7 +36,7 @@ const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
           <div className={styles.aboutCompany__wrapper}>
             <div className={styles.aboutCompany__content}>
               <section className={styles.aboutCompany__header}>
-                <CompanyHeader companyName={company.companyName} vacancy={2} reviews={2} />
+                <CompanyHeader companyName={company.companyName} vacancy={ribbonVacancies?.totalVacancies} reviews={2} />
               </section>
               <section className={[styles.aboutCompany__info, styles.info].join(' ')}>
                 <div className={styles.info__left}>
@@ -102,7 +104,7 @@ const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
               <section className={[styles.aboutCompany__vacancies, styles.vacancies].join(' ')}>
                 <div className={styles.vacancies__title}>Вакансии</div>
                 <div className={styles.vacancies__ribbon}>
-                  {vacancies?.map((vacancy, index) => {
+                  {ribbonVacancies?.vacancies.map((vacancy, index) => {
                     return <VacanciesCard key={index} vacancy={vacancy} />
                   })}
                 </div>

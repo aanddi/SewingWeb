@@ -97,7 +97,17 @@ export class VacancyService {
       }
     })
 
-    return vacancies
+    const totalVacancies = await this.prisma.vacancy.count({
+      where: {
+        employerId: +idEmployer,
+        status: true
+      }
+    })
+
+    return {
+      vacancies: vacancies,
+      totalVacancies: totalVacancies
+    }
   }
 
   async getMyVacancies(idEmployer: number) {

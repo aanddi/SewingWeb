@@ -5,7 +5,6 @@ export interface IVacancyResponse extends IVacancy {
   companyName: string
 }
 
-// лента
 export interface IRibbonResponse {
   vacancies: IVacancyCard[]
   totalVacancies: number
@@ -48,4 +47,10 @@ export interface IMyVacancy {
     id: number
     companyName: string
   }
+}
+
+export interface IRibbonById {
+  vacancies: IVacancyCard[]
+  totalVacancies: number
+  
 }

@@ -1,16 +1,16 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 
 import styles from './MyVacancies.module.scss'
 
+import LoadingSpinner from '@/components/elements/Loading/LoadingSpinner'
 import WarningModal from '@/components/elements/Modal/WarningModal/WarningModal'
 import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 
-import { IMyVacancy, IRibbonResponse, IVacancyResponse } from '@/core/services/vacancy/vacancy.interface'
-import { IVacancy } from '@/core/types/vacancy.interface'
+import { IMyVacancy } from '@/core/services/vacancy/vacancy.interface'
 
 import { useEmployer } from '@/core/hooks/useEmployer'
 import { VacancyService } from '@/core/services/vacancy/vacancy.service'
@@ -27,9 +27,9 @@ const MyVacancies: FC = () => {
   const [unpublicationId, setUnpublicationId] = useState<number | undefined>(undefined)
   const queryClient = useQueryClient()
 
-  const { data: employer } = useEmployer()
+  const { data: employer, isLoading: isLoadingEmployer } = useEmployer()
 
-  const { data: vacancies } = useQuery<IMyVacancy[]>({
+  const { data: vacancies, isLoading: isLoadingVacancies } = useQuery<IMyVacancy[]>({
     queryKey: ['vacancies', employer?.id],
     queryFn: async () => {
       const response = VacancyService.getMyVacancies(employer?.id)
@@ -37,8 +37,6 @@ const MyVacancies: FC = () => {
     },
     enabled: !!employer
   })
-
-  console.log(vacancies)
 
   return (
     <SiteLayout background={'#fff'}>
@@ -54,7 +52,9 @@ const MyVacancies: FC = () => {
                 <span>Создать</span>
               </Link>
             </div>
-            {vacancies?.length ? (
+            {isLoadingEmployer || isLoadingVacancies ? (
+              <LoadingSpinner />
+            ) : vacancies?.length ? (
               <div className={styles.vacancies__list}>
                 {vacancies?.map((elem, index) => {
                   return (
@@ -75,15 +75,13 @@ const MyVacancies: FC = () => {
                                     setUnpublication(true)
                                     setUnpublicationId(elem.id)
                                   }}
-                                  className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
-                                >
+                                  className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}>
                                   Снять с публикации
                                 </div>
                                 <WarningModal
                                   message={'Если это платная вакансия, вам придется снова оплатить тариф, чтобы опубликовать'}
                                   active={unpublication}
-                                  setActive={setUnpublication}
-                                >
+                                  setActive={setUnpublication}>
                                   <span
                                     className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
                                     onClick={async () => {
@@ -91,8 +89,7 @@ const MyVacancies: FC = () => {
                                       setUnpublication(false)
                                       setUnpublicationId(undefined)
                                       queryClient.invalidateQueries({ queryKey: ['vacancies'] })
-                                    }}
-                                  >
+                                    }}>
                                     Снять с публикации
                                   </span>
                                 </WarningModal>
@@ -107,8 +104,7 @@ const MyVacancies: FC = () => {
                                     setDeleteVacancy(true)
                                     setDeleteVacancyId(elem.id)
                                   }}
-                                  className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
-                                >
+                                  className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}>
                                   Удалить
                                 </div>
                                 <WarningModal active={deleteVacancy} setActive={setDeleteVacancy}>
@@ -119,8 +115,7 @@ const MyVacancies: FC = () => {
                                       setDeleteVacancy(false)
                                       setDeleteVacancyId(undefined)
                                       queryClient.invalidateQueries({ queryKey: ['vacancies'] })
-                                    }}
-                                  >
+                                    }}>
                                     Удалить
                                   </div>
                                 </WarningModal>
@@ -151,6 +146,8 @@ const MyVacancies: FC = () => {
                   )
                 })}
               </div>
+            ) : !isLoadingVacancies && !!isLoadingVacancies && !vacancies?.length ? (
+              <p className={styles.vacancies__notVacancies}>У вас нет вакансий</p>
             ) : (
               <p className={styles.vacancies__notVacancies}>У вас нет вакансий</p>
             )}

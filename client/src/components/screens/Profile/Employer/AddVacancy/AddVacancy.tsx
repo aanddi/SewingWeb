@@ -118,13 +118,13 @@ const AddVacancy: FC = () => {
       //======= DATE =============
       const date = new Date('2023-11-16T22:52:50.265Z')
 
-      const start = date.toISOString()
+      const start: any = date.toISOString()
       setValue('dateStart', start)
 
       // вычисление срока вакансии
       date.setDate(date.getDate() + tarifs[activeTarif].time)
 
-      const end = date.toISOString()
+      const end: any = date.toISOString()
       setValue('dateEnd', end)
     }
   }, [tags, employer, activeTarif, tarifs, setValue])
@@ -278,8 +278,7 @@ const AddVacancy: FC = () => {
                   {...register('descCard', {
                     required: 'Укажите описание вакансии'
                   })}
-                  style={errors.descCard ? { borderColor: 'red' } : undefined}
-                ></textarea>
+                  style={errors.descCard ? { borderColor: 'red' } : undefined}></textarea>
                 {errors.descCard && <span className={styles.addVacancy__errorField}>Укажите описание карточки вакансии</span>}
               </div>
               <div className={styles.addVacancy__inputs}>
@@ -584,13 +583,11 @@ const AddVacancy: FC = () => {
                             tarifs && activeTarif == index
                               ? [styles.addVacancy__cardWrapper, styles.addVacancy__cardWrapper_active].join(' ')
                               : styles.addVacancy__cardWrapper
-                          }
-                        >
+                          }>
                           <div className={styles.addVacancy__cardTitle}>Вакансия {elem.name}</div>
                           <div className={styles.addVacancy__efficiency}>
                             <div
-                              className={[styles.addVacancy__efficiencyNumber, styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]].join(' ')}
-                            >
+                              className={[styles.addVacancy__efficiencyNumber, styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]].join(' ')}>
                               x{index + 1}
                             </div>
                             <div className={[styles.addVacancy__efficiencyDesc, styles[`addVacancy__efficiencyDesc_${(index % 3) + 1}`]].join(' ')}>

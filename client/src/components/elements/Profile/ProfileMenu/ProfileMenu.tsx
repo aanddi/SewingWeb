@@ -43,8 +43,7 @@ const ProfileMenu: FC = () => {
           isShow
             ? [styles.profileMenu__menu, styles.profileMenu__menu_active].join(' ')
             : [styles.profileMenu__menu, styles.profileMenu__menu_unActive].join(' ')
-        }
-      >
+        }>
         <div className={styles.profileMenu__wrapper}>
           <div className={styles.profileMenu__header}>
             <Link href="/profile/my" className={styles.profileMenu__name}>
@@ -80,6 +79,9 @@ const ProfileMenu: FC = () => {
               </ul>
             ) : (
               <ul className={styles.profileMenu__list}>
+                <li>
+                  <Link href={`/company/${employerId}`}>Страница предприятия</Link>
+                </li>
                 {menuEmployer.map((item, index) => {
                   return (
                     <li key={index}>
@@ -87,9 +89,6 @@ const ProfileMenu: FC = () => {
                     </li>
                   )
                 })}
-                <li>
-                  <Link href={`/company/${employerId}`}>Страница предприятия</Link>
-                </li>
               </ul>
             )}
           </nav>

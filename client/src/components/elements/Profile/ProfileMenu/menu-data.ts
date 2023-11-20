@@ -25,5 +25,9 @@ export const menuEmployer = [
   {
     name: 'Мои вакансии',
     link: '/profile/e_vacancies'
+  },
+  {
+    name: 'Избранные вакансии',
+    link: '/'
   }
 ]
