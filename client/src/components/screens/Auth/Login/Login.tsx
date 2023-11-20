@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -69,7 +68,6 @@ const Login: FC = () => {
               title={'Телефон'}
               star={true}
               error={errors.phone?.message}
-              placeholder="Введите номер телефона"
             />
           </div>
           <div className={styles.applicant__item}>
@@ -78,15 +76,14 @@ const Login: FC = () => {
                 required: 'Обязательное поле',
                 onChange: () => onChangeFields(),
                 minLength: {
-                  value: 8,
-                  message: 'Минимальная длинна пароля должна быть 8 символов'
+                  value: 6,
+                  message: 'Минимальная длинна пароля должна быть 6 символов'
                 }
               })}
               type={'password'}
               title={'Пароль'}
               error={errors.password?.message}
               star={true}
-              placeholder="Введите пароль"
             />
           </div>
           <div className={styles.applicant__enter}>

@@ -10,6 +10,7 @@ import Field from '@/components/ui/Field/Field'
 
 import { IEmployer } from '@/core/types/employer.interface'
 
+import { validNumber } from '@/core/helpers/valid-field'
 import { useAuth } from '@/core/hooks/useAuth'
 import { EmployerService } from '@/core/services/employer/employer.service'
 
@@ -34,20 +35,15 @@ const RegisterCompany: FC = () => {
   // ошибка сервера
   const [serverErrorMessage, setServerErrorMessage] = useState<string | null>(null)
 
-  // запрос employerService
-  const create = async (data: IEmployer) => {
-    const response = await EmployerService.create(data)
-    setServerErrorMessage(response.message)
-    return response.statusCode
-  }
-
   // при клике
   const onSubmit: SubmitHandler<IEmployer> = async data => {
-    const isCreated = await create(data)
-    if (!isCreated) {
+    try {
+      const response = await EmployerService.create(data)
       reset()
-      router.replace('/')
-    } else return isCreated
+      router.back()
+    } catch (error: any) {
+      setServerErrorMessage(error.response.data.message)
+    }
   }
 
   return (
@@ -62,50 +58,44 @@ const RegisterCompany: FC = () => {
             <div className={styles.employer__item}>
               <Field
                 {...register('companyName', {
-                  required: 'Обязательное поле'
+                  required: 'Укажите название предприятия'
                 })}
                 type={'text'}
                 title={'Название предприятия'}
                 star={true}
                 error={errors.companyName?.message}
-                placeholder="Введите название предприятия"
               />
             </div>
 
             <div className={styles.employer__item}>
               <Field
                 {...register('inn', {
-                  required: 'Обязательное поле'
+                  required: 'Укажите ИНН',
+                  pattern: {
+                    value: validNumber(12),
+                    message: 'Введите корректный ИНН. Он должен состоять из 12 цифр.'
+                  }
                 })}
                 type={'text'}
                 title={'ИНН предприятия'}
                 star={true}
                 error={errors.inn?.message}
-                placeholder="Введите ИНН предприятия"
               />
             </div>
 
             <div className={styles.employer__twoItem}>
               <div className={styles.employer__item}>
-                <Field
-                  {...register('registrCity', {})}
-                  type={'text'}
-                  title={'Город регистрации'}
-                  star={false}
-                  error={errors.registrCity?.message}
-                  placeholder="Введите город регистрации"
-                />
+                <Field {...register('registrCity', {})} type={'text'} title={'Город регистрации'} star={false} error={errors.registrCity?.message} />
               </div>
               <div className={styles.employer__item}>
                 <Field
                   {...register('type', {
-                    required: 'Обязательное поле'
+                    required: 'Укажите тип предприятия'
                   })}
                   type={'text'}
                   title={'Тип предприятия'}
                   star={true}
                   error={errors.type?.message}
-                  placeholder="Введите тип предприятия"
                 />
               </div>
             </div>
@@ -113,34 +103,26 @@ const RegisterCompany: FC = () => {
             <div className={styles.employer__item}>
               <Field
                 {...register('size', {
-                  required: 'Обязательное поле'
+                  required: 'Укажите размер предприятия'
                 })}
                 type={'number'}
-                title={'Размер предприятия'}
+                title={'Укажите размер предприятия'}
                 star={true}
                 error={errors.size?.message}
-                placeholder="Введите размер предприятия"
+                placeholder="Количество сотрудников на предприятии"
               />
             </div>
 
             <div className={styles.employer__twoItem}>
-              <Field
-                {...register('adress', {})}
-                type={'text'}
-                title={'Адресс'}
-                star={false}
-                error={errors.adress?.message}
-                placeholder="Введите адресс офиса или предприятия"
-              />
+              <Field {...register('adress', {})} type={'text'} title={'Адресс'} star={false} error={errors.adress?.message} />
               <Field
                 {...register('contact', {
-                  required: 'Обязательное поле'
+                  required: 'Укажите способ связи с вами'
                 })}
                 type={'text'}
                 title={'Контакты'}
                 star={true}
                 error={errors.contact?.message}
-                placeholder="Введите номер телефона или сайт"
               />
             </div>
 

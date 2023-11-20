@@ -85,6 +85,7 @@
   &__statistics {
     color: #fff;
     display: flex;
+    text-align: center;
     gap: 45px;
     
     &_block {}
@@ -152,7 +153,7 @@
     position: -webkit-sticky;
     position: sticky;
     top: 60px;
-    background: #F6FAFF;
+    background: #fff;
     backdrop-filter: blur(20px);
 
     &_count {
@@ -163,11 +164,12 @@
     }
 
     &_filter {
-      border-radius: 3px;
+      border-radius: 6px;
       background: $pink;
       padding: 10px 50px;
       color: #fff;
       font-size: 14px;
+      cursor: pointer;
 
       &:hover {
         background: $pinkHover;
@@ -176,28 +178,33 @@
   }
 
   &__vacansiesList {
-    & > *:not(:first-child, :last-child) {
-      margin-bottom: 20px;
-    }
+    flex: 1 1 100%;
   }
 
-  &__showVacancies {
-    width: 100%;
-    border-radius: 10px;
-    background: #FFF;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 400;
-    padding: 16px 0;
-    cursor: pointer;
-  }
 
   &__ad {
-    img {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 70px;
-    }
+
+    display: flex;
+
+    justify-content: flex-end;
+    // img {
+    //   position: -webkit-sticky;
+    //   position: sticky;
+    //   top: 70px;
+    // }
+  }
+
+  &__top {
+ 
+    position: sticky;
+    bottom: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+   
+
   }
 }
 

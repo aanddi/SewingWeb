@@ -21,7 +21,7 @@ const FooterSite: FC<Props> = props => {
               <h3 className={styles.footer__title}>Информация</h3>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/info/about-us" className={styles.footer__link}>
                 О SewingWeb
               </Link>
             </li>
@@ -31,7 +31,7 @@ const FooterSite: FC<Props> = props => {
               </Link>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/info/rules" className={styles.footer__link}>
                 Правила сайта
               </Link>
             </li>

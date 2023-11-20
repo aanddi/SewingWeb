@@ -101,7 +101,6 @@ const Register: FC = () => {
               title={'Имя'}
               star={true}
               error={errors.name?.message}
-              placeholder="Введите имя"
             />
           </div>
           <div className={styles.register__item}>
@@ -114,7 +113,6 @@ const Register: FC = () => {
               title={'Фамилия'}
               error={errors.surname?.message}
               star={true}
-              placeholder="Введите фамилию"
             />
           </div>
           <div className={styles.register__item}>
@@ -131,7 +129,6 @@ const Register: FC = () => {
               title={'Номер телефона'}
               error={errors.phone?.message}
               star={true}
-              placeholder="Введите номер телефона"
             />
           </div>
           <div className={styles.register__item}>
@@ -139,8 +136,8 @@ const Register: FC = () => {
               {...register('password', {
                 required: 'Обязательное поле',
                 minLength: {
-                  value: 8,
-                  message: 'Минимальная длинна пароля должна быть 8 символов'
+                  value: 6,
+                  message: 'Минимальная длинна пароля должна быть 6 символов'
                 },
                 onChange: () => onChangeFields()
               })}
@@ -148,7 +145,6 @@ const Register: FC = () => {
               title={'Пароль'}
               error={errors.password?.message}
               star={true}
-              placeholder="Придумайте пароль"
             />
           </div>
 

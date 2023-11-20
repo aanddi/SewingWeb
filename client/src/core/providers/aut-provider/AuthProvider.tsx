@@ -19,8 +19,8 @@ const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({ Componen
 
   // получаем токен и если он валидный получаем новую пару
   useEffect(() => {
-    const accessTolen = getAccessToken()
-    if (accessTolen) checkAuth()
+    const accessToken = getAccessToken()
+    if (accessToken) checkAuth()
   }, [])
 
   // получаем рефреш токен и если он невалидный и еще есть авторизация, то выходим

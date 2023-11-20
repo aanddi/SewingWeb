@@ -7,7 +7,8 @@
     border-radius: 5px !important;
     box-shadow: none !important;
     min-height: 33px !important;
-    height: 33px !important;
+    min-height: 33px !important;
+    max-height: auto;
     font-family: inherit;
     font-size: inherit;
     font-weight: 400 !important;
@@ -26,7 +27,8 @@
   }
 
   &__value-container {
-    height: 33px !important;
+    min-height: 33px !important;
+    max-height: auto;
     cursor: text !important;
   }
 
@@ -58,7 +60,9 @@
   }
 
   &__menu-list {
+
     height: 200px !important;
+
     background-color: #ffffff !important;
   }
 

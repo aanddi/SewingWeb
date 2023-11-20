@@ -22,6 +22,6 @@ export interface IVacancy {
 
   status: boolean
 
-  dateStart: string
-  dateEnd: string
+  dateStart: Date
+  dateEnd: Date
 }

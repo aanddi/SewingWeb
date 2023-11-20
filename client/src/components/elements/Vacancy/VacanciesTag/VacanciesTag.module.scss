@@ -9,7 +9,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #F2F2F2;
+
+    border: 1px solid #dcdbdb;
     border-radius: 20px;
     padding: 5px 15px;
     gap: 5px;
@@ -28,12 +29,13 @@
     background-color: #FFECEF;
     border-radius: 20px;
     padding: 5px 15px;
-    gap: 5px;
+    gap: 8px;
   }
 
   &__proName {
     color: $pink;
     text-align: center;
+    font-weight: 500;
     font-size: 13px;
   }
 }

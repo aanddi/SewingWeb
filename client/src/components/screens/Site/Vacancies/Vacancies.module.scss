@@ -4,20 +4,21 @@
   margin-top: 63px;
   margin-bottom: 50px;
 
-  &__about {}
+  &__about {
+  }
 
-  &__ribbon {}
+  &__ribbon {
+  }
 }
 
 .about {
-
   &__wrapper {
-    display: flex;  
+    display: flex;
     gap: 40px;
   }
 
   &__info {
-    flex: 1 0 60%;
+    flex: 1 0 75%;
   }
 
   &__header {
@@ -27,15 +28,16 @@
   }
 
   &__name {
-		font-weight: 900;
-		font-size: 40px;
-		line-height: 120%;
-		padding-bottom: 15px;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 120%;
+    padding-bottom: 15px;
     margin-top: 20px;
-		border-bottom: 1px solid grey;
+    border-bottom: 1px dashed $grey;
   }
 
-  &__requirements {}
+  &__requirements {
+  }
 
   &__item {
     display: flex;
@@ -45,19 +47,19 @@
     }
 
     &_title {
-      font-weight: 700;
+      color: $grey;
       margin-right: 7px;
       width: 120px;
     }
-  
-    &_subTitle {}
+
+    &_subTitle {
+    }
   }
 
   &__favorites {
-
     &_button {
       border-radius: 10px;
-      border: 1px solid #A09F9F;
+      border: 1px solid #a09f9f;
       padding: 5px 5px;
       display: flex;
       justify-content: center;
@@ -69,14 +71,18 @@
         border: 1px solid #717070;
       }
     }
-  
+
     &_date {
-      margin-top: 10px;
-      text-decoration-line: underline;
+      margin: 10px 0;
+
+      color: $grey;
     }
   }
 
   &__sideBar {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
     position: -webkit-sticky;
     position: sticky;
     top: 50px;
@@ -84,20 +90,22 @@
   }
 
   &__salary {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 23px;
+    font-weight: 800;
     text-align: center;
     margin: 30px 0 20px 0;
   }
 
-  &__control {}
+  &__control {
+  }
 
   &__responds {
     border-radius: 10px;
-    padding: 10px 0;
+    padding: 12px 0;
     background: $blue;
     width: 100%;
     text-align: center;
+    font-size: 16px;
     color: #fff;
     margin-bottom: 20px;
     cursor: pointer;
@@ -109,8 +117,8 @@
 
   &__phone {
     border-radius: 10px;
-    border: 1px solid #DEDEDE;
-    background: #F3F3F3;
+    border: 1px solid #dedede;
+    background: #f3f3f3;
     padding: 10px 0;
     width: 100%;
     text-align: center;
@@ -122,7 +130,7 @@
 
   &__companyWrapper {
     border-radius: 10px;
-    border: 1px solid #DBD7D7;
+    border: 1px solid #dbd7d7;
     padding: 15px;
   }
 
@@ -137,7 +145,10 @@
   }
 
   &__companyName {
-    color: #328EE3;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #328ee3;
     font-size: 18px;
     font-weight: 400;
     cursor: pointer;
@@ -147,10 +158,19 @@
     }
   }
 
-  &__companyLogo {}
+  &__companyLogo {
+  }
 
-  &__contactPerson {
-    margin: 19px 0 16px 0;
+  &__contactItem {
+    line-height: 150%;
+    font-size: 15px;
+    margin: 10px 0 16px 0;
+    font-weight: 500;
+
+    &_title {
+      font-weight: 300;
+      color: #717070 !important;
+    }
   }
 
   &__countVacancies {
@@ -178,7 +198,7 @@
   }
 
   &__description {
-    margin-top: 30px;
+    margin: 30px 0;
   }
 
   &__textBlock {
@@ -193,11 +213,12 @@
   &__title {
     font-size: 20px;
     font-weight: 600;
-    line-height: 150%; 
+    line-height: 150%;
     margin-bottom: 6px;
   }
 
-  &__skills {}
+  &__skills {
+  }
 
   &__skillsBlock {
     display: flex;
@@ -210,7 +231,7 @@
   &__skillsTitle {
     font-size: 20px;
     font-weight: 600;
-    line-height: 150%; 
+    line-height: 150%;
     margin-bottom: 6px;
   }
 
@@ -223,10 +244,11 @@
   &__map {
     margin-top: 20px;
 
-    p{
+    p {
       margin-bottom: 10px;
     }
   }
 }
 
-.ribbon {}
+.ribbon {
+}

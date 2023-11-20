@@ -48,6 +48,24 @@
 .addVacancy {
   margin: 100px 0;
 
+  &__authError {
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    a {
+      text-decoration: underline;
+      font-size: 15px;
+      color: $blue;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
   &__content {
     margin-top: 30px;
     border-radius: 30px;
@@ -76,7 +94,6 @@
   }
 
   &__input {
- 
   }
 
   &__line {
@@ -94,7 +111,6 @@
   }
 
   &__conditions {
-   
   }
 
   &__selectLabel {
@@ -186,6 +202,12 @@
   &__helpLink {
     cursor: pointer;
     text-decoration: underline;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   &__required {
@@ -228,8 +250,13 @@
     gap: 20px;
     border-top: 1px solid $grey;
     padding-top: 30px;
+  }
 
- 
+  &__footerWarning {
+    margin-top: 15px;
+    color: $grey;
+    font-size: 13px;
+    line-height: 150%;
   }
 
   &__error {
@@ -248,12 +275,10 @@
     border-radius: 8px;
     cursor: pointer;
     width: 200px;
-  
 
     &_post {
       color: #fff;
       background-color: $blue;
-
 
       &:hover {
         background-color: $blueHover;
@@ -278,8 +303,6 @@
 
   &__card {
     flex: 1 1 33.33%;
-
- 
   }
 
   &__cardWrapper {
@@ -293,7 +316,7 @@
 
     &_active {
       border: 2px solid $blue;
-       box-shadow: none;
+      box-shadow: none;
     }
 
     &:hover {

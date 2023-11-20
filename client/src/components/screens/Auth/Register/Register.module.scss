@@ -92,13 +92,18 @@
 
   &__button {
     display: inline-flex;
-    background-color: $pink;
+    background-color: #FCA4B6;
     color: #fff;
     padding: 12px 40px;
     border-radius: 5px;
     font-size: 16px;
     font-weight: 500;
     gap: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $pink;
+    }
   }
 
   &__forgot {

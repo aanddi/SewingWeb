@@ -2,7 +2,7 @@
 
 .aboutCompany {
   background-color: #fff;
-  margin-top: 64px;
+  margin: 64px 0;
 
   &__wrapper {
     display: flex;
@@ -22,11 +22,11 @@
   }
 
   &__aside {
-    img {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 70px;
-    }
+    // img {
+    //   position: -webkit-sticky;
+    //   position: sticky;
+    //   top: 70px;
+    // }
   }
 }
 

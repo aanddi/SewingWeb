@@ -1,14 +1,17 @@
+import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { FC } from 'react'
 
 import styles from './AboutCompanies.module.scss'
 
 import CompanyHeader from '@/components/elements/Company/CompanyHeader/CompanyHeader'
-import AboutText from '@/components/elements/EditText/AboutText'
+import TextToHTML from '@/components/elements/EditText/TextToHTML'
 import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import { IEmployer } from '@/core/types/employer.interface'
+
+import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 
 import { FaStar } from 'react-icons/fa'
 
@@ -16,7 +19,14 @@ import pattern from 'public/Companies/pattern.svg'
 import ad from 'public/ad/ad.png'
 
 const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
-  console.log(company)
+  const { data: vacancies } = useQuery({
+    queryKey: ['vacancies'],
+    queryFn: async () => {
+      const response = await VacancyService.getMyVacancies(company.id)
+      return response
+    },
+    enabled: !!company
+  })
   return (
     <SiteLayout background={'#fff'}>
       <div className={styles.aboutCompany}>
@@ -59,7 +69,7 @@ const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
               </section>
               <section className={[styles.aboutCompany__desc, styles.desc].join(' ')}>
                 <h3 className={styles.reviews__title}>О компании</h3>
-                {company.about ? <AboutText about={company.about} /> : <div>Описание компании не указано</div>}
+                {company.about ? <TextToHTML text={company.about} /> : <div>Описание компании не указано</div>}
               </section>
               <section className={[styles.aboutCompany__reviews, styles.reviews].join(' ')}>
                 <h3 className={styles.reviews__title}>Отзывы о предприятии</h3>
@@ -92,54 +102,9 @@ const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
               <section className={[styles.aboutCompany__vacancies, styles.vacancies].join(' ')}>
                 <div className={styles.vacancies__title}>Вакансии</div>
                 <div className={styles.vacancies__ribbon}>
-                  <VacanciesCard
-                    _id={1}
-                    title={'Швея'}
-                    salary={'от 30 000 руб.'}
-                    description={
-                      'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-                    }
-                    tags={['Вакансия недели', 'Студенты', 'Пенсионерам']}
-                    company={'ООО Легпром'}
-                    adress={'Симферополь, Учебный переулок 8'}
-                    phone={'+7978754645'}
-                  />
-                  <VacanciesCard
-                    _id={1}
-                    title={'Швея'}
-                    salary={'от 30 000 руб.'}
-                    description={
-                      'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-                    }
-                    tags={['Вакансия недели', 'Студенты']}
-                    company={'ООО Легпром'}
-                    adress={'Симферополь, Учебный переулок 8'}
-                    phone={'+7978754645'}
-                  />
-                  <VacanciesCard
-                    _id={1}
-                    title={'Швея'}
-                    salary={'от 30 000 руб.'}
-                    description={
-                      'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-                    }
-                    tags={['Вакансия недели', 'Студенты']}
-                    company={'ООО Легпром'}
-                    adress={'Симферополь, Учебный переулок 8'}
-                    phone={'+7978754645'}
-                  />
-                  <VacanciesCard
-                    _id={1}
-                    title={'Швея'}
-                    salary={'от 30 000 руб.'}
-                    description={
-                      'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-                    }
-                    tags={['Вакансия недели', 'Студенты']}
-                    company={'ООО Легпром'}
-                    adress={'Симферополь, Учебный переулок 8'}
-                    phone={'+7978754645'}
-                  />
+                  {vacancies?.map((vacancy, index) => {
+                    return <VacanciesCard key={index} vacancy={vacancy} />
+                  })}
                 </div>
               </section>
             </div>

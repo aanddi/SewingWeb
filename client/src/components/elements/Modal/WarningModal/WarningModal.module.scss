@@ -1,0 +1,94 @@
+@import '@/assets/styles/_variables.scss';
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+
+  &__content {
+    margin: 10px;
+    padding: 30px;
+    border-radius: 7px;
+    background: #fff;
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(25px);
+    width: 500px;
+    height: auto;
+    position: relative;
+    z-index: 100;
+  }
+
+  &__active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 150%;
+  }
+
+  &__title {
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  &__subTitle {
+    font-weight: 500;
+    margin-top: 20px;
+  }
+
+  &__message {
+    color: $grey;
+    margin-top: 20px;
+    line-height: 150%;
+    
+  }
+
+
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 50px;
+    justify-content: center;
+
+    & > * {
+      font-size: 16px;
+    }
+  }
+
+  &__closeButton {
+    display: inline-flex;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+
+}

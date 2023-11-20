@@ -1,0 +1,68 @@
+.rules {
+  margin: 100px 0;
+
+
+}
+
+.rules__wrapper {
+  & > * {
+    padding-top: 20px;
+    border-top: 1px dashed $blue;
+  }
+}
+
+.rules__bigTitle {
+  color: $darkBlue;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+.rules__title {
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.rules__subTitle {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+
+.vacancyRules {
+  p,
+  ol {
+    font-size: 15px;
+    line-height: 150%;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-top: 10px;
+  }
+
+  ol {
+    list-style-type: decimal;
+
+    margin-bottom: 30px;
+
+    & > * {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.vacancyRules__footer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+

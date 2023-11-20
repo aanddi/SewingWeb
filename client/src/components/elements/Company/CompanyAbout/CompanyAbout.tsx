@@ -12,7 +12,7 @@ import { IEmployer } from '@/core/types/employer.interface'
 
 import { EmployerService } from '@/core/services/employer/employer.service'
 
-import AboutText from '../../EditText/AboutText'
+import TextToHTML from '../../EditText/TextToHTML'
 
 import { BiSolidEditAlt } from 'react-icons/bi'
 import { IoIosAddCircleOutline } from 'react-icons/io'
@@ -72,7 +72,7 @@ const CompanyAbout: FC<Props> = ({ about, idEmployer }) => {
         {about && about !== '<p><br></p>' ? (
           <>
             <div className={showTextEditor ? styles.editorAbout__blockNone : styles.editorAbout__aboutText}>
-              <AboutText about={about} />
+              <TextToHTML text={about} />
             </div>
             <div
               className={showTextEditor ? styles.editorAbout__blockNone : styles.editorAbout__edit}

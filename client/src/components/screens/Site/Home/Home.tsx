@@ -1,22 +1,47 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import styles from './Home.module.scss'
 
-import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
+import Pagination from '@/components/elements/Pagination/Pagination'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
-import { IHome } from './Home.interface'
+import { IRibbonResponse } from '@/core/services/vacancy/vacancy.interface'
 
 import { IoIosArrowDown } from 'react-icons/io'
 import { LuSettings2 } from 'react-icons/lu'
+import { SlArrowUpCircle } from 'react-icons/sl'
 
 import ad from 'public/ad/ad.png'
 
-const Home: FC<IHome> = props => {
+const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, totalPages }) => {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  const toggleVisibility = () => {
+    if (window.scrollY > 500) {
+      setIsVisible(true)
+    } else {
+      setIsVisible(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisibility)
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility)
+    }
+  }, [])
+
   return (
-    <SiteLayout background={'#F6FAFF'}>
+    <SiteLayout background={'#fff'}>
       <div className={styles.home}>
         <section className={[styles.home__mainScreen, styles.mainScreen].join(' ')}>
           <div className="mainScreen__container">
@@ -31,16 +56,18 @@ const Home: FC<IHome> = props => {
                   </div>
                   <div className={styles.mainScreen__search_button}>Найти</div>
                 </div>
-                <div className={styles.mainScreen__employee}>Я ищу сотрудника</div>
+                <Link href={'/employer'} className={styles.mainScreen__employee}>
+                  Я ищу сотрудника
+                </Link>
               </div>
               <div className={styles.mainScreen__bottom}>
                 <div className={styles.mainScreen__statistics}>
                   <div className={styles.mainScreen__statistics_block}>
-                    <h3 className={styles.mainScreen__statistics_count}>2103</h3>
+                    <h3 className={styles.mainScreen__statistics_count}>{totalVacancies}</h3>
                     <p className={styles.mainScreen__statistics_text}>вакансии</p>
                   </div>
                   <div className={styles.mainScreen__statistics_block}>
-                    <h3 className={styles.mainScreen__statistics_count}>523</h3>
+                    <h3 className={styles.mainScreen__statistics_count}>{totalResume}</h3>
                     <p className={styles.mainScreen__statistics_text}>резюме</p>
                   </div>
                 </div>
@@ -55,7 +82,7 @@ const Home: FC<IHome> = props => {
           </div>
         </section>
 
-        <section className={[styles.home__ribbon, styles.ribbon].join(' ')}>
+        <section className={[styles.home__ribbon, styles.ribbon].join(' ')} id="vacancy">
           <div className="ribbon__container">
             <div className={styles.ribbon__wrapper}>
               <div className={styles.ribbon__vacansiesList}>
@@ -63,75 +90,23 @@ const Home: FC<IHome> = props => {
                   <h3 className={styles.ribbon__vacansiesTop_count}>Найдено 5 вакансий</h3>
                   <div className={styles.ribbon__vacansiesTop_filter}>Фильтр</div>
                 </div>
-                <VacanciesCard
-                  _id={1}
-                  title={'Швея'}
-                  salary={'от 30 000 руб.'}
-                  description={
-                    'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-                  }
-                  tags={['Вакансия недели', 'Студенты', 'Пенсионерам']}
-                  company={'ООО Легпром'}
-                  adress={'Симферополь, Учебный переулок 8'}
-                  phone={'+7978754645'}
-                />
-                <VacanciesCard
-                  _id={1}
-                  title={'Швея'}
-                  salary={'от 30 000 руб.'}
-                  description={
-                    'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-                  }
-                  tags={['Вакансия недели', 'Студенты']}
-                  company={'ООО Легпром'}
-                  adress={'Симферополь, Учебный переулок 8'}
-                  phone={'+7978754645'}
-                />
-                <VacanciesCard
-                  _id={1}
-                  title={'Швея'}
-                  salary={'от 30 000 руб.'}
-                  description={
-                    'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-                  }
-                  tags={['Вакансия недели', 'Студенты']}
-                  company={'ООО Легпром'}
-                  adress={'Симферополь, Учебный переулок 8'}
-                  phone={'+7978754645'}
-                />
-                <VacanciesCard
-                  _id={1}
-                  title={'Швея'}
-                  salary={'от 30 000 руб.'}
-                  description={
-                    'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-                  }
-                  tags={['Вакансия недели', 'Студенты']}
-                  company={'ООО Легпром'}
-                  adress={'Симферополь, Учебный переулок 8'}
-                  phone={'+7978754645'}
-                />
-                <VacanciesCard
-                  _id={1}
-                  title={'Швея'}
-                  salary={'от 30 000 руб.'}
-                  description={
-                    'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-                  }
-                  tags={['Вакансия недели', 'Студенты']}
-                  company={'ООО Легпром'}
-                  adress={'Симферополь, Учебный переулок 8'}
-                  phone={'+7978754645'}
-                />
-                <div className={styles.ribbon__showVacancies}>Показать еще</div>
+                <div className={styles.ribbon__content}>
+                  <div className={styles.ribbon__vacancies}>
+                    <Pagination vacanciesData={vacancies} totalPages={totalPages} />
+                  </div>
+                </div>
               </div>
-
               <aside className={styles.ribbon__ad}>
                 <Link href="/employer">
                   <Image src={ad} alt={'Реклама'} />
                 </Link>
               </aside>
             </div>
+            {isVisible && (
+              <div onClick={scrollToTop} className={styles.ribbon__top}>
+                <SlArrowUpCircle size={45} style={{ color: '#D3D3D5' }} />
+              </div>
+            )}
           </div>
         </section>
       </div>

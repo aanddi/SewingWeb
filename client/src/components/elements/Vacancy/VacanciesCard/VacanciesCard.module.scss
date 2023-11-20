@@ -4,7 +4,7 @@
   display: flex;
   border-radius: 10px;
   background-color: #fff;
-  box-shadow: 1px 1px 5px 0px rgba(208, 208, 208, 0.96);
+  border: 1px solid #E0E0E0;
 
   &__content {
     padding: 23px 35px;
@@ -12,7 +12,7 @@
 
   &__title {
     font-size: 22px;
-    font-weight: 700;
+    font-weight: 600;
 
     &:hover {
       text-decoration: underline;
@@ -20,46 +20,46 @@
   }
 
   &__salary {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 500;
-    margin-top: 8px;
+    margin-top: 12px;
   }
 
   &__description {
-    color: #2F2E2E;
-    font-size: 15px;
+    color: $darkBlue;
     line-height: 140%; 
     letter-spacing: 0.15px;
     margin: 14px 0 21px 0;
+    font-size: 15px;
   }
-
-  &__tags {
- 
-  } 
-
-  &
 
   &__company {
     display: flex;
-    margin: 20px 0 5px 0;
+    margin: 20px 0 8px 0;
     gap: 6px;
+    font-weight: 600;
 
     &_svg {}
 
     &_name {
-      font-size: 14px;
+      font-size: 15px;
       font-style: normal;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
   &__adress {
     display: flex;
     gap: 6px;
+    color: $grey;
 
     &_svg {}
 
     &_name {
-      font-size: 14px;
+
       font-style: normal;
     }
   }
@@ -68,13 +68,14 @@
     margin-top: 20px;
     display: flex;
     gap: 20px;
+    font-size: 15px;
 
     &_respond {
       border-radius: 7px;
       background: $blue;
-      padding: 10px 15px;
+      padding: 14px 22px;
       color: #FFF;
-      font-size: 16px;
+
       cursor: pointer;
 
       &:hover {
@@ -83,15 +84,22 @@
     }
 
     &_checkphone {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 7px;
-      background: #e9e9e9;
+      background: #f6f5f5;
       color: #050505;
-      font-size: 16px;
+
       padding: 10px 20px;
       cursor: pointer;
 
       &_text {
         user-select: none;
+      }
+
+      &:hover {
+        background: #ebebeb;
       }
     }
   }

@@ -1,0 +1,134 @@
+@import '@/assets/styles/_variables.scss';
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+
+  &__content {
+    margin: 10px;
+    padding: 50px;
+    border-radius: 7px;
+    background: #fff;
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(25px);
+    width: 500px;
+    height: auto;
+    position: relative;
+    z-index: 100;
+  }
+
+  &__active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+  }
+
+  &__title {
+    font-size: 30px;
+    font-weight: 800;
+    color: $blue;
+    margin-bottom: 30px;
+  }
+
+  &__descItem {
+    padding-bottom: 10px;
+    color: $grey;
+  }
+
+  &__cart {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+    border-radius: 20px;
+    background: linear-gradient(79deg, #E3E1E1 27.11%, #D2D1D1 72.14%);
+
+
+    padding: 30px;
+    margin: 40px 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+    transition: all .3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+      box-shadow: 1px 1px 0px rgba(0, 0, 0, 0);
+    }
+  }
+
+  &__cardInfo {
+    flex: 1 1 100%;
+  }
+
+  &__warning {
+    color: $grey;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  &__label {
+    color: #a0a0a0;
+    margin-bottom: 5px;
+  }
+
+  &__number {
+    input {
+      width: 100%;
+    }
+  }
+
+  &__term {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    gap: 20px;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  &__cardCvv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      width: 50%;
+    }
+  }
+
+  &__cvv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px;
+    color: #676666;
+  }
+}

@@ -8,7 +8,7 @@ import { IEmployer } from '@/core/types/employer.interface'
 import { EmployerService } from '@/core/services/employer/employer.service'
 
 interface AboutEmployerProps {
-  company: IEmployer | null
+  company: IEmployer
 }
 
 const AboutCompaniesPage: NextPage<AboutEmployerProps> = ({ company }) => {

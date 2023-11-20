@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { CreateVacancy } from './dto/create.dto'
 
@@ -6,14 +6,190 @@ import { CreateVacancy } from './dto/create.dto'
 export class VacancyService {
   constructor(private prisma: PrismaService) {}
 
+  // формирование ленты вакансий с пагинацией по странично
+  async getRibbon(page = 1) {
+    // проверка на срок годности вакансий
+    await this.validateRibbon()
+
+    // колво вакансий на одну подгрузку
+    const PAGE_SIZE = 3
+
+    // определяет сколько вакансий надо пропустить
+    const skip = (page - 1) * PAGE_SIZE
+
+    // Получение списка вакансий со статусом true
+    const vacancies = await this.prisma.vacancy.findMany({
+      where: {
+        status: true
+      },
+      skip: skip, // сколько пропустить
+      take: PAGE_SIZE, // сколько вернуть
+      select: {
+        id: true,
+        title: true,
+        descCard: true,
+        maxSalary: true,
+        minSalary: true,
+        tags: true,
+        city: true,
+        adress: true,
+        phoneNumber: true,
+        tarifId: true,
+        employer: {
+          select: {
+            id: true,
+            companyName: true
+          }
+        }
+      },
+      orderBy: {
+        tarifId: 'desc'
+      }
+    })
+
+    const totalVacancies = await this.prisma.vacancy.count({
+      where: {
+        status: true
+      }
+    })
+
+    const totalResume = await this.prisma.resume.count()
+
+    // Если вакансий нет, то возвращаем пустой объект
+    if (totalVacancies === 0) {
+      return {}
+    }
+
+    // Расчёт общего кол-ва страниц
+    const totalPages = Math.ceil(totalVacancies / PAGE_SIZE)
+
+    return {
+      vacancies: vacancies,
+      totalVacancies: totalVacancies,
+      totalResume: totalResume,
+      totalPages: totalPages
+    }
+  }
+
+  async getRibbonById(idEmployer: number) {
+    await this.validateRibbon()
+
+    const vacancies = await this.prisma.vacancy.findMany({
+      where: {
+        employerId: +idEmployer,
+        status: true
+      },
+      select: {
+        id: true,
+        title: true,
+        descCard: true,
+        maxSalary: true,
+        minSalary: true,
+        tags: true,
+        city: true,
+        adress: true,
+        employerId: true,
+        employer: {
+          select: {
+            companyName: true
+          }
+        }
+      }
+    })
+
+    return vacancies
+  }
+
+  async getMyVacancies(idEmployer: number) {
+    await this.validateRibbon()
+
+    const vacancies = await this.prisma.vacancy.findMany({
+      where: {
+        employerId: +idEmployer
+      },
+      select: {
+        id: true,
+        title: true,
+        descCard: true,
+        maxSalary: true,
+        minSalary: true,
+        tags: true,
+        city: true,
+        adress: true,
+        dateStart: true,
+        dateEnd: true,
+        status: true,
+        phoneNumber: true,
+        employer: {
+          select: {
+            id: true,
+            companyName: true
+          }
+        }
+      },
+      orderBy: {
+        id: 'desc'
+      }
+    })
+
+    return vacancies
+  }
+
+  async getById(idVacancy: number) {
+    const vacancy = await this.prisma.vacancy.findUnique({
+      where: {
+        id: +idVacancy
+      }
+    })
+
+    const companyName = await this.prisma.employer.findUnique({
+      where: {
+        id: +vacancy.employerId
+      },
+      select: {
+        companyName: true
+      }
+    })
+
+    return {
+      ...vacancy,
+      ...companyName
+    }
+  }
+
+  async deleteMyVacancy(idVacancy: number) {
+    if (!idVacancy) throw new NotFoundException('Вакансия не найдена')
+    const deleteVacancy = await this.prisma.vacancy.delete({
+      where: {
+        id: +idVacancy
+      }
+    })
+  }
+
+  async unpublication(idVacancy: number) {
+    if (!idVacancy) throw new NotFoundException('Вакансия не найдена')
+    const unpublication = await this.prisma.vacancy.update({
+      where: {
+        id: +idVacancy
+      },
+      data: {
+        status: false
+      }
+    })
+
+    return unpublication
+  }
+
   async create(dto: CreateVacancy) {
+    if (!dto.employerId) throw new NotFoundException('Ваше предприятие не найдено. Пройдите регистрацию предприятия.')
+
     // берем все тарифы
     const tarifs = await this.getTarif()
 
     // проверяем, если работодатель выбрал платный тариф, то создаем вакансию
     // если выбрал бесплатную (лимит 1 активная вакансия), то мы проверяем наличие активных бесплатных вакансий у работодателя
     // если такие есть, то прокидываем ошибку
-    if (tarifs[dto.tarifId].salary !== 0) {
+    if (tarifs[dto.tarifId].salary !== 0 || !dto.status) {
       const vacancy = await this.createVacancy(dto)
       return vacancy
     } else {
@@ -75,5 +251,22 @@ export class VacancyService {
       }
     })
     return newVacancy
+  }
+
+  private async validateRibbon() {
+    // текущаю дата
+    const currentDate = new Date()
+
+    // Обновление статуса ваканций, у которых дата окончания уже прошла
+    await this.prisma.vacancy.updateMany({
+      where: {
+        dateEnd: {
+          lt: currentDate // lt означает "меньше"
+        }
+      },
+      data: {
+        status: false
+      }
+    })
   }
 }

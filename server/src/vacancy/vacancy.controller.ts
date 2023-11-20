@@ -1,25 +1,52 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common'
-import { VacancyService } from './vacancy.service'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common'
+import { Auth } from 'src/auth/decorators/auth.decorators'
 import { CreateVacancy } from './dto/create.dto'
-
+import { VacancyService } from './vacancy.service'
 @Controller('vacancy')
 export class VacancyController {
   constructor(private readonly vacancyService: VacancyService) {}
 
-  // @Get('')
-  // getRibbon() {
-  //   return this.vacancyService.getRibbon()
-  // }
+  @Get('ribbon')
+  getRibbon(@Query('page') page: number) {
+    return this.vacancyService.getRibbon(page)
+  }
 
-  @Post('create')
-  // @Auth()
-  create(@Body() dto: CreateVacancy) {
-    return this.vacancyService.create(dto)
+  @Get('ribbon/:id')
+  getRibbonById(@Param('id') idEmployer: number) {
+    return this.vacancyService.getRibbonById(idEmployer)
   }
 
   @Get('getTarif')
-  // @Auth()
   getTarif() {
     return this.vacancyService.getTarif()
+  }
+
+  @Get('getById/:id')
+  getById(@Param('id') idVacancy: number) {
+    return this.vacancyService.getById(idVacancy)
+  }
+
+  @Get('getMyVacancies/:id')
+  // @Auth()
+  getMyVacancies(@Param('id') idEmployer: number) {
+    return this.vacancyService.getMyVacancies(idEmployer)
+  }
+
+  @Delete('deleteMyVacancy/:id')
+  @Auth()
+  deleteMyVacancy(@Param('id') idVacancy: number) {
+    return this.vacancyService.deleteMyVacancy(idVacancy)
+  }
+
+  @Patch('unpublication/:id')
+  // @Auth()
+  unpublication(@Param('id') idVacancy: number) {
+    return this.vacancyService.unpublication(idVacancy)
+  }
+
+  @Post('create')
+  @Auth()
+  create(@Body() dto: CreateVacancy) {
+    return this.vacancyService.create(dto)
   }
 }

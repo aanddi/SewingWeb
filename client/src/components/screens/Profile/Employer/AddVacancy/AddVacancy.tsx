@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import 'react-quill/dist/quill.snow.css'
@@ -9,6 +10,9 @@ import Select, { MultiValue } from 'react-select'
 
 import styles from './AddVacancy.module.scss'
 
+import PaymentModal from '@/components/elements/Modal/PaymentModal/PaymentModal'
+import RulesVacancy from '@/components/elements/Modal/RulesVacancyModal/RulesVacancyModal'
+import SuccessVacancy from '@/components/elements/Modal/SuccessVacancy/SuccessVacancy'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import ErrorForm from '@/components/ui/ErrorForm/ErrorForm'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
@@ -17,6 +21,7 @@ import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 import { ITarifVacancy } from '@/core/types/tarif-vacancy.interface'
 import { IVacancy } from '@/core/types/vacancy.interface'
 
+import { validPhone } from '@/core/helpers/valid-field'
 import { useEmployer } from '@/core/hooks/useEmployer'
 import { useProfessions } from '@/core/hooks/useProfessions'
 import { VacancyService } from '@/core/services/vacancy/vacancy.service'
@@ -30,10 +35,13 @@ import img from 'public/Employers/imageBaner01.svg'
 const QuillNoSSRWrapper = dynamic(async () => (await import('react-quill')).default, { ssr: false })
 
 const AddVacancy: FC = () => {
+  // ==========================================
   const [desc, setDesc] = useState('')
-  const { data: employer } = useEmployer()
+  const [activeRules, setActiveRules] = useState(false)
+  const [activePayment, setActivePayment] = useState(false)
+  const [activeSuccess, setActiveSuccess] = useState(false)
 
-  const employerId = employer?.id
+  const router = useRouter()
 
   // ========== TARIF AND PAY =============================
   const { data: tarifs } = useQuery<ITarifVacancy[]>({
@@ -44,7 +52,7 @@ const AddVacancy: FC = () => {
     }
   })
 
-  const [activeTarif, setActiveTarif] = useState<number | undefined>(undefined)
+  const [activeTarif, setActiveTarif] = useState<number | undefined>(0)
 
   // ========== TAGS =============================
   const [tags, setTags] = useState<string[]>([])
@@ -62,7 +70,7 @@ const AddVacancy: FC = () => {
     }
   }
 
-  // ========== PROFESSIONS =============================
+  // ========== REACT QUERY =============================
 
   const { data: professions } = useProfessions()
 
@@ -70,6 +78,9 @@ const AddVacancy: FC = () => {
     value: elem.id,
     label: elem.name
   }))
+
+  const { data: employer } = useEmployer()
+  const employerId = employer?.id
 
   // ========== REACT HOOK FORM =============================
 
@@ -85,14 +96,15 @@ const AddVacancy: FC = () => {
     formState: { errors }
   } = useForm<IVacancy>({
     mode: 'onChange',
-    defaultValues: {
-      employerId: employerId
-    }
+    defaultValues: {}
   })
 
   useEffect(() => {
-    const tagsString = tags.join(', ')
+    if (employerId) {
+      setValue('employerId', employerId)
+    }
     if (tags) {
+      const tagsString = tags.join(', ')
       setValue('tags', tagsString)
     }
 
@@ -109,31 +121,36 @@ const AddVacancy: FC = () => {
       const start = date.toISOString()
       setValue('dateStart', start)
 
-      console.log(tarifs[activeTarif].id)
-
+      // вычисление срока вакансии
       date.setDate(date.getDate() + tarifs[activeTarif].time)
 
       const end = date.toISOString()
       setValue('dateEnd', end)
     }
-  }, [tags, activeTarif, tarifs, setValue])
+  }, [tags, employer, activeTarif, tarifs, setValue])
 
-  const onSubmit: SubmitHandler<IVacancy> = async data => {
-    data.status = true
+  const onSave: SubmitHandler<IVacancy> = async data => {
+    data.status = false
     try {
       const response = await VacancyService.create(data)
       reset()
+      setActiveSuccess(true)
     } catch (error: any) {
       setErrorUpdate(error.response.data.message)
     }
   }
 
-  const onSave: SubmitHandler<IVacancy> = async data => {
-    data.status = false
-    console.log(data)
+  const onOpenPayment: SubmitHandler<IVacancy> = data => {
+    setActivePayment(true)
+  }
+
+  const onPayment: SubmitHandler<IVacancy> = async data => {
+    data.status = true
     try {
       const response = await VacancyService.create(data)
       reset()
+      setActivePayment(false)
+      setActiveSuccess(true)
     } catch (error: any) {
       setErrorUpdate(error.response.data.message)
     }
@@ -143,6 +160,12 @@ const AddVacancy: FC = () => {
     <SiteLayout background={'#fff'}>
       <div className={styles.addVacancy}>
         <div className="addVacancy__container">
+          {employer ? null : (
+            <div className={styles.addVacancy__authError}>
+              <ErrorForm>Чтобы разместить вакансию, зарегистрируйте вашу компанию</ErrorForm>
+              <Link href={'/auth/registerCompany'}>Регистрация</Link>
+            </div>
+          )}
           <div className={[styles.addVacancy__tarif, styles.tarif].join(' ')}>
             <div className={styles.tarif__tarifWrapper}>
               <p className={styles.tarif__question}>Хотите больше сотрудников?</p>
@@ -156,7 +179,7 @@ const AddVacancy: FC = () => {
             </div>
           </div>
           <div className={styles.addVacancy__content}>
-            <form onSubmit={handleSubmit(onSubmit)} className={styles.addVacancy__wrapper}>
+            <form onSubmit={handleSubmit(onPayment)} className={styles.addVacancy__wrapper}>
               <div className={styles.addVacancy__header}>
                 <ProfileTitle title={'Добавить вакансию'} />
               </div>
@@ -165,7 +188,12 @@ const AddVacancy: FC = () => {
                   <FiInfo size={20} style={{ color: '#3490DF' }} />
                   <div className={styles.addVacancy__helpText}>
                     <p>Укажите популярное название, чтобы было проще найти вакансию</p>
-                    <p>После размещения вы уже не сможете изменить название!</p>
+                    <p>
+                      После размещения вы уже не сможете изменить название!
+                      <span onClick={() => setActiveRules(true)} className={styles.addVacancy__helpLink}>
+                        Правила размещения вакансии
+                      </span>
+                    </p>
                   </div>
                 </div>
                 <div className={styles.addVacancy__inputs}>
@@ -288,6 +316,8 @@ const AddVacancy: FC = () => {
                           options={skills ? skills : []}
                           placeholder=""
                           isMulti={true}
+                          isSearchable={false}
+                          noOptionsMessage={() => 'Нет ключевых навыков'}
                           // value={skills}
                           onChange={(selectedOptions: MultiValue<{ value: string; label: string }>) => {
                             const selectedValues = selectedOptions.map(option => option.value).join(', ')
@@ -318,6 +348,7 @@ const AddVacancy: FC = () => {
                           value={workExperience ? workExperience.find(option => option.value === field.value) : null}
                           hideSelectedOptions={false}
                           isMulti={false}
+                          isSearchable={false}
                           onChange={selectedOption => {
                             if (selectedOption) {
                               field.onChange(selectedOption.value) // Сохраняем только значение value
@@ -354,6 +385,7 @@ const AddVacancy: FC = () => {
                           value={employmentType ? employmentType.find(option => option.value === field.value) : null}
                           hideSelectedOptions={false}
                           isMulti={false}
+                          isSearchable={false}
                           onChange={selectedOption => {
                             if (selectedOption) {
                               field.onChange(selectedOption.value) // Сохраняем только значение value
@@ -390,6 +422,7 @@ const AddVacancy: FC = () => {
                           value={workTimetable ? workTimetable.find(option => option.value === field.value) : null}
                           hideSelectedOptions={false}
                           isMulti={false}
+                          isSearchable={false}
                           onChange={selectedOption => {
                             if (selectedOption) {
                               field.onChange(selectedOption.value) // Сохраняем только значение value
@@ -426,6 +459,7 @@ const AddVacancy: FC = () => {
                           value={education ? education.find(option => option.value === field.value) : null}
                           hideSelectedOptions={false}
                           isMulti={false}
+                          isSearchable={false}
                           onChange={selectedOption => {
                             if (selectedOption) {
                               field.onChange(selectedOption.value) // Сохраняем только значение value
@@ -511,7 +545,11 @@ const AddVacancy: FC = () => {
 
                   <FieldProfile
                     {...register('phoneNumber', {
-                      required: 'Укажите номер телефона контактного лица'
+                      required: 'Укажите номер телефона контактного лица',
+                      pattern: {
+                        value: validPhone,
+                        message: 'Введите корректный номер телефона. Пример +70000000000'
+                      }
                     })}
                     type={'text'}
                     title={'Номер телефона'}
@@ -571,11 +609,11 @@ const AddVacancy: FC = () => {
               </div>
               <div className={styles.addVacancy__footer}>
                 {activeTarif !== undefined && tarifs && tarifs[activeTarif].salary == 0 ? (
-                  <button className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
+                  <div onClick={handleSubmit(onPayment)} className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
                     <span>Опубликовать вакансию</span>
-                  </button>
+                  </div>
                 ) : (
-                  <div className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
+                  <div onClick={handleSubmit(onOpenPayment)} className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
                     <span>Перейти к оплате</span>
                   </div>
                 )}
@@ -585,13 +623,29 @@ const AddVacancy: FC = () => {
                   <span>Сохранить вакансию</span>
                 </div>
               </div>
-              <p className={styles.addVacancy__error}>
-                <ErrorForm>{errorUpdate}</ErrorForm>
-              </p>
+              <PaymentModal active={activePayment} setActive={setActivePayment} tarif={tarifs && activeTarif ? tarifs[activeTarif].name : undefined}>
+                <div onClick={handleSubmit(onPayment)} className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
+                  <span>Оплатить {activeTarif !== undefined && tarifs && tarifs[activeTarif].salary} рублей</span>
+                </div>
+              </PaymentModal>
             </form>
+            <div className={styles.addVacancy__footerWarning}>
+              <p>
+                Размещая вакансию, вы соглашаетесь с
+                <span onClick={() => setActiveRules(true)} className={styles.addVacancy__helpLink}>
+                  условиями и правилами
+                </span>
+                размещения вакансии на sewingweb.ru
+              </p>
+            </div>
+            <p className={styles.addVacancy__error}>
+              <ErrorForm>{errorUpdate}</ErrorForm>
+            </p>
           </div>
         </div>
       </div>
+      <SuccessVacancy active={activeSuccess} setActive={setActiveSuccess} />
+      <RulesVacancy active={activeRules} setActive={setActiveRules} />
     </SiteLayout>
   )
 }

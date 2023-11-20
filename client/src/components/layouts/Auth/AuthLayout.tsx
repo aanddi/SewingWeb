@@ -30,13 +30,10 @@ const AuthLayout: FC<IAuthLayout> = props => {
                 </div>
                 <div className={styles.auth__back}>
                   <Link href="/" className={styles.auth__closeBg}>
-                    <AiOutlineClose size={15} />
+                    <AiOutlineClose size={18} />
                   </Link>
                 </div>
               </header>
-              {/*
-             
-              */}
               {props.children}
             </div>
           </div>

@@ -5,6 +5,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import '@/assets/styles/globals.scss'
 
+import ProgressBar from '@/components/elements/Layout/ProgressBar/ProgressBar'
+
 import AuthProvider from '@/core/providers/aut-provider/AuthProvider'
 import { TypeComponentAuthFields } from '@/core/providers/aut-provider/auth-page.types'
 import { persistor, store } from '@/core/store/store'
@@ -19,20 +21,23 @@ const queryClient = new QueryClient({
 
 export default function App({ Component, pageProps }: AppProps & TypeComponentAuthFields) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <AuthProvider
-            Component={{
-              isOnlyEmployer: Component.isOnlyEmployer,
-              isOnlyJobSeeker: Component.isOnlyJobSeeker
-            }}
-          >
-            <Component {...pageProps} />
-          </AuthProvider>
-        </PersistGate>
-      </Provider>
-    </QueryClientProvider>
+    <>
+      <ProgressBar />
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <AuthProvider
+              Component={{
+                isOnlyEmployer: Component.isOnlyEmployer,
+                isOnlyJobSeeker: Component.isOnlyJobSeeker
+              }}
+            >
+              <Component {...pageProps} />
+            </AuthProvider>
+          </PersistGate>
+        </Provider>
+      </QueryClientProvider>
+    </>
   )
 }
 
