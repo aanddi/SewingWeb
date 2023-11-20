@@ -29,6 +29,8 @@ const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
     enabled: !!company
   })
 
+  console.log(ribbonVacancies)
+
   return (
     <SiteLayout background={'#fff'}>
       <div className={styles.aboutCompany}>

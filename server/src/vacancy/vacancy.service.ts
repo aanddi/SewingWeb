@@ -88,12 +88,16 @@ export class VacancyService {
         tags: true,
         city: true,
         adress: true,
-        employerId: true,
+        tarifId: true,
         employer: {
           select: {
+            id: true,
             companyName: true
           }
         }
+      }, 
+      orderBy: {
+        tarifId: 'desc'
       }
     })
 

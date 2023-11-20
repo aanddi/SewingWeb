@@ -16,6 +16,11 @@ export class VacancyController {
     return this.vacancyService.getRibbonById(idEmployer)
   }
 
+  // @Get('vacancy/similar')
+  // getSimilar(@Param('id') idEmployer: number) {
+  //   return this.vacancyService.getSimilar(idEmployer)
+  // }
+
   @Get('getTarif')
   getTarif() {
     return this.vacancyService.getTarif()

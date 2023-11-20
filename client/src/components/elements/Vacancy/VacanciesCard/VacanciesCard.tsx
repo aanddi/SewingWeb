@@ -4,7 +4,7 @@ import { FC, useState } from 'react'
 
 import styles from './VacanciesCard.module.scss'
 
-import { IRibbonResponse } from '@/core/services/vacancy/vacancy.interface'
+import { IVacancyCard } from '@/core/services/vacancy/vacancy.interface'
 
 import { formatPrice } from '@/core/utils/format-price'
 
@@ -13,11 +13,11 @@ import VacanciesTag from '../VacanciesTag/VacanciesTag'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { IoShieldCheckmarkSharp } from 'react-icons/io5'
 
-interface VacanciesCardProps {
-  vacancy: any
+interface Props {
+  vacancy: IVacancyCard
 }
 
-const VacanciesCard: FC<VacanciesCardProps> = ({ vacancy }) => {
+const VacanciesCard: FC<Props> = ({ vacancy }) => {
   const [checkNumber, setCheckNumber] = useState(false)
   const router = useRouter()
   //
@@ -71,8 +71,7 @@ const VacanciesCard: FC<VacanciesCardProps> = ({ vacancy }) => {
               e.stopPropagation()
               setCheckNumber(!checkNumber)
             }}
-            className={[styles.VCard__button_checkphone, styles.VCard__button_checkphone_text].join(' ')}
-          >
+            className={[styles.VCard__button_checkphone, styles.VCard__button_checkphone_text].join(' ')}>
             {checkNumber ? <span>{vacancy.phoneNumber}</span> : 'Показать номер'}
           </div>
         </div>

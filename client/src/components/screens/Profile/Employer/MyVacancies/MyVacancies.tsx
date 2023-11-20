@@ -35,7 +35,8 @@ const MyVacancies: FC = () => {
       const response = VacancyService.getMyVacancies(employer?.id)
       return response
     },
-    enabled: !!employer
+    enabled: !!employer,
+
   })
 
   return (
@@ -146,8 +147,6 @@ const MyVacancies: FC = () => {
                   )
                 })}
               </div>
-            ) : !isLoadingVacancies && !!isLoadingVacancies && !vacancies?.length ? (
-              <p className={styles.vacancies__notVacancies}>У вас нет вакансий</p>
             ) : (
               <p className={styles.vacancies__notVacancies}>У вас нет вакансий</p>
             )}
