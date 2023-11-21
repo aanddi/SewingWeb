@@ -6,7 +6,7 @@
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 9999999;
 
   display: flex;
@@ -65,16 +65,16 @@
     color: $grey;
     margin-top: 20px;
     line-height: 150%;
-    
   }
-
 
   &__button {
     display: flex;
     align-items: center;
     gap: 30px;
-    margin-top: 50px;
+    margin-top: 46px;
+    padding-top: 25px;
     justify-content: center;
+    border-top: 1px solid $grey;
 
     & > * {
       font-size: 16px;

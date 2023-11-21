@@ -71,7 +71,8 @@ const VacanciesCard: FC<Props> = ({ vacancy }) => {
               e.stopPropagation()
               setCheckNumber(!checkNumber)
             }}
-            className={[styles.VCard__button_checkphone, styles.VCard__button_checkphone_text].join(' ')}>
+            className={[styles.VCard__button_checkphone, styles.VCard__button_checkphone_text].join(' ')}
+          >
             {checkNumber ? <span>{vacancy.phoneNumber}</span> : 'Показать номер'}
           </div>
         </div>

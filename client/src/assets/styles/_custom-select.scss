@@ -1,9 +1,12 @@
-
 .custom-select {
- 
+  &--is-disabled {
+    cursor: not-allowed !important;
+    background-color: #f3f3f3 !important;
+  }
+
   &__control {
     background-color: transparent !important;
-   
+    border: 1px solid #c2bfbf !important;
     border-radius: 5px !important;
     box-shadow: none !important;
     min-height: 33px !important;
@@ -13,17 +16,14 @@
     font-size: inherit;
     font-weight: 400 !important;
 
-
     &--menu-is-open {}
 
     &:invalid {
       border-color: red; /* Установите желаемый цвет границы */
-    } 
-   
+    }
   }
 
   &__option {
-
   }
 
   &__value-container {
@@ -32,10 +32,12 @@
     cursor: text !important;
   }
 
-  &__input-container {}
+  &__input-container {
+  }
 
-  &__input {
-    
+  &__input:disabled {
+    background: #f3f3f3 !important;
+    cursor: not-allowed !important;
   }
 
   // текст внутри
@@ -48,7 +50,6 @@
   &__indicators {
     cursor: pointer;
     height: 31px !important;
-
   }
 
   &__indicator {
@@ -56,11 +57,9 @@
   }
 
   &__menu {
-
   }
 
   &__menu-list {
-
     height: 200px !important;
 
     background-color: #ffffff !important;
@@ -68,9 +67,16 @@
 
   &__option {
     cursor: pointer !important;
-    
+
     &--is-focused {
-       //background-color: lighten($blue, 20%) !important;
+      //background-color: lighten($blue, 20%) !important;
     }
-  } 
+  }
+
+  &__multi-value {
+    background-color: #ebeaea !important;
+    padding: 3px 10px !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+  }
 }

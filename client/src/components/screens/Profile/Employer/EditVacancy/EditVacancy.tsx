@@ -8,6 +8,7 @@ import Select, { MultiValue } from 'react-select'
 
 import styles from './EditVcancy.module.scss'
 
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import LoadingSpinner from '@/components/elements/Loading/LoadingSpinner'
 import PaymentModal from '@/components/elements/Modal/PaymentModal/PaymentModal'
 import RulesVacancy from '@/components/elements/Modal/RulesVacancyModal/RulesVacancyModal'
@@ -42,14 +43,16 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
   const [activePayment, setActivePayment] = useState(false)
   const [activeSuccess, setActiveSuccess] = useState(false)
 
+  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false)
+
   // ========== TARIF AND PAY =============================
 
   const { data: tarifs } = useTarifs()
 
-  const [activeTarif, setActiveTarif] = useState<number | undefined>(0)
+  const [activeTarif, setActiveTarif] = useState<number>(vacancy.tarifId)
 
   // ========== TAGS =============================
-  const [tags, setTags] = useState<string[]>([])
+  const [tags, setTags] = useState<string[]>(vacancy.tags.split(', '))
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -57,10 +60,10 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
 
     // Если чекбокс выбран, добавляем значение в data
     if (isChecked) {
-      setTags([...tags, value])
+      setTags(prevTags => [...prevTags, value])
     } else {
       // Если чекбокс снят, удаляем значение из data
-      setTags(tags.filter(item => item !== value))
+      setTags(prevTags => prevTags.filter(tag => tag !== value))
     }
   }
 
@@ -75,8 +78,7 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
 
   const { data: employer, isLoading } = useEmployer()
   const employerId = employer?.id
-    const router = useRouter()
-
+  const router = useRouter()
 
   // ========== REACT HOOK FORM ==================  ===========
 
@@ -96,32 +98,67 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
   })
 
   useEffect(() => {
-    setValue('title', vacancy.title), setValue('professionId', vacancy.professionId)
+    if (employerId) {
+      setValue('employerId', employerId)
+    }
+
+    if (vacancy.status) {
+      setValue('dateStart', vacancy.dateStart)
+      setValue('dateEnd', vacancy.dateEnd)
+    } else if (!vacancy.status && tarifs) {
+      const date = new Date('2023-11-16T22:52:50.265Z')
+
+      const start: any = date.toISOString()
+      setValue('dateStart', start)
+
+      // вычисление срока вакансии
+      date.setDate(date.getDate() + tarifs[activeTarif].time)
+
+      const end: any = date.toISOString()
+      setValue('dateEnd', end)
+    }
+
+    if (tags) {
+      const tagsString = tags.join(', ')
+      setValue('tags', tagsString)
+    }
+
+    if (vacancy.skills) {
+      const skillsArray = vacancy.skills.split(', ').map(skill => ({
+        value: skill,
+        label: skill
+      }))
+      setSkillsList(skillsArray)
+    }
+
+    setValue('title', vacancy.title)
+    setValue('professionId', vacancy.professionId)
     setValue('minSalary', vacancy.minSalary)
     setValue('maxSalary', vacancy.maxSalary)
     setValue('descCard', vacancy.descCard)
     setValue('city', vacancy.city)
     setValue('adress', vacancy.adress)
-    // setValue('skills', vacancy.skills)
     setValue('workExperience', vacancy.workExperience)
     setValue('employmentType', vacancy.employmentType)
     setValue('workTimetable', vacancy.workTimetable)
     setValue('education', vacancy.education)
-    // setValue('tags', vacancy.tags)
     setValue('descMain', vacancy.descMain)
     setValue('fullName', vacancy.fullName)
     setValue('phoneNumber', vacancy.phoneNumber)
     setValue('contact', vacancy.contact)
-    // setValue('tarifId', vacancy.tarifId)
-  }, [vacancy, setValue])
+    setValue('tarifId', activeTarif)
+  }, [vacancy, activeTarif, employerId, tags, setValue])
+
+  const [skillsList, setSkillsList] = useState<MultiValue<{ value: string; label: string }>>([])
 
   const onSave: SubmitHandler<IVacancy> = async data => {
-    data.status = false
+    setIsLoadingSubmit(true)
+    data.status = vacancy.status
     try {
-      const response = await VacancyService.create(data)
-      reset()
-      setActiveSuccess(true)
+      const response = await VacancyService.updateMyVacancy(vacancy.id, data)
+      router.replace('/profile/e_vacancies')
     } catch (error: any) {
+      setIsLoadingSubmit(false)
       setErrorUpdate(error.response.data.message)
     }
   }
@@ -131,50 +168,54 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
   }
 
   const onPayment: SubmitHandler<IVacancy> = async data => {
+    setIsLoadingSubmit(true)
     data.status = true
     try {
-      const response = await VacancyService.create(data)
+      const response = await VacancyService.updateMyVacancy(vacancy.id, data)
       reset()
       setActivePayment(false)
       setActiveSuccess(true)
+      setIsLoadingSubmit(false)
     } catch (error: any) {
+      setIsLoadingSubmit(false)
+      data.status = false
       setErrorUpdate(error.response.data.message)
     }
   }
 
   return (
     <SiteLayout background={'#fff'}>
-      <div className={styles.addVacancy}>
-        <div className="addVacancy__container">
+      <div className={styles.editVacancy}>
+        <div className="editVacancy__container">
           {isLoading ? (
             <LoadingSpinner />
           ) : employerId == vacancy.employerId ? (
             <>
               {employer ? null : (
-                <div className={styles.addVacancy__authError}>
+                <div className={styles.editVacancy__authError}>
                   <ErrorForm>Чтобы разместить вакансию, зарегистрируйте вашу компанию</ErrorForm>
                   <Link href={'/auth/registerCompany'}>Регистрация</Link>
                 </div>
               )}
-              <div className={styles.addVacancy__content}>
-                <form onSubmit={handleSubmit(onPayment)} className={styles.addVacancy__wrapper}>
-                  <div className={styles.addVacancy__header}>
+              <div className={styles.editVacancy__content}>
+                <form onSubmit={handleSubmit(onPayment)} className={styles.editVacancy__wrapper}>
+                  <div className={styles.editVacancy__header}>
                     {vacancy.status ? <ProfileTitle title={'Редактировать вакансию'} /> : <ProfileTitle title={'Опубликовать вакансию'} />}
                   </div>
-                  <div className={styles.addVacancy__headerForm}>
-                    <div className={styles.addVacancy__help}>
+                  <div className={styles.editVacancy__headerForm}>
+                    <div className={styles.editVacancy__help}>
                       <FiInfo size={20} style={{ color: '#3490DF' }} />
-                      <div className={styles.addVacancy__helpText}>
+                      <div className={styles.editVacancy__helpText}>
                         <p>Укажите популярное название, чтобы было проще найти вакансию</p>
                         <p>
-                          После размещения вы уже не сможете изменить название!
-                          <span onClick={() => setActiveRules(true)} className={styles.addVacancy__helpLink}>
+                          После размещения вы уже не сможете изменить название и должность у активной вакансии!
+                          <span onClick={() => setActiveRules(true)} className={styles.editVacancy__helpLink}>
                             Правила размещения вакансии
                           </span>
                         </p>
                       </div>
                     </div>
-                    <div className={styles.addVacancy__inputs}>
+                    <div className={styles.editVacancy__inputs}>
                       <FieldProfile
                         {...register('title', {
                           required: 'Укажите название вакансии'
@@ -185,12 +226,12 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                         star={true}
                         error={errors.title?.message}
                       />
-                      <div className={styles.addVacancy__selectBlock}>
-                        <div className={styles.addVacancy__selectLabel}>
+                      <div className={styles.editVacancy__selectBlock}>
+                        <div className={styles.editVacancy__selectLabel}>
                           <span>Должность</span>
-                          <span className={styles.addVacancy__required}>*</span>
+                          <span className={styles.editVacancy__required}>*</span>
                         </div>
-                        <div className={styles.addVacancy__select}>
+                        <div className={styles.editVacancy__select}>
                           <Controller
                             name="professionId"
                             control={control}
@@ -204,6 +245,7 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                                 value={profession ? profession.find(option => option.value === field.value) : null}
                                 hideSelectedOptions={false}
                                 isMulti={false}
+                                isDisabled={vacancy.status}
                                 noOptionsMessage={() => 'Нет такой профессии'}
                                 onChange={selectedOption => {
                                   if (selectedOption) {
@@ -219,48 +261,49 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                               />
                             )}
                           />
-                          {errors.professionId && <span className={styles.addVacancy__errorField}>Укажите подходящую профессию</span>}
+                          {errors.professionId && <span className={styles.editVacancy__errorField}>Укажите подходящую профессию</span>}
                         </div>
                       </div>
                     </div>
-                    <div className={styles.addVacancy__salaryBlock}>
-                      <div className={styles.addVacancy__labelSalary}>Зарплата</div>
-                      <div className={styles.addVacancy__salary}>
-                        <div className={styles.addVacancy__salaryVield}>
+                    <div className={styles.editVacancy__salaryBlock}>
+                      <div className={styles.editVacancy__labelSalary}>Зарплата</div>
+                      <div className={styles.editVacancy__salary}>
+                        <div className={styles.editVacancy__salaryVield}>
                           <input {...register('minSalary')} type="number" placeholder="от" />
                         </div>
                         <span>—</span>
 
-                        <div className={styles.addVacancy__salaryVield}>
+                        <div className={styles.editVacancy__salaryVield}>
                           <input {...register('maxSalary')} type="number" placeholder="до" />
                         </div>
-                        <span className={styles.addVacancy__rub}>руб. / мес</span>
+                        <span className={styles.editVacancy__rub}>руб. / мес</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className={styles.addVacancy__line}></div>
-                  <div className={styles.addVacancy__shortDesc}>
-                    <h3 className={styles.addVacancy__titleBlock}>Описание и требования</h3>
-                    <div className={styles.addVacancy__help}>
+                  <div className={styles.editVacancy__line}></div>
+                  <div className={styles.editVacancy__shortDesc}>
+                    <h3 className={styles.editVacancy__titleBlock}>Описание и требования</h3>
+                    <div className={styles.editVacancy__help}>
                       <FiInfo size={20} style={{ color: '#3490DF' }} />
-                      <div className={styles.addVacancy__helpText}>
+                      <div className={styles.editVacancy__helpText}>
                         <p>Напишите краткое (1-2 предложения) описание вашей вакансии. </p>
                         <p>Заинтересуйте человека этим сообщением, чтобы он захотел посмотреть подробную информацию</p>
                       </div>
                     </div>
-                    <div className={styles.addVacancy__label}>
+                    <div className={styles.editVacancy__label}>
                       <span>Краткое описание на карточке вакансии</span>
-                      <span className={styles.addVacancy__required}>*</span>
+                      <span className={styles.editVacancy__required}>*</span>
                     </div>
                     <textarea
                       {...register('descCard', {
                         required: 'Укажите описание вакансии'
                       })}
-                      style={errors.descCard ? { borderColor: 'red' } : undefined}></textarea>
-                    {errors.descCard && <span className={styles.addVacancy__errorField}>Укажите описание карточки вакансии</span>}
+                      style={errors.descCard ? { borderColor: 'red' } : undefined}
+                    ></textarea>
+                    {errors.descCard && <span className={styles.editVacancy__errorField}>Укажите описание карточки вакансии</span>}
                   </div>
-                  <div className={styles.addVacancy__inputs}>
+                  <div className={styles.editVacancy__inputs}>
                     <FieldProfile
                       {...register('city', {
                         required: 'Укажите город'
@@ -279,11 +322,11 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                       star={true}
                       error={errors.adress?.message}
                     />
-                    <div className={styles.addVacancy__selectBlock}>
-                      <div className={styles.addVacancy__selectLabel}>
+                    <div className={styles.editVacancy__selectBlock}>
+                      <div className={styles.editVacancy__selectLabel}>
                         <span>Ключевые навыки </span>
                       </div>
-                      <div className={styles.addVacancy__select}>
+                      <div className={styles.editVacancy__select}>
                         <Controller
                           name="skills"
                           control={control}
@@ -291,16 +334,16 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                           render={({ field }) => (
                             <Select
                               classNamePrefix="custom-select"
-                              options={skills ? skills : []}
+                              options={skills}
                               placeholder=""
                               isMulti={true}
                               isSearchable={false}
                               noOptionsMessage={() => 'Нет ключевых навыков'}
-                              // value={skills}
+                              value={skillsList} // Устанавливаем текущие выбранные навыки
                               onChange={(selectedOptions: MultiValue<{ value: string; label: string }>) => {
                                 const selectedValues = selectedOptions.map(option => option.value).join(', ')
-                                field.onChange(selectedValues)
-                                // setWorkTime(selectedOptions)
+                                field.onChange(selectedValues) // Устанавливаем выбранные значения в форму.
+                                setSkillsList(selectedOptions)
                               }}
                             />
                           )}
@@ -308,12 +351,12 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                       </div>
                     </div>
 
-                    <div className={styles.addVacancy__selectBlock}>
-                      <div className={styles.addVacancy__selectLabel}>
+                    <div className={styles.editVacancy__selectBlock}>
+                      <div className={styles.editVacancy__selectLabel}>
                         <span>Опыт работы </span>
-                        <span className={styles.addVacancy__required}>*</span>
+                        <span className={styles.editVacancy__required}>*</span>
                       </div>
-                      <div className={[styles.addVacancy__select, styles.addVacancy__select_conditions].join(' ')}>
+                      <div className={[styles.editVacancy__select, styles.editVacancy__select_conditions].join(' ')}>
                         <Controller
                           name="workExperience"
                           control={control}
@@ -341,16 +384,16 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                             />
                           )}
                         />
-                        {errors.workExperience && <span className={styles.addVacancy__errorField}>Укажите опыт работы</span>}
+                        {errors.workExperience && <span className={styles.editVacancy__errorField}>Укажите опыт работы</span>}
                       </div>
                     </div>
 
-                    <div className={styles.addVacancy__selectBlock}>
-                      <div className={styles.addVacancy__selectLabel}>
+                    <div className={styles.editVacancy__selectBlock}>
+                      <div className={styles.editVacancy__selectLabel}>
                         <span>Тип занятости </span>
-                        <span className={styles.addVacancy__required}>*</span>
+                        <span className={styles.editVacancy__required}>*</span>
                       </div>
-                      <div className={[styles.addVacancy__select, styles.addVacancy__select_conditions].join(' ')}>
+                      <div className={[styles.editVacancy__select, styles.editVacancy__select_conditions].join(' ')}>
                         <Controller
                           name="employmentType"
                           control={control}
@@ -378,16 +421,16 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                             />
                           )}
                         />
-                        {errors.workExperience && <span className={styles.addVacancy__errorField}>Укажите тип занятости</span>}
+                        {errors.workExperience && <span className={styles.editVacancy__errorField}>Укажите тип занятости</span>}
                       </div>
                     </div>
 
-                    <div className={styles.addVacancy__selectBlock}>
-                      <div className={styles.addVacancy__selectLabel}>
+                    <div className={styles.editVacancy__selectBlock}>
+                      <div className={styles.editVacancy__selectLabel}>
                         <span>График работы </span>
-                        <span className={styles.addVacancy__required}>*</span>
+                        <span className={styles.editVacancy__required}>*</span>
                       </div>
-                      <div className={[styles.addVacancy__select, styles.addVacancy__select_conditions].join(' ')}>
+                      <div className={[styles.editVacancy__select, styles.editVacancy__select_conditions].join(' ')}>
                         <Controller
                           name="workTimetable"
                           control={control}
@@ -415,16 +458,16 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                             />
                           )}
                         />
-                        {errors.workExperience && <span className={styles.addVacancy__errorField}>Укажите график работы</span>}
+                        {errors.workExperience && <span className={styles.editVacancy__errorField}>Укажите график работы</span>}
                       </div>
                     </div>
 
-                    <div className={styles.addVacancy__selectBlock}>
-                      <div className={styles.addVacancy__selectLabel}>
+                    <div className={styles.editVacancy__selectBlock}>
+                      <div className={styles.editVacancy__selectLabel}>
                         <span>Образование </span>
-                        <span className={styles.addVacancy__required}>*</span>
+                        <span className={styles.editVacancy__required}>*</span>
                       </div>
-                      <div className={[styles.addVacancy__select, styles.addVacancy__select_conditions].join(' ')}>
+                      <div className={[styles.editVacancy__select, styles.editVacancy__select_conditions].join(' ')}>
                         <Controller
                           name="education"
                           control={control}
@@ -452,34 +495,34 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                             />
                           )}
                         />
-                        {errors.education && <span className={styles.addVacancy__errorField}>Укажите опыт образование</span>}
+                        {errors.education && <span className={styles.editVacancy__errorField}>Укажите опыт образование</span>}
                       </div>
                     </div>
                   </div>
-                  <div className={styles.addVacancy__tags}>
-                    <div className={styles.addVacancy__tagsLabel}>Вакансия подходит для</div>
-                    <div className={styles.addVacancy__tagsList}>
+                  <div className={styles.editVacancy__tags}>
+                    <div className={styles.editVacancy__tagsLabel}>Вакансия подходит для</div>
+                    <div className={styles.editVacancy__tagsList}>
                       {tagsList.map((item, index) => {
                         return (
-                          <div className={styles.addVacancy__tag}>
-                            <input type="checkbox" value={item.value} onChange={handleCheckboxChange} />
+                          <div className={styles.editVacancy__tag} key={index}>
+                            <input type="checkbox" value={item.value} checked={tags.includes(item.value)} onChange={handleCheckboxChange} />
                             <span>{item.label}</span>
                           </div>
                         )
                       })}
                     </div>
                   </div>
-                  <div className={styles.addVacancy__desc}>
-                    <div className={styles.addVacancy__help}>
+                  <div className={styles.editVacancy__desc}>
+                    <div className={styles.editVacancy__help}>
                       <FiInfo size={20} style={{ color: '#3490DF' }} />
-                      <div className={styles.addVacancy__helpText}>
+                      <div className={styles.editVacancy__helpText}>
                         <p>Соискатели лучше откликаются на вакансии с понятным и подробным описанием</p>
                         <p>Опишите обязанности, требования, условия труда и т.д.</p>
                       </div>
                     </div>
-                    <div className={styles.addVacancy__label}>
+                    <div className={styles.editVacancy__label}>
                       <span>Описание вакансии</span>
-                      <span className={styles.addVacancy__required}>*</span>
+                      <span className={styles.editVacancy__required}>*</span>
                     </div>
                     <Controller
                       name="descMain"
@@ -500,19 +543,19 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                       )}
                     />
                     {errors.descMain || desc === '<p><br></p>' ? (
-                      <span className={styles.addVacancy__errorField}>Укажите описание вакансии</span>
+                      <span className={styles.editVacancy__errorField}>Укажите описание вакансии</span>
                     ) : null}
                   </div>
-                  <div className={styles.addVacancy__line}></div>
-                  <div className={styles.addVacancy__contactPerson}>
-                    <h3 className={styles.addVacancy__titleBlock}>Контакное лицо</h3>
-                    <div className={styles.addVacancy__help}>
+                  <div className={styles.editVacancy__line}></div>
+                  <div className={styles.editVacancy__contactPerson}>
+                    <h3 className={styles.editVacancy__titleBlock}>Контакное лицо</h3>
+                    <div className={styles.editVacancy__help}>
                       <FiInfo size={20} style={{ color: '#3490DF' }} />
-                      <div className={styles.addVacancy__helpText}>
+                      <div className={styles.editVacancy__helpText}>
                         <p>Если у вас несколько контактных лиц, укажите их в описании вакансии</p>
                       </div>
                     </div>
-                    <div className={styles.addVacancy__inputs}>
+                    <div className={styles.editVacancy__inputs}>
                       <FieldProfile
                         {...register('fullName', {
                           required: 'Укажите контактное лицо'
@@ -543,49 +586,52 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
 
                   {vacancy.status ? null : (
                     <>
-                      <div className={styles.addVacancy__line}></div>
-                      <div className={styles.addVacancy__tarifPlan}>
-                        <h3 className={styles.addVacancy__titleBlock}>Тариф</h3>
-                        <div className={styles.addVacancy__help}>
+                      <div className={styles.editVacancy__line}></div>
+                      <div className={styles.editVacancy__tarifPlan}>
+                        <h3 className={styles.editVacancy__titleBlock}>Тариф</h3>
+                        <div className={styles.editVacancy__help}>
                           <FiInfo size={20} style={{ color: '#3490DF' }} />
-                          <div className={styles.addVacancy__helpText}>
+                          <div className={styles.editVacancy__helpText}>
                             <p>
                               Подробнее о тарифах можно почитать на странице{' '}
-                              <Link href={'/employer'} className={styles.addVacancy__helpLink}>
+                              <Link href={'/employer'} className={styles.editVacancy__helpLink}>
                                 Работодателю
                               </Link>
                             </p>
                             <p>Чтобы выбрать нужный тариф просто нажмите на блок тарифа</p>
                           </div>
                         </div>
-                        <div className={styles.addVacancy__cards}>
+                        <div className={styles.editVacancy__cards}>
                           {tarifs?.map((elem, index) => {
                             return (
-                              <div key={index} className={styles.addVacancy__card} onClick={() => setActiveTarif(index)}>
+                              <div key={index} className={styles.editVacancy__card} onClick={() => setActiveTarif(index)}>
                                 <div
                                   className={
                                     tarifs && activeTarif == index
-                                      ? [styles.addVacancy__cardWrapper, styles.addVacancy__cardWrapper_active].join(' ')
-                                      : styles.addVacancy__cardWrapper
-                                  }>
-                                  <div className={styles.addVacancy__cardTitle}>Вакансия {elem.name}</div>
-                                  <div className={styles.addVacancy__efficiency}>
+                                      ? [styles.editVacancy__cardWrapper, styles.editVacancy__cardWrapper_active].join(' ')
+                                      : styles.editVacancy__cardWrapper
+                                  }
+                                >
+                                  <div className={styles.editVacancy__cardTitle}>Вакансия {elem.name}</div>
+                                  <div className={styles.editVacancy__efficiency}>
                                     <div
                                       className={[
-                                        styles.addVacancy__efficiencyNumber,
-                                        styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]
-                                      ].join(' ')}>
+                                        styles.editVacancy__efficiencyNumber,
+                                        styles[`editVacancy__efficiencyNumber_${(index % 3) + 1}`]
+                                      ].join(' ')}
+                                    >
                                       x{index + 1}
                                     </div>
                                     <div
-                                      className={[styles.addVacancy__efficiencyDesc, styles[`addVacancy__efficiencyDesc_${(index % 3) + 1}`]].join(
+                                      className={[styles.editVacancy__efficiencyDesc, styles[`editVacancy__efficiencyDesc_${(index % 3) + 1}`]].join(
                                         ' '
-                                      )}>
+                                      )}
+                                    >
                                       в {index + 1} раз <br /> эффективность
                                     </div>
                                   </div>
-                                  <div className={styles.addVacancy__cardFooter}>
-                                    <p className={styles.addVacancy__cardSalary}>{elem.salary} рублей</p>
+                                  <div className={styles.editVacancy__cardFooter}>
+                                    <p className={styles.editVacancy__cardSalary}>{elem.salary} рублей</p>
                                     <p>публикация на {elem.time} дней</p>
                                   </div>
                                 </div>
@@ -598,20 +644,32 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                   )}
 
                   {vacancy.status ? (
-                    <div className={styles.addVacancy__footer}>
-                      <div onClick={handleSubmit(onPayment)} className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
-                        <CiSaveDown2 size={20} style={{ strokeWidth: '1' }} />
-                        <span>Сохранить</span>
+                    <div className={styles.editVacancy__footer}>
+                      <div onClick={handleSubmit(onSave)} className={[styles.editVacancy__button, styles.editVacancy__button_post].join(' ')}>
+                        {isLoadingSubmit ? (
+                          <LoadingDots color={'#fff'} />
+                        ) : (
+                          <>
+                            <CiSaveDown2 size={20} style={{ strokeWidth: '1' }} />
+                            <span>Сохранить</span>
+                          </>
+                        )}
+                      </div>
+                      <div className={styles.editVacancy__close}>
+                        <Link href={'/profile/e_vacancies'}>Отменить</Link>
                       </div>
                     </div>
                   ) : (
-                    <div className={styles.addVacancy__footer}>
+                    <div className={styles.editVacancy__footer}>
                       {activeTarif !== undefined && tarifs && tarifs[activeTarif].salary == 0 ? (
-                        <div onClick={handleSubmit(onPayment)} className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
-                          <span>Опубликовать вакансию</span>
+                        <div onClick={handleSubmit(onPayment)} className={[styles.editVacancy__button, styles.editVacancy__button_post].join(' ')}>
+                          {isLoadingSubmit ? <LoadingDots /> : <span>Опубликовать вакансию</span>}
                         </div>
                       ) : (
-                        <div onClick={handleSubmit(onOpenPayment)} className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
+                        <div
+                          onClick={handleSubmit(onOpenPayment)}
+                          className={[styles.editVacancy__button, styles.editVacancy__button_post].join(' ')}
+                        >
                           <span>Перейти к оплате</span>
                         </div>
                       )}
@@ -620,22 +678,27 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                   <PaymentModal
                     active={activePayment}
                     setActive={setActivePayment}
-                    tarif={tarifs && activeTarif ? tarifs[activeTarif].name : undefined}>
-                    <div onClick={handleSubmit(onPayment)} className={[styles.addVacancy__button, styles.addVacancy__button_post].join(' ')}>
-                      <span>Оплатить {activeTarif !== undefined && tarifs && tarifs[activeTarif].salary} рублей</span>
+                    tarif={tarifs && activeTarif ? tarifs[activeTarif].name : undefined}
+                  >
+                    <div onClick={handleSubmit(onPayment)} className={[styles.editVacancy__button, styles.editVacancy__button_post].join(' ')}>
+                      {isLoadingSubmit ? (
+                        <LoadingDots />
+                      ) : (
+                        <span>Оплатить {activeTarif !== undefined && tarifs && tarifs[activeTarif].salary} рублей</span>
+                      )}
                     </div>
                   </PaymentModal>
                 </form>
-                <div className={styles.addVacancy__footerWarning}>
+                <div className={styles.editVacancy__footerWarning}>
                   <p>
                     Размещая вакансию, вы соглашаетесь с
-                    <span onClick={() => setActiveRules(true)} className={styles.addVacancy__helpLink}>
+                    <span onClick={() => setActiveRules(true)} className={styles.editVacancy__helpLink}>
                       условиями и правилами
                     </span>
                     размещения вакансии на sewingweb.ru
                   </p>
                 </div>
-                <p className={styles.addVacancy__error}>
+                <p className={styles.editVacancy__error}>
                   <ErrorForm>{errorUpdate}</ErrorForm>
                 </p>
               </div>
@@ -645,11 +708,11 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
             </>
           ) : (
             <>
-            
-            <ErrorForm>Упс... Ошибка. Вы не можете редактировать не свои вакансии!!</ErrorForm>
-            <div className={styles.addVacancy__buttonBack} onClick={() => router.back()}>Назад</div>
+              <ErrorForm>Упс... Ошибка. Вы не можете редактировать не свои вакансии!!</ErrorForm>
+              <div className={styles.editVacancy__buttonBack} onClick={() => router.back()}>
+                Назад
+              </div>
             </>
-            
           )}
         </div>
       </div>

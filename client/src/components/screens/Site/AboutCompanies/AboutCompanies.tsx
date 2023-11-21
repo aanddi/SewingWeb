@@ -19,7 +19,6 @@ import pattern from 'public/Companies/pattern.svg'
 import ad from 'public/ad/ad.png'
 
 const AboutCompanies: FC<{ company: IEmployer }> = ({ company }) => {
-
   const { data: ribbonVacancies } = useQuery({
     queryKey: ['vacancies'],
     queryFn: async () => {

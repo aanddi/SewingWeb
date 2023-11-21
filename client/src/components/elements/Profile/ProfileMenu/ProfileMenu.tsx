@@ -43,7 +43,8 @@ const ProfileMenu: FC = () => {
           isShow
             ? [styles.profileMenu__menu, styles.profileMenu__menu_active].join(' ')
             : [styles.profileMenu__menu, styles.profileMenu__menu_unActive].join(' ')
-        }>
+        }
+      >
         <div className={styles.profileMenu__wrapper}>
           <div className={styles.profileMenu__header}>
             <Link href="/profile/my" className={styles.profileMenu__name}>

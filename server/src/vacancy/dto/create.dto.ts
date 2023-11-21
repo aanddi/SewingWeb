@@ -6,10 +6,8 @@ export class CreateVacancy {
   professionId: number
   tarifId: number
   title: string
-  @IsNumber()
   @IsOptional()
   minSalary: number
-  @IsNumber()
   @IsOptional()
   maxSalary: number
   descCard: string

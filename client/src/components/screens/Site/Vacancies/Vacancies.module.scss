@@ -1,8 +1,7 @@
 @import '@/assets/styles/_variables.scss';
 
 .vacancies {
-  margin-top: 63px;
-  margin-bottom: 50px;
+  margin: 75px 0;
 
   &__about {
   }
@@ -28,6 +27,7 @@
   }
 
   &__name {
+    color: $darkBlue;
     font-weight: 900;
     font-size: 40px;
     line-height: 120%;
@@ -85,7 +85,7 @@
     flex: 1 1 100%;
     position: -webkit-sticky;
     position: sticky;
-    top: 50px;
+    top: 60px;
     align-self: flex-start;
   }
 

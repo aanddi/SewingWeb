@@ -1,22 +1,24 @@
+import { GetServerSideProps } from 'next'
+
 import Meta from '@/components/Meta/Meta'
 import EditVacancy from '@/components/screens/Profile/Employer/EditVacancy/EditVacancy'
 
-import { NextPageAuth } from '@/core/providers/aut-provider/auth-page.types'
-import { GetServerSideProps } from 'next'
-import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 import { IVacancyResponse } from '@/core/services/vacancy/vacancy.interface'
+
 import { useAuth } from '@/core/hooks/useAuth'
 import { useEmployer } from '@/core/hooks/useEmployer'
+import { NextPageAuth } from '@/core/providers/aut-provider/auth-page.types'
 import { EmployerService } from '@/core/services/employer/employer.service'
+import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 
 interface AboutVacancyProps {
   vacancy: IVacancyResponse
 }
 
-const EditVacancyPage: NextPageAuth<AboutVacancyProps> = ({vacancy}) => {
+const EditVacancyPage: NextPageAuth<AboutVacancyProps> = ({ vacancy }) => {
   return (
     <Meta title="Редактировать вакансию">
-      <EditVacancy vacancy={vacancy}/>
+      <EditVacancy vacancy={vacancy} />
     </Meta>
   )
 }

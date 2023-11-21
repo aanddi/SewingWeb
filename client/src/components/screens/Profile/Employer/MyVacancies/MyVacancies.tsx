@@ -21,13 +21,23 @@ import { GoDotFill } from 'react-icons/go'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 
 const MyVacancies: FC = () => {
-  const [deleteVacancy, setDeleteVacancy] = useState(false)
-  const [unpublication, setUnpublication] = useState(false)
+  //======== Warning modal ===========
+  const [modalAction, setModalAction] = useState<'delete' | 'unpublication' | null>(null)
+  const [modalActive, setModalActive] = useState(false)
+  const [targetId, setTargetId] = useState<number | undefined>(undefined)
 
-  const [deleteVacancyId, setDeleteVacancyId] = useState<number | undefined>(undefined)
-  const [unpublicationId, setUnpublicationId] = useState<number | undefined>(undefined)
-  const queryClient = useQueryClient()
+  const handleAction = (type: 'delete' | 'unpublication', id: number | undefined) => {
+    setModalAction(type)
+    setTargetId(id)
+    setModalActive(true)
+  }
 
+  const closeModal = () => {
+    setModalActive(false)
+    setTargetId(undefined)
+  }
+
+  //======== useQuery ===========
   const { data: employer, isLoading: isLoadingEmployer } = useEmployer()
 
   const { data: vacancies, isLoading: isLoadingVacancies } = useQuery<IMyVacancy[]>({
@@ -39,11 +49,32 @@ const MyVacancies: FC = () => {
     enabled: !!employer
   })
 
-  const {mutation: unpublicationMutation } = useMutation(
-    'unpublication',
-    async () => VacancyService.unpublication(unpublicationId),
-    {onS}
-  )
+  //======== useMutation ===========
+  const queryClient = useQueryClient()
+
+  const mutationUnpublication = useMutation({
+    mutationKey: ['vacancies'],
+    mutationFn: async (id: number | undefined) => {
+      const response = await VacancyService.unpublication(id)
+    },
+    onSuccess: () => {
+      setModalActive(false)
+      setTargetId(undefined)
+      queryClient.invalidateQueries({ queryKey: ['vacancies'] })
+    }
+  })
+
+  const mutationDelete = useMutation({
+    mutationKey: ['vacancies'],
+    mutationFn: async (id: number | undefined) => {
+      const response = await VacancyService.deleteMyVacancy(id)
+    },
+    onSuccess: () => {
+      setModalActive(false)
+      setTargetId(undefined)
+      queryClient.invalidateQueries({ queryKey: ['vacancies'] })
+    }
+  })
 
   return (
     <SiteLayout background={'#fff'}>
@@ -76,62 +107,35 @@ const MyVacancies: FC = () => {
                               <>
                                 <Link
                                   href={`/profile/e_edit-vacancy/${elem.id}`}
-                                  className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}>
+                                  className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}
+                                >
                                   Редактировать
                                 </Link>
                                 <div
-                                  onClick={() => {
-                                    setUnpublication(true)
-                                    setUnpublicationId(elem.id)
-                                  }}
-                                  className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}>
+                                  onClick={() => handleAction('unpublication', elem.id)}
+                                  className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
+                                >
                                   Снять с публикации
                                 </div>
-                                <WarningModal
-                                  message={'Если это платная вакансия, вам придется снова оплатить тариф, чтобы опубликовать'}
-                                  active={unpublication}
-                                  setActive={setUnpublication}>
-                                  <span
-                                    className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
-                                    onClick={async () => {
-                                      setUnpublication(false)
-                                      setUnpublicationId(undefined)
-                                      queryClient.invalidateQueries({ queryKey: ['vacancies'] })
-                                    }}>
-                                    Снять с публикации
-                                  </span>
-                                </WarningModal>
                               </>
                             ) : (
                               <>
                                 <Link
                                   href={`/profile/e_edit-vacancy/${elem.id}`}
-                                  className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}>
+                                  className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}
+                                >
                                   Опубликовать
                                 </Link>
                                 <div
-                                  onClick={() => {
-                                    setDeleteVacancy(true)
-                                    setDeleteVacancyId(elem.id)
-                                  }}
-                                  className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}>
+                                  onClick={() => handleAction('delete', elem.id)}
+                                  className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
+                                >
                                   Удалить
                                 </div>
-                                <WarningModal active={deleteVacancy} setActive={setDeleteVacancy}>
-                                  <div
-                                    className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
-                                    onClick={async () => {
-                                      const deleteMyVacancy = await VacancyService.deleteMyVacancy(deleteVacancyId)
-                                      setDeleteVacancy(false)
-                                      setDeleteVacancyId(undefined)
-                                      queryClient.invalidateQueries({ queryKey: ['vacancies'] })
-                                    }}>
-                                    Удалить
-                                  </div>
-                                </WarningModal>
                               </>
                             )}
                           </div>
+
                           <div className={styles.vacancies__dates}>
                             <p className={styles.vacancies__date}>Начало: {formatDate(elem.dateStart)}</p>
                             <p className={styles.vacancies__date}>Конец: {formatDate(elem.dateEnd)}</p>
@@ -160,6 +164,33 @@ const MyVacancies: FC = () => {
               <p className={styles.vacancies__notVacancies}>У вас нет вакансий</p>
             )}
           </div>
+          <WarningModal
+            message={
+              modalAction === 'unpublication'
+                ? 'Если это платная вакансия, вам придется снова оплатить тариф, чтобы опубликовать.'
+                : 'При удалении, вы потеряете базу откликов на эту вакансию.'
+            }
+            active={modalActive}
+            setActive={closeModal}
+          >
+            {modalAction === 'delete' && (
+              <div
+                className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
+                onClick={async () => mutationDelete.mutate(targetId)}
+              >
+                {mutationDelete.isPending ? <LoadingDots /> : 'Удалить'}
+              </div>
+            )}
+
+            {modalAction === 'unpublication' && (
+              <div
+                className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
+                onClick={() => mutationUnpublication.mutate(targetId)}
+              >
+                {mutationUnpublication.isPending ? <LoadingDots /> : 'Снять с публикации'}
+              </div>
+            )}
+          </WarningModal>
         </div>
       </div>
     </SiteLayout>

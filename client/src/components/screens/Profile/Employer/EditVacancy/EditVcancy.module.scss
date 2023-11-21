@@ -1,6 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
-.addVacancy {
+.editVacancy {
   margin: 100px 0;
 
   &__authError {
@@ -219,7 +219,7 @@
     margin-top: 60px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 50px;
     border-top: 1px solid $grey;
     padding-top: 30px;
   }
@@ -251,6 +251,10 @@
     &_post {
       color: #fff;
       background-color: $blue;
+
+      svg {
+        fill: #fff !important;
+      }
 
       &:hover {
         background-color: $blueHover;
@@ -353,5 +357,10 @@
   &__cardSalary {
     font-size: 15px;
     font-weight: 500;
+  }
+
+  &__close {
+    font-size: 16px;
+    cursor: pointer;
   }
 }

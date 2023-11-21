@@ -52,5 +52,4 @@ export interface IMyVacancy {
 export interface IRibbonById {
   vacancies: IVacancyCard[]
   totalVacancies: number
-  
 }

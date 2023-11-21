@@ -9,6 +9,7 @@ import Select, { MultiValue } from 'react-select'
 
 import styles from './AddVacancy.module.scss'
 
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import PaymentModal from '@/components/elements/Modal/PaymentModal/PaymentModal'
 import RulesVacancy from '@/components/elements/Modal/RulesVacancyModal/RulesVacancyModal'
 import SuccessVacancy from '@/components/elements/Modal/SuccessVacancy/SuccessVacancy'
@@ -40,12 +41,10 @@ const AddVacancy: FC = () => {
   const [activePayment, setActivePayment] = useState(false)
   const [activeSuccess, setActiveSuccess] = useState(false)
 
-  const router = useRouter()
-
   // ========== TARIF AND PAY =============================
   const { data: tarifs } = useTarifs()
 
-  const [activeTarif, setActiveTarif] = useState<number | undefined>(0)
+  const [activeTarif, setActiveTarif] = useState<number>(0)
 
   // ========== TAGS =============================
   const [tags, setTags] = useState<string[]>([])
@@ -72,7 +71,7 @@ const AddVacancy: FC = () => {
     label: elem.name
   }))
 
-  const { data: employer } = useEmployer()
+  const { data: employer, isLoading: employerLoading } = useEmployer()
   const employerId = employer?.id
 
   // ========== REACT HOOK FORM =============================
@@ -145,6 +144,7 @@ const AddVacancy: FC = () => {
       setActivePayment(false)
       setActiveSuccess(true)
     } catch (error: any) {
+      data.status = false
       setErrorUpdate(error.response.data.message)
     }
   }
@@ -153,12 +153,16 @@ const AddVacancy: FC = () => {
     <SiteLayout background={'#fff'}>
       <div className={styles.addVacancy}>
         <div className="addVacancy__container">
-          {employer ? null : (
-            <div className={styles.addVacancy__authError}>
-              <ErrorForm>Чтобы разместить вакансию, зарегистрируйте вашу компанию</ErrorForm>
-              <Link href={'/auth/registerCompany'}>Регистрация</Link>
-            </div>
-          )}
+          <div className={styles.addVacancy__authError}>
+            {employerLoading ? (
+              <LoadingDots />
+            ) : employer ? null : (
+              <>
+                <ErrorForm>Чтобы разместить вакансию, зарегистрируйте вашу компанию</ErrorForm>
+                <Link href={'/auth/registerCompany'}>Регистрация</Link>
+              </>
+            )}
+          </div>
           <div className={[styles.addVacancy__tarif, styles.tarif].join(' ')}>
             <div className={styles.tarif__tarifWrapper}>
               <p className={styles.tarif__question}>Хотите больше сотрудников?</p>
@@ -182,7 +186,7 @@ const AddVacancy: FC = () => {
                   <div className={styles.addVacancy__helpText}>
                     <p>Укажите популярное название, чтобы было проще найти вакансию</p>
                     <p>
-                      После размещения вы уже не сможете изменить название!
+                      После размещения вы уже не сможете изменить название и должность у активной вакансии!
                       <span onClick={() => setActiveRules(true)} className={styles.addVacancy__helpLink}>
                         Правила размещения вакансии
                       </span>
@@ -271,7 +275,8 @@ const AddVacancy: FC = () => {
                   {...register('descCard', {
                     required: 'Укажите описание вакансии'
                   })}
-                  style={errors.descCard ? { borderColor: 'red' } : undefined}></textarea>
+                  style={errors.descCard ? { borderColor: 'red' } : undefined}
+                ></textarea>
                 {errors.descCard && <span className={styles.addVacancy__errorField}>Укажите описание карточки вакансии</span>}
               </div>
               <div className={styles.addVacancy__inputs}>
@@ -310,11 +315,9 @@ const AddVacancy: FC = () => {
                           isMulti={true}
                           isSearchable={false}
                           noOptionsMessage={() => 'Нет ключевых навыков'}
-                          // value={skills}
                           onChange={(selectedOptions: MultiValue<{ value: string; label: string }>) => {
                             const selectedValues = selectedOptions.map(option => option.value).join(', ')
                             field.onChange(selectedValues)
-                            // setWorkTime(selectedOptions)
                           }}
                         />
                       )}
@@ -576,11 +579,13 @@ const AddVacancy: FC = () => {
                             tarifs && activeTarif == index
                               ? [styles.addVacancy__cardWrapper, styles.addVacancy__cardWrapper_active].join(' ')
                               : styles.addVacancy__cardWrapper
-                          }>
+                          }
+                        >
                           <div className={styles.addVacancy__cardTitle}>Вакансия {elem.name}</div>
                           <div className={styles.addVacancy__efficiency}>
                             <div
-                              className={[styles.addVacancy__efficiencyNumber, styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]].join(' ')}>
+                              className={[styles.addVacancy__efficiencyNumber, styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]].join(' ')}
+                            >
                               x{index + 1}
                             </div>
                             <div className={[styles.addVacancy__efficiencyDesc, styles[`addVacancy__efficiencyDesc_${(index % 3) + 1}`]].join(' ')}>

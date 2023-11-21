@@ -62,5 +62,13 @@ export const VacancyService = {
       data
     })
     return response.data
+  },
+
+  async updateMyVacancy(id: number | undefined, data: IVacancy) {
+    return instance({
+      url: `/vacancy/update/${id}`,
+      method: 'PUT',
+      data
+    })
   }
 }
