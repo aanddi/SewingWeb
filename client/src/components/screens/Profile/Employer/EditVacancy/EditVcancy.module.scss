@@ -1,0 +1,357 @@
+@import '@/assets/styles/_variables.scss';
+
+.addVacancy {
+  margin: 100px 0;
+
+  &__authError {
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    a {
+      text-decoration: underline;
+      font-size: 15px;
+      color: $blue;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__buttonBack {
+    margin-top: 30px;
+    padding: 10px 0;
+    border-radius: 8px;
+    width: 120px;
+    background-color: $blue;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $blueHover;
+    }
+  }
+
+  &__content {
+    margin-top: 30px;
+    border-radius: 30px;
+    background: #fff;
+    box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__header {
+    margin-bottom: 30px;
+  }
+
+  &__wrapper {
+    width: 900px;
+  }
+
+  &__inputs {
+    & > * {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__input {
+  }
+
+  &__line {
+    margin: 35px 0;
+    border-bottom: 1px dashed $blue;
+  }
+
+  &__selectBlock {
+    display: flex;
+    align-items: center;
+  }
+
+  &__select {
+    width: 100%;
+  }
+
+  &__conditions {
+  }
+
+  &__selectLabel {
+    width: 250px;
+  }
+
+  &__errorField {
+    display: block;
+    color: red;
+    font-size: 12px;
+    margin-top: 7px;
+  }
+
+  &__salaryBlock {
+    display: flex;
+    align-items: center;
+  }
+
+  &__salary {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    input {
+      padding: 8px 0 8px 10px;
+      border-radius: 5px;
+      border: 1px solid #c2bfbf;
+
+      &:focus {
+        border-color: $blue;
+      }
+    }
+  }
+
+  &__rub {
+    font-weight: 500;
+  }
+
+  &__labelSalary {
+    width: 250px;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+
+  &__titleBlock {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+
+  &__shortDesc {
+    margin-bottom: 25px;
+
+    textarea {
+      box-sizing: border-box;
+      border-radius: 8px;
+      padding: 15px;
+      line-height: 20px;
+      min-width: 100%;
+      max-width: 100%;
+      max-height: 100px;
+      min-height: 100px;
+      border: 1px solid $grey;
+
+      &:focus {
+        border-color: $blue;
+      }
+    }
+  }
+
+  &__help {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px !important;
+  }
+
+  &__helpText {
+    color: $grey;
+    font-size: 13px;
+    line-height: 150%;
+  }
+
+  &__helpLink {
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__required {
+    color: red;
+  }
+
+  &__tags {
+    display: flex;
+  }
+
+  &__tagsLabel {
+    width: 250px;
+  }
+
+  &__tagsList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    input {
+      transform: scale(1.2);
+    }
+  }
+
+  &__desc {
+    margin-top: 50px;
+  }
+
+  &__footer {
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-top: 1px solid $grey;
+    padding-top: 30px;
+  }
+
+  &__footerWarning {
+    margin-top: 15px;
+    color: $grey;
+    font-size: 13px;
+    line-height: 150%;
+  }
+
+  &__error {
+    margin-top: 20px;
+  }
+
+  &__button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 200px;
+
+    &_post {
+      color: #fff;
+      background-color: $blue;
+
+      &:hover {
+        background-color: $blueHover;
+      }
+    }
+
+    &_save {
+      color: $blue;
+      background-color: #eaf7fe;
+
+      &:hover {
+        background-color: #dae7ee;
+      }
+    }
+  }
+
+  &__cards {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__card {
+    flex: 1 1 33.33%;
+  }
+
+  &__cardWrapper {
+    border: 2px solid transparent;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 1px 1px 12px 0px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &_active {
+      border: 2px solid $blue;
+      box-shadow: none;
+    }
+
+    &:hover {
+      border: 2px solid #3490df;
+      box-shadow: none;
+    }
+  }
+
+  &__cardTitle {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  &__efficiency {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+  }
+
+  &__efficiencyNumber {
+    font-size: 30px;
+    margin-right: 10px;
+    line-height: 150%;
+    font-weight: 600;
+
+    &_1 {
+      color: $blue;
+    }
+
+    &_2 {
+      color: #f16b84;
+    }
+
+    &_3 {
+      color: #eb193f;
+    }
+  }
+
+  &__efficiencyDesc {
+    line-height: 120%;
+    font-weight: 500;
+
+    &_1 {
+      color: $blue;
+    }
+
+    &_2 {
+      color: #f16b84;
+    }
+
+    &_3 {
+      color: #eb193f;
+    }
+  }
+
+  &__cardFooter {
+    p {
+      line-height: 150%;
+    }
+  }
+
+  &__cardSalary {
+    font-size: 15px;
+    font-weight: 500;
+  }
+}

@@ -1,4 +1,17 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+  ValidationPipe,
+  UsePipes,
+  HttpCode
+} from '@nestjs/common'
 import { Auth } from 'src/auth/decorators/auth.decorators'
 import { CreateVacancy } from './dto/create.dto'
 import { VacancyService } from './vacancy.service'
@@ -49,9 +62,18 @@ export class VacancyController {
     return this.vacancyService.unpublication(idVacancy)
   }
 
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
   @Post('create')
   @Auth()
   create(@Body() dto: CreateVacancy) {
     return this.vacancyService.create(dto)
+  }
+
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
+  @Put('update/:id')
+  async updateVacancy(@Param('id') idVacancy: number, @Body() dto: CreateVacancy) {
+    return this.vacancyService.updateVacancy(idVacancy, dto)
   }
 }

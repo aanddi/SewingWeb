@@ -3,7 +3,7 @@ import { IEmployer } from '@/core/types/employer.interface'
 import { instance } from '@/core/api/api.interceptor'
 
 export const EmployerService = {
-  async getEmployerById(id: string) {
+  async getEmployerById(id: number | string) {
     return await instance<IEmployer>({
       url: `/employer/${id}`,
       method: 'GET'

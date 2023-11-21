@@ -1,9 +1,10 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 
 import styles from './MyVacancies.module.scss'
 
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import LoadingSpinner from '@/components/elements/Loading/LoadingSpinner'
 import WarningModal from '@/components/elements/Modal/WarningModal/WarningModal'
 import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
@@ -35,9 +36,14 @@ const MyVacancies: FC = () => {
       const response = VacancyService.getMyVacancies(employer?.id)
       return response
     },
-    enabled: !!employer,
-
+    enabled: !!employer
   })
+
+  const {mutation: unpublicationMutation } = useMutation(
+    'unpublication',
+    async () => VacancyService.unpublication(unpublicationId),
+    {onS}
+  )
 
   return (
     <SiteLayout background={'#fff'}>
@@ -68,7 +74,9 @@ const MyVacancies: FC = () => {
                             </Link>
                             {elem.status ? (
                               <>
-                                <Link href={'/'} className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}>
+                                <Link
+                                  href={`/profile/e_edit-vacancy/${elem.id}`}
+                                  className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}>
                                   Редактировать
                                 </Link>
                                 <div
@@ -86,7 +94,6 @@ const MyVacancies: FC = () => {
                                   <span
                                     className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
                                     onClick={async () => {
-                                      const unpublication = await VacancyService.unpublication(unpublicationId)
                                       setUnpublication(false)
                                       setUnpublicationId(undefined)
                                       queryClient.invalidateQueries({ queryKey: ['vacancies'] })
@@ -97,7 +104,9 @@ const MyVacancies: FC = () => {
                               </>
                             ) : (
                               <>
-                                <Link href={'/'} className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}>
+                                <Link
+                                  href={`/profile/e_edit-vacancy/${elem.id}`}
+                                  className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}>
                                   Опубликовать
                                 </Link>
                                 <div

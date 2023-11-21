@@ -95,7 +95,7 @@ export class VacancyService {
             companyName: true
           }
         }
-      }, 
+      },
       orderBy: {
         tarifId: 'desc'
       }
@@ -134,6 +134,7 @@ export class VacancyService {
         dateEnd: true,
         status: true,
         phoneNumber: true,
+        tarifId: true,
         employer: {
           select: {
             id: true,
@@ -222,6 +223,40 @@ export class VacancyService {
         return vacancy
       }
     }
+  }
+
+  async updateVacancy(idVacancy: number, dto: CreateVacancy) {
+    const vacancy = await this.prisma.vacancy.update({
+      where: {
+        id: +idVacancy
+      },
+      data: {
+        employerId: dto.employerId,
+        title: dto.title,
+        minSalary: +dto.minSalary,
+        maxSalary: +dto.maxSalary,
+        descCard: dto.descCard,
+        descMain: dto.descMain,
+        city: dto.city,
+        adress: dto.adress,
+        skills: dto.skills,
+        workExperience: dto.workExperience,
+        workTimetable: dto.workTimetable,
+        employmentType: dto.employmentType,
+        education: dto.education,
+        tags: dto.tags,
+        fullName: dto.fullName,
+        phoneNumber: dto.phoneNumber,
+        contact: dto.contact,
+        status: dto.status,
+        dateStart: dto.dateStart,
+        dateEnd: dto.dateEnd,
+        tarifId: dto.tarifId,
+        professionId: +dto.professionId
+      }
+    })
+
+    return vacancy
   }
 
   async getTarif() {

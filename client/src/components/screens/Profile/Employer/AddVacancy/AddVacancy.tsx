@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,16 +17,16 @@ import ErrorForm from '@/components/ui/ErrorForm/ErrorForm'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 
-import { ITarifVacancy } from '@/core/types/tarif-vacancy.interface'
 import { IVacancy } from '@/core/types/vacancy.interface'
 
 import { validPhone } from '@/core/helpers/valid-field'
 import { useEmployer } from '@/core/hooks/useEmployer'
 import { useProfessions } from '@/core/hooks/useProfessions'
+import { useTarifs } from '@/core/hooks/useTarifs'
 import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 import { education, employmentType, skills, tagsList, workExperience, workTimetable } from '@/core/utils/select-vacancy-data'
 
-import { CiSaveDown2, CiSaveUp2 } from 'react-icons/ci'
+import { CiSaveDown2 } from 'react-icons/ci'
 import { FiInfo } from 'react-icons/fi'
 
 import img from 'public/Employers/imageBaner01.svg'
@@ -44,13 +43,7 @@ const AddVacancy: FC = () => {
   const router = useRouter()
 
   // ========== TARIF AND PAY =============================
-  const { data: tarifs } = useQuery<ITarifVacancy[]>({
-    queryKey: ['tarifVacancy'],
-    queryFn: async () => {
-      const response = await VacancyService.getTarif()
-      return response.data
-    }
-  })
+  const { data: tarifs } = useTarifs()
 
   const [activeTarif, setActiveTarif] = useState<number | undefined>(0)
 
