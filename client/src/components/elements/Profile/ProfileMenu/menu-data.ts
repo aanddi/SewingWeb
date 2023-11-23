@@ -1,33 +1,33 @@
 export const menuJobseeker = [
   {
     name: 'Моё резюме',
-    link: '/profile/j_resume'
+    link: '/profile/my-resume'
   },
   {
     name: 'Мои отклики',
-    link: '/profile/j_responses'
+    link: '/profile/my-responses'
   },
   {
     name: 'Оставленные отзывы',
-    link: '/profile/j_reviews'
+    link: '/profile/my-reviews'
   },
   {
     name: 'Избранные вакансии',
-    link: '/profile/j_favorites'
+    link: '/profile/my-favorites'
   }
 ]
 
 export const menuEmployer = [
   {
     name: 'Информация о предприятии',
-    link: '/profile/e_company'
+    link: '/profile/my-company'
   },
   {
     name: 'Мои вакансии',
-    link: '/profile/e_vacancies'
+    link: '/profile/my-vacancies'
   },
   {
     name: 'Избранные вакансии',
-    link: '/'
+    link: '/profile/my-favorites'
   }
 ]

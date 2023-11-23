@@ -5,6 +5,7 @@ import { FC, useState } from 'react'
 
 import styles from './Resume.module.scss'
 
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import AboutInfo from '@/components/elements/Modal/ResumeModal/AboutInfo/AboutInfo'
 import EditEducation from '@/components/elements/Modal/ResumeModal/EditEdication/EditEdication'
 import EditWorkexperience from '@/components/elements/Modal/ResumeModal/EditWorkExperience/EditWorkExperience'
@@ -43,7 +44,7 @@ const Resume: FC = () => {
   const { user } = useAuth()
   const userId = user?.id
 
-  const { data: resume } = useQuery<IResume>({
+  const { data: resume, isLoading: resumeLoading } = useQuery<IResume>({
     queryKey: ['resume', userId],
     queryFn: async () => {
       const response = await JobseekerService.getResumeByIdUser(userId)
@@ -53,7 +54,7 @@ const Resume: FC = () => {
 
   const resumeId = resume?.id
 
-  const { data: education } = useQuery<IEducation[]>({
+  const { data: education, isLoading: educationLoading } = useQuery<IEducation[]>({
     queryKey: ['education'],
     queryFn: async () => {
       if (resumeId) {
@@ -64,7 +65,7 @@ const Resume: FC = () => {
     enabled: !!resumeId // Эта опция указывает, что запрос будет выполнен только если resumeId существует
   })
 
-  const { data: experience } = useQuery<IWorkExperience[]>({
+  const { data: experience, isLoading: experienceLoading } = useQuery<IWorkExperience[]>({
     queryKey: ['experience'],
     queryFn: async () => {
       if (resumeId) {
@@ -91,14 +92,34 @@ const Resume: FC = () => {
                 <div className={styles.resume__info}>
                   <div className={styles.resume__infoBlock}>
                     <div className={styles.resume__name}>
-                      {resume?.surname} {resume?.name} {resume?.patronymic}
-                      {!resume?.surname && !resume?.name && !resume?.name ? <span>ФИО не указано</span> : null}
+                      {resumeLoading ? (
+                        <LoadingDots width={25} />
+                      ) : resume ? (
+                        <span>
+                          {resume?.surname} {resume?.name} {resume?.patronymic}
+                        </span>
+                      ) : (
+                        <span>ФИО не указано</span>
+                      )}
                     </div>
                     <div className={styles.resume__post}>
-                      {resume?.profession ? <span>{resume?.profession}</span> : <span>Профессия не указана</span>}
+                      {resumeLoading ? (
+                        <LoadingDots width={25} />
+                      ) : resume?.profession ? (
+                        <span>{resumeLoading ? <LoadingDots width={25} /> : resume?.profession}</span>
+                      ) : (
+                        <span>Профессия не указана</span>
+                      )}
                     </div>
                     <div className={styles.resume__salary}>
-                      <span>Желаемый доход:</span> {resume?.salary ? <span>от {formatPrice(resume?.salary)} руб.</span> : <span>не указан</span>}
+                      <span>Желаемый доход:</span>{' '}
+                      {resumeLoading ? (
+                        <LoadingDots width={25} />
+                      ) : resume?.salary ? (
+                        <span>от {formatPrice(resume?.salary)} руб.</span>
+                      ) : (
+                        <span>не указан</span>
+                      )}
                     </div>
                   </div>
                   <div className={styles.resume__fullInfo}>
@@ -106,43 +127,78 @@ const Resume: FC = () => {
                       <div className={styles.resume__fullLeft}>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>Дата рождения:</div>
-                          <div className={styles.resume__desc}>{resume?.DOB ? <span>{resume?.DOB}</span> : <span>не указано</span>}</div>
+                          <div className={styles.resume__desc}>
+                            {resumeLoading ? <LoadingDots width={25} /> : resume?.DOB ? <span>{resume?.DOB}</span> : <span>не указано</span>}
+                          </div>
                         </div>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>Пол:</div>
-                          <div className={styles.resume__desc}>{resume?.gender ? <span>{resume?.gender}</span> : <span>не указано</span>}</div>
+                          <div className={styles.resume__desc}>
+                            {resumeLoading ? <LoadingDots width={25} /> : resume?.gender ? <span>{resume?.gender}</span> : <span>не указано</span>}
+                          </div>
                         </div>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>Номер телефона:</div>
                           <div className={styles.resume__desc}>
-                            {resume?.phoneNumber ? <span>{resume?.phoneNumber}</span> : <span>не указано</span>}
+                            {resumeLoading ? (
+                              <LoadingDots width={25} />
+                            ) : resume?.phoneNumber ? (
+                              <span>{resume?.phoneNumber}</span>
+                            ) : (
+                              <span>не указано</span>
+                            )}
                           </div>
-                        </div>
-                        <div className={styles.resume__fullBlock}>
-                          <div className={styles.resume__label}>Эл. почта:</div>
-                          <div className={styles.resume__desc}>{resume?.email ? <span>{resume?.email}</span> : <span>не указано</span>}</div>
-                        </div>
-                      </div>
-                      <div className={styles.resume__fullRight}>
-                        <div className={styles.resume__fullBlock}>
-                          <div className={styles.resume__label}>Гражданство:</div>
-                          <div className={styles.resume__desc}>
-                            {resume?.citizenship ? <span>{resume?.citizenship}</span> : <span>не указано</span>}
-                          </div>
-                        </div>
-                        <div className={styles.resume__fullBlock}>
-                          <div className={styles.resume__label}>Город:</div>
-                          <div className={styles.resume__desc}>{resume?.city ? <span>{resume?.city}</span> : <span>не указано</span>}</div>
-                        </div>
-
-                        <div className={styles.resume__fullBlock}>
-                          <div className={styles.resume__label}>Язык:</div>
-                          <div className={styles.resume__desc}>{resume?.languages ? <span>{resume?.languages}</span> : <span>не указано</span>}</div>
                         </div>
                         <div className={styles.resume__fullBlock}>
                           <div className={styles.resume__label}>График работы:</div>
                           <div className={styles.resume__desc}>
-                            {resume?.workTimetable ? <span>{resume?.workTimetable}</span> : <span>не указано</span>}
+                            {resumeLoading ? (
+                              <LoadingDots width={25} />
+                            ) : resume?.workTimetable ? (
+                              <span>{resume?.workTimetable}</span>
+                            ) : (
+                              <span>не указано</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className={styles.resume__fullRight}>
+                        <div className={styles.resume__fullBlock}>
+                          <div className={styles.resume__label}>Эл. почта:</div>
+                          <div className={styles.resume__desc}>
+                            {resumeLoading ? <LoadingDots width={25} /> : resume?.email ? <span>{resume?.email}</span> : <span>не указано</span>}
+                          </div>
+                        </div>
+                        <div className={styles.resume__fullBlock}>
+                          <div className={styles.resume__label}>Гражданство:</div>
+                          <div className={styles.resume__desc}>
+                            {resumeLoading ? (
+                              <LoadingDots width={25} />
+                            ) : resume?.citizenship ? (
+                              <span>{resume?.citizenship}</span>
+                            ) : (
+                              <span>не указано</span>
+                            )}
+                          </div>
+                        </div>
+                        <div className={styles.resume__fullBlock}>
+                          <div className={styles.resume__label}>Город:</div>
+                          <div className={styles.resume__desc}>
+                            {resumeLoading ? <LoadingDots width={25} /> : resume?.city ? <span>{resume?.city}</span> : <span>не указано</span>}
+                          </div>
+                        </div>
+
+                        <div className={styles.resume__fullBlock}>
+                          <div className={styles.resume__label}>Язык:</div>
+                          <div className={styles.resume__desc}>
+                            {resumeLoading ? (
+                              <LoadingDots width={25} />
+                            ) : resume?.languages ? (
+                              <span>{resume?.languages}</span>
+                            ) : (
+                              <span>не указано</span>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -154,20 +210,14 @@ const Resume: FC = () => {
                     </div>
                   </div>
                 </div>
-                <aside className={styles.resume__sidebar}>
-                  <div className={styles.resume__sidebarWrapper}>
-                    <Link href="/" className={styles.resume__barBlock}>
-                      <h2>100</h2>
-                      <span>вакансий найдено для Вас</span>
-                    </Link>
-                  </div>
+                {/* <aside className={styles.resume__sidebar}>
                   <div className={styles.resume__sidebarWrapper}>
                     <Link href="/" className={styles.resume__barBlock}>
                       <h2>5</h2>
                       <span>ваши отклики</span>
                     </Link>
                   </div>
-                </aside>
+                </aside> */}
               </div>
 
               <div className={styles.resume__body}>

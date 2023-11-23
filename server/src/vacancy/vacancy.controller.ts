@@ -15,6 +15,7 @@ import {
 import { Auth } from 'src/auth/decorators/auth.decorators'
 import { CreateVacancy } from './dto/create.dto'
 import { VacancyService } from './vacancy.service'
+import { ResponsesDto } from './dto/responses.dto'
 @Controller('vacancy')
 export class VacancyController {
   constructor(private readonly vacancyService: VacancyService) {}
@@ -45,7 +46,7 @@ export class VacancyController {
   }
 
   @Get('getMyVacancies/:id')
-  // @Auth()
+  @Auth()
   getMyVacancies(@Param('id') idEmployer: number) {
     return this.vacancyService.getMyVacancies(idEmployer)
   }
@@ -57,7 +58,7 @@ export class VacancyController {
   }
 
   @Patch('unpublication/:id')
-  // @Auth()
+  @Auth()
   unpublication(@Param('id') idVacancy: number) {
     return this.vacancyService.unpublication(idVacancy)
   }
@@ -73,7 +74,36 @@ export class VacancyController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Put('update/:id')
+  @Auth()
   async updateVacancy(@Param('id') idVacancy: number, @Body() dto: CreateVacancy) {
     return this.vacancyService.updateVacancy(idVacancy, dto)
+  }
+
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
+  @Post('response')
+  @Auth()
+  async response(@Body() dto: ResponsesDto) {
+    return this.vacancyService.response(dto)
+  }
+
+  @Get('getFavorites/:id')
+  // @Auth()
+  async getFavorites(@Param('id') userId: number) {
+    return this.vacancyService.getFavorites(userId)
+  }
+
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
+  @Auth()
+  @Post('createFavorite')
+  async createFavorite(@Body() dto: ResponsesDto) {
+    return this.vacancyService.createFavorite(dto)
+  }
+
+  @Auth()
+  @Delete('deleteFavorite/:id')
+  async deleteFavorite(@Param('id') idFavorite: number) {
+    return this.vacancyService.deleteFavorite(idFavorite)
   }
 }

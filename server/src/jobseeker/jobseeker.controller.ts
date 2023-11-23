@@ -17,12 +17,27 @@ import { EducationDto } from './dto/education.dto'
 import { UpdateResume } from './dto/update-resume.dto'
 import { JobseekerService } from './jobseeker.service'
 import { ExperienceDto } from './dto/experience.dto'
+import { ResponsesDto } from 'src/vacancy/dto/responses.dto'
 
 @Controller('jobseeker')
 export class JobseekerController {
   constructor(private readonly jobseekerService: JobseekerService) {}
 
+  @Get('/getResponses/:id')
+  @Auth()
+  async getResponses(@Param('id') idUser: number) {
+    return this.jobseekerService.getResponses(idUser)
+  }
+
+  @UsePipes(new ValidationPipe())
+  @Delete('/deleteResponses/:id')
+  @Auth()
+  async deleteResponses(@Param('id') idResponse: number) {
+    return this.jobseekerService.deleteResponses(idResponse)
+  }
+
   @Get('/getResume/:id')
+  // @Auth()
   async getResume(@Param('id') id: number) {
     return this.jobseekerService.getResume(id)
   }

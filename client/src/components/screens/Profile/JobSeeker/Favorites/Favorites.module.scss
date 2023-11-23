@@ -1,12 +1,12 @@
 @import '@/assets/styles/_variables.scss';
 
 .favorites {
-  margin-top: 100px;
+  margin: 100px 0;
 
   &__header {}
 
   &__wrapper {
-    margin-top: 50px;
+    margin-top: 30px;
     width: 70%;
 
     & > * {

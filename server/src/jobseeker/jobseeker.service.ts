@@ -4,10 +4,62 @@ import { UpdateAbout } from './dto/about.dto'
 import { EducationDto } from './dto/education.dto'
 import { UpdateResume } from './dto/update-resume.dto'
 import { ExperienceDto } from './dto/experience.dto'
+import { ResponsesDto } from 'src/vacancy/dto/responses.dto'
 
 @Injectable()
 export class JobseekerService {
   constructor(private prisma: PrismaService) {}
+
+  async getResponses(idUser: number) {
+    const jobseeker = await this.prisma.jobSeeker.findUnique({
+      where: {
+        userId: +idUser
+      }
+    })
+
+    if (!jobseeker) throw new NotFoundException('Соискатель не найден!')
+
+    const responses = await this.prisma.responses.findMany({
+      where: {
+        jobseekerId: +jobseeker.id
+      },
+      include: {
+        vacancy: {
+          select: {
+            id: true,
+            title: true,
+            descCard: true,
+            maxSalary: true,
+            minSalary: true,
+            tags: true,
+            city: true,
+            adress: true,
+            phoneNumber: true,
+            tarifId: true,
+            employer: {
+              select: {
+                id: true,
+                companyName: true
+              }
+            }
+          }
+        }
+      },
+      orderBy: {
+        id: 'desc'
+      }
+    })
+
+    return responses
+  }
+
+  async deleteResponses(idResponse: number) {
+    const deleteResponse = await this.prisma.responses.delete({
+      where: {
+        id: +idResponse
+      }
+    })
+  }
 
   //======= Resume =================================================
 

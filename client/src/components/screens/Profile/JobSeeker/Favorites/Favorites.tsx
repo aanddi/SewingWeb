@@ -1,12 +1,28 @@
+import { useQuery } from '@tanstack/react-query'
 import { FC } from 'react'
 
 import styles from './Favorites.module.scss'
 
+import LoadingSpinner from '@/components/elements/Loading/LoadingSpinner'
 import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
+import NoElements from '@/components/ui/NoElements/NoElements'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 
+import { useAuth } from '@/core/hooks/useAuth'
+import { VacancyService } from '@/core/services/vacancy/vacancy.service'
+
 const Favorites: FC = () => {
+  const { user } = useAuth()
+
+  const { data: myFavorites, isLoading: myFavoritesLoading } = useQuery({
+    queryKey: ['myFavorites'],
+    queryFn: async () => {
+      const responses = await VacancyService.getFavorites(user?.id)
+      return responses.data
+    }
+  })
+
   return (
     <SiteLayout background={'#fff'}>
       <div className={styles.favorites}>
@@ -15,54 +31,15 @@ const Favorites: FC = () => {
             <ProfileTitle title={'Избранные вакансии'} />
           </div>
           <div className={styles.favorites__wrapper}>
-            <VacanciesCard
-              _id={1}
-              title={'Швея'}
-              salary={'от 30 000 руб.'}
-              description={
-                'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-              }
-              tags={['Вакансия недели', 'Студенты', 'Пенсионерам']}
-              company={'ООО Легпром'}
-              adress={'Симферополь, Учебный переулок 8'}
-              phone={'+7978754645'}
-            />
-            <VacanciesCard
-              _id={1}
-              title={'Швея'}
-              salary={'от 30 000 руб.'}
-              description={
-                'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-              }
-              tags={['Вакансия недели', 'Студенты', 'Пенсионерам']}
-              company={'ООО Легпром'}
-              adress={'Симферополь, Учебный переулок 8'}
-              phone={'+7978754645'}
-            />
-            <VacanciesCard
-              _id={1}
-              title={'Швея'}
-              salary={'от 30 000 руб.'}
-              description={
-                'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-              }
-              tags={['Вакансия недели', 'Студенты', 'Пенсионерам']}
-              company={'ООО Легпром'}
-              adress={'Симферополь, Учебный переулок 8'}
-              phone={'+7978754645'}
-            />
-            <VacanciesCard
-              _id={1}
-              title={'Швея'}
-              salary={'от 30 000 руб.'}
-              description={
-                'Вот уже 20 лет мы шьём чехлы для салонов автомобилей, всегда поддерживая качество на высоком уровне. В связи с этим у нас всё больше клиентов. И нашему производству требуется швея.'
-              }
-              tags={['Вакансия недели', 'Студенты', 'Пенсионерам']}
-              company={'ООО Легпром'}
-              adress={'Симферополь, Учебный переулок 8'}
-              phone={'+7978754645'}
-            />
+            {myFavoritesLoading ? (
+              <LoadingSpinner />
+            ) : myFavorites && myFavorites?.length > 0 ? (
+              myFavorites?.map((elem, index) => {
+                return <VacanciesCard key={index} vacancy={elem.vacancy} />
+              })
+            ) : (
+              <NoElements message="У вас нет избранных вакансий" />
+            )}
           </div>
         </div>
       </div>

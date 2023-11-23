@@ -6,8 +6,9 @@ import styles from './AboutInfo.module.scss'
 
 import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeModal'
 
+import { UpdateAbout } from '@/core/services/jobseeker/jobseeker.interface'
+
 import { useAuth } from '@/core/hooks/useAuth'
-import { UpdateAbout } from '@/core/services/jobseeker/jobseeker.helper'
 import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 
 interface Props {

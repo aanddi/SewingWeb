@@ -11,6 +11,7 @@ const FavoritesPage: NextPageAuth = () => {
   )
 }
 
+FavoritesPage.isOnlyEmployer = true
 FavoritesPage.isOnlyJobSeeker = true
 
 export default FavoritesPage

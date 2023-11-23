@@ -1,3 +1,4 @@
+import { IFavorite } from '@/core/types/favorite.interface'
 import { IVacancy } from '@/core/types/vacancy.interface'
 
 // лента и мои вакансии
@@ -52,4 +53,8 @@ export interface IMyVacancy {
 export interface IRibbonById {
   vacancies: IVacancyCard[]
   totalVacancies: number
+}
+
+export interface IFavoriteList extends IFavorite {
+  vacancy: IVacancyCard
 }

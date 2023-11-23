@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
@@ -11,7 +11,6 @@ import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 import { IEducation } from '@/core/types/education.interface'
 
 import { validNumber } from '@/core/helpers/valid-field'
-import { EducationType } from '@/core/services/jobseeker/jobseeker.helper'
 import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { educationLevel } from '@/core/utils/select-resume-data'
 

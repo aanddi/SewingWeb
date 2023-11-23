@@ -1,0 +1,11 @@
+@import '@/assets/styles/_variables.scss';
+
+.noElements {
+  width: 100%;
+  margin-top: 40px;
+  font-size: 14px;
+  color: $grey;
+  border: 1px solid $grey;
+  padding: 20px;
+  border-radius: 10px;
+}

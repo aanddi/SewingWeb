@@ -1,4 +1,6 @@
-import { IMyVacancy, IRibbonById, IRibbonResponse, IVacancyResponse } from './vacancy.interface'
+import { IFavoriteList, IMyVacancy, IRibbonById, IRibbonResponse, IVacancyResponse } from './vacancy.interface'
+import { IFavorite } from '@/core/types/favorite.interface'
+import { IResponses } from '@/core/types/responses.interface'
 import { ITarifVacancy } from '@/core/types/tarif-vacancy.interface'
 import { IVacancy } from '@/core/types/vacancy.interface'
 
@@ -40,6 +42,12 @@ export const VacancyService = {
       method: 'GET'
     })
   },
+  async getListById(id: string | undefined) {
+    return instance<IVacancyResponse[]>({
+      url: `/vacancy/getById/${id}`,
+      method: 'GET'
+    })
+  },
 
   async unpublication(id: number | undefined) {
     return instance({
@@ -69,6 +77,36 @@ export const VacancyService = {
       url: `/vacancy/update/${id}`,
       method: 'PUT',
       data
+    })
+  },
+
+  async response(data: IResponses) {
+    return instance({
+      url: `/vacancy/response`,
+      method: 'POST',
+      data
+    })
+  },
+
+  async getFavorites(idUser: number | undefined) {
+    return instance<IFavoriteList[]>({
+      url: `/vacancy/getFavorites/${idUser}`,
+      method: 'GET'
+    })
+  },
+
+  async createFavorite(data: IFavorite) {
+    return instance({
+      url: `/vacancy/createFavorite`,
+      method: 'POST',
+      data
+    })
+  },
+
+  async deleteFavorite(idFavorite: number | undefined) {
+    return instance({
+      url: `/vacancy/deleteFavorite/${idFavorite}`,
+      method: 'DELETE'
     })
   }
 }

@@ -4,10 +4,35 @@
   display: flex;
   border-radius: 10px;
   background-color: #fff;
-  border: 1px solid #E0E0E0;
+  border: 1px solid #e0e0e0;
 
   &__content {
     padding: 23px 35px;
+    width: 100%;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__favorite {
+    
+    &_active svg {
+      fill: $blue;
+      stroke: $blue;
+    }
+
+    svg {
+      fill: transparent;
+      stroke: #565656;
+      stroke-width: 25;
+    }
+
+    svg:hover {
+      stroke: $blue;
+      cursor: pointer;
+    }
   }
 
   &__title {
@@ -27,7 +52,7 @@
 
   &__description {
     color: $darkBlue;
-    line-height: 140%; 
+    line-height: 140%;
     letter-spacing: 0.15px;
     margin: 14px 0 21px 0;
     font-size: 15px;
@@ -39,7 +64,8 @@
     gap: 6px;
     font-weight: 600;
 
-    &_svg {}
+    &_svg {
+    }
 
     &_name {
       font-size: 15px;
@@ -56,14 +82,14 @@
     gap: 6px;
     color: $grey;
 
-    &_svg {}
+    &_svg {
+    }
 
     &_name {
-
       font-style: normal;
     }
   }
- 
+
   &__button {
     margin-top: 20px;
     display: flex;
@@ -73,8 +99,10 @@
     &_respond {
       border-radius: 7px;
       background: $blue;
-      padding: 14px 22px;
-      color: #FFF;
+      padding: 14px 0;
+      width: 150px;
+      text-align: center;
+      color: #fff;
 
       cursor: pointer;
 
@@ -102,5 +130,10 @@
         background: #ebebeb;
       }
     }
+  }
+
+  &__date {
+    color: green;
+    margin-top: 20px;
   }
 }

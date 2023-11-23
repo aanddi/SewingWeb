@@ -1,10 +1,93 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { CreateVacancy } from './dto/create.dto'
+import { ResponsesDto } from './dto/responses.dto'
 
 @Injectable()
 export class VacancyService {
   constructor(private prisma: PrismaService) {}
+
+  // ========== ACTION VACANCY ========================
+
+  async response(dto: ResponsesDto) {
+    const jobseeker = await this.prisma.jobSeeker.findUnique({
+      where: {
+        userId: +dto.userId
+      }
+    })
+
+    if (!jobseeker) throw new NotFoundException('Соискатель не найден!')
+
+    const checkResponse = await this.prisma.responses.findMany({
+      where: {
+        vacancyId: +dto.vacancyId,
+        jobseekerId: +jobseeker.id
+      }
+    })
+
+    if (checkResponse.length > 0) throw new NotFoundException('Вы уже откликнулись на это вакансию')
+
+    const response = await this.prisma.responses.create({
+      data: {
+        vacancyId: +dto.vacancyId,
+        jobseekerId: +jobseeker.id
+      }
+    })
+    return response
+  }
+
+  async getFavorites(userId: number) {
+    const favoriteList = await this.prisma.favorites.findMany({
+      where: {
+        userId: +userId
+      },
+      include: {
+        vacancy: {
+          select: {
+            id: true,
+            title: true,
+            descCard: true,
+            maxSalary: true,
+            minSalary: true,
+            tags: true,
+            city: true,
+            adress: true,
+            phoneNumber: true,
+            tarifId: true,
+            employer: {
+              select: {
+                id: true,
+                companyName: true
+              }
+            }
+          }
+        }
+      },
+      orderBy: {
+        id: 'desc'
+      }
+    })
+    return favoriteList
+  }
+
+  async createFavorite(dto: ResponsesDto) {
+    const favorite = await this.prisma.favorites.create({
+      data: {
+        userId: +dto.userId,
+        vacancyId: +dto.vacancyId
+      }
+    })
+  }
+
+  async deleteFavorite(idFavorite: number) {
+    const favorite = await this.prisma.favorites.delete({
+      where: {
+        id: +idFavorite
+      }
+    })
+  }
+
+  // =================================================
 
   // формирование ленты вакансий с пагинацией по странично
   async getRibbon(page = 1) {

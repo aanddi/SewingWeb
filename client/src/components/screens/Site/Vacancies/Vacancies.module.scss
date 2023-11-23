@@ -56,28 +56,12 @@
     }
   }
 
-  &__favorites {
-    &_button {
-      border-radius: 10px;
-      border: 1px solid #a09f9f;
-      padding: 5px 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-
-      &:hover {
-        border: 1px solid #717070;
-      }
-    }
-
-    &_date {
-      margin: 10px 0;
-
-      color: $grey;
-    }
+  &__dateStart {
+    margin: 10px 0;
+    color: $grey;
   }
+
+
 
   &__sideBar {
     display: flex;
@@ -99,21 +83,89 @@
   &__control {
   }
 
-  &__responds {
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
     border-radius: 10px;
-    padding: 12px 0;
-    background: $blue;
+ 
     width: 100%;
-    text-align: center;
-    font-size: 16px;
-    color: #fff;
-    margin-bottom: 20px;
+
+
     cursor: pointer;
 
-    &:hover {
-      background-color: $blueHover;
+    &_responds {
+      background: $blue;
+      color: #fff;
+      padding: 12px 0;
+      font-size: 16px;
+
+      &:hover {
+        background-color: $blueHover;
+      }
+    }
+
+    &_favorites {
+      border: 1px solid $grey;
+      margin: 15px 0;
+      padding: 10px 0;
+
+      svg {
+        fill: transparent;
+        stroke: #565656;
+        stroke-width: 25;
+      }
+
+      &:hover {
+        border: 1px solid $blue;
+        svg {
+          stroke: $blue;
+          cursor: pointer;
+        }
+      }
+  
+      svg:hover {
+        stroke: $blue;
+        cursor: pointer;
+      }
+    }
+
+    &_favoritesActive {
+      border: 1px solid $blue;
+      svg {
+        fill: $blue;
+        stroke: $blue;
+      }
+    }
+
+    &_report {
+      border: 1px solid $grey;
+      padding: 10px 0;
+
+      &:hover {
+        border: 1px solid #9f9e9e;
+        svg {
+          stroke: #565656;
+          cursor: pointer;
+        }
+      }
+
+      svg {
+        fill: transparent;
+        stroke: #565656;
+        stroke-width: 10;
+      }
     }
   }
+
+  &__dateResponse {
+    text-align: center;
+    color: green;
+    margin-bottom: 30px;
+    margin-top: 15px;
+  }
+
 
   &__phone {
     border-radius: 10px;

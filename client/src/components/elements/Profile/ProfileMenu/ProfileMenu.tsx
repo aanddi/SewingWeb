@@ -29,7 +29,8 @@ const ProfileMenu: FC = () => {
     queryFn: async () => {
       const response = await EmployerService.getEmployerByUserId(user?.id)
       return response.data.id
-    }
+    },
+    enabled: !!user && role == '_JOBSEEKER_'
   })
 
   return (
@@ -56,12 +57,12 @@ const ProfileMenu: FC = () => {
           </div>
           <div className={styles.profileMenu__buttons}>
             {role == '_JOBSEEKER_' ? (
-              <Link href="/profile/j_resume" className={styles.profileMenu__button}>
+              <Link href="/profile/my-resume" className={styles.profileMenu__button}>
                 <IoAddCircleOutline size={20} />
                 <span>Создать резюме</span>
               </Link>
             ) : (
-              <Link className={styles.profileMenu__button} href="/profile/e_add-vacancy">
+              <Link className={styles.profileMenu__button} href="/profile/add-vacancy">
                 <BiUpload size={20} />
                 <span>Опубликовать вакансию</span>
               </Link>

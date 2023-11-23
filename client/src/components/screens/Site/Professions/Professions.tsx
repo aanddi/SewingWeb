@@ -81,7 +81,7 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
               <div className={styles.ribbon__cards}>
                 {professions.length > 0 ? (
                   professions.map((profession, index) => {
-                    return (
+                    return profession._count.vacancy == 0 ? null : (
                       <ProfessionCard
                         key={index}
                         title={profession.name}

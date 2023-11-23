@@ -24,7 +24,7 @@ const HeaderSite: FC = () => {
           <div className={styles.header__left}>
             <div className={styles.header__logo}>
               <Link href="/">
-                <Image src={logoMenu} alt="SewingWeb" />
+                <Image priority src={logoMenu} alt="SewingWeb" />
               </Link>
             </div>
             <div className={styles.header__menu}>

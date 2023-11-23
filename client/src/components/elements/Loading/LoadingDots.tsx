@@ -5,11 +5,12 @@ import dots from 'public/Loading/LoadingDots.svg'
 
 interface Props {
   color?: string
+  width?: number
 }
 
-const LoadingDots: FC<Props> = ({ color = '#3490DF' }) => {
+const LoadingDots: FC<Props> = ({ color = '#3490DF', width = '40' }) => {
   return (
-    <svg width="40" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill={color}>
+    <svg width={width} viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill={color}>
       <circle cx="15" cy="15" r="15">
         <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite" />
         <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite" />

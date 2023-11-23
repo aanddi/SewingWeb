@@ -1,11 +1,24 @@
+import { EducationType, IResponsesList, UpdateAbout } from './jobseeker.interface'
 import { IResume } from '@/core/types/resume.interface'
 import { IWorkExperience } from '@/core/types/work-experience.interface'
 
 import { instance } from '@/core/api/api.interceptor'
 
-import { EducationType, UpdateAbout } from './jobseeker.helper'
-
 export const JobseekerService = {
+  async getMyResponses(id: number | undefined) {
+    return instance<IResponsesList[]>({
+      url: `jobseeker/getResponses/${id}`,
+      method: 'GET'
+    })
+  },
+
+  async deleteResponse(idResponse: number | undefined) {
+    return instance({
+      url: `jobseeker/deleteResponses/${idResponse}`,
+      method: 'DELETE'
+    })
+  },
+
   async getResumeByIdUser(id: number | undefined) {
     const response = await instance<IResume>({
       url: `jobseeker/getResume/${id}`,

@@ -16,7 +16,8 @@
     font-size: inherit;
     font-weight: 400 !important;
 
-    &--menu-is-open {}
+    &--menu-is-open {
+    }
 
     &:invalid {
       border-color: red; /* Установите желаемый цвет границы */
@@ -78,5 +79,14 @@
     padding: 3px 10px !important;
     border-radius: 10px !important;
     cursor: pointer !important;
+  }
+
+  &__multi-value__remove {
+    margin-left: 5px !important;
+  }
+
+  &__multi-value__remove:hover {
+    background-color: $blue !important;
+    color: #ffffff !important;
   }
 }

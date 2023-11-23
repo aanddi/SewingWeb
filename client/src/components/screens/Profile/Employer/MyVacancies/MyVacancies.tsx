@@ -9,6 +9,7 @@ import LoadingSpinner from '@/components/elements/Loading/LoadingSpinner'
 import WarningModal from '@/components/elements/Modal/WarningModal/WarningModal'
 import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
+import NoElements from '@/components/ui/NoElements/NoElements'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
 
 import { IMyVacancy } from '@/core/services/vacancy/vacancy.interface'
@@ -85,7 +86,7 @@ const MyVacancies: FC = () => {
               <div>
                 <ProfileTitle title={'Мои вакансии'} />
               </div>
-              <Link href={'/profile/e_add-vacancy'} className={styles.vacancies__add}>
+              <Link href={'/profile/add-vacancy'} className={styles.vacancies__add}>
                 <IoMdAddCircleOutline size={16} style={{ color: '#2c8acc' }} />
                 <span>Создать</span>
               </Link>
@@ -106,7 +107,7 @@ const MyVacancies: FC = () => {
                             {elem.status ? (
                               <>
                                 <Link
-                                  href={`/profile/e_edit-vacancy/${elem.id}`}
+                                  href={`/profile/edit-vacancy/${elem.id}`}
                                   className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}
                                 >
                                   Редактировать
@@ -161,7 +162,7 @@ const MyVacancies: FC = () => {
                 })}
               </div>
             ) : (
-              <p className={styles.vacancies__notVacancies}>У вас нет вакансий</p>
+              <NoElements message="У вас нет вакансий" />
             )}
           </div>
           <WarningModal

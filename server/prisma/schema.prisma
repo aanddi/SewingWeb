@@ -24,7 +24,8 @@ model User {
 
   jobSeeker JobSeeker?
 
-  employer Employer?
+  employer  Employer?
+  Favorites Favorites[]
 
   @@map("users")
 }
@@ -52,7 +53,8 @@ model JobSeeker {
   resume   Resume @relation(fields: [resumeId], references: [id])
   resumeId Int    @unique @map("resume_id")
 
-  vacancy Vacancy[] // избранные вакансии, которые добавлены соискателями
+  vacancy   Vacancy[] // избранные вакансии, которые добавлены соискателями
+  responses Responses[]
 
   @@map("jobseekers")
 }
@@ -111,7 +113,6 @@ model Resume {
   eductional Education[]
 
   jobseeker JobSeeker?
-  vacancy   Responses[]
   employer  Employer[] // избранные резюме, работодатели, которые добавили резюме в избранное
 
   @@map("resumes")
@@ -178,7 +179,8 @@ model Vacancy {
 
   jobSeeker JobSeeker[] // избранные вакансии, соискатели, которые доавлили вакансии
 
-  resume Responses[]
+  resume    Responses[]
+  Favorites Favorites[]
 
   @@map("vacansies")
 }
@@ -224,11 +226,24 @@ model Profession {
 
 // ЛОГИКА СВЯЗИ: на одну вакансию может откликнуться несколько соискателей, нескольким соискателям может понравиться одна вакансия(многие ко многим). Определили явно, так как есть дополнительное поле id(нужно оно или нет, пока хз)
 model Responses {
-  id       Int @id @default(autoincrement()) @map("response_id")
-  resumeId Int @map("resume_id")
+  id          Int      @id @default(autoincrement()) @map("response_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  jobseekerId Int      @map("jobseeker_id")
+  vacancyId   Int      @map("vacancy_id")
 
-  resume Resume @relation(fields: [resumeId], references: [id])
+  jobseeker JobSeeker @relation(fields: [jobseekerId], references: [id])
+  vacancy   Vacancy   @relation(fields: [vacancyId], references: [id])
 
-  vacancyId Int     @map("vacancy_id")
-  vacancy   Vacancy @relation(fields: [vacancyId], references: [id])
+  @@map("responses")
+}
+
+model Favorites {
+  id        Int @id @default(autoincrement()) @map("favorite_id")
+  userId    Int @map("user_id")
+  vacancyId Int @map("vacancy_id")
+
+  user    User    @relation(fields: [userId], references: [id])
+  vacancy Vacancy @relation(fields: [vacancyId], references: [id])
+
+  @@map("vacancy_favorites")
 }

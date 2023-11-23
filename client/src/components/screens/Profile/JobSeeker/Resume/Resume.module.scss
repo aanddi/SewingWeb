@@ -68,6 +68,11 @@
     color: $grey;
   }
 
+  &__desc {
+    width: 200px;
+    line-height: 150%;
+  }
+
   &__fullLeft {
     & > *:not(:last-child) {
       margin-bottom: 15px;
