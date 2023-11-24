@@ -3,7 +3,12 @@
 .responses {
   margin: 100px 0;
 
-  &__header {}
+  &__header {
+  }
+
+  &__sort {
+    margin: 30px 0;
+  }
 
   &__wrapper {
     margin-top: 30px;
@@ -15,31 +20,35 @@
   }
 
   &__item {
-
   }
 
   &__controll {
     width: 100%;
     border-radius: 10px;
     background: #ffffff;
-    border: 1px solid #E0E0E0;
+    border: 1px solid #e0e0e0;
     margin-bottom: 15px;
   }
 
   &__wrapperControll {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 20px 35px;
   }
 
   &__delete {
-    
     cursor: pointer;
     color: red;
 
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 3px;
   }
 }

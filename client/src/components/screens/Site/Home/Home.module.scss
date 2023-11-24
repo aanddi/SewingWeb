@@ -142,6 +142,7 @@
   &__wrapper {
     display: flex;
     gap: 70px;
+    margin-top: 20px;
   }
 
   &__vacansiesTop {
@@ -199,10 +200,13 @@
     position: sticky;
     bottom: 20px;
     z-index: 1000;
-    display: flex;
+    display: inline-flex;
     align-items: flex-end;
     justify-content: flex-end;
-
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
    
 
   }

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
@@ -35,7 +35,7 @@ const Resume: FC = () => {
   const [activeModal3, setActiveModal3] = useState(false)
   const [activeModal4, setActiveModal4] = useState(false)
 
-  const [edicationItem, setEdicationItem] = useState(null)
+  const [edicationItem, setEdicationItem] = useState<IEducation | null>(null)
   const [experienceItem, setExperienceItem] = useState(null)
 
   const [activeModal5, setActiveModal5] = useState(false)
@@ -54,7 +54,7 @@ const Resume: FC = () => {
 
   const resumeId = resume?.id
 
-  const { data: education, isLoading: educationLoading } = useQuery<IEducation[]>({
+  const { data: education, isLoading: educationLoading } = useQuery({
     queryKey: ['education'],
     queryFn: async () => {
       if (resumeId) {

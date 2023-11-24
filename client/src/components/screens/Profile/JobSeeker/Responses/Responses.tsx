@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { FC, useState } from 'react'
+import { useRouter } from 'next/router'
+import { FC, useEffect, useState } from 'react'
 
 import styles from './Responses.module.scss'
 
@@ -10,21 +11,37 @@ import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/Vacancies
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import NoElements from '@/components/ui/NoElements/NoElements'
 import ProfileTitle from '@/components/ui/ProfileTitle/ProfileTitle'
+import SortList from '@/components/ui/SortList/SortList'
 
 import { useAuth } from '@/core/hooks/useAuth'
-import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
-import { VacancyService } from '@/core/services/vacancy/vacancy.service'
+import { useOutside } from '@/core/hooks/useOutside'
+import { ResponsesService } from '@/core/services/responses/responses.service'
+
+import { GoDotFill } from 'react-icons/go'
 
 const Responses: FC = () => {
   const [activeWarning, setActiveWarning] = useState(false)
   const [targetId, setTargetId] = useState<number | undefined>(undefined)
+  const [queryParam, setQueryParam] = useState<string | undefined>(undefined)
+
+  const { ref, isShow, setIsShow } = useOutside(false)
+
   const queryClient = useQueryClient()
+
   const { user } = useAuth()
 
+  const router = useRouter()
+
+  useEffect(() => {
+    const query = router.query.show as string
+    setQueryParam(query)
+    queryClient.invalidateQueries({ queryKey: ['myResponses', queryParam] })
+  }, [router])
+
   const { data: myResponses, isLoading: myResponsesLoading } = useQuery({
-    queryKey: ['myResponses'],
+    queryKey: ['myResponses', queryParam],
     queryFn: async () => {
-      const responses = await JobseekerService.getMyResponses(user?.id)
+      const responses = await ResponsesService.getMyResponses(user?.id, queryParam)
       return responses.data
     }
   })
@@ -32,7 +49,7 @@ const Responses: FC = () => {
   const mutationDelete = useMutation({
     mutationKey: ['myResponses'],
     mutationFn: async (id: number | undefined) => {
-      const response = await JobseekerService.deleteResponse(id)
+      const response = await ResponsesService.delete(id)
     },
     onSuccess: () => {
       setActiveWarning(false)
@@ -41,12 +58,34 @@ const Responses: FC = () => {
     }
   })
 
+  const sortResponsesList = [
+    {
+      name: 'все',
+      href: `/profile/my-responses`
+    },
+    {
+      name: 'приглашения',
+      href: `/profile/my-responses/?show=interview`
+    },
+    {
+      name: 'отказы',
+      href: `/profile/my-responses/?show=rejected`
+    },
+    {
+      name: 'ожидание',
+      href: `/profile/my-responses/?show=wait`
+    }
+  ]
+
   return (
     <SiteLayout background={'#fff'}>
       <div className={styles.responses}>
         <div className="responses__container">
           <div className={styles.responses__header}>
             <ProfileTitle title={'Мои отклики'} />
+          </div>
+          <div className={styles.responses__sort} ref={ref}>
+            <SortList title={'Показать'} data={sortResponsesList} active={isShow} setActive={setIsShow} />
           </div>
           <div className={styles.responses__wrapper}>
             {myResponsesLoading ? (
@@ -66,12 +105,32 @@ const Responses: FC = () => {
                         >
                           Удалить из откликов
                         </div>
+                        <div className={styles.responses__status}>
+                          {elem.status == 'На рассмотрении' ? (
+                            <>
+                              <GoDotFill size={20} style={{ color: '#FCA50F' }} />
+                              <span>{elem.status}</span>
+                            </>
+                          ) : elem.status == 'Отклонено' ? (
+                            <>
+                              <GoDotFill size={20} style={{ color: '#FC0800' }} />
+                              <span>{elem.status}</span>
+                            </>
+                          ) : (
+                            <>
+                              <GoDotFill size={20} style={{ color: '#00EB1F' }} />
+                              <span>{elem.status}</span>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                     <VacanciesCard key={index} vacancy={elem.vacancy} />
                   </div>
                 )
               })
+            ) : myResponses && myResponses.length == 0 && queryParam ? (
+              <NoElements message="Нет откликов с таким параметром" />
             ) : (
               <NoElements message="Вы не откликались на вакансии" />
             )}

@@ -1,6 +1,5 @@
-import { IFavoriteList, IMyVacancy, IRibbonById, IRibbonResponse, IVacancyResponse } from './vacancy.interface'
+import { IFavoriteList, IMyVacancy, IRibbonById, IRibbonResponse, ISimilarResponse, IVacancyResponse } from './vacancy.interface'
 import { IFavorite } from '@/core/types/favorite.interface'
-import { IResponses } from '@/core/types/responses.interface'
 import { ITarifVacancy } from '@/core/types/tarif-vacancy.interface'
 import { IVacancy } from '@/core/types/vacancy.interface'
 
@@ -26,6 +25,14 @@ export const VacancyService = {
     return instance<IRibbonById>({
       url: `/vacancy/ribbon/${id}`,
       method: 'GET'
+    })
+  },
+
+  async getSimilar(data: ISimilarResponse) {
+    return instance({
+      url: '/vacancy/similar',
+      method: 'GET',
+      data
     })
   },
 
@@ -80,13 +87,7 @@ export const VacancyService = {
     })
   },
 
-  async response(data: IResponses) {
-    return instance({
-      url: `/vacancy/response`,
-      method: 'POST',
-      data
-    })
-  },
+  //=================================================
 
   async getFavorites(idUser: number | undefined) {
     return instance<IFavoriteList[]>({

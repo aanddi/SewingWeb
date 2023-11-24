@@ -1,27 +1,23 @@
-import { EducationType, IResponsesList, UpdateAbout } from './jobseeker.interface'
+import { ResumeAboutResponse, UpdateAbout } from './jobseeker.interface'
+import { IEducation } from '@/core/types/education.interface'
 import { IResume } from '@/core/types/resume.interface'
 import { IWorkExperience } from '@/core/types/work-experience.interface'
 
 import { instance } from '@/core/api/api.interceptor'
 
 export const JobseekerService = {
-  async getMyResponses(id: number | undefined) {
-    return instance<IResponsesList[]>({
-      url: `jobseeker/getResponses/${id}`,
-      method: 'GET'
-    })
-  },
-
-  async deleteResponse(idResponse: number | undefined) {
-    return instance({
-      url: `jobseeker/deleteResponses/${idResponse}`,
-      method: 'DELETE'
-    })
-  },
-
   async getResumeByIdUser(id: number | undefined) {
     const response = await instance<IResume>({
       url: `jobseeker/getResume/${id}`,
+      method: 'GET'
+    })
+
+    return response.data
+  },
+
+  async getAbout(id: string | undefined) {
+    const response = await instance<ResumeAboutResponse>({
+      url: `jobseeker/getAbout/${id}`,
       method: 'GET'
     })
 
@@ -51,7 +47,7 @@ export const JobseekerService = {
   //======= Education =================================================
 
   async getAllEducationById(id: number | undefined) {
-    const response = await instance({
+    const response = await instance<IEducation[]>({
       url: `jobseeker/getAllEducationById/${id}`,
       method: 'GET'
     })
@@ -60,7 +56,7 @@ export const JobseekerService = {
   },
 
   async getEducationById(id: number | undefined) {
-    const response = await instance({
+    const response = await instance<IEducation>({
       url: `jobseeker/getEducationById/${id}`,
       method: 'GET'
     })
@@ -68,7 +64,7 @@ export const JobseekerService = {
     return response.data
   },
 
-  async createEducation(id: number | undefined, data: EducationType) {
+  async createEducation(id: number | undefined, data: IEducation) {
     const response = await instance({
       url: `jobseeker/createEducation/${id}`,
       method: 'POST',
@@ -78,7 +74,7 @@ export const JobseekerService = {
     return response.data
   },
 
-  async updateEducation(id: number | undefined, data: EducationType) {
+  async updateEducation(id: number | undefined, data: IEducation) {
     const response = await instance({
       url: `jobseeker/updateEducation/${id}`,
       method: 'PUT',

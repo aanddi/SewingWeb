@@ -5,6 +5,7 @@ import { Dispatch, FC, PropsWithChildren, SetStateAction, useEffect } from 'reac
 import styles from './SuccessVacancy.module.scss'
 
 import { AiOutlineClose } from 'react-icons/ai'
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
 
 interface Props {
   active: boolean
@@ -38,7 +39,7 @@ const SuccessVacancy: FC<Props> = ({ active, setActive }) => {
 
   const myVacancies = () => {
     setActive(false)
-    router.push('/profile/e_vacancies')
+    router.push('/profile/my-vacancies')
   }
   return (
     <div className={active ? [styles.modal, styles.modal__active].join(' ') : styles.modal} onClick={() => setActive(false)}>
@@ -48,20 +49,7 @@ const SuccessVacancy: FC<Props> = ({ active, setActive }) => {
         </div>
         <div className={styles.modal__wrapper}>
           <div className={styles.modal__success}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="green"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-              <path d="m9 11 3 3L22 4" />
-            </svg>
+            <IoMdCheckmarkCircleOutline size={150} style={{ color: 'green' }} />
           </div>
           <h1 className={styles.modal__title}>Успешно</h1>
           <div className={styles.modal__text}>

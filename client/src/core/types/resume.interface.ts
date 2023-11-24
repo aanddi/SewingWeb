@@ -1,5 +1,6 @@
 export interface IResume {
   id: number
+  updatedAt?: Date
   name: string
   surname: string
   patronymic?: string

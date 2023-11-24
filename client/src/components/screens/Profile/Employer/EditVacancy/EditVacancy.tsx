@@ -156,7 +156,7 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
     data.status = vacancy.status
     try {
       const response = await VacancyService.updateMyVacancy(vacancy.id, data)
-      router.replace('/profile/e_vacancies')
+      router.replace('/profile/my-vacancies')
     } catch (error: any) {
       setIsLoadingSubmit(false)
       setErrorUpdate(error.response.data.message)

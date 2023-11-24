@@ -3,4 +3,5 @@ export interface IResponses {
   createdAt: Date
   userId: number | undefined
   vacancyId: number
+  status?: string
 }

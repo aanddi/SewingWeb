@@ -1,0 +1,105 @@
+@import '@/assets/styles/_variables.scss';
+
+.resumeCard {
+  &__wrapper {
+    padding: 40px ;
+    display: flex;
+    gap: 40px;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+  }
+
+  &__id {
+    color: $grey;
+    font-size: 12px;
+    text-align: center;
+    display: flex;
+    margin-top: 10px;
+  }
+
+  &__header {
+    margin-bottom: 20px;
+
+    & > *:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__infoPerson {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__name {
+    font-size: 23px;
+    font-weight: 700;
+  }
+
+  &__date {
+    font-size: 18px;
+  }
+
+  &__profession {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__salary {
+  }
+
+  &__contact {
+    margin: 30px 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    & > *:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__label {
+    color: $grey;
+    width: 150px;
+  }
+
+  &__desc {
+    
+    line-height: 150%;
+    text-align: justify;
+    overflow: hidden;
+    width: 100%;
+    max-height: 120px;
+    position: relative;
+
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+  }
+
+  &__footer {
+    margin-top: 40px;
+  }
+
+  &__showMore {
+    color: #363636;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

@@ -101,7 +101,10 @@ const MyVacancies: FC = () => {
                       <div className={styles.vacancies__controlPanel}>
                         <div className={styles.vacancies__panelWrapper}>
                           <div className={styles.vacancies__buttons}>
-                            <Link href={'/'} className={[styles.vacancies__item, styles.vacancies__item_responses].join(' ')}>
+                            <Link
+                              href={`/profile/responses/${elem.id}`}
+                              className={[styles.vacancies__item, styles.vacancies__item_responses].join(' ')}
+                            >
                               Отклики
                             </Link>
                             {elem.status ? (
@@ -122,7 +125,7 @@ const MyVacancies: FC = () => {
                             ) : (
                               <>
                                 <Link
-                                  href={`/profile/e_edit-vacancy/${elem.id}`}
+                                  href={`/profile/edit-vacancy/${elem.id}`}
                                   className={[styles.vacancies__item, styles.vacancies__item_edit].join(' ')}
                                 >
                                   Опубликовать

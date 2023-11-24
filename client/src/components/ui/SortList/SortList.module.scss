@@ -1,0 +1,87 @@
+@import '@/assets/styles/_variables.scss';
+
+.sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+
+  &__title {
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+
+    span {
+      color: $blue;
+    }
+  }
+
+  &__list {
+    position: absolute;
+    bottom: calc(100% - 35px); 
+    left: 0;
+    transform: translateY(-10%);
+    transition: all 0.2s ease-in;
+    z-index: 1000;
+
+    &_active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translate(0%);
+    }
+
+    &_unactive {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &__listWrapper {
+    min-height: 100px; 
+    padding: 10px 0;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.51);
+    width: 300px;
+    transition: all 0.4s ease-in;
+    position: absolute;
+  }
+
+  &__items {
+    font-size: 15px;
+  }
+
+  &__item {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #dce7fd;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 15px 0 15px 20px;
+  }
+
+  *::-webkit-scrollbar,
+  html *::-webkit-scrollbar {
+    height: 8px;
+    width: 10px;
+    border-radius: 100px;
+  }
+
+  *::-webkit-scrollbar-track,
+  html *::-webkit-scrollbar-track {
+    background: #e2e1e1;
+    border-radius: 100px;
+  }
+
+  *::-webkit-scrollbar-thumb,
+  html *::-webkit-scrollbar-thumb {
+    background-color: #bfbdbd;
+    border-radius: 5px;
+    border: 3px solid #bfbdbd;
+    border-radius: 100px;
+  }
+}

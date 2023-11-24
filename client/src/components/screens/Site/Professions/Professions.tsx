@@ -5,10 +5,13 @@ import styles from './Professions.module.scss'
 
 import ProfessionCard from '@/components/elements/Professoin/ProfessionCard/ProfessionCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
+import SortList from '@/components/ui/SortList/SortList'
 
 import { IProfession } from '@/core/types/profession.interface'
 
 import { useOutside } from '@/core/hooks/useOutside'
+
+import { sortProfessions } from './sort-professions.data'
 
 import { BiSearchAlt } from 'react-icons/bi'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
@@ -17,7 +20,6 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
   const { isShow, setIsShow, ref } = useOutside(false)
   const [sortValue, setSortValue] = useState('по популярности')
 
-  console.log(professions)
   return (
     <SiteLayout background={'#F6FAFF'}>
       <div className={styles.professions}>
@@ -42,40 +44,8 @@ const Professions: FC<{ professions: IProfession[] }> = ({ professions }) => {
         <section className={[styles.professions__ribbon, styles.ribbon].join(' ')}>
           <div className="ribbon__container">
             <div className={styles.ribbon__wrapper}>
-              <div className={styles.ribbon__sort} onClick={() => setIsShow(!isShow)} ref={ref}>
-                <div className={styles.ribbon__text}>
-                  Сортировка <span>{sortValue}</span>
-                </div>
-                <div
-                  className={
-                    isShow
-                      ? [styles.ribbon__sortMenu, styles.ribbon__sortMenu_active].join(' ')
-                      : [styles.ribbon__sortMenu, styles.ribbon__sortMenu_unactive].join(' ')
-                  }
-                >
-                  <div className={styles.ribbon__sortWrapper}>
-                    <ul className={styles.ribbon__sortList}>
-                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по популярности')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions?sort=popular">
-                          по популярности
-                        </Link>
-                      </li>
-                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по возрастанию зарплаты')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions?sort=asc">
-                          по возрастанию зарплаты
-                        </Link>
-                      </li>
-                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по убыванию зарплаты')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions?sort=desc">
-                          по убыванию зарплаты
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className={styles.ribbon__icon}>
-                  {isShow ? <IoIosArrowUp style={{ color: '#242424' }} size={20} /> : <IoIosArrowDown style={{ color: '#242424' }} size={20} />}
-                </div>
+              <div ref={ref}>
+                <SortList data={sortProfessions} active={isShow} setActive={setIsShow} />
               </div>
 
               <div className={styles.ribbon__cards}>

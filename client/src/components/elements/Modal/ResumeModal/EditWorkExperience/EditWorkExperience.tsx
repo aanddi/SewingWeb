@@ -23,8 +23,8 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
   // ========== DATE =============================
   const [monthStart, setMonthStart] = useState<string>('')
   const [yearStart, setYearStart] = useState<string>('')
-  const [monthEnd, setMonthEnd] = useState<string>('')
-  const [yearEnd, setYearEnd] = useState<string>('')
+  const [monthEnd, setMonthEnd] = useState<string | undefined>('')
+  const [yearEnd, setYearEnd] = useState<string | undefined>('')
 
   const [untilNow, setUntilNow] = useState(false)
 
@@ -57,19 +57,26 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
   useEffect(() => {
     if (experience) {
       const [startMonth, startYear] = experience.startTime.split(' ')
-      const [endMonth, endYear] = experience.endTime.split(' ')
+
+      if (experience.endTime) {
+        const [endMonth, endYear] = experience.endTime.split(' ')
+        setMonthEnd(endMonth)
+        setYearEnd(endYear)
+        setValue('endTime', `${endMonth} ${endYear}`)
+      } else {
+        setMonthEnd(undefined)
+        setYearEnd(undefined)
+      }
 
       setMonthStart(startMonth)
       setYearStart(startYear)
-      setMonthEnd(endMonth)
-      setYearEnd(endYear)
 
       setValue('city', experience.city)
       setValue('company', experience.company)
       setValue('post', experience.post)
       setValue('startTime', `${startMonth} ${startYear}`)
       setValue('untilNow', experience.untilNow)
-      setValue('endTime', `${endMonth} ${endYear}`)
+
       setValue('experience', experience.experience)
     }
   }, [experience, setValue])

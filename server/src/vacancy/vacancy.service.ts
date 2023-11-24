@@ -1,40 +1,14 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
+import { ResponsesDto } from '../responses/dto/responses.dto'
 import { CreateVacancy } from './dto/create.dto'
-import { ResponsesDto } from './dto/responses.dto'
+import { SimilarDto } from './dto/similar.dto'
 
 @Injectable()
 export class VacancyService {
   constructor(private prisma: PrismaService) {}
 
-  // ========== ACTION VACANCY ========================
-
-  async response(dto: ResponsesDto) {
-    const jobseeker = await this.prisma.jobSeeker.findUnique({
-      where: {
-        userId: +dto.userId
-      }
-    })
-
-    if (!jobseeker) throw new NotFoundException('Соискатель не найден!')
-
-    const checkResponse = await this.prisma.responses.findMany({
-      where: {
-        vacancyId: +dto.vacancyId,
-        jobseekerId: +jobseeker.id
-      }
-    })
-
-    if (checkResponse.length > 0) throw new NotFoundException('Вы уже откликнулись на это вакансию')
-
-    const response = await this.prisma.responses.create({
-      data: {
-        vacancyId: +dto.vacancyId,
-        jobseekerId: +jobseeker.id
-      }
-    })
-    return response
-  }
+  // ========== FAVORITE ========================
 
   async getFavorites(userId: number) {
     const favoriteList = await this.prisma.favorites.findMany({
@@ -197,6 +171,68 @@ export class VacancyService {
     }
   }
 
+  async getSimilar(dto: SimilarDto) {
+    const similarList = await this.prisma.vacancy.findMany({
+      where: {
+        professionId: dto.professionId,
+        status: true
+      },
+      select: {
+        id: true,
+        title: true,
+        descCard: true,
+        maxSalary: true,
+        minSalary: true,
+        tags: true,
+        city: true,
+        adress: true,
+        phoneNumber: true,
+        tarifId: true,
+        employer: {
+          select: {
+            id: true,
+            companyName: true
+          }
+        }
+      },
+      orderBy: {
+        tarifId: 'desc'
+      }
+    })
+
+    if (similarList.length === 0) {
+      const similarList = await this.prisma.vacancy.findMany({
+        where: {
+          city: dto.city,
+          status: true
+        },
+        select: {
+          id: true,
+          title: true,
+          descCard: true,
+          maxSalary: true,
+          minSalary: true,
+          tags: true,
+          city: true,
+          adress: true,
+          phoneNumber: true,
+          tarifId: true,
+          employer: {
+            select: {
+              id: true,
+              companyName: true
+            }
+          }
+        },
+        orderBy: {
+          tarifId: 'desc'
+        }
+      })
+      return similarList
+    }
+    return similarList
+  }
+
   async getMyVacancies(idEmployer: number) {
     await this.validateRibbon()
 
@@ -257,6 +293,21 @@ export class VacancyService {
 
   async deleteMyVacancy(idVacancy: number) {
     if (!idVacancy) throw new NotFoundException('Вакансия не найдена')
+
+    // удаление окликов на вакансию
+    await this.prisma.responses.deleteMany({
+      where: {
+        vacancyId: +idVacancy
+      }
+    })
+
+    // удаление избранных
+    await this.prisma.favorites.deleteMany({
+      where: {
+        vacancyId: +idVacancy
+      }
+    })
+
     const deleteVacancy = await this.prisma.vacancy.delete({
       where: {
         id: +idVacancy

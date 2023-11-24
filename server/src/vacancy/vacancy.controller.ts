@@ -3,19 +3,20 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
   Put,
   Query,
-  ValidationPipe,
   UsePipes,
-  HttpCode
+  ValidationPipe
 } from '@nestjs/common'
 import { Auth } from 'src/auth/decorators/auth.decorators'
+import { ResponsesDto } from '../responses/dto/responses.dto'
 import { CreateVacancy } from './dto/create.dto'
 import { VacancyService } from './vacancy.service'
-import { ResponsesDto } from './dto/responses.dto'
+import { SimilarDto } from './dto/similar.dto'
 @Controller('vacancy')
 export class VacancyController {
   constructor(private readonly vacancyService: VacancyService) {}
@@ -30,10 +31,10 @@ export class VacancyController {
     return this.vacancyService.getRibbonById(idEmployer)
   }
 
-  // @Get('vacancy/similar')
-  // getSimilar(@Param('id') idEmployer: number) {
-  //   return this.vacancyService.getSimilar(idEmployer)
-  // }
+  @Get('similar')
+  getSimilar(@Body() dto: SimilarDto) {
+    return this.vacancyService.getSimilar(dto)
+  }
 
   @Get('getTarif')
   getTarif() {
@@ -77,14 +78,6 @@ export class VacancyController {
   @Auth()
   async updateVacancy(@Param('id') idVacancy: number, @Body() dto: CreateVacancy) {
     return this.vacancyService.updateVacancy(idVacancy, dto)
-  }
-
-  @UsePipes(new ValidationPipe())
-  @HttpCode(200)
-  @Post('response')
-  @Auth()
-  async response(@Body() dto: ResponsesDto) {
-    return this.vacancyService.response(dto)
   }
 
   @Get('getFavorites/:id')

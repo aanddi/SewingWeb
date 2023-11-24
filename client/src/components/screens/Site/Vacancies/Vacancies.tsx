@@ -8,22 +8,22 @@ import styles from './Vacancies.module.scss'
 
 import TextToHTML from '@/components/elements/EditText/TextToHTML'
 import LoadingDots from '@/components/elements/Loading/LoadingDots'
+import VacanciesCard from '@/components/elements/Vacancy/VacanciesCard/VacanciesCard'
 import VacanciesTag from '@/components/elements/Vacancy/VacanciesTag/VacanciesTag'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
-import { IResponsesList } from '@/core/services/jobseeker/jobseeker.interface'
-import { IVacancyResponse } from '@/core/services/vacancy/vacancy.interface'
+import { IResponsesList } from '@/core/services/responses/response.interface'
+import { ISimilarResponse, IVacancyCard, IVacancyResponse } from '@/core/services/vacancy/vacancy.interface'
 import { IFavorite } from '@/core/types/favorite.interface'
 import { IResponses } from '@/core/types/responses.interface'
 
 import { useAuth } from '@/core/hooks/useAuth'
 import { useCheckRole } from '@/core/hooks/useCheckRole'
-import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { ResponsesService } from '@/core/services/responses/responses.service'
 import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 import { formatDate } from '@/core/utils/format-date'
 import { formatPrice } from '@/core/utils/format-price'
 
-import { CiWarning } from 'react-icons/ci'
 import { FaStar } from 'react-icons/fa'
 import { IoMdHeart } from 'react-icons/io'
 import { IoShieldCheckmarkSharp } from 'react-icons/io5'
@@ -43,6 +43,20 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
     if (vacancy.skills) setSkillArray(vacancy.skills.split(',').map(skills => skills.trim()))
   }, [vacancy])
 
+  //===== SIMILAR =========================================
+
+  const { data: similarVacancies, isLoading: similarVacanciesLoading } = useQuery<IVacancyCard[]>({
+    queryKey: ['similarVacancies'],
+    queryFn: async () => {
+      const similarData = {
+        professionId: vacancy.professionId,
+        city: vacancy.city
+      }
+      const responses = await VacancyService.getSimilar(similarData)
+      return responses.data
+    }
+  })
+
   //===== RESPONSES =========================================
 
   const [activeResponse, setActiveResponse] = useState<IResponsesList | undefined>(undefined)
@@ -50,7 +64,7 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
   const mutationResponse = useMutation({
     mutationKey: ['myResponses'],
     mutationFn: async (data: IResponses) => {
-      const response = await VacancyService.response(data)
+      const response = await ResponsesService.create(data)
       queryClient.invalidateQueries({ queryKey: ['myResponses'] })
     }
   })
@@ -58,7 +72,7 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
   const { data: myResponses, isLoading: myResponsesLoading } = useQuery({
     queryKey: ['myResponses'],
     queryFn: async () => {
-      const responses = await JobseekerService.getMyResponses(user?.id)
+      const responses = await ResponsesService.getMyResponses(user?.id)
       return responses.data
     },
     enabled: !!user
@@ -270,7 +284,23 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
             </div>
           </div>
         </div>
-        <div className={[styles.vacancies__ribbon, styles.ribbon].join(' ')}></div>
+        {similarVacancies && similarVacancies?.length > 0 ? (
+          <div className={[styles.vacancies__ribbon, styles.ribbon].join(' ')}>
+            <div className="ribbon__container">
+              <div className={styles.ribbon__wrapper}>
+                <div className={styles.ribbon__content}>
+                  <div className={styles.ribbon__title}>Рекомендуем откликнуться:</div>
+                  <div className={styles.ribbon__vacancies}>
+                    {similarVacancies?.map((vacancy, index) => {
+                      return <VacanciesCard key={index} vacancy={vacancy} />
+                    })}
+                  </div>
+                </div>
+                <aside className={styles.ribbon__aside}></aside>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </div>
     </SiteLayout>
   )

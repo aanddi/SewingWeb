@@ -61,8 +61,6 @@
     color: $grey;
   }
 
-
-
   &__sideBar {
     display: flex;
     flex-direction: column;
@@ -89,9 +87,8 @@
     gap: 10px;
     justify-content: center;
     border-radius: 10px;
- 
-    width: 100%;
 
+    width: 100%;
 
     cursor: pointer;
 
@@ -124,7 +121,7 @@
           cursor: pointer;
         }
       }
-  
+
       svg:hover {
         stroke: $blue;
         cursor: pointer;
@@ -165,7 +162,6 @@
     margin-bottom: 30px;
     margin-top: 15px;
   }
-
 
   &__phone {
     border-radius: 10px;
@@ -263,10 +259,11 @@
   }
 
   &__title {
+    color: $darkBlue;
     font-size: 20px;
-    font-weight: 600;
-    line-height: 150%;
-    margin-bottom: 6px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    margin-top: 50px;
   }
 
   &__skills {
@@ -294,13 +291,46 @@
   }
 
   &__map {
-    margin-top: 20px;
+    margin-top: 50px;
 
     p {
       margin-bottom: 10px;
+    }
+
+    iframe {
+      border-radius: 20px;
     }
   }
 }
 
 .ribbon {
+  &__wrapper {
+    display: flex;
+    gap: 40px;
+    margin-top: 50px;
+  }
+
+  &__title {
+    color: $darkBlue;
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  &__content {
+    flex: 1 0 75%;
+
+  }
+
+  &__vacancies {
+    margin-top: 30px;
+    & > * {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__aside {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+  }
 }

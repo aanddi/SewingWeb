@@ -5,10 +5,13 @@ import styles from './Companies.module.scss'
 
 import CompaniesCard from '@/components/elements/Company/CompaniesCard/CompaniesCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
+import SortList from '@/components/ui/SortList/SortList'
 
 import { IEmployer } from '@/core/types/employer.interface'
 
 import { useOutside } from '@/core/hooks/useOutside'
+
+import { sortCompany } from './sort-company.data'
 
 import { BiSearchAlt } from 'react-icons/bi'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
@@ -70,40 +73,8 @@ const Companies: FC<{ companies: IEmployer[] }> = ({ companies }) => {
         <section className={[styles.companies__ribbon, styles.ribbon].join(' ')}>
           <div className="ribbon__container">
             <div className={styles.ribbon__wrapper}>
-              <div className={styles.ribbon__sort} onClick={() => setIsShow(!isShow)} ref={ref}>
-                <div className={styles.ribbon__text}>
-                  Сортировка <span>{sortValue}</span>
-                </div>
-                <div
-                  className={
-                    isShow
-                      ? [styles.ribbon__sortMenu, styles.ribbon__sortMenu_active].join(' ')
-                      : [styles.ribbon__sortMenu, styles.ribbon__sortMenu_unactive].join(' ')
-                  }
-                >
-                  <div className={styles.ribbon__sortWrapper}>
-                    <ul className={styles.ribbon__sortList}>
-                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по популярности')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions">
-                          по количеству вакансий
-                        </Link>
-                      </li>
-                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по возрастанию зарплаты')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions">
-                          по популярности
-                        </Link>
-                      </li>
-                      <li className={styles.ribbon__sortItem} onClick={() => setSortValue('по убыванию зарплаты')}>
-                        <Link className={styles.ribbon__sortLink} href="/professions">
-                          по размеру предприятия
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className={styles.ribbon__icon}>
-                  {isShow ? <IoIosArrowUp style={{ color: '#000' }} size={20} /> : <IoIosArrowDown style={{ color: '#000' }} size={20} />}
-                </div>
+              <div ref={ref}>
+                <SortList data={sortCompany} active={isShow} setActive={setIsShow} />
               </div>
               <div className={styles.ribbon__cards}>
                 {companies.length > 0 ? (

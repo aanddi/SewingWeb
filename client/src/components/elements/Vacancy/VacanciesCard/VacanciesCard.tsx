@@ -5,14 +5,14 @@ import { FC, useEffect, useState } from 'react'
 
 import styles from './VacanciesCard.module.scss'
 
-import { IResponsesList } from '@/core/services/jobseeker/jobseeker.interface'
+import { IResponsesList } from '@/core/services/responses/response.interface'
 import { IVacancyCard } from '@/core/services/vacancy/vacancy.interface'
 import { IFavorite } from '@/core/types/favorite.interface'
 import { IResponses } from '@/core/types/responses.interface'
 
 import { useAuth } from '@/core/hooks/useAuth'
 import { useCheckRole } from '@/core/hooks/useCheckRole'
-import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { ResponsesService } from '@/core/services/responses/responses.service'
 import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 import { formatDate } from '@/core/utils/format-date'
 import { formatPrice } from '@/core/utils/format-price'
@@ -43,7 +43,7 @@ const VacanciesCard: FC<Props> = ({ vacancy }) => {
   const mutationResponse = useMutation({
     mutationKey: ['myResponses'],
     mutationFn: async (data: IResponses) => {
-      const response = await VacancyService.response(data)
+      const response = await ResponsesService.create(data)
       queryClient.invalidateQueries({ queryKey: ['myResponses'] })
     }
   })
@@ -51,10 +51,10 @@ const VacanciesCard: FC<Props> = ({ vacancy }) => {
   const { data: myResponses, isLoading: myResponsesLoading } = useQuery({
     queryKey: ['myResponses'],
     queryFn: async () => {
-      const responses = await JobseekerService.getMyResponses(user?.id)
+      const responses = await ResponsesService.getMyResponses(user?.id)
       return responses.data
     },
-    enabled: !!user
+    enabled: role == '_JOBSEEKER_'
   })
 
   useEffect(() => {
@@ -101,7 +101,7 @@ const VacanciesCard: FC<Props> = ({ vacancy }) => {
       <div className={styles.VCard__content}>
         <div className={styles.VCard__header}>
           <div className={styles.VCard__mainHeader}>
-            <Link href={`/vacancies/${vacancy.id}`} className={styles.VCard__title}>
+            <Link target="_blank" href={`/vacancies/${vacancy.id}`} className={styles.VCard__title}>
               {vacancy.title}
             </Link>
 

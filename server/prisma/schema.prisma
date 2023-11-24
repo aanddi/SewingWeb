@@ -109,7 +109,7 @@ model Resume {
   workTimetable String?
 
   about      String?
-  work_exp   WorkExperience[]
+  work_experience   WorkExperience[]
   eductional Education[]
 
   jobseeker JobSeeker?
@@ -230,6 +230,7 @@ model Responses {
   createdAt   DateTime @default(now()) @map("created_at")
   jobseekerId Int      @map("jobseeker_id")
   vacancyId   Int      @map("vacancy_id")
+  status      String
 
   jobseeker JobSeeker @relation(fields: [jobseekerId], references: [id])
   vacancy   Vacancy   @relation(fields: [vacancyId], references: [id])

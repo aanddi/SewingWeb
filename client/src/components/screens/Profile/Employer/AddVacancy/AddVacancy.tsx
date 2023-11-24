@@ -39,7 +39,7 @@ const AddVacancy: FC = () => {
   const [desc, setDesc] = useState('')
   const [activeRules, setActiveRules] = useState(false)
   const [activePayment, setActivePayment] = useState(false)
-  const [activeSuccess, setActiveSuccess] = useState(false)
+  const [activeSuccess, setActiveSuccess] = useState(true)
 
   // ========== TARIF AND PAY =============================
   const { data: tarifs } = useTarifs()
@@ -125,7 +125,7 @@ const AddVacancy: FC = () => {
     data.status = false
     try {
       const response = await VacancyService.create(data)
-      reset()
+      // reset()
       setActiveSuccess(true)
     } catch (error: any) {
       setErrorUpdate(error.response.data.message)
@@ -140,7 +140,7 @@ const AddVacancy: FC = () => {
     data.status = true
     try {
       const response = await VacancyService.create(data)
-      reset()
+      // reset()
       setActivePayment(false)
       setActiveSuccess(true)
     } catch (error: any) {

@@ -9,9 +9,9 @@ import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import { IRibbonResponse } from '@/core/services/vacancy/vacancy.interface'
 
+import { FaArrowUpLong } from 'react-icons/fa6'
 import { IoIosArrowDown } from 'react-icons/io'
 import { LuSettings2 } from 'react-icons/lu'
-import { SlArrowUpCircle } from 'react-icons/sl'
 
 import ad from 'public/ad/ad.png'
 
@@ -104,7 +104,7 @@ const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, tot
             </div>
             {isVisible && (
               <div onClick={scrollToTop} className={styles.ribbon__top}>
-                <SlArrowUpCircle size={45} style={{ color: '#D3D3D5' }} />
+                <FaArrowUpLong size={25} />
               </div>
             )}
           </div>

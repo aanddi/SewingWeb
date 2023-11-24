@@ -6,9 +6,18 @@ import { ConfigModule } from '@nestjs/config'
 import { EmployerModule } from './employer/employer.module'
 import { JobseekerModule } from './jobseeker/jobseeker.module'
 import { VacancyModule } from './vacancy/vacancy.module'
+import { ResponsesModule } from './responses/responses.module'
 
 @Module({
-  imports: [ConfigModule.forRoot(), ProfessionModule, AuthModule, EmployerModule, JobseekerModule, VacancyModule],
+  imports: [
+    ConfigModule.forRoot(),
+    ProfessionModule,
+    AuthModule,
+    EmployerModule,
+    JobseekerModule,
+    VacancyModule,
+    ResponsesModule
+  ],
   providers: []
 })
 export class AppModule {}

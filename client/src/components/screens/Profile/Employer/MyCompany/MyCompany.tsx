@@ -105,7 +105,7 @@ const MyCompany: FC = () => {
                 </div>
                 <aside className={styles.company__sidebar}>
                   <div className={styles.company__sidebarWrapper}>
-                    <Link href="/profile/e_vacancies" className={styles.company__barBlock}>
+                    <Link href="/profile/my-vacancies" className={styles.company__barBlock}>
                       <h2>{countVacancy ? countVacancy : '0'}</h2>
                       <span>вакансий</span>
                     </Link>

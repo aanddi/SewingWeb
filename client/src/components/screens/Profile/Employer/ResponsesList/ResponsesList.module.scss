@@ -1,0 +1,122 @@
+@import '@/assets/styles/_variables.scss';
+
+.responses {
+  margin: 100px 0;
+
+  &__wrapper {
+    width: 1000px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__backList {
+    display: flex;
+    align-content: center;
+    gap: 10px;
+    border-radius: 10px;
+    background-color: #eef4f8;
+    padding: 10px 20px;
+    color: #b6b6b6;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #e7ecf0;
+    }
+
+    & > span {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__filter {
+    margin-top: 20px;
+    background-color: #fff;
+    width: 100%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 63px;
+    padding: 20px 0;
+    z-index: 100;
+  }
+
+  &__wrapperFilter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      bottom: -42px;
+      right: 0;
+      width: 100%;
+      height: 30px;
+      background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+    }
+  }
+
+  &__count {
+    color: $blue;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &__list {
+    margin-top: 10px;
+  }
+
+  &__item {
+    margin-bottom: 40px;
+  }
+
+  &__panelControl {
+    width: 100%;
+    border-radius: 10px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 15px;
+  }
+
+  &__panelWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 35px;
+  }
+
+  &__panelActions {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    font-weight: 500;
+  }
+
+  &__interview {
+    color: green;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__reject {
+    color: #fc0800;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__panelStatus {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+}

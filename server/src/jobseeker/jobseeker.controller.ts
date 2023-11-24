@@ -14,30 +14,16 @@ import {
 import { Auth } from 'src/auth/decorators/auth.decorators'
 import { UpdateAbout } from './dto/about.dto'
 import { EducationDto } from './dto/education.dto'
+import { ExperienceDto } from './dto/experience.dto'
 import { UpdateResume } from './dto/update-resume.dto'
 import { JobseekerService } from './jobseeker.service'
-import { ExperienceDto } from './dto/experience.dto'
-import { ResponsesDto } from 'src/vacancy/dto/responses.dto'
 
 @Controller('jobseeker')
 export class JobseekerController {
   constructor(private readonly jobseekerService: JobseekerService) {}
 
-  @Get('/getResponses/:id')
-  @Auth()
-  async getResponses(@Param('id') idUser: number) {
-    return this.jobseekerService.getResponses(idUser)
-  }
-
-  @UsePipes(new ValidationPipe())
-  @Delete('/deleteResponses/:id')
-  @Auth()
-  async deleteResponses(@Param('id') idResponse: number) {
-    return this.jobseekerService.deleteResponses(idResponse)
-  }
-
   @Get('/getResume/:id')
-  // @Auth()
+  @Auth()
   async getResume(@Param('id') id: number) {
     return this.jobseekerService.getResume(id)
   }
@@ -54,6 +40,11 @@ export class JobseekerController {
   @Auth()
   async updateResumeAbout(@Param('id') id: number, @Body() dto: UpdateAbout) {
     return this.jobseekerService.updateResumeAbout(id, dto)
+  }
+
+  @Get('/getAbout/:id')
+  async getAboutResume(@Param('id') idResume: number) {
+    return this.jobseekerService.getAboutResume(idResume)
   }
 
   //======= Education =================================================

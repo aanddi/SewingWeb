@@ -2,64 +2,12 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { UpdateAbout } from './dto/about.dto'
 import { EducationDto } from './dto/education.dto'
-import { UpdateResume } from './dto/update-resume.dto'
 import { ExperienceDto } from './dto/experience.dto'
-import { ResponsesDto } from 'src/vacancy/dto/responses.dto'
+import { UpdateResume } from './dto/update-resume.dto'
 
 @Injectable()
 export class JobseekerService {
   constructor(private prisma: PrismaService) {}
-
-  async getResponses(idUser: number) {
-    const jobseeker = await this.prisma.jobSeeker.findUnique({
-      where: {
-        userId: +idUser
-      }
-    })
-
-    if (!jobseeker) throw new NotFoundException('Соискатель не найден!')
-
-    const responses = await this.prisma.responses.findMany({
-      where: {
-        jobseekerId: +jobseeker.id
-      },
-      include: {
-        vacancy: {
-          select: {
-            id: true,
-            title: true,
-            descCard: true,
-            maxSalary: true,
-            minSalary: true,
-            tags: true,
-            city: true,
-            adress: true,
-            phoneNumber: true,
-            tarifId: true,
-            employer: {
-              select: {
-                id: true,
-                companyName: true
-              }
-            }
-          }
-        }
-      },
-      orderBy: {
-        id: 'desc'
-      }
-    })
-
-    return responses
-  }
-
-  async deleteResponses(idResponse: number) {
-    const deleteResponse = await this.prisma.responses.delete({
-      where: {
-        id: +idResponse
-      }
-    })
-  }
 
   //======= Resume =================================================
 
@@ -116,6 +64,50 @@ export class JobseekerService {
     })
 
     return update.about
+  }
+
+  async getAboutResume(idResume: number) {
+    const resume = await this.prisma.resume.findUnique({
+      where: {
+        id: +idResume
+      },
+      select: {
+        id: true,
+        updatedAt: true,
+        name: true,
+        surname: true,
+        patronymic: true,
+        profession: true,
+        salary: true,
+        gender: true,
+        DOB: true,
+        phoneNumber: true,
+        citizenship: true,
+        city: true,
+        email: true,
+        languages: true,
+        workTimetable: true,
+        about: true
+      }
+    })
+
+    const experience = await this.prisma.workExperience.findMany({
+      where: {
+        resumeId: +idResume
+      }
+    })
+
+    const education = await this.prisma.education.findMany({
+      where: {
+        resumeId: +idResume
+      }
+    })
+
+    return {
+      resume: resume,
+      experience: experience,
+      education: education
+    }
   }
 
   //======= Education =================================================

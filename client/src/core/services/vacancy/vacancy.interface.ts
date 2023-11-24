@@ -58,3 +58,8 @@ export interface IRibbonById {
 export interface IFavoriteList extends IFavorite {
   vacancy: IVacancyCard
 }
+
+export interface ISimilarResponse {
+  city: string
+  professionId: number
+}

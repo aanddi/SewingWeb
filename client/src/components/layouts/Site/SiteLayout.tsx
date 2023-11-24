@@ -7,7 +7,7 @@ interface Props {
   background?: string
 }
 
-const SiteLayout: FC<PropsWithChildren<Props>> = ({ children, background }) => {
+const SiteLayout: FC<PropsWithChildren<Props>> = ({ children, background = '#fff' }) => {
   return (
     <>
       <HeaderSite />
