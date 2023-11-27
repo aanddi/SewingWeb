@@ -4,40 +4,43 @@ import { FC } from 'react'
 
 import styles from './CompaniesCard.module.scss'
 
+import ReviewsStar from '@/components/ui/ReviewsStart/ReviewsStar'
+
 import ICompaniesCard from './CompaniesCard.interface'
+import { IEmployerResponse, IResponseCard } from '@/core/services/employer/employer.interface'
 
 import { FaMapMarkerAlt, FaStar } from 'react-icons/fa'
 import { IoDocumentTextOutline, IoShieldCheckmarkSharp } from 'react-icons/io5'
 
 import logo from 'public/Companies/logoCompany.svg'
 
-const CompaniesCard: FC<ICompaniesCard> = props => {
+const CompaniesCard: FC<IResponseCard> = ({ employer, count, averageGrade }) => {
   return (
-    <Link href={`/company/${props.id}`} className={styles.companiesCard}>
+    <Link href={`/company/${employer.id}`} className={styles.companiesCard}>
       <div className={styles.companiesCard__wrapper}>
         <div className={styles.companiesCard__content}>
           <div className={styles.companiesCard__items}>
             <div className={styles.companiesCard__item}>
               <IoShieldCheckmarkSharp style={{ color: '#3490DF' }} />
-              <span className={styles.companiesCard__name}>{props.name}</span>
+              <span className={styles.companiesCard__name}>{employer.companyName}</span>
             </div>
             <div className={styles.companiesCard__item}>
               <IoDocumentTextOutline style={{ color: '#B7B7B7' }} />
-              <span className={styles.companiesCard__count}>{props.count} вакансий</span>
+              {count.countVacancy !== 0 ? (
+                <span className={styles.companiesCard__count}>{count.countVacancy} вакансий</span>
+              ) : (
+                <span className={styles.companiesCard__count}>нет вакансий</span>
+              )}
             </div>
             <div className={styles.companiesCard__item}>
               <FaMapMarkerAlt style={{ color: '#B7B7B7' }} />
-              <span>{props.adress}</span>
+              <span>{employer.adress}</span>
             </div>
             <div className={styles.companiesCard__reviews}>
               <div className={styles.companiesCard__reviewsStar}>
-                <FaStar style={{ color: '#F4A815' }} size={15} />
-                <FaStar style={{ color: '#F4A815' }} size={15} />
-                <FaStar style={{ color: '#F4A815' }} size={15} />
-                <FaStar style={{ color: '#F4A815' }} size={15} />
-                <FaStar style={{ color: '#F4A815' }} size={15} />
+                <ReviewsStar grade={averageGrade} sizeStar={15} />
               </div>
-              <span>{props.reviews} отзывов</span>
+              {count.countReviews !== 0 ? <span>{count.countReviews} отзывов</span> : <span>нет отзывов</span>}
             </div>
           </div>
           <div className={styles.companiesCard__logo}>

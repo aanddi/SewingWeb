@@ -7,6 +7,7 @@ import { EmployerModule } from './employer/employer.module'
 import { JobseekerModule } from './jobseeker/jobseeker.module'
 import { VacancyModule } from './vacancy/vacancy.module'
 import { ResponsesModule } from './responses/responses.module'
+import { ReviewsModule } from './reviews/reviews.module'
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { ResponsesModule } from './responses/responses.module'
     EmployerModule,
     JobseekerModule,
     VacancyModule,
-    ResponsesModule
+    ResponsesModule,
+    ReviewsModule
   ],
   providers: []
 })

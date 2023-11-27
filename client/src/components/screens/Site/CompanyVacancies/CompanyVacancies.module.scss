@@ -1,0 +1,45 @@
+@import '@/assets/styles/_variables.scss';
+
+.companyVacancies {
+  margin-top: 110px;
+  margin-bottom: 60px;
+  min-height: 80vh;
+
+  &__wrapper {
+    display: flex;
+    gap: 70px;
+  }
+
+  &__content {
+    flex: 1 1 auto;
+
+    & > *:not(:first-child) {
+      margin-top: 50px;
+    }
+  }
+
+  &__title {
+    color: $darkBlue;
+    font-size: 25px;
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  &__noVacancies {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 15px;
+
+    &_title {
+      display: flex;
+      margin-bottom: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    &_text {
+      color: #3f3f3f;
+    }
+  }
+}

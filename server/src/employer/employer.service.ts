@@ -12,18 +12,180 @@ export class EmployerService {
       select: {
         id: true,
         companyName: true,
-        inn: true,
-        type: true,
-        registrCity: true,
-        about: true,
-        size: true,
-        contact: true,
         adress: true,
-        userId: true
+        _count: {
+          select: {
+            vacansy: {
+              // выбираем количество вакансий
+              where: {
+                status: true
+              }
+            },
+            Reviews: true // выбираем количество отзывов
+          }
+        },
+        Reviews: {
+          select: {
+            grade: true // выбираем оценки для каждого работодателя
+          }
+        }
       }
     })
 
-    return employers
+    const types = await this.getCountTypes()
+
+    const companies = employers.map(employer => {
+      const averageGrade = this.calculateAverageGrade(employer.Reviews)
+
+      return {
+        employer: {
+          id: employer.id,
+          companyName: employer.companyName,
+          adress: employer.adress
+        },
+
+        count: {
+          countVacancy: employer._count.vacansy,
+          countReviews: employer._count.Reviews
+        },
+        averageGrade: averageGrade
+      }
+    })
+
+    return {
+      companies: companies,
+      types: types
+    }
+  }
+
+  async getHeader(idEmployer: number) {
+    const companyName = await this.prisma.employer.findUnique({
+      where: {
+        id: +idEmployer
+      },
+      select: {
+        id: true,
+        companyName: true
+      }
+    })
+
+    const reviewsCount = await this.prisma.reviews.count({
+      where: {
+        employerId: +idEmployer
+      }
+    })
+
+    const vacanciesCount = await this.prisma.vacancy.count({
+      where: {
+        employerId: +idEmployer,
+        status: true
+      }
+    })
+
+    return {
+      ...companyName,
+      reviewsCount: reviewsCount,
+      vacanciesCount: vacanciesCount
+    }
+  }
+
+  async getSuggest(suggest: string) {
+    const result = await this.prisma.employer.findMany({
+      select: {
+        companyName: true
+      },
+      where: {
+        OR: [
+          {
+            companyName: {
+              contains: suggest,
+              mode: 'insensitive'
+            }
+          },
+          {
+            type: {
+              contains: suggest,
+              mode: 'insensitive'
+            }
+          },
+          {
+            adress: {
+              contains: suggest,
+              mode: 'insensitive'
+            }
+          }
+        ]
+      }
+    })
+
+    return result
+  }
+
+  async getSearch(search: string, sort: string) {
+    const employers = await this.prisma.employer.findMany({
+      where: {
+        OR: [
+          {
+            companyName: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          },
+          {
+            type: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          }
+        ]
+      },
+      select: {
+        id: true,
+        companyName: true,
+        adress: true,
+        _count: {
+          select: {
+            vacansy: {
+              // выбираем количество вакансий
+              where: {
+                status: true
+              }
+            },
+            Reviews: true // выбираем количество отзывов
+          }
+        },
+        Reviews: {
+          select: {
+            grade: true // выбираем оценки для каждого работодателя
+          }
+        }
+      }
+    })
+
+    const types = await this.getCountTypes()
+
+    const companies = employers.map(employer => {
+      const averageGrade = this.calculateAverageGrade(employer._count)
+
+      return {
+        employer: {
+          id: employer.id,
+          companyName: employer.companyName,
+          adress: employer.adress
+        },
+
+        count: {
+          countVacancy: employer._count.vacansy,
+          countReviews: employer._count.Reviews
+        },
+        averageGrade: averageGrade
+      }
+    })
+
+    return {
+      companies: companies,
+      types: types
+    }
   }
 
   async getEmployerById(id: number) {
@@ -157,5 +319,30 @@ export class EmployerService {
 
       if (checkINN) throw new BadRequestException('Такая компания уже существует под таким ИНН')
     }
+  }
+
+  private async getCountTypes() {
+    const companyTypes = await this.prisma.employer.groupBy({
+      by: ['type'],
+      _count: true
+    })
+    return companyTypes
+  }
+
+  private calculateAverageGrade(reviews) {
+    let totalGrade = 0
+    let reviewCount = 0
+
+    reviews.forEach(review => {
+      totalGrade += review.grade
+      reviewCount++
+    })
+
+    if (reviewCount === 0) {
+      return 0 // Если нет отзывов, то средняя оценка будет 0
+    }
+
+    const averageGrade = totalGrade / reviewCount
+    return averageGrade
   }
 }

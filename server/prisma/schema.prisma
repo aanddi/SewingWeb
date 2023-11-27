@@ -55,6 +55,7 @@ model JobSeeker {
 
   vacancy   Vacancy[] // избранные вакансии, которые добавлены соискателями
   responses Responses[]
+  Reviews   Reviews[]
 
   @@map("jobseekers")
 }
@@ -108,9 +109,9 @@ model Resume {
   languages     String?
   workTimetable String?
 
-  about      String?
-  work_experience   WorkExperience[]
-  eductional Education[]
+  about           String?
+  work_experience WorkExperience[]
+  eductional      Education[]
 
   jobseeker JobSeeker?
   employer  Employer[] // избранные резюме, работодатели, которые добавили резюме в избранное
@@ -136,7 +137,8 @@ model Employer {
 
   vacansy Vacancy[]
 
-  resume Resume[] // избранные резюме, которые добавлены работодателями
+  resume  Resume[] // избранные резюме, которые добавлены работодателями
+  Reviews Reviews[]
 
   @@map("employers")
 }
@@ -247,4 +249,23 @@ model Favorites {
   vacancy Vacancy @relation(fields: [vacancyId], references: [id])
 
   @@map("vacancy_favorites")
+}
+
+model Reviews {
+  id          Int       @id @default(autoincrement()) @map("review_id")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime? @updatedAt @map("updated_at")
+  employerId  Int       @map("employer_id")
+  jobseekerId Int       @map("jobseeker_id")
+  profession  String
+  post        String
+  grade       Int
+  advantages  String?
+  flaws       String?
+  comment     String?
+
+  employer  Employer  @relation(fields: [employerId], references: [id])
+  jobseeker JobSeeker @relation(fields: [jobseekerId], references: [id])
+
+  @@map("employer_reviews")
 }

@@ -6,54 +6,81 @@ import { CreateProfessionDto } from './dto/create-profession.dto'
 export class ProfessionService {
   constructor(private prisma: PrismaService) {}
 
+  async getSuggest(suggest: string) {
+    const result = await this.prisma.profession.findMany({
+      select: {
+        name: true
+      },
+      where: {
+        name: {
+          contains: suggest,
+          mode: 'insensitive'
+        }
+      }
+    })
+
+    return result
+  }
+
   async getAllProfession() {
-    const professions = await this.prisma.profession.findMany({
+    const result = await this.prisma.profession.findMany({
       include: {
         _count: {
-          // count(*)
           select: {
-            vacancy: true
+            vacancy: {
+              where: {
+                status: true
+              }
+            }
           }
         }
       }
     })
-    return professions
+
+    return result
   }
 
-  async getSort(sort) {
-    if (sort == 'popular') {
-      const profession_vacansies = await this.prisma.profession.findMany({
-        include: {
-          _count: {
-            select: {
-              vacancy: true
+  async getSort(sort, search: string) {
+    const searchQuery = {
+      where: {
+        name: {
+          contains: search
+        }
+      },
+      include: {
+        _count: {
+          select: {
+            vacancy: {
+              where: {
+                status: true
+              }
             }
           }
-        },
+        }
+      }
+    }
+
+    let result
+
+    if (sort === 'popular' || sort === undefined) {
+      result = await this.prisma.profession.findMany({
+        ...searchQuery,
         orderBy: {
           vacancy: {
             _count: 'desc'
           }
         }
       })
-      return profession_vacansies
     } else {
-      const professions = await this.prisma.profession.findMany({
-        include: {
-          _count: {
-            select: {
-              vacancy: true
-            }
-          }
-        },
+      result = await this.prisma.profession.findMany({
+        ...searchQuery,
         orderBy: {
           averageSalary: sort
         }
       })
-      return professions
     }
+    return result
   }
-
   async create(dto: CreateProfessionDto) {
     const checkProf = await this.prisma.profession.findUnique({
       where: {

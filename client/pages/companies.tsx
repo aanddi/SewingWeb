@@ -1,32 +1,46 @@
 import { GetServerSideProps, NextPage } from 'next'
 
 import Meta from '@/components/Meta/Meta'
-import Companies from '@/components/screens/Site/Companies/Companies'
+import CompaniesList from '@/components/screens/Site/CompaniesList/Companies'
 
-import { IEmployer } from '@/core/types/employer.interface'
+import { IEmployerCard } from '@/core/services/employer/employer.interface'
 
 import { EmployerService } from '@/core/services/employer/employer.service'
 
-interface EmployerProps {
-  companies: IEmployer[]
-}
-
-const CompaniesPage: NextPage<EmployerProps> = ({ companies }) => {
+const CompaniesPage: NextPage<IEmployerCard> = ({ companies, types }) => {
   return (
     <Meta title="Предприятия">
-      <Companies companies={companies} />
+      <CompaniesList companies={companies} types={types} />
     </Meta>
   )
 }
 
 export default CompaniesPage
 
-export const getServerSideProps: GetServerSideProps<EmployerProps> = async context => {
-  try {
-    const response = await EmployerService.getEmployerAll()
+export const getServerSideProps: GetServerSideProps<IEmployerCard> = async context => {
+  const search = context.query.search as string
+  const sort = context.query.sort as string
 
-    return { props: { companies: response.data } }
+  try {
+    let response
+
+    if (search) {
+      response = await EmployerService.getBySearch(search)
+    } else {
+      response = await EmployerService.getEmployerAll()
+    }
+
+    if (response !== undefined) {
+      return {
+        props: {
+          companies: response.data.companies,
+          types: response.data.types
+        }
+      }
+    } else {
+      return { notFound: true }
+    }
   } catch (error) {
-    return { props: { companies: [] } }
+    return { notFound: true }
   }
 }

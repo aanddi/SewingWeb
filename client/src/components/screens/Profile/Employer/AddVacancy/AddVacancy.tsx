@@ -39,7 +39,7 @@ const AddVacancy: FC = () => {
   const [desc, setDesc] = useState('')
   const [activeRules, setActiveRules] = useState(false)
   const [activePayment, setActivePayment] = useState(false)
-  const [activeSuccess, setActiveSuccess] = useState(true)
+  const [activeSuccess, setActiveSuccess] = useState(false)
 
   // ========== TARIF AND PAY =============================
   const { data: tarifs } = useTarifs()

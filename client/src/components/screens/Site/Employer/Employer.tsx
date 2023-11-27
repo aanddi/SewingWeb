@@ -24,7 +24,7 @@ import pattern2 from 'public/Employers/pattern2.svg'
 import pattern3 from 'public/Employers/pattern3.svg'
 import pattern5 from 'public/Employers/pattern5.svg'
 
-const Employer: FC<IEmployer> = props => {
+const Employer: FC = () => {
   return (
     <SiteLayout>
       <div className={styles.employer}>

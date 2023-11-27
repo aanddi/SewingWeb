@@ -13,8 +13,13 @@ export class ProfessionController {
   }
 
   @Get()
-  getSort(@Query('sort') sort: SortProfession) {
-    return this.professionService.getSort(sort)
+  getSort(@Query('sort') sort: string, @Query('search') search: string) {
+    return this.professionService.getSort(sort, search)
+  }
+
+  @Get('suggest')
+  getSuggest(@Query('suggest') suggest: string) {
+    return this.professionService.getSuggest(suggest)
   }
 
   @UsePipes(new ValidationPipe())

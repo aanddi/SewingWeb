@@ -3,6 +3,7 @@
 .reviews {
   margin-top: 100px;
   margin-bottom: 50px;
+  min-height: 80vh;
 
   &__header {
 
@@ -11,8 +12,41 @@
   &__wrapper {
     margin-top: 50px;
 
-    & > * {
-      margin-bottom: 30px;
+    
+  }
+
+  &__item {
+    & > *:not(:first-child) {
+      margin-bottom: 55px;
+    }
+  }
+
+  &__panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
+  &__company {
+    font-weight: 700;
+    font-size: 24px;
+    color: $darkBlue;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__delete {
+    color: red;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

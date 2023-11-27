@@ -1,8 +1,9 @@
 @import '@/assets/styles/_variables.scss';
 
 .aboutCompany {
-  background-color: #fff;
-  margin: 64px 0;
+  margin-top: 110px;
+  margin-bottom: 60px;
+  min-height: 80vh;
 
   &__wrapper {
     display: flex;
@@ -12,13 +13,9 @@
   &__content {
     flex: 1 1 auto;
 
-    & > * {
+    & > *:not(:first-child) {
       margin-top: 50px;
     }
-  }
-
-  &__header {
-    margin-top: 40px;
   }
 
   &__aside {
@@ -33,7 +30,7 @@
 .info {
   display: flex;
   gap: 60px;
-  margin-top: 30px;
+  margin-top: 50px;
 
   &__block {
     display: flex;
@@ -51,8 +48,10 @@
 }
 
 .desc {
-  text-align: justify;
-  line-height: 165%;
+  &__noDesc {
+    color: $grey;
+    font-size: 15px;
+  }
 }
 
 .reviews {
@@ -66,7 +65,7 @@
   &__content {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 15px;
   }
 
   &__card {
@@ -108,7 +107,7 @@
 
   &__star {
     display: flex;
-    gap: 4px;
+    gap: 5px;
   }
 
   &__desc {
@@ -126,20 +125,28 @@
 
   &__text {
     color: #6c6a6a;
-    line-height: 130%;
+    line-height: 150%;
+    width: 80%;
   }
 
   &__btn {
     display: inline-flex;
-    padding: 7px 20px;
+    padding: 10px 20px;
     color: #fff;
     background-color: $blue;
     border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $blueHover;
+    }
   }
+
   &__pattern {
     position: absolute;
+    transform: scale(1.1);
     top: 0;
-    right: 0;
+    right: 20px;
   }
 }
 

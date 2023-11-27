@@ -1,14 +1,14 @@
 export const sortProfessions = [
   {
     name: 'по популярности',
-    href: '/professions?sort=popular'
+    query: 'popular'
   },
   {
     name: 'по возрастанию зарплаты',
-    href: '/professions?sort=asc'
+    query: 'asc'
   },
   {
     name: 'по убыванию зарплаты',
-    href: '/professions?sort=desc'
+    query: 'desc'
   }
 ]

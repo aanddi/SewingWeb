@@ -1,10 +1,10 @@
 export const sortCompany = [
   {
-    name: 'по количеству',
+    name: 'по популярности',
     href: '/profile/my-responses'
   },
   {
-    name: 'по популярности',
+    name: 'по количеству вакансий',
     href: '/profile/my-responses'
   },
   {

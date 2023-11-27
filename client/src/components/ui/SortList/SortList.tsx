@@ -8,7 +8,8 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 interface SortItem {
   name: string
-  href: string
+  href?: string
+  query?: string
 }
 
 interface Props {
@@ -32,9 +33,15 @@ const SortList: FC<Props> = ({ active, setActive, data, title }) => {
             {data.map((elem, index) => {
               return (
                 <li key={index} className={styles.sort__item} onClick={() => setSortValue(elem.name)}>
-                  <Link href={elem.href} className={styles.sort__link}>
-                    {elem.name}
-                  </Link>
+                  {elem.href ? (
+                    <Link href={elem.href} replace className={styles.sort__link}>
+                      {elem.name}
+                    </Link>
+                  ) : (
+                    <Link href={{ query: { ...router.query, sort: elem.query } }} replace={true} className={styles.sort__link}>
+                      {elem.name}
+                    </Link>
+                  )}
                 </li>
               )
             })}

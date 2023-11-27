@@ -3,38 +3,42 @@ import { GetServerSideProps, NextPage } from 'next'
 import Meta from '@/components/Meta/Meta'
 import Professions from '@/components/screens/Site/Professions/Professions'
 
-import { IProfession } from '@/core/types/profession.interface'
+import { IProfessionCard } from '@/core/services/profession/profession.interface'
 
 import { ProfessionService } from '@/core/services/profession/profession.service'
 
-interface ProfessionsProps {
-  professions: IProfession[]
+interface PropsProfessions {
+  professions: IProfessionCard[]
 }
 
-const ProfessionsPage: NextPage<ProfessionsProps> = ({ professions }) => {
+const ProfessionsPage: NextPage<PropsProfessions> = ({ professions }) => {
   return (
     <Meta title="Профессии">
       <Professions professions={professions} />
     </Meta>
   )
 }
+
 export default ProfessionsPage
 
-// Рендеринг данных на стороне сервера
-export const getServerSideProps: GetServerSideProps<ProfessionsProps> = async context => {
-  const sort = context.query.sort as string
+export const getServerSideProps: GetServerSideProps<PropsProfessions> = async context => {
+  const sort = context.query?.sort as string
+  const search = context.query?.search as string
 
   try {
     let response
-
-    if (sort) {
-      response = await ProfessionService.getBySorted(sort)
+    if (sort || search) {
+      response = await ProfessionService.getBySearch(search, sort)
     } else {
       response = await ProfessionService.getAll()
     }
 
-    return { props: { professions: response.data } }
+    if (response.data !== undefined) {
+      return { props: { professions: response.data } }
+    } else {
+      return { notFound: true }
+    }
   } catch (error) {
-    return { props: { professions: [] } }
+    return { notFound: true }
   }
 }

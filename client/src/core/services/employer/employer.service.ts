@@ -1,3 +1,4 @@
+import { IEmployerCard, IEmployerHeader, IEmployerSuggest } from './employer.interface'
 import { IEmployer } from '@/core/types/employer.interface'
 
 import { instance } from '@/core/api/api.interceptor'
@@ -11,8 +12,29 @@ export const EmployerService = {
   },
 
   async getEmployerAll() {
-    return await instance<IEmployer[]>({
+    return await instance<IEmployerCard>({
       url: `/employer`,
+      method: 'GET'
+    })
+  },
+
+  async getHeader(idEmployer: string) {
+    return await instance<IEmployerHeader>({
+      url: `/employer/header/${idEmployer}`,
+      method: 'GET'
+    })
+  },
+
+  async getSuggest(suggest: string) {
+    return instance<IEmployerSuggest[]>({
+      url: `/employer/suggest/?suggest=${suggest}`,
+      method: 'GET'
+    })
+  },
+
+  async getBySearch(search: string) {
+    return instance<IEmployerCard>({
+      url: `employer/search/?search=${search}`,
       method: 'GET'
     })
   },

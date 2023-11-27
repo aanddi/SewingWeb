@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Param, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common'
 import { Auth } from 'src/auth/decorators/auth.decorators'
 import { EmployerDto } from './dto/employer.dto'
 import { EmployerService } from './employer.service'
@@ -10,6 +10,21 @@ export class EmployerController {
   @Get()
   getAllEmployer() {
     return this.employerService.getAllEmployer()
+  }
+
+  @Get('header/:id')
+  getHeader(@Param('id') idEmployer: number) {
+    return this.employerService.getHeader(idEmployer)
+  }
+
+  @Get('search')
+  getSearch(@Query('search') search: string, @Query('sort') sort: string) {
+    return this.employerService.getSearch(search, sort)
+  }
+
+  @Get('suggest')
+  getSuggest(@Query('suggest') suggest: string) {
+    return this.employerService.getSuggest(suggest)
   }
 
   @Get(':id') // id employer

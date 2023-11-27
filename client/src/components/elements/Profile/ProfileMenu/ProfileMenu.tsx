@@ -36,7 +36,7 @@ const ProfileMenu: FC = () => {
   return (
     <div className={styles.profileMenu} ref={ref}>
       <div className={styles.profileMenu__photo} onClick={() => setIsShow(!isShow)}>
-        <Image src={photoUser} alt="Фото" />
+        <Image src={photoUser} alt="Фото" priority />
       </div>
 
       <div

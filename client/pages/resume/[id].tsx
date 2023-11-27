@@ -1,13 +1,10 @@
 import { GetServerSideProps, NextPage } from 'next'
 
 import Meta from '@/components/Meta/Meta'
-import AboutCompanies from '@/components/screens/Site/AboutCompanies/AboutCompanies'
 import ResumeAbout from '@/components/screens/Site/Resume/ResumeAbout'
 
 import { ResumeAboutResponse } from '@/core/services/jobseeker/jobseeker.interface'
-import { IEmployer } from '@/core/types/employer.interface'
 
-import { EmployerService } from '@/core/services/employer/employer.service'
 import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 
 const AboutCompaniesPage: NextPage<ResumeAboutResponse> = ({ resume, experience, education }) => {

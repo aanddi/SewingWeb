@@ -34,12 +34,13 @@
   &__reviews {
     display: flex;
     align-items: center;  
-    gap: 10px;
+    gap: 15px;
+    margin-top: 15px;
 
     span {
       color: $blue;
       font-weight: 500;
-      text-decoration-line: underline;
+
     }
   }
 

@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react'
 
 import styles from './Home.module.scss'
 
+import FilterModal from '@/components/elements/Modal/FilterModal/FilterModal'
 import Pagination from '@/components/elements/Pagination/Pagination'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
@@ -17,6 +18,7 @@ import ad from 'public/ad/ad.png'
 
 const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, totalPages }) => {
   const [isVisible, setIsVisible] = useState(false)
+  const [activeFilter, setActiveFilter] = useState(false)
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -51,7 +53,7 @@ const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, tot
                   <div className={styles.mainScreen__search_input}>
                     <input type="text" placeholder="Должность или предприятие" />
                   </div>
-                  <div className={styles.mainScreen__search_filter}>
+                  <div onClick={() => setActiveFilter(true)} className={styles.mainScreen__search_filter}>
                     <LuSettings2 size={20} style={{ color: '#454B54' }} />
                   </div>
                   <div className={styles.mainScreen__search_button}>Найти</div>
@@ -80,6 +82,7 @@ const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, tot
               </div>
             </div>
           </div>
+          <FilterModal active={activeFilter} setActive={setActiveFilter} />
         </section>
 
         <section className={[styles.home__ribbon, styles.ribbon].join(' ')} id="vacancy">

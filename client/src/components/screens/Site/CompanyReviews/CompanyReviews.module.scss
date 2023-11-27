@@ -1,8 +1,9 @@
 @import '@/assets/styles/_variables.scss';
 
 .reviews {
-  background-color: #fff;
-  margin-top: 64px;
+  margin-top: 110px;
+  margin-bottom: 60px;
+  min-height: 80vh;
 
   &__wrapper {
     display: flex;
@@ -12,8 +13,8 @@
   &__content {
     flex: 1 1 auto;
 
-    & > * {
-      margin-top: 50px;
+    & > *:not(:first-child) {
+      margin-top: 60px;
     }
   }
 
@@ -25,7 +26,8 @@
     }
   }
 
-  &__block {}
+  &__block {
+  }
 
   &__title {
     color: $darkBlue;
@@ -37,18 +39,23 @@
   &__contentReviews {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 15px;
   }
 
   &__card {
+    display: flex;
+    align-items: center;
+
     flex: 1 1 40%;
+
     min-height: 100%;
     border-radius: 10px;
-    background: #FFF;
-    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.10);
+    background: #fff;
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.1);
   }
 
-  &__cardReviews {}
+  &__cardReviews {
+  }
 
   &__cardAd {
     position: relative;
@@ -57,8 +64,8 @@
 
   &__wrapperReviews {
     padding: 15px 35px;
-    
-     & > *:not(:last-child) {
+
+    & > *:not(:last-child) {
       margin-bottom: 15px;
     }
   }
@@ -69,7 +76,7 @@
 
     span {
       color: $darkBlue;
-      font-size: 25px;
+      font-size: 28px;
       font-weight: 700;
       margin-right: 15px;
     }
@@ -77,10 +84,11 @@
 
   &__star {
     display: flex;
-    gap: 4px;
+    gap: 5px;
   }
 
-  &__desc {}
+  &__desc {
+  }
 
   &__link {
     color: $blue;
@@ -93,22 +101,29 @@
   }
 
   &__text {
-    color: #6C6A6A;
-    line-height: 130%; 
+    color: #6c6a6a;
+    line-height: 150%;
+    width: 80%;
   }
 
   &__btn {
     display: inline-flex;
-    padding: 7px 20px;
+    padding: 10px 20px;
     color: #fff;
     background-color: $blue;
     border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $blueHover;
+    }
   }
 
   &__pattern {
     position: absolute;
+    transform: scale(1.1);
     top: 0;
-    right: 0;
+    right: 20px;
   }
 
   &__ribbon {
@@ -118,43 +133,21 @@
     margin-bottom: 50px;
   }
 
-  &__ribbonItem {
-    position: relative;
+  &__noReviews {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 15px;
 
-    &::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 1px;
-      background-color: $grey;
-      top: -20px;
+    &_title {
+      display: flex;
+      margin-bottom: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
-  }
 
-  &__itemHead {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  &__proffession {
-    font-weight: 600;
-    font-size: 16px;
-  }
-
-  &__post {
-    font-size: 16px;
-  }
-
-  &__date {
-    margin-left: 10px;
-    color: $grey;
-  }
-
-  &__starBlock {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    margin-top: 10px;
+    &_text {
+      color: #3f3f3f;
+    }
   }
 }
