@@ -8,6 +8,7 @@ import { JobseekerModule } from './jobseeker/jobseeker.module'
 import { VacancyModule } from './vacancy/vacancy.module'
 import { ResponsesModule } from './responses/responses.module'
 import { ReviewsModule } from './reviews/reviews.module'
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { ReviewsModule } from './reviews/reviews.module'
     JobseekerModule,
     VacancyModule,
     ResponsesModule,
-    ReviewsModule
+    ReviewsModule,
+    PrismaModule
   ],
   providers: [PrismaService]
 })
