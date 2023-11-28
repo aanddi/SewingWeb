@@ -19,6 +19,7 @@ import { sortCompany } from './sort-company.data'
 import { BiSearchAlt } from 'react-icons/bi'
 import { LuSearchX } from 'react-icons/lu'
 import { RxCross1 } from 'react-icons/rx'
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 
 const CompaniesList: FC<IEmployerCard> = ({ companies, types }) => {
   const { isShow, setIsShow, ref } = useOutside(false)
@@ -74,11 +75,36 @@ const CompaniesList: FC<IEmployerCard> = ({ companies, types }) => {
                         type="text"
                         placeholder="Введите предприятие"
                       />
-                      {value ? (
-                        <div onClick={() => setValue('')} className={styles.search__reset}>
-                          <RxCross1 />
+                      <div
+                        onClick={() => setValue('')}
+                        className={value ? styles.search__resetSearch : [styles.search__resetSearch, styles.search__resetSearch_unactive].join(' ')}>
+                        <RxCross1 />
+                      </div>
+                      <div
+                        ref={refSearch}
+                        className={
+                          isShowSearch
+                            ? [styles.search__list, styles.search__list_active].join(' ')
+                            : [styles.search__list, styles.search__list_unactive].join(' ')
+                        }>
+                        <div className={styles.search__listWrapper}>
+                          <ul className={styles.search__items}>
+                            {search?.map((elem, index) => {
+                              return (
+                                <li onClick={() => setIsShowSearch(false)} key={index} className={styles.search__item}>
+                                  <Link href={`/companies/?search=${elem.companyName}`} className={styles.search__link}>
+                                    {elem.companyName}
+                                  </Link>
+                                </li>
+                              )
+                            })}
+                            <div className={styles.search__loading}>
+                              {isLoading && <LoadingDots />}
+                              {search?.length === 0 && <div>Нет результатов</div>}
+                            </div>
+                          </ul>
                         </div>
-                      ) : null}
+                      </div>
                     </div>
                   </div>
 
@@ -91,35 +117,10 @@ const CompaniesList: FC<IEmployerCard> = ({ companies, types }) => {
                       onClick={() => {
                         router.push('companies')
                         setValue('')
-                      }}
-                    >
+                      }}>
                       Сбросить поиск
                     </span>
                   )}
-                </div>
-
-                <div
-                  ref={refSearch}
-                  className={
-                    isShowSearch
-                      ? [styles.search__list, styles.search__list_active].join(' ')
-                      : [styles.search__list, styles.search__list_unactive].join(' ')
-                  }
-                >
-                  <div className={styles.search__listWrapper}>
-                    <ul className={styles.search__items}>
-                      {search?.map((elem, index) => {
-                        return (
-                          <li onClick={() => setIsShowSearch(false)} key={index} className={styles.search__item}>
-                            <Link href={`/companies/?search=${elem.companyName}`} className={styles.search__link}>
-                              {elem.companyName}
-                            </Link>
-                          </li>
-                        )
-                      })}
-                      {search?.length === 0 && <div className={styles.search__notFound}>Нет результатов</div>}
-                    </ul>
-                  </div>
                 </div>
               </div>
 

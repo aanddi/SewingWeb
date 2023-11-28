@@ -7,6 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+
 //------------- Первичный пользователь -------------
 model User {
   id         Int      @id @default(autoincrement())

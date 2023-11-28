@@ -37,19 +37,19 @@ const Employer: FC = () => {
               </h1>
               <h3 className={styles.main__subTitle}> Все необходимые инструменты для качественного найма </h3>
               <div className={styles.main__buttons}>
-                <Link href="/" className={[styles.main__button, styles.main__button_blue].join(' ')}>
+                <Link href="/profile/add-vacancy" className={[styles.main__button, styles.main__button_blue].join(' ')}>
                   Разместить вакансию
                 </Link>
-                <Link href="/" className={[styles.main__button, styles.main__button_transparent].join(' ')}>
+                <Link href="/profile/my-vacancies" className={[styles.main__button, styles.main__button_transparent].join(' ')}>
                   Найти резюме
                 </Link>
               </div>
               <p className={styles.main__description}>
                 Вакансия — это объявление о поиске сотрудника. Опишите, кто нужен, и выбирайте лучших среди откликнувшихся.
               </p>
-              <Image src={head_line} alt="" className={[styles.main__pattern, styles.main__pattern_line].join(' ')} />
-              <Image src={head_img1} alt="" className={[styles.main__pattern, styles.main__pattern_img1].join(' ')} />
-              <Image src={head_img2} alt="" className={[styles.main__pattern, styles.main__pattern_img2].join(' ')} />
+              <Image priority src={head_line} alt="" className={[styles.main__pattern, styles.main__pattern_line].join(' ')} />
+              <Image priority src={head_img1} alt="" className={[styles.main__pattern, styles.main__pattern_img1].join(' ')} />
+              <Image priority src={head_img2} alt="" className={[styles.main__pattern, styles.main__pattern_img2].join(' ')} />
             </div>
           </div>
         </section>

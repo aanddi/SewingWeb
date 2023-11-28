@@ -11,6 +11,7 @@ import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import { IRibbonResponse } from '@/core/services/vacancy/vacancy.interface'
 
 import { FaArrowUpLong } from 'react-icons/fa6'
+import { FcDocument } from 'react-icons/fc'
 import { IoIosArrowDown } from 'react-icons/io'
 import { LuSettings2 } from 'react-icons/lu'
 
@@ -76,7 +77,7 @@ const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, tot
                 <div className={styles.mainScreen__arrow}>
                   <IoIosArrowDown style={{ color: '#fff' }} size={40} />
                 </div>
-                <Link href={'/profile/j_resume'} className={styles.mainScreen__button}>
+                <Link href={'/profile/my-resume'} className={styles.mainScreen__button}>
                   Создать резюме
                 </Link>
               </div>
@@ -88,22 +89,36 @@ const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, tot
         <section className={[styles.home__ribbon, styles.ribbon].join(' ')} id="vacancy">
           <div className="ribbon__container">
             <div className={styles.ribbon__wrapper}>
-              <div className={styles.ribbon__vacansiesList}>
-                <div className={styles.ribbon__vacansiesTop}>
-                  <h3 className={styles.ribbon__vacansiesTop_count}>Найдено 5 вакансий</h3>
-                  <div className={styles.ribbon__vacansiesTop_filter}>Фильтр</div>
-                </div>
-                <div className={styles.ribbon__content}>
-                  <div className={styles.ribbon__vacancies}>
-                    <Pagination vacanciesData={vacancies} totalPages={totalPages} />
+              {vacancies.length > 0 ? (
+                <>
+                  <div className={styles.ribbon__vacansiesList}>
+                    <div className={styles.ribbon__vacansiesTop}>
+                      <h3 className={styles.ribbon__vacansiesTop_count}>Найдено 5 вакансий</h3>
+                      <div className={styles.ribbon__vacansiesTop_filter}>Фильтр</div>
+                    </div>
+                    <div className={styles.ribbon__content}>
+                      <div className={styles.ribbon__vacancies}>
+                        <Pagination vacanciesData={vacancies} totalPages={totalPages} />
+                      </div>
+                    </div>
+                  </div>
+                  <aside className={styles.ribbon__ad}>
+                    <Link href="/employer">
+                      <Image src={ad} alt={'Реклама'} />
+                    </Link>
+                  </aside>
+                </>
+              ) : (
+                <div className={styles.ribbon__error}>
+                  <div className={styles.ribbon__error_icon}>
+                    <FcDocument size={40} style={{ color: '#3490DF' }} />
+                  </div>
+                  <div className={styles.ribbon__error_message}>
+                    <span className={styles.ribbon__error_title}>Упс... не удалось найти вакансии.</span>
+                    <span>Попробуйте изменить условия поиска или попробовать чуть позже.</span>
                   </div>
                 </div>
-              </div>
-              <aside className={styles.ribbon__ad}>
-                <Link href="/employer">
-                  <Image src={ad} alt={'Реклама'} />
-                </Link>
-              </aside>
+              )}
             </div>
             {isVisible && (
               <div onClick={scrollToTop} className={styles.ribbon__top}>

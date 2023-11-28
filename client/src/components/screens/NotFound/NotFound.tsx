@@ -19,9 +19,14 @@ const NotFound: FC = () => {
             </div>
             <div className={styles.notFound__title}>К сожалению, такой страницы нет</div>
             <div className={styles.notFound__subTitle}>Но у нас много других страниц, где можно найти работу или сотрудника</div>
-            <button onClick={() => router.back()} className={styles.notFound__link}>
-              Вернутся назад
-            </button>
+            <div className={styles.notFound__footer}>
+              <button onClick={() => router.back()} className={[styles.notFound__button, styles.notFound__button_toBack].join(' ')}>
+                Вернутся назад
+              </button>
+              <button onClick={() => router.replace('/')} className={[styles.notFound__button, styles.notFound__button_toHome].join(' ')}>
+                На главную
+              </button>
+            </div>
           </div>
         </div>
       </div>

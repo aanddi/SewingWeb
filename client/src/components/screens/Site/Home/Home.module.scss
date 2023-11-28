@@ -12,7 +12,8 @@
   width: 100%;
   background-size: cover;
 
-  &__wrapper {}
+  &__wrapper {
+  }
 
   &__search {
     display: flex;
@@ -87,8 +88,9 @@
     display: flex;
     text-align: center;
     gap: 45px;
-    
-    &_block {}
+
+    &_block {
+    }
 
     &_count {
       font-size: 25px;
@@ -118,20 +120,20 @@
 
   &__arrow {
     svg {
-      animation: arrow 2s linear infinite ;
+      animation: arrow 2s linear infinite;
     }
 
-  @keyframes arrow {
-    0% {
-      transform: translate(0, 6px);
+    @keyframes arrow {
+      0% {
+        transform: translate(0, 6px);
+      }
+      50% {
+        transform: translate(0, -6px);
+      }
+      100% {
+        transform: translate(0, 6px);
+      }
     }
-    50% {
-      transform: translate(0, -6px);
-    }
-    100% {
-      transform: translate(0, 6px);
-    }
-  }
   }
 }
 
@@ -182,9 +184,7 @@
     flex: 1 1 100%;
   }
 
-
   &__ad {
-
     display: flex;
 
     justify-content: flex-end;
@@ -196,7 +196,6 @@
   }
 
   &__top {
- 
     position: sticky;
     bottom: 20px;
     z-index: 1000;
@@ -207,8 +206,25 @@
     padding: 20px;
     box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-   
+  }
 
+  &__error {
+    display: flex;
+    gap: 20px;
+    margin-top: 50px;
+    min-height: 30vh;
+
+    &_message {
+      display: flex;
+      flex-direction: column;
+      line-height: 150%;
+      color: $grey;
+      font-size: 15px;
+    }
+    &_title {
+      font-weight: 500;
+      color: $colorText;
+      font-size: 16px;
+    }
   }
 }
-

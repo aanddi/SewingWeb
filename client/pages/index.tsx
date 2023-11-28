@@ -20,32 +20,28 @@ export const getServerSideProps: GetServerSideProps<IRibbonResponse> = async con
   try {
     const response = await VacancyService.getRibbon(page)
 
-    if (response.data !== undefined) {
-      let vacancies: IVacancyCard[] = []
+    let vacancies: IVacancyCard[] = []
 
-      if (typeof context.query.page === 'string' && Number(context.query.page) > 1) {
-        // Получение ранее загруженных вакансий
-        const prevPagesVacancies: IVacancyCard[] = []
+    if (typeof context.query.page === 'string' && Number(context.query.page) > 1) {
+      // Получение ранее загруженных вакансий
+      const prevPagesVacancies: IVacancyCard[] = []
 
-        for (let i = 1; i < page; i++) {
-          const prevResponse = await VacancyService.getRibbon(i)
-          prevPagesVacancies.push(...prevResponse.data.vacancies)
-        }
-        vacancies = prevPagesVacancies
+      for (let i = 1; i < page; i++) {
+        const prevResponse = await VacancyService.getRibbon(i)
+        prevPagesVacancies.push(...prevResponse.data.vacancies)
       }
+      vacancies = prevPagesVacancies
+    }
 
-      vacancies.push(...response.data.vacancies)
+    vacancies.push(...response.data.vacancies)
 
-      return {
-        props: {
-          vacancies: vacancies,
-          totalVacancies: response.data.totalVacancies,
-          totalResume: response.data.totalResume,
-          totalPages: response.data.totalPages
-        }
+    return {
+      props: {
+        vacancies: vacancies,
+        totalVacancies: response.data.totalVacancies,
+        totalResume: response.data.totalResume,
+        totalPages: response.data.totalPages
       }
-    } else {
-      return { props: { vacancies: [], totalVacancies: 0, totalResume: 0, totalPages: 0 } }
     }
   } catch (error) {
     return { props: { vacancies: [], totalVacancies: 0, totalResume: 0, totalPages: 0 } }

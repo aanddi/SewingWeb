@@ -37,7 +37,6 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  position: relative;
 
   &__block {
     display: inline-flex;
@@ -46,36 +45,44 @@
     gap: 20px;
   }
 
-  &__inputBlock {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &__reset {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
   &__input {
     display: flex;
     align-items: center;
     gap: 10px;
     border: 1px solid $grey;
     border-radius: 6px;
-    padding: 10px 0 10px 20px;
-    width: 320px;
     box-sizing: border-box;
+    position: relative;
+  }
+
+  &__inputBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     input {
-      padding-right: 40px;
+      width: 320px;
+      padding: 10px 0 10px 0;
+    }
+  }
+
+  &__resetSearch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-left: 10px;
+    opacity: 1;
+
+    &_unactive {
+      opacity: 0;
     }
   }
 
   &__icons {
     display: flex;
     align-items: center;
+    margin-left: 10px;
   }
 
   &__button {
@@ -93,11 +100,13 @@
 
   &__list {
     position: absolute;
-    bottom: calc(100% - 70px);
+    width: 100%;
+    bottom: -210px;
     left: 0;
+    z-index: 1000;
+
     transform: translateY(-10%);
     transition: all 0.2s ease-in;
-    z-index: 1000;
 
     &_active {
       opacity: 1;
@@ -112,7 +121,8 @@
   }
 
   &__listWrapper {
-    height: auto;
+    z-index: 1000;
+    height: 200px;
     min-height: 50px;
     max-height: 250px;
     overflow-y: scroll;
@@ -120,9 +130,15 @@
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.51);
-    width: 320px;
     transition: all 0.4s ease-in;
-    position: absolute;
+  }
+
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: $grey;
   }
 
   &__items {
@@ -136,11 +152,6 @@
     }
   }
 
-  &__notFound {
-    text-align: center;
-    color: $grey;
-    margin-top: 20px;
-  }
 
   &__link {
     display: block;
@@ -176,7 +187,6 @@
 .ribbon {
   padding: 30px 0;
   padding-bottom: 50px;
-
 
   &__cards {
     display: flex;

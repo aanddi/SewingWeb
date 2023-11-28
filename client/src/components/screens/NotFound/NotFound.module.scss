@@ -21,18 +21,34 @@
     font-size: 15px;
   }
 
-  &__link {
-    margin-top: 40px;
+  &__footer {
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__button {
     padding: 15px 60px;
-    background-color: $blue;
     border-radius: 10px;
     color: #fff;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
 
-    &:hover {
-      background-color: $blueHover;
+    &_toBack {
+      background-color: $blue;
+      &:hover {
+        background-color: $blueHover;
+      }
+    }
+
+    &_toHome {
+      background-color: #e3e3e3;
+      color: $colorText;
+      &:hover {
+        background-color: #dbd9d9;
+      }
     }
   }
 }

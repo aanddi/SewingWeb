@@ -3,25 +3,29 @@
 .employer {
   margin-top: 63px;
 
-  &__main {}
+  &__main {
+  }
 
-  &__info {}
+  &__info {
+  }
 
-  &__rates {}
+  &__rates {
+  }
 
-  &__feedback {}
+  &__feedback {
+  }
 }
 
 .main {
-  background: linear-gradient(180deg, #DDEFFF 29.88%, #FFF 100%);
+  background: linear-gradient(180deg, #ddefff 29.88%, #fff 100%);
 
   &__pattern {
     position: absolute;
 
     &_line {
-      top: 50%;  
-      left: 50%; 
-      transform: translate(-50%, -50%); 
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 1;
     }
 
@@ -93,7 +97,7 @@
   }
 
   &__description {
-    margin: 0 auto; 
+    margin: 0 auto;
     color: $darkBlue;
     text-align: center;
     width: 500px;
@@ -110,7 +114,7 @@
     position: relative;
     padding-bottom: 100px;
   }
-   &__pattern {
+  &__pattern {
     position: absolute;
 
     &_arrow1 {
@@ -166,7 +170,14 @@
     flex: 1 1 33%;
     border-radius: 20px;
     background-color: #fff;
-    box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.13);
+    box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.13);
+    }
   }
 
   &__arrow {
@@ -196,7 +207,7 @@
 
   &__cardTitle {
     text-align: center;
-    color:$darkBlue;
+    color: $darkBlue;
     font-size: 20px;
     margin-top: 20px;
     font-weight: 500;
@@ -216,7 +227,8 @@
   background-color: #fff;
   padding: 50px 0 50px 0;
 
-  &__wrapper {}
+  &__wrapper {
+  }
 
   &__title {
     color: $darkBlue;
@@ -236,7 +248,11 @@
   &__card {
     flex: 1 1 33%;
     height: 100%;
-    
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+      transform: translateY(-10px);
+    }
   }
 
   &__content {
@@ -245,7 +261,6 @@
     flex-direction: column;
     border-radius: 45px 45px 10px 10px;
     min-height: 100%;
-    background: linear-gradient(138deg, rgba(52, 144, 223, 0.10) 21.98%, rgba(253, 119, 145, 0.10) 71.55%);
     box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.21);
   }
 
@@ -308,7 +323,8 @@
     align-items: center;
   }
 
-  &__icon {}
+  &__icon {
+  }
 
   &__text {
     font-size: 15px;
@@ -343,23 +359,30 @@
     margin-top: 20px;
     width: 100%;
     background-color: $blue;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 20px 0;
     text-align: center;
     color: #fff;
     font-size: 18px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+
+    &:hover {
+      background-color: $blueHover;
+    }
   }
 }
 
 .feedback {
   padding: 50px 0 50px 0;
 
-  &__wrapper {}
+  &__wrapper {
+  }
 
   &__card {
     border-radius: 50px;
-    background: linear-gradient(270deg, rgba(50, 142, 227, 0.55) 0%, rgba(255, 255, 255, 0.00) 98.94%);
-    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(270deg, #ffeaee 12.55%, #edf7ff 76.97%);
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.15);
   }
 
   &__content {
@@ -393,7 +416,7 @@
 
   &__write {
     font-size: 25px;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 26px;
   }
 
@@ -403,6 +426,7 @@
     font-weight: 300;
     width: 340px;
     margin-bottom: 30px;
+    line-height: 150%;
   }
 
   &__contacts {
@@ -419,25 +443,22 @@
   &__input {
     border-radius: 8px;
     background: #fff;
-    color: #A7A5A5;
-    font-size: 12px;
     padding: 12px;
     margin-bottom: 17px;
   }
 
   &__textarea {
     border-radius: 8px;
-    color: #A7A5A5;
     background: #fff;
-    font-size: 12px;
     padding: 12px;
     margin-bottom: 8px;
+    border: none;
   }
 
   &__agreement {
     font-size: 13px;
     line-height: 21px;
-    color: $grey;
+    color: rgb(154, 154, 154);
 
     span {
       color: $blue;
@@ -446,7 +467,6 @@
   }
 
   &__submit {
-    width: 100px;
     text-align: center;
     padding: 9px 30px;
     background-color: $blue;
@@ -454,5 +474,11 @@
     border-radius: 8px;
     font-size: 16px;
     margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+      background-color: $blueHover;
+    }
   }
 }
