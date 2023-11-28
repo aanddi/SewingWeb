@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react'
 
 import styles from './VacanciesTag.module.scss'
 
-import { RiUserHeartLine } from 'react-icons/Ri'
 import { FaCrown } from 'react-icons/fa'
 import { LuUser } from 'react-icons/lu'
 import { PiStudent } from 'react-icons/pi'
@@ -40,9 +39,6 @@ const VacanciesTag: FC<TagArray> = ({ tags, tarif }) => {
           </div>
         ) : elem == 'Пенсионеры' ? (
           <div key={elem} className={styles.tagBlock__item}>
-            <div>
-              <RiUserHeartLine style={{ color: '#363535' }} />
-            </div>
             <div className={styles.tagBlock__name}>{elem}</div>
           </div>
         ) : elem == 'Люди с инвалидностью' ? (
