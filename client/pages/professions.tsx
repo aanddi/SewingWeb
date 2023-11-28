@@ -25,19 +25,20 @@ export const getServerSideProps: GetServerSideProps<PropsProfessions> = async co
   const sort = context.query?.sort as string
   const search = context.query?.search as string
 
- try {
+  try {
     let response
     if (sort || search) {
       response = await ProfessionService.getBySearch(search, sort)
     } else {
       response = await ProfessionService.getAll()
-      
+    }
+
     if (response.data) {
       return { props: { professions: response.data } }
     } else {
       return { props: { professions: [] } }
     }
   } catch (error) {
-    return { props: { professions: [] } }
+    return {props: { professions: [] } }
   }
 }
