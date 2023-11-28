@@ -25,20 +25,13 @@ export const getServerSideProps: GetServerSideProps<PropsProfessions> = async co
   const sort = context.query?.sort as string
   const search = context.query?.search as string
 
-  try {
-    let response
-    if (sort || search) {
-      response = await ProfessionService.getBySearch(search, sort)
-    } else {
-      response = await ProfessionService.getAll()
+  // Fetch the data from the server and assign it to the 'professions' variable
+  const professions: IProfessionCard[] = await fetchData(sort, search);
+  
+  // Return the fetched data as props
+  return {
+    props: {
+      professions: professions
     }
-
-    if (response.data !== undefined) {
-      return { props: { professions: response.data } }
-    } else {
-      return { professions: [] }
-    }
-  } catch (error) {
-    return { professions: [] }
-  }
+  };
 }
