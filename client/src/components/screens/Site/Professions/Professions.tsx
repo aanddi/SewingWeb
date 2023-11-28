@@ -146,7 +146,8 @@ const Professions: FC<Props> = ({ professions }) => {
               <div className={styles.ribbon__cards}>
                 {professions.length > 0 ? (
                   professions.map((profession, index) => {
-                    return profession._count.vacancy > 0 ? <ProfessionCard profession={profession} key={index} /> : null
+                    // profession._count.vacancy > 0 ? : null
+                    return  <ProfessionCard profession={profession} key={index} /> 
                   })
                 ) : (
                   <div className={styles.ribbon__error}>
