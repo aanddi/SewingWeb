@@ -40,16 +40,16 @@ const VacanciesTag: FC<TagArray> = ({ tags, tarif }) => {
           </div>
         ) : elem == 'Пенсионеры' ? (
           <div key={elem} className={styles.tagBlock__item}>
-            <div>
+            {/* <div>
               <RiUserHeartLine style={{ color: '#363535' }} />
-            </div>
+            </div> */}
             <div className={styles.tagBlock__name}>{elem}</div>
           </div>
         ) : elem == 'Люди с инвалидностью' ? (
           <div key={elem} className={styles.tagBlock__item}>
-            {/* <div>
+            <div>
               <TbDisabled style={{ color: '#363535' }} />
-            </div> */}
+            </div>
             <div className={styles.tagBlock__name}>{elem}</div>
           </div>
         ) : elem == 'Иностранные граждане' ? (
