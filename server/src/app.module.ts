@@ -20,6 +20,6 @@ import { ReviewsModule } from './reviews/reviews.module'
     ResponsesModule,
     ReviewsModule
   ],
-  providers: []
+  providers: [PrismaService]
 })
 export class AppModule {}
