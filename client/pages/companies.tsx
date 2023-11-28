@@ -38,9 +38,19 @@ export const getServerSideProps: GetServerSideProps<IEmployerCard> = async conte
         }
       }
     } else {
-      return { notFound: true }
+      return {
+        props: {
+          companies: [],
+          types: []
+        }
+      }
     }
   } catch (error) {
-    return { notFound: true }
+    return {
+      props: {
+        companies: [],
+        types: []
+      }
+    }
   }
 }

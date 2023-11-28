@@ -30,7 +30,7 @@ const ProfileMenu: FC = () => {
       const response = await EmployerService.getEmployerByUserId(user?.id)
       return response.data.id
     },
-    enabled: !!user && role == '_JOBSEEKER_'
+    enabled: !!user && role == '_EMPLOYER_'
   })
 
   return (

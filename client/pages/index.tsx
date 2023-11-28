@@ -45,10 +45,10 @@ export const getServerSideProps: GetServerSideProps<IRibbonResponse> = async con
         }
       }
     } else {
-      return { notFound: true }
+      return { props: { vacancies: [], totalVacancies: 0, totalResume: 0, totalPages: 0 } }
     }
   } catch (error) {
-    return { notFound: true }
+    return { props: { vacancies: [], totalVacancies: 0, totalResume: 0, totalPages: 0 } }
   }
 }
 
