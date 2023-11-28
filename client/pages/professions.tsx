@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<PropsProfessions> = async co
     } else {
       response = await ProfessionService.getAll()
       
-    if (response.data !== undefined) {
+    if (response.data) {
       return { props: { professions: response.data } }
     } else {
       return { props: { professions: [] } }
