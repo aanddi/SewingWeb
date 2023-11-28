@@ -72,7 +72,7 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
   const { data: myResponses, isLoading: myResponsesLoading } = useQuery({
     queryKey: ['myResponses'],
     queryFn: async () => {
-      const responses = await ResponsesService.getMyResponses(user?.id)
+      const responses = await ResponsesService.getMyResponses(user?.id, undefined)
       return responses.data
     },
     enabled: !!user

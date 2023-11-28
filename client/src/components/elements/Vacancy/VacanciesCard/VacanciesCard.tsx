@@ -51,7 +51,7 @@ const VacanciesCard: FC<Props> = ({ vacancy }) => {
   const { data: myResponses, isLoading: myResponsesLoading } = useQuery({
     queryKey: ['myResponses'],
     queryFn: async () => {
-      const responses = await ResponsesService.getMyResponses(user?.id)
+      const responses = await ResponsesService.getMyResponses(user?.id, undefined)
       return responses.data
     },
     enabled: role == '_JOBSEEKER_'

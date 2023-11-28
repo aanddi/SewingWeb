@@ -27,7 +27,7 @@ export class ResponsesController {
   }
 
   @Get('/getByIdVacancy/:id')
-  // @Auth()
+  @Auth()
   async getByIdVacancy(@Query('show') show: string, @Param('id') idVacancy: number) {
     return this.responsesService.getByIdVacancy(idVacancy, show)
   }

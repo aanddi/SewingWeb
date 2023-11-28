@@ -5,8 +5,11 @@ import { instance } from '@/core/api/api.interceptor'
 
 export const ResponsesService = {
   async getMyResponses(id: number | undefined, sort: string | undefined) {
+    let url
+    if (sort) url = `responses/getByIdUser/${id}/?show=${sort}`
+    else url = `responses/getByIdUser/${id}`
     return instance<IResponsesList[]>({
-      url: `responses/getByIdUser/${id}/?show=${sort}`,
+      url,
       method: 'GET'
     })
   },
