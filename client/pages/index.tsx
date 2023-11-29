@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps<IRibbonResponse> = async con
   try {
     const response = await VacancyService.getRibbon(page)
 
-    if (response.data !== undefined) {
+    if (response.data) {
       let vacancies: IVacancyCard[] = []
 
       if (typeof context.query.page === 'string' && Number(context.query.page) > 1) {
@@ -45,7 +45,12 @@ export const getServerSideProps: GetServerSideProps<IRibbonResponse> = async con
         }
       }
     } else {
-      return { notFound: true }
+      return { props: {
+        vacancies: [],
+        totalVacancies: 0,
+        totalResume: 0,
+        totalPages: 0
+      } }
     }
   } catch (error) {
     return { notFound: true }
