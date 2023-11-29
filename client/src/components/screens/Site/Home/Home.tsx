@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
@@ -9,6 +10,8 @@ import Pagination from '@/components/elements/Pagination/Pagination'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 
 import { IRibbonResponse } from '@/core/services/vacancy/vacancy.interface'
+
+import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 
 import { FaArrowUpLong } from 'react-icons/fa6'
 import { FcDocument } from 'react-icons/fc'
@@ -29,6 +32,18 @@ const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, tot
   }
 
   const toggleVisibility = () => {
+    {
+      {
+        {
+          {
+            {
+              {
+              }
+            }
+          }
+        }
+      }
+    }
     if (window.scrollY > 500) {
       setIsVisible(true)
     } else {
@@ -42,6 +57,17 @@ const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, tot
       window.removeEventListener('scroll', toggleVisibility)
     }
   }, [])
+
+  const { data: vacancy } = useQuery({
+    queryKey: ['vacancy'],
+    queryFn: async () => {
+      const prevResponse = await VacancyService.getRibbon(1)
+
+      return prevResponse.data
+    }
+  })
+
+  console.log(vacancy)
 
   return (
     <SiteLayout background={'#fff'}>
