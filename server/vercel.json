@@ -1,9 +1,10 @@
 {
   "version": 2,
+  "public": true,
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/static-build",
+      "use": "@vercel/node",
       "config": {
         "prisma": {
           "generate": true
@@ -16,6 +17,13 @@
       "src": "/api/(.*)",
       "dest": "src/main.ts",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "src/main.ts"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "postgres://default:SR4HiCg2LcEA@ep-proud-glitter-38171981-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb"
+  }
 }
