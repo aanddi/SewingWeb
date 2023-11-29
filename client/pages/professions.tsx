@@ -32,5 +32,7 @@ export const getServerSideProps: GetServerSideProps<PropsProfessions> = async co
     response = await ProfessionService.getAll()
   }
 
+  console.log(response.data)
+
   return { props: { professions: response.data } }
 }

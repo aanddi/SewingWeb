@@ -145,11 +145,12 @@ const Professions: FC<Props> = ({ professions }) => {
               </div>
 
               <div className={styles.ribbon__cards}>
-                {professions.length > 0 ? (
-                  professions.map((profession, index) => {
-                    // profession._count.vacancy > 0 ? : null
-                    return <ProfessionCard profession={profession} key={index} />
-                  })
+                {professions.map((profession, index) => {
+                  // profession._count.vacancy > 0 ? : null
+                  return <ProfessionCard profession={profession} key={index} />
+                })}
+                {/* {professions.length > 0 ? (
+                 
                 ) : (
                   <div className={styles.ribbon__error}>
                     <div className={styles.ribbon__error_icon}>
@@ -160,7 +161,7 @@ const Professions: FC<Props> = ({ professions }) => {
                       <span>Попробуйте изменить условия поиска или попробовать чуть позже.</span>
                     </div>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>
