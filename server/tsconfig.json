@@ -17,8 +17,5 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  },
-  "prisma": {
-    "include": ["src/prisma.service.ts"]
   }
 }

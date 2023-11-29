@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-
+import { ProfessionModule } from './profession/profession.module'
 import { PrismaService } from './prisma.service'
 import { AuthModule } from './auth/auth.module'
 import { ConfigModule } from '@nestjs/config'
@@ -9,17 +9,17 @@ import { VacancyModule } from './vacancy/vacancy.module'
 import { ResponsesModule } from './responses/responses.module'
 import { ReviewsModule } from './reviews/reviews.module'
 
-
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    ProfessionModule,
     AuthModule,
     EmployerModule,
     JobseekerModule,
     VacancyModule,
     ResponsesModule,
-    ReviewsModule,
+    ReviewsModule
   ],
-  providers: [PrismaService]
+  providers: []
 })
 export class AppModule {}
