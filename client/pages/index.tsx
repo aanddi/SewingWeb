@@ -17,7 +17,7 @@ const HomePage: NextPage<IRibbonResponse> = ({ vacancies, totalVacancies, totalR
 
 export const getServerSideProps: GetServerSideProps<IRibbonResponse> = async context => {
   const page = context.query.page ? Number(context.query.page) : 1
-  try {
+
     const response = await VacancyService.getRibbon(page)
 
     let vacancies: IVacancyCard[] = []
@@ -43,9 +43,6 @@ export const getServerSideProps: GetServerSideProps<IRibbonResponse> = async con
         totalPages: response.data.totalPages
       }
     }
-  } catch (error) {
-    return { props: { vacancies: [], totalVacancies: 0, totalResume: 0, totalPages: 0 } }
-  }
 }
 
 export default HomePage
