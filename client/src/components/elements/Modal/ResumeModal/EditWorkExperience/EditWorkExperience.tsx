@@ -15,7 +15,7 @@ import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { mouth } from '@/core/utils/select-resume-data'
 
 interface Props {
-  experience: IWorkExperience
+  experience: IWorkExperience | undefined
   active: boolean
   setActive: Dispatch<SetStateAction<boolean>>
 }
@@ -129,7 +129,7 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
   const onSubmit: SubmitHandler<IWorkExperience> = async data => {
     setIsLoading(true)
     try {
-      const respone = await JobseekerService.updateExperience(experience.id, data)
+      const respone = await JobseekerService.updateExperience(experience?.id, data)
       queryClient.invalidateQueries({ queryKey: ['experience'] })
       setActive(false)
       setIsLoading(false)
@@ -316,7 +316,7 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
             </div>
             <span className={styles.editModal__footerError}>{errorUpdate}</span>
           </div>
-          <div className={styles.editModal__deleteButton} onClick={() => mutationExperience.mutate(experience.id)}>
+          <div className={styles.editModal__deleteButton} onClick={() => mutationExperience.mutate(experience?.id)}>
             {mutationExperience.isPending ? <LoadingDots color={'red'} /> : 'Удалить'}
           </div>
         </div>

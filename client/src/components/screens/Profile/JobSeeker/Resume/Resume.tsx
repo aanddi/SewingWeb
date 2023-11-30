@@ -37,7 +37,7 @@ const Resume: FC = () => {
   const [activeModal4, setActiveModal4] = useState(false)
 
   const [edicationItem, setEdicationItem] = useState<IEducation | null>(null)
-  const [experienceItem, setExperienceItem] = useState(null)
+  const [experienceItem, setExperienceItem] = useState<IWorkExperience | undefined>(undefined)
 
   const [activeModal5, setActiveModal5] = useState(false)
   const [activeModal6, setActiveModal6] = useState(false)
@@ -247,6 +247,7 @@ const Resume: FC = () => {
                                 <div
                                   onClick={async () => {
                                     const response = await JobseekerService.getExperienceById(elem.id)
+                                    
                                     setExperienceItem(response)
                                     setActiveModal6(true)
                                   }}
