@@ -1,18 +1,15 @@
 @import '@/assets/styles/_variables.scss';
 
 .reviews {
-  margin-top: 100px;
   margin-bottom: 50px;
   min-height: 80vh;
 
   &__header {
-
   }
 
   &__wrapper {
     margin-top: 50px;
-
-    
+    width: 1000px;
   }
 
   &__item {

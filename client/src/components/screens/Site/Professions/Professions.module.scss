@@ -1,9 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .professions {
-  margin-top: 63px;
-  min-height: 80vh;
-
   &__head {
   }
 
@@ -151,7 +148,6 @@
       background-color: #dce7fd;
     }
   }
-
 
   &__link {
     display: block;

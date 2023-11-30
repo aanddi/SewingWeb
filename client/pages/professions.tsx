@@ -36,9 +36,9 @@ export const getServerSideProps: GetServerSideProps<PropsProfessions> = async co
     if (response.data !== undefined) {
       return { props: { professions: response.data } }
     } else {
-      return { notFound: true }
+      return { props: { professions: [] } }
     }
   } catch (error) {
-    return { notFound: true }
+    return { props: { professions: [] } }
   }
 }

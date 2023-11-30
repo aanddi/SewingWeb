@@ -267,7 +267,7 @@ const Employer: FC = () => {
                   </div>
                 </div>
               </div>
-              <Link href={'/profile/e_add-vacancy'} className={styles.rates__button}>
+              <Link href={'/profile/add-vacancy'} className={styles.rates__button}>
                 Опубликовать вакансию
               </Link>
             </div>

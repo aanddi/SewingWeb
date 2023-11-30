@@ -92,8 +92,6 @@ const ResumeAbout: FC<ResumeAboutResponse> = ({ resume, experience, education })
                   </div>
                 </div>
 
-                {resume.updatedAt ? <div className={styles.resumePage__updateDate}>Резюме обновлено: {formatDate(resume.updatedAt)}</div> : null}
-
                 <div className={styles.resumePage__body}>
                   <div className={styles.resumePage__bodyBlock}>
                     <div className={styles.resumePage__blockTitle}>Опыт работы</div>
@@ -165,6 +163,9 @@ const ResumeAbout: FC<ResumeAboutResponse> = ({ resume, experience, education })
                       </>
                     )}
                   </div>
+                </div>
+                <div className={styles.resumePage__footer}>
+                  {resume.updatedAt ? <div className={styles.resumePage__updateDate}>Резюме обновлено: {formatDate(resume.updatedAt)}</div> : null}
                 </div>
               </div>
             </div>

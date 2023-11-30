@@ -1,10 +1,11 @@
-import { useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 
 import styles from './EditEdication.module.scss'
 
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeModal'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 
@@ -24,7 +25,18 @@ const EditEducation: FC<Props> = ({ edication, active, setActive }) => {
   // ========================================================
   const queryClient = useQueryClient()
 
+  const mutationDelete = useMutation({
+    mutationKey: ['deleteEducation'],
+    mutationFn: async (id: number | undefined) => {
+      const respone = await JobseekerService.deleteEducation(id)
+      queryClient.invalidateQueries({ queryKey: ['education'] })
+      setActive(false)
+      return respone
+    }
+  })
+
   // ========== REACT HOOK FORM =============================
+  const [isLoading, setIsLoading] = useState(false)
 
   // save error server
   const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
@@ -50,12 +62,15 @@ const EditEducation: FC<Props> = ({ edication, active, setActive }) => {
   }, [edication, setValue])
 
   const onSubmit: SubmitHandler<IEducation> = async data => {
+    setIsLoading(true)
     try {
       const respone = await JobseekerService.updateEducation(edication.id, data)
       queryClient.invalidateQueries({ queryKey: ['education'] })
       setActive(false)
+      setIsLoading(false)
       reset()
     } catch (error: any) {
+      setIsLoading(false)
       setErrorUpdate(error.response.data.message)
     }
   }
@@ -139,21 +154,14 @@ const EditEducation: FC<Props> = ({ edication, active, setActive }) => {
         </div>
         <div className={styles.editModal__modalFooter}>
           <div className={styles.editModal__footerWrapper}>
-            <button className={styles.editModal__saveButton}>Сохранить</button>
+            <button className={styles.editModal__saveButton}>{isLoading ? <LoadingDots color="#fff" /> : 'Сохранить'}</button>
             <div className={styles.editModal__resetButton} onClick={handleCancel}>
               Отменить
             </div>
             <span className={styles.editModal__footerError}>{errorUpdate}</span>
           </div>
-          <div
-            className={styles.editModal__deleteButton}
-            onClick={async () => {
-              const respone = await JobseekerService.deleteEducation(edication.id)
-              queryClient.invalidateQueries({ queryKey: ['education'] })
-              setActive(false)
-            }}
-          >
-            Удалить
+          <div className={styles.editModal__deleteButton} onClick={() => mutationDelete.mutate(edication.id)}>
+            {mutationDelete.isPending ? <LoadingDots color={'red'} /> : 'Удалить'}
           </div>
         </div>
       </form>

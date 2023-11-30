@@ -8,8 +8,8 @@ export class EmployerController {
   constructor(private readonly employerService: EmployerService) {}
 
   @Get()
-  getAllEmployer() {
-    return this.employerService.getAllEmployer()
+  getAllEmployer(@Query('search') search: string, @Query('sort') sort: string) {
+    return this.employerService.getAllEmployer(search, sort)
   }
 
   @Get('header/:id')
@@ -17,10 +17,10 @@ export class EmployerController {
     return this.employerService.getHeader(idEmployer)
   }
 
-  @Get('search')
-  getSearch(@Query('search') search: string, @Query('sort') sort: string) {
-    return this.employerService.getSearch(search, sort)
-  }
+  // @Get('search')
+  // getSearch(@Query('search') search: string, @Query('sort') sort: string) {
+  //   return this.employerService.getSearch(search, sort)
+  // }
 
   @Get('suggest')
   getSuggest(@Query('suggest') suggest: string) {

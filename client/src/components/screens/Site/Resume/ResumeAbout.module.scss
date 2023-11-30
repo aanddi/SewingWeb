@@ -1,8 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .resumePage {
-  margin: 100px;
-
   &__wrapper {
     display: flex;
     gap: 74px;
@@ -16,7 +14,6 @@
   &__photo {
     img {
       border-radius: 100px;
-      box-shadow: 2px 2px 10px #9c9c9c;
     }
   }
 
@@ -93,7 +90,6 @@
   }
 
   &__bodyBlock {
-
   }
 
   &__blockList {
@@ -114,18 +110,11 @@
     gap: 10px;
   }
 
-  &__updateDate {
-    color: $grey;
-    margin-top: 40px;
-
-  }
-
   /*============================================*/
 
   &__experiencePost {
     font-weight: 500;
     font-size: 16px;
-
   }
 
   &__experienceTime {
@@ -222,5 +211,16 @@
     span {
       line-height: 120%;
     }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 70px;
+  }
+
+  &__updateDate {
+    color: $grey;
   }
 }

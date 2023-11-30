@@ -1,10 +1,11 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { Dispatch, FC, SetStateAction, useState } from 'react'
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 
 import styles from './WorkExperience.module.scss'
 
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeModal'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 
@@ -21,6 +22,8 @@ interface Props {
 
 const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
   const queryClient = useQueryClient()
+  const [maxLength, setMaxLength] = useState(1000)
+  const [sizeField, setSizeField] = useState(0)
 
   // ========== DATE =============================
 
@@ -31,17 +34,41 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
 
   const [untilNow, setUntilNow] = useState(false)
 
+  const [yearStartError, setYearStartError] = useState(false)
+  const [yearEndError, setYearEndError] = useState(false)
+
   const handleYearStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYearStart(e.target.value)
     setValue('startTime', `${monthStart} ${e.target.value}`)
+
+    if (e.target.value.length > 4) {
+      setYearStartError(true)
+    } else {
+      setYearStartError(false)
+    }
   }
 
   const handleYearEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYearEnd(e.target.value)
     setValue('endTime', `${monthEnd} ${e.target.value}`)
+
+    if (e.target.value.length > 4) {
+      setYearEndError(true)
+    } else {
+      setYearEndError(false)
+    }
   }
 
+  useEffect(() => {
+    if (untilNow) {
+      setYearEndError(false)
+      setYearStartError(false)
+    }
+  }, [untilNow])
+
   // ========== REACT HOOK FORM =============================
+
+  const [isLoading, setIsLoading] = useState(false)
 
   // save error server
   const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
@@ -58,15 +85,17 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
   })
 
   const onSubmit: SubmitHandler<IWorkExperience> = async data => {
-    console.log(data)
+    setIsLoading(true)
     try {
       const response = await JobseekerService.createExperience(resumeId, data)
       queryClient.invalidateQueries({ queryKey: ['experience'] })
+      setIsLoading(false)
       setActive(false)
       reset()
       setValue('startTime', '')
       setValue('endTime', '')
     } catch (error: any) {
+      setIsLoading(false)
       setErrorUpdate(error.response.data.message)
     }
   }
@@ -145,13 +174,14 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
                         type="number"
                         placeholder="Год"
                         onChange={e => handleYearStartChange(e)}
-                        style={errors.startTime ? { borderColor: 'red' } : undefined}
+                        style={errors.startTime || yearStartError ? { borderColor: 'red' } : undefined}
                       />
-                      {errors.startTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
                     </>
                   )}
                 />
               </div>
+              {yearStartError ? <span className={styles.workExperience__error}>Укажите действительный год</span> : null}
+              {errors.startTime && <span className={styles.workExperience__error}>Укажите дату начало работы</span>}
             </div>
           </div>
 
@@ -199,11 +229,12 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
                         disabled={untilNow}
                         value={untilNow ? '' : yearEnd}
                       />
-                      {errors.endTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
                     </>
                   )}
                 />
               </div>
+              {yearEndError ? <span className={styles.workExperience__error}>Укажите действительный год</span> : null}
+              {errors.endTime && <span className={styles.workExperience__error}>Укажите дату начало работы</span>}
               <div className={styles.workExperience__checkbox}>
                 <input
                   {...register('untilNow')}
@@ -221,13 +252,16 @@ const WorkExperience: FC<Props> = ({ resumeId, active, setActive }) => {
           <div className={styles.workExperience__block}>
             <div className={styles.workExperience__label}>Обязанности, функции и достижения</div>
             <div className={styles.workExperience__textarea}>
-              <textarea {...register('experience')}></textarea>
+              <textarea maxLength={maxLength} {...register('experience')} onChange={e => setSizeField(e.target.value.length)} />
+              <div className={styles.workExperience__size}>
+                {sizeField}/{maxLength} символов
+              </div>
             </div>
           </div>
         </div>
 
         <div className={styles.workExperience__modalFooter}>
-          <button className={styles.workExperience__saveButton}>Сохранить</button>
+          <button className={styles.workExperience__saveButton}>{isLoading ? <LoadingDots color="#fff" /> : 'Сохранить'}</button>
           <div className={styles.workExperience__resetButton} onClick={handleCancel}>
             Отменить
           </div>

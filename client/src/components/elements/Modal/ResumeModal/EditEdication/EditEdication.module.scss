@@ -56,7 +56,8 @@
 
   &__saveButton {
     background-color: $blue;
-    padding: 10px 30px;
+    width: 130px;
+    padding: 10px 0;
     color: #fff;
     border-radius: 6px;
     cursor: pointer;
@@ -70,6 +71,7 @@
 
   &__resetButton {
     cursor: pointer;
+    font-size: 15px;
   }
 
   &__modalFooter {
@@ -79,7 +81,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 30px;
     background-color: #fff;
     padding: 30px 30px 30px 40px;
     box-shadow: 0 -10px 25px rgba(46, 59, 99, 0.08);
@@ -88,12 +90,17 @@
   &__footerWrapper {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
   }
 
   &__deleteButton {
     color: red;
     cursor: pointer;
+    font-size: 15px;
     margin-right: 80px;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

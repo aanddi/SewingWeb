@@ -5,6 +5,7 @@ import Select, { MultiValue } from 'react-select'
 
 import styles from './PersonalInfo.module.scss'
 
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeModal'
 import Error from '@/components/ui/ErrorForm/ErrorForm'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
@@ -66,6 +67,8 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
 
   // ========== REACT HOOK FORM =============================
 
+  const [isLoading, setIsLoading] = useState(false)
+
   // save error server
   const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
 
@@ -103,12 +106,15 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
 
   // submit forma
   const onSubmit: SubmitHandler<IResume> = async data => {
+    setIsLoading(true)
     try {
       const response = await JobseekerService.updateResumeByIdUser(user?.id, data)
       queryClient.invalidateQueries({ queryKey: ['resume'] })
+      setIsLoading(false)
       setActive(false)
       reset()
     } catch (error: any) {
+      setIsLoading(false)
       setErrorUpdate(error.response.data.message)
     }
   }
@@ -451,7 +457,7 @@ const PersonalInfo: FC<IPersonalInfo> = ({ resume, active, setActive }) => {
           </div>
         </div>
         <div className={styles.formInfo__modalFooter}>
-          <button className={styles.formInfo__saveButton}>Сохранить</button>
+          <button className={styles.formInfo__saveButton}>{isLoading ? <LoadingDots color="#fff" /> : 'Сохранить'}</button>
           <div className={styles.formInfo__resetButton} onClick={handleCancel}>
             Отменить
           </div>

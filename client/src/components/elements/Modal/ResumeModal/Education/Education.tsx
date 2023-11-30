@@ -5,6 +5,7 @@ import Select from 'react-select'
 
 import styles from './Education.module.scss'
 
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeModal'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 
@@ -25,6 +26,8 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
 
   // ========== REACT HOOK FORM =============================
 
+  const [isLoading, setIsLoading] = useState(false)
+
   // save error server
   const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
 
@@ -40,12 +43,15 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
   })
 
   const onSubmit: SubmitHandler<IEducation> = async data => {
+    setIsLoading(true)
     try {
       const respone = await JobseekerService.createEducation(resumeId, data)
       queryClient.invalidateQueries({ queryKey: ['education'] })
+      setIsLoading(false)
       setActive(false)
       reset()
     } catch (error: any) {
+      setIsLoading(false)
       setErrorUpdate(error.response.data.message)
     }
   }
@@ -128,7 +134,7 @@ const Education: FC<Props> = ({ resumeId, active, setActive }) => {
           />
         </div>
         <div className={styles.education__modalFooter}>
-          <button className={styles.education__saveButton}>Сохранить</button>
+          <button className={styles.education__saveButton}>{isLoading ? <LoadingDots color="#fff" /> : 'Сохранить'}</button>
           <div className={styles.education__resetButton} onClick={handleCancel}>
             Отменить
           </div>

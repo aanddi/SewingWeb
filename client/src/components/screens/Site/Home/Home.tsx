@@ -18,6 +18,7 @@ import { FcDocument } from 'react-icons/fc'
 import { IoIosArrowDown } from 'react-icons/io'
 import { LuSettings2 } from 'react-icons/lu'
 
+import head_img1 from 'public/Employers/head_img1.svg'
 import ad from 'public/ad/ad.png'
 
 const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, totalPages }) => {
@@ -137,7 +138,7 @@ const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, tot
               ) : (
                 <div className={styles.ribbon__error}>
                   <div className={styles.ribbon__error_icon}>
-                    <FcDocument size={40} style={{ color: '#3490DF' }} />
+                    <Image src={head_img1} alt={''} width={300} />
                   </div>
                   <div className={styles.ribbon__error_message}>
                     <span className={styles.ribbon__error_title}>Упс... не удалось найти вакансии.</span>

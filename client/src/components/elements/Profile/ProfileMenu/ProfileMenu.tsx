@@ -59,7 +59,7 @@ const ProfileMenu: FC = () => {
             {role == '_JOBSEEKER_' ? (
               <Link href="/profile/my-resume" className={styles.profileMenu__button}>
                 <IoAddCircleOutline size={20} />
-                <span>Создать резюме</span>
+                <span>Дополнить резюме</span>
               </Link>
             ) : (
               <Link className={styles.profileMenu__button} href="/profile/add-vacancy">

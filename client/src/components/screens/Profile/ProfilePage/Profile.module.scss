@@ -1,7 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .profile {
-  margin-top: 100px;
   margin-bottom: 50px;
 
   &__header {
@@ -43,13 +42,14 @@
   }
 
   &__title {
-    width: 160px;
+    width: 250px;
   }
 
   &__remind {
     color: $blue;
     text-decoration: underline;
     font-weight: 500;
+   width: 100%;
 
     &:hover {
       text-decoration: none;

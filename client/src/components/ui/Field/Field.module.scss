@@ -1,21 +1,28 @@
 @import '@/assets/styles/_variables.scss';
 
 .field {
+  &__input {
+    border-radius: 5px;
+    border: 1px solid #c2bfbf;
+    width: 100%;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   input {
     padding: 10px 0 10px 10px;
-    border-radius: 5px;
-    border: 1px solid #C2BFBF;
     width: 100%;
-    font-size: 13px;
-
+    border-radius: 5px;
     &:hover {
       cursor: text;
     }
+  }
 
-    &:focus {
-      border: 1px solid $blue !important;
-    }
+  &__checkPassword {
+    margin-right: 20px;
+    cursor: pointer;
   }
 
   &__error {
@@ -29,7 +36,7 @@
 
     &::placeholder {
       color: red !important;
-   }
+    }
   }
 
   &__title {
@@ -37,6 +44,7 @@
     font-weight: 500;
     margin-bottom: 10px;
     font-size: 15px;
+    user-select: none;
   }
 
   &__head {
@@ -47,5 +55,6 @@
   &__required {
     color: red;
     font-size: 15px;
+    user-select: none;
   }
 }

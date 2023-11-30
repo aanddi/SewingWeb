@@ -34,7 +34,9 @@ const CompanyVacancies: FC<Props> = ({ header, vacancies }) => {
                   <>
                     <div className={styles.companyVacancies__title}>Вакансии</div>
                     {vacancies.map((vacancy, index) => (
-                      <VacanciesCard key={index} vacancy={vacancy} />
+                      <div key={index} className={styles.companyVacancies__item}>
+                        <VacanciesCard vacancy={vacancy} />
+                      </div>
                     ))}
                   </>
                 ) : (

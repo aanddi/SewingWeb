@@ -6,6 +6,7 @@ import { FC, useEffect, useState } from 'react'
 import styles from './Companies.module.scss'
 
 import CompaniesCard from '@/components/elements/Company/CompaniesCard/CompaniesCard'
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import SortList from '@/components/ui/SortList/SortList'
 
@@ -19,7 +20,6 @@ import { sortCompany } from './sort-company.data'
 import { BiSearchAlt } from 'react-icons/bi'
 import { LuSearchX } from 'react-icons/lu'
 import { RxCross1 } from 'react-icons/rx'
-import LoadingDots from '@/components/elements/Loading/LoadingDots'
 
 const CompaniesList: FC<IEmployerCard> = ({ companies, types }) => {
   const { isShow, setIsShow, ref } = useOutside(false)
@@ -73,11 +73,12 @@ const CompaniesList: FC<IEmployerCard> = ({ companies, types }) => {
                         }}
                         value={value}
                         type="text"
-                        placeholder="Введите предприятие"
+                        placeholder="Введите предприятие или город"
                       />
                       <div
                         onClick={() => setValue('')}
-                        className={value ? styles.search__resetSearch : [styles.search__resetSearch, styles.search__resetSearch_unactive].join(' ')}>
+                        className={value ? styles.search__resetSearch : [styles.search__resetSearch, styles.search__resetSearch_unactive].join(' ')}
+                      >
                         <RxCross1 />
                       </div>
                       <div
@@ -86,7 +87,8 @@ const CompaniesList: FC<IEmployerCard> = ({ companies, types }) => {
                           isShowSearch
                             ? [styles.search__list, styles.search__list_active].join(' ')
                             : [styles.search__list, styles.search__list_unactive].join(' ')
-                        }>
+                        }
+                      >
                         <div className={styles.search__listWrapper}>
                           <ul className={styles.search__items}>
                             {search?.map((elem, index) => {
@@ -117,7 +119,8 @@ const CompaniesList: FC<IEmployerCard> = ({ companies, types }) => {
                       onClick={() => {
                         router.push('companies')
                         setValue('')
-                      }}>
+                      }}
+                    >
                       Сбросить поиск
                     </span>
                   )}

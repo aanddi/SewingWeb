@@ -1,9 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .companies {
-  margin-top: 63px;
-  min-height: 80vh;
-  
   &__head {
   }
 
@@ -181,7 +178,6 @@
       background-color: #dce7fd;
     }
   }
-
 
   &__link {
     display: block;

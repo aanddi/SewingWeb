@@ -7,7 +7,7 @@ import { EmployerDto } from './dto/employer.dto'
 export class EmployerService {
   constructor(private prisma: PrismaService) {}
 
-  async getAllEmployer() {
+  async getAllEmployer(search: string = '', sort: string = 'maxReviews') {
     const employers = await this.prisma.employer.findMany({
       select: {
         id: true,
@@ -43,7 +43,6 @@ export class EmployerService {
           companyName: employer.companyName,
           adress: employer.adress
         },
-
         count: {
           countVacancy: employer._count.vacansy,
           countReviews: employer._count.Reviews
@@ -52,8 +51,10 @@ export class EmployerService {
       }
     })
 
+    const sortedReviews = companies.sort((a, b) => b.count.countReviews - a.count.countReviews)
+
     return {
-      companies: companies,
+      companies: sortedReviews,
       types: types
     }
   }
@@ -121,7 +122,7 @@ export class EmployerService {
     return result
   }
 
-  async getSearch(search: string, sort: string) {
+  async getSearch(search: string = '', sort: string) {
     const employers = await this.prisma.employer.findMany({
       where: {
         OR: [
@@ -133,6 +134,12 @@ export class EmployerService {
           },
           {
             type: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          },
+          {
+            adress: {
               contains: search,
               mode: 'insensitive'
             }
@@ -165,7 +172,7 @@ export class EmployerService {
     const types = await this.getCountTypes()
 
     const companies = employers.map(employer => {
-      const averageGrade = this.calculateAverageGrade(employer._count)
+      const averageGrade = this.calculateAverageGrade(employer.Reviews)
 
       return {
         employer: {
@@ -173,7 +180,6 @@ export class EmployerService {
           companyName: employer.companyName,
           adress: employer.adress
         },
-
         count: {
           countVacancy: employer._count.vacansy,
           countReviews: employer._count.Reviews
@@ -182,9 +188,36 @@ export class EmployerService {
       }
     })
 
-    return {
-      companies: companies,
-      types: types
+    if (!companies.length) {
+      return {
+        companies: [],
+        types: types
+      }
+    }
+
+    if (!sort) {
+      sort = 'maxReviews'
+    }
+
+    // if (sort === 'minReviews') {
+    //   const sortedReviews = companies.sort((a, b) => a.count.countReviews - b.count.countReviews)
+    //   return {
+    //     companies: sortedReviews,
+    //     types: types
+    //   }
+
+    if (sort === 'maxReviews') {
+      const sortedReviews = companies.sort((a, b) => b.count.countReviews - a.count.countReviews)
+      return {
+        companies: sortedReviews,
+        types: types
+      }
+    } else if (sort === 'maxVacancies') {
+      const sortedReviews = companies.sort((a, b) => b.count.countVacancy - a.count.countVacancy)
+      return {
+        companies: sortedReviews,
+        types: types
+      }
     }
   }
 
@@ -333,10 +366,12 @@ export class EmployerService {
     let totalGrade = 0
     let reviewCount = 0
 
-    reviews.forEach(review => {
-      totalGrade += review.grade
-      reviewCount++
-    })
+    if (Array.isArray(reviews)) {
+      reviews.forEach(review => {
+        totalGrade += review.grade
+        reviewCount++
+      })
+    }
 
     if (reviewCount === 0) {
       return 0 // Если нет отзывов, то средняя оценка будет 0

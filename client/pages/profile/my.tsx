@@ -1,5 +1,5 @@
 import Meta from '@/components/Meta/Meta'
-import Profile from '@/components/screens/Profile/JobSeeker/Profile/Profile'
+import Profile from '@/components/screens/Profile/ProfilePage/Profile'
 
 import { NextPageAuth } from '@/core/providers/aut-provider/auth-page.types'
 

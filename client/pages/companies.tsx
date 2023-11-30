@@ -25,15 +25,24 @@ export const getServerSideProps: GetServerSideProps<IEmployerCard> = async conte
     let response
 
     if (search) {
-      response = await EmployerService.getBySearch(search)
+      response = await EmployerService.getBySearch(search, sort)
     } else {
       response = await EmployerService.getEmployerAll()
     }
 
-    return {
-      props: {
-        companies: response.data.companies,
-        types: response.data.types
+    if (response.data !== undefined) {
+      return {
+        props: {
+          companies: response.data.companies,
+          types: response.data.types
+        }
+      }
+    } else {
+      return {
+        props: {
+          companies: [],
+          types: []
+        }
       }
     }
   } catch (error) {

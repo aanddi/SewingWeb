@@ -32,9 +32,17 @@ export const EmployerService = {
     })
   },
 
-  async getBySearch(search: string) {
+  async getBySearch(search: string, sort: string) {
+    let url
+    if (search && sort) {
+      url = `/employer/?search=${search}&sort=${sort}`
+    } else if (!search) {
+      url = `/employer/?sort=${sort}`
+    } else if (!sort) {
+      url = `/employer/?search=${search}`
+    }
     return instance<IEmployerCard>({
-      url: `employer/search/?search=${search}`,
+      url,
       method: 'GET'
     })
   },

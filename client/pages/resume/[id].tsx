@@ -8,8 +8,9 @@ import { ResumeAboutResponse } from '@/core/services/jobseeker/jobseeker.interfa
 import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 
 const AboutCompaniesPage: NextPage<ResumeAboutResponse> = ({ resume, experience, education }) => {
+  const fullname = `${resume.surname} ${resume.name}  ${resume.patronymic}` || 'Резюме'
   return (
-    <Meta title="О резюме">
+    <Meta title={fullname} desc={resume.about}>
       <ResumeAbout resume={resume} experience={experience} education={education} />
     </Meta>
   )

@@ -11,7 +11,14 @@ const SiteLayout: FC<PropsWithChildren<Props>> = ({ children, background = '#fff
   return (
     <>
       <HeaderSite />
-      <main style={{ backgroundColor: background, minHeight: '80vh' }} className="page">
+      <main
+        style={{
+          backgroundColor: background,
+          minHeight: '80vh',
+          paddingBottom: '100px'
+        }}
+        className="page"
+      >
         {children}
       </main>
       <FooterSite />

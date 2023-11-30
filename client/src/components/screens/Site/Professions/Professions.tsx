@@ -6,7 +6,6 @@ import { FC, useEffect, useState } from 'react'
 import styles from './Professions.module.scss'
 
 import LoadingDots from '@/components/elements/Loading/LoadingDots'
-import LoadingSpinner from '@/components/elements/Loading/LoadingSpinner'
 import ProfessionCard from '@/components/elements/Professoin/ProfessionCard/ProfessionCard'
 import SiteLayout from '@/components/layouts/Site/SiteLayout'
 import SortList from '@/components/ui/SortList/SortList'
@@ -83,7 +82,8 @@ const Professions: FC<Props> = ({ professions }) => {
 
                       <div
                         onClick={() => setValue('')}
-                        className={value ? styles.search__resetSearch : [styles.search__resetSearch, styles.search__resetSearch_unactive].join(' ')}>
+                        className={value ? styles.search__resetSearch : [styles.search__resetSearch, styles.search__resetSearch_unactive].join(' ')}
+                      >
                         <RxCross1 />
                       </div>
                       <div
@@ -92,7 +92,8 @@ const Professions: FC<Props> = ({ professions }) => {
                           isShowSearch
                             ? [styles.search__list, styles.search__list_active].join(' ')
                             : [styles.search__list, styles.search__list_unactive].join(' ')
-                        }>
+                        }
+                      >
                         <div className={styles.search__listWrapper}>
                           <ul className={styles.search__items}>
                             {search?.map((elem, index) => {
@@ -117,7 +118,8 @@ const Professions: FC<Props> = ({ professions }) => {
                   <Link
                     href={{ pathname: '/professions', query: { search: value } }}
                     onClick={() => setIsShowSearch(false)}
-                    className={styles.search__button}>
+                    className={styles.search__button}
+                  >
                     Найти
                   </Link>
                   {querySearch && (
@@ -126,7 +128,8 @@ const Professions: FC<Props> = ({ professions }) => {
                       onClick={() => {
                         router.push('professions')
                         setValue('')
-                      }}>
+                      }}
+                    >
                       Сбросить поиск
                     </span>
                   )}
@@ -146,22 +149,22 @@ const Professions: FC<Props> = ({ professions }) => {
 
               <div className={styles.ribbon__cards}>
                 {professions.map((profession, index) => {
-                  // profession._count.vacancy > 0 ? : null
-                  return <ProfessionCard profession={profession} key={index} />
+                  return profession._count.vacancy > 0 ? <ProfessionCard profession={profession} key={index} /> : null
                 })}
-                {/* {professions.length > 0 ? (
-                 
-                ) : (
-                  <div className={styles.ribbon__error}>
-                    <div className={styles.ribbon__error_icon}>
-                      <LuSearchX size={30} style={{ color: '#FD7791' }} />
+
+                {professions.length === 0 && (
+                  <>
+                    <div className={styles.ribbon__error}>
+                      <div className={styles.ribbon__error_icon}>
+                        <LuSearchX size={30} style={{ color: '#FD7791' }} />
+                      </div>
+                      <div className={styles.ribbon__error_message}>
+                        <span className={styles.ribbon__error_title}>Упс... не удалось найти профессии.</span>
+                        <span>Попробуйте изменить условия поиска или попробовать чуть позже.</span>
+                      </div>
                     </div>
-                    <div className={styles.ribbon__error_message}>
-                      <span className={styles.ribbon__error_title}>Упс... не удалось найти профессии.</span>
-                      <span>Попробуйте изменить условия поиска или попробовать чуть позже.</span>
-                    </div>
-                  </div>
-                )} */}
+                  </>
+                )}
               </div>
             </div>
           </div>

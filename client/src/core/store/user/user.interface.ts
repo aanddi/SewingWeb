@@ -53,3 +53,9 @@ export interface IAuthResponse extends ITokens {
   user: IUser
   error: string | undefined
 }
+
+export interface IRemind {
+  phone: string
+  password: string
+  repeatPassword: string
+}

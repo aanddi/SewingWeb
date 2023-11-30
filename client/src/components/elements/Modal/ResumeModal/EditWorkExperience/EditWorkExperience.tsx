@@ -1,10 +1,11 @@
-import { useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 
 import styles from './EditWorkExperience.module.scss'
 
+import LoadingDots from '@/components/elements/Loading/LoadingDots'
 import ResumeModal from '@/components/elements/Modal/ResumeModal/Layout/ResumeModal'
 import FieldProfile from '@/components/ui/FieldProfile/FieldProfile'
 
@@ -14,32 +15,70 @@ import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
 import { mouth } from '@/core/utils/select-resume-data'
 
 interface Props {
-  experience: any
+  experience: IWorkExperience
   active: boolean
   setActive: Dispatch<SetStateAction<boolean>>
 }
 
 const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
+  const [maxLength, setMaxLength] = useState(1000)
+  const [sizeField, setSizeField] = useState(0)
   // ========== DATE =============================
   const [monthStart, setMonthStart] = useState<string>('')
   const [yearStart, setYearStart] = useState<string>('')
   const [monthEnd, setMonthEnd] = useState<string | undefined>('')
   const [yearEnd, setYearEnd] = useState<string | undefined>('')
 
+  const [yearStartError, setYearStartError] = useState(false)
+  const [yearEndError, setYearEndError] = useState(false)
+
   const [untilNow, setUntilNow] = useState(false)
 
   const handleYearStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setYearStart(e.target.value)
+    if (e.target.value.length) {
+      setYearStart(e.target.value)
+      setValue('startTime', `${monthStart} ${e.target.value}`)
+    }
+
+    if (e.target.value.length > 4) {
+      setYearStartError(true)
+    } else {
+      setYearStartError(false)
+    }
   }
 
   const handleYearEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYearEnd(e.target.value)
+    setValue('endTime', `${monthEnd} ${e.target.value}`)
+    if (e.target.value.length > 4) {
+      setYearEndError(true)
+    } else {
+      setYearEndError(false)
+    }
   }
+
+  useEffect(() => {
+    if (untilNow) {
+      setYearEndError(false)
+      setYearStartError(false)
+    }
+  }, [untilNow])
   // ========================================================
   const queryClient = useQueryClient()
 
+  const mutationExperience = useMutation({
+    mutationKey: ['deleteExperience'],
+    mutationFn: async (id: number | undefined) => {
+      const respone = await JobseekerService.deleteExperience(id)
+      queryClient.invalidateQueries({ queryKey: ['experience'] })
+      setActive(false)
+      return respone
+    }
+  })
+
   // ========== REACT HOOK FORM =============================
-  console.log(experience)
+  const [isLoading, setIsLoading] = useState(false)
+
   // save error server
   const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
 
@@ -78,16 +117,25 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
       setValue('untilNow', experience.untilNow)
 
       setValue('experience', experience.experience)
+      const size = experience.experience?.length
+      if (size) {
+        setSizeField(size)
+      } else {
+        setSizeField(0)
+      }
     }
   }, [experience, setValue])
 
   const onSubmit: SubmitHandler<IWorkExperience> = async data => {
+    setIsLoading(true)
     try {
       const respone = await JobseekerService.updateExperience(experience.id, data)
       queryClient.invalidateQueries({ queryKey: ['experience'] })
       setActive(false)
+      setIsLoading(false)
       reset()
     } catch (error: any) {
+      setIsLoading(false)
       setErrorUpdate(error.response.data.message)
     }
   }
@@ -175,19 +223,15 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
                         type="number"
                         placeholder="Год"
                         value={yearStart}
-                        onChange={e => {
-                          if (e.target.value.length) {
-                            setYearStart(e.target.value)
-                            setValue('startTime', `${monthStart} ${e.target.value}`)
-                          }
-                        }}
-                        style={errors.startTime ? { borderColor: 'red' } : undefined}
+                        onChange={e => handleYearStartChange(e)}
+                        style={errors.startTime || yearStartError ? { borderColor: 'red' } : undefined}
                       />
-                      {errors.startTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
                     </>
                   )}
                 />
               </div>
+              {yearStartError ? <span className={styles.editModal__error}>Укажите действительный год</span> : null}
+              {errors.startTime && <span className={styles.editModal__error}>Укажите дату начало работы</span>}
             </div>
           </div>
 
@@ -228,19 +272,17 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
                       <input
                         type="number"
                         placeholder="Год"
-                        onChange={e => {
-                          setYearEnd(e.target.value)
-                          setValue('endTime', `${monthEnd} ${e.target.value}`)
-                        }}
-                        style={errors.endTime ? { borderColor: 'red' } : undefined}
+                        onChange={e => handleYearEndChange(e)}
+                        style={errors.endTime || yearEndError ? { borderColor: 'red' } : undefined}
                         disabled={untilNow}
                         value={untilNow ? '' : yearEnd}
                       />
-                      {errors.endTime && <span className={styles.education__error}>Укажите дату начало работы</span>}
                     </>
                   )}
                 />
               </div>
+              {yearEndError ? <span className={styles.editModal__error}>Укажите действительный год</span> : null}
+              {errors.endTime && <span className={styles.editModal__error}>Укажите дату начало работы</span>}
               <div className={styles.editModal__checkbox}>
                 <input
                   {...register('untilNow')}
@@ -258,17 +300,25 @@ const EditWorkexperience: FC<Props> = ({ experience, active, setActive }) => {
           <div className={styles.editModal__block}>
             <div className={styles.editModal__label}>Обязанности, функции и достижения</div>
             <div className={styles.editModal__textarea}>
-              <textarea {...register('experience')}></textarea>
+              <textarea maxLength={maxLength} {...register('experience')} onChange={e => setSizeField(e.target.value.length)} />
+              <div className={styles.editModal__size}>
+                {sizeField}/{maxLength} символов
+              </div>
             </div>
           </div>
         </div>
 
         <div className={styles.editModal__modalFooter}>
-          <button className={styles.editModal__saveButton}>Сохранить</button>
-          <div className={styles.editModal__resetButton} onClick={handleCancel}>
-            Отменить
+          <div className={styles.editModal__footerWrapper}>
+            <button className={styles.editModal__saveButton}>{isLoading ? <LoadingDots color="#fff" /> : 'Сохранить'}</button>
+            <div className={styles.editModal__resetButton} onClick={handleCancel}>
+              Отменить
+            </div>
+            <span className={styles.editModal__footerError}>{errorUpdate}</span>
           </div>
-          <span className={styles.editModal__footerError}>{errorUpdate}</span>
+          <div className={styles.editModal__deleteButton} onClick={() => mutationExperience.mutate(experience.id)}>
+            {mutationExperience.isPending ? <LoadingDots color={'red'} /> : 'Удалить'}
+          </div>
         </div>
       </form>
     </ResumeModal>

@@ -1,7 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .applicant {
-
   &__title {
     color: $darkBlue;
     text-align: center;
@@ -42,6 +41,11 @@
     padding: 12px 40px;
     border-radius: 5px;
     font-size: 16px;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: $pinkHover;
+    }
   }
 
   &__forgot {
@@ -64,7 +68,7 @@
     span {
       color: $blue;
       cursor: pointer;
-      
+
       &:hover {
         text-decoration: underline;
       }

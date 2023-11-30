@@ -1,9 +1,7 @@
 @import '@/assets/styles/_variables.scss';
 
 .addReviews {
-  margin-top: 110px;
-  margin-bottom: 60px;
-  min-height: 80vh;
+  margin-top: 40px;
 
   &__wrapper {
     display: flex;
@@ -43,7 +41,7 @@
   }
 
   &__subTitle {
-    font-size: 15px;
+    color: $grey;
   }
 
   &__grade {

@@ -1,8 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .employer {
-  margin-top: 63px;
-
   &__main {
   }
 
@@ -382,7 +380,6 @@
   &__card {
     border-radius: 50px;
     background: linear-gradient(270deg, #ffeaee 12.55%, #edf7ff 76.97%);
-    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.15);
   }
 
   &__content {

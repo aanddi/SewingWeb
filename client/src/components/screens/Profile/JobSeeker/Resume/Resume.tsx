@@ -21,6 +21,7 @@ import { IWorkExperience } from '@/core/types/work-experience.interface'
 
 import { useAuth } from '@/core/hooks/useAuth'
 import { JobseekerService } from '@/core/services/jobseeker/jobseeker.service'
+import { formatDate } from '@/core/utils/format-date'
 import { formatPrice } from '@/core/utils/format-price'
 
 import { BiSolidEditAlt } from 'react-icons/bi'
@@ -257,6 +258,8 @@ const Resume: FC = () => {
                           )
                         })
                       ) : null
+                    ) : resumeLoading ? (
+                      <LoadingDots />
                     ) : (
                       <div className={styles.resume__blockSubTitle}>
                         Сведения о прошлом месте работы: должность, компания, период работы, функции и достижения.
@@ -304,6 +307,8 @@ const Resume: FC = () => {
                           )
                         })
                       ) : null
+                    ) : resumeLoading ? (
+                      <LoadingDots />
                     ) : (
                       <div className={styles.resume__blockSubTitle}>
                         Полученное образование: учебное заведение, специальность, курсы повышения квалификации.
@@ -327,6 +332,8 @@ const Resume: FC = () => {
                         <span>Редактировать</span>
                       </div>
                     </>
+                  ) : resumeLoading ? (
+                    <LoadingDots />
                   ) : (
                     <>
                       <div className={styles.resume__blockSubTitle}>
@@ -339,6 +346,12 @@ const Resume: FC = () => {
                     </>
                   )}
                 </div>
+              </div>
+              <div className={styles.resume__footer}>
+                {resume?.updatedAt ? <div className={styles.resume__updateDate}>Резюме обновленно: {formatDate(resume?.updatedAt)}</div> : null}
+                <Link href={`/resume/${resume?.id}`} target="_blank" className={styles.resume__linkResume}>
+                  Ссылка на ваше резюме
+                </Link>
               </div>
             </div>
           </div>
