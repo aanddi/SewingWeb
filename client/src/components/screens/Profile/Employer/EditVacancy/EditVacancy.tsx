@@ -106,7 +106,7 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
       setValue('dateStart', vacancy.dateStart)
       setValue('dateEnd', vacancy.dateEnd)
     } else if (!vacancy.status && tarifs) {
-      const date = new Date('2023-11-16T22:52:50.265Z')
+      const date = new Date()
 
       const start: any = date.toISOString()
       setValue('dateStart', start)
@@ -656,7 +656,7 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                         )}
                       </div>
                       <div className={styles.editVacancy__close}>
-                        <Link href={'/profile/e_vacancies'}>Отменить</Link>
+                        <Link href={'/profile/my-vacancies'}>Отменить</Link>
                       </div>
                     </div>
                   ) : (

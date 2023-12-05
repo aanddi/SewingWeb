@@ -1,4 +1,4 @@
-import { IFavoriteList, IMyVacancy, IRibbonById, IRibbonResponse, ISimilarResponse, IVacancyResponse } from './vacancy.interface'
+import { IFavoriteList, IMyVacancy, IRibbonById, IRibbonResponse, IRibbonSeggest, ISimilarResponse, IVacancyResponse } from './vacancy.interface'
 import { IFavorite } from '@/core/types/favorite.interface'
 import { ITarifVacancy } from '@/core/types/tarif-vacancy.interface'
 import { IVacancy } from '@/core/types/vacancy.interface'
@@ -12,6 +12,13 @@ export const VacancyService = {
       method: 'GET'
     })
     return response.data
+  },
+
+  async getSeggest(suggest: string) {
+    return instance<IRibbonSeggest[]>({
+      url: `/vacancy/suggest/?suggest=${suggest}`,
+      method: 'GET'
+    })
   },
 
   async getRibbon(page: number) {

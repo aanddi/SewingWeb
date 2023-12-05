@@ -11,53 +11,6 @@
   &__wrapper {
   }
 
-  &__search {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 250px;
-
-    &_content {
-      display: flex;
-      align-items: center;
-      background-color: $blue;
-      border-radius: 15px;
-      padding: 4px;
-    }
-
-    &_input {
-      input {
-        border-radius: 16px;
-        background-color: #fff;
-        color: #565656bd;
-        font-size: 14px;
-        font-style: italic;
-        border-radius: 15px 0 0 15px;
-        padding: 12px 0 12px 10px;
-        width: 400px;
-      }
-    }
-
-    &_filter {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #fff;
-      padding: 10px 15px;
-      margin-left: 3px;
-      border-radius: 0 15px 15px 0;
-    }
-
-    &_button {
-      color: #fff;
-      text-align: center;
-      font-size: 20px;
-      font-weight: 500;
-      padding: 0 20px;
-    }
-  }
-
   &__employee {
     color: #fff;
     text-align: center;
@@ -133,6 +86,150 @@
   }
 }
 
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 250px;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    background-color: $blue;
+    border-radius: 15px;
+    padding: 4px;
+    transition: all 0.4s ease-in-out;
+    position: relative;
+    &:hover {
+      background-color: #479de9;
+    }
+  }
+
+  &__inputBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 15px 0 0 15px;
+
+    input {
+      border-radius: 16px;
+      padding: 12px 0 12px 10px;
+      width: 400px;
+    }
+  }
+
+  &__resetSearch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-left: 10px;
+    opacity: 1;
+
+    &_unactive {
+      opacity: 0;
+    }
+  }
+
+  &__filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 10px 15px;
+    margin-left: 3px;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+  }
+
+  &__buttonSearch {
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0 20px;
+    cursor: pointer;
+  }
+
+  &__list {
+    position: absolute;
+    width: 100%;
+    bottom: -205px;
+    left: 0;
+    z-index: 1000;
+
+    transform: translateY(-10%);
+    transition: all 0.2s ease-in;
+
+    &_active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translate(0%);
+    }
+
+    &_unactive {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &__listWrapper {
+    height: 200px;
+    min-height: 50px;
+    max-height: 250px;
+    overflow-y: scroll;
+    padding: 10px 0;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.51);
+    transition: all 0.4s ease-in;
+  }
+
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: $grey;
+  }
+
+  &__item {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #dce7fd;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 10px 0 10px 15px;
+  }
+
+  *::-webkit-scrollbar,
+  html *::-webkit-scrollbar {
+    height: 8px;
+    width: 10px;
+    border-radius: 100px;
+  }
+
+  *::-webkit-scrollbar-track,
+  html *::-webkit-scrollbar-track {
+    background: #e2e1e1;
+    border-radius: 100px;
+  }
+
+  *::-webkit-scrollbar-thumb,
+  html *::-webkit-scrollbar-thumb {
+    background-color: #bfbdbd;
+    border-radius: 5px;
+    border: 3px solid #bfbdbd;
+    border-radius: 100px;
+  }
+}
+
 .ribbon {
   margin-top: 10px;
   margin-bottom: 50px;
@@ -148,11 +245,10 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 15px;
     position: -webkit-sticky;
     position: sticky;
-    top: 60px;
-    background: #fff;
+    top: 64px;
     backdrop-filter: blur(20px);
 
     &_count {
@@ -182,7 +278,6 @@
 
   &__ad {
     display: flex;
-
     justify-content: flex-end;
     // img {
     //   position: -webkit-sticky;
@@ -192,16 +287,20 @@
   }
 
   &__top {
-    position: sticky;
-    bottom: 20px;
-    z-index: 1000;
-    display: inline-flex;
-    align-items: flex-end;
-    justify-content: flex-end;
     background-color: #fff;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    position: fixed;
+    bottom: 20px;
+    right: 200px;
+
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.15);
+    }
   }
 
   &__error {

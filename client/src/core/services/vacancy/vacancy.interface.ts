@@ -63,3 +63,7 @@ export interface ISimilarResponse {
   city: string
   professionId: number
 }
+
+export interface IRibbonSeggest {
+  title: string
+}

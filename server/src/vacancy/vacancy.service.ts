@@ -63,6 +63,39 @@ export class VacancyService {
 
   // =================================================
 
+  async getSuggest(suggest: string) {
+    const result = await this.prisma.vacancy.findMany({
+      select: {
+        title: true
+      },
+      where: {
+        status: true,
+        OR: [
+          {
+            title: {
+              contains: suggest,
+              mode: 'insensitive'
+            }
+          },
+          {
+            city: {
+              contains: suggest,
+              mode: 'insensitive'
+            }
+          },
+          {
+            skills: {
+              contains: suggest,
+              mode: 'insensitive'
+            }
+          }
+        ]
+      }
+    })
+
+    return result
+  }
+
   // формирование ленты вакансий с пагинацией по странично
   async getRibbon(page = 1) {
     // проверка на срок годности вакансий
@@ -360,37 +393,51 @@ export class VacancyService {
   }
 
   async updateVacancy(idVacancy: number, dto: CreateVacancy) {
-    const vacancy = await this.prisma.vacancy.update({
+    // проверка на бесплатную вакансию
+    const tarifs = await this.getTarif()
+
+    const checkCount = await this.prisma.vacancy.findMany({
       where: {
-        id: +idVacancy
-      },
-      data: {
         employerId: dto.employerId,
-        title: dto.title,
-        minSalary: +dto.minSalary,
-        maxSalary: +dto.maxSalary,
-        descCard: dto.descCard,
-        descMain: dto.descMain,
-        city: dto.city,
-        adress: dto.adress,
-        skills: dto.skills,
-        workExperience: dto.workExperience,
-        workTimetable: dto.workTimetable,
-        employmentType: dto.employmentType,
-        education: dto.education,
-        tags: dto.tags,
-        fullName: dto.fullName,
-        phoneNumber: dto.phoneNumber,
-        contact: dto.contact,
-        status: dto.status,
-        dateStart: dto.dateStart,
-        dateEnd: dto.dateEnd,
         tarifId: dto.tarifId,
-        professionId: +dto.professionId
+        status: true
       }
     })
 
-    return vacancy
+    if (tarifs[dto.tarifId].salary == 0 && checkCount.length > 0) {
+      throw new BadRequestException('Лимит на бесплатное размещение вакансии превышен.')
+    } else {
+      const vacancy = await this.prisma.vacancy.update({
+        where: {
+          id: +idVacancy
+        },
+        data: {
+          employerId: dto.employerId,
+          title: dto.title,
+          minSalary: +dto.minSalary,
+          maxSalary: +dto.maxSalary,
+          descCard: dto.descCard,
+          descMain: dto.descMain,
+          city: dto.city,
+          adress: dto.adress,
+          skills: dto.skills,
+          workExperience: dto.workExperience,
+          workTimetable: dto.workTimetable,
+          employmentType: dto.employmentType,
+          education: dto.education,
+          tags: dto.tags,
+          fullName: dto.fullName,
+          phoneNumber: dto.phoneNumber,
+          contact: dto.contact,
+          status: dto.status,
+          dateStart: dto.dateStart,
+          dateEnd: dto.dateEnd,
+          tarifId: dto.tarifId,
+          professionId: +dto.professionId
+        }
+      })
+      return vacancy
+    }
   }
 
   async getTarif() {

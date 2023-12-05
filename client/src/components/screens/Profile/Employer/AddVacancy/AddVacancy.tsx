@@ -41,6 +41,9 @@ const AddVacancy: FC = () => {
   const [activePayment, setActivePayment] = useState(false)
   const [activeSuccess, setActiveSuccess] = useState(false)
 
+  const [maxLength, setMaxLength] = useState(350)
+  const [sizeField, setSizeField] = useState(0)
+
   // ========== TARIF AND PAY =============================
   const { data: tarifs } = useTarifs()
 
@@ -108,7 +111,7 @@ const AddVacancy: FC = () => {
       setValue('tarifId', activeTarif)
 
       //======= DATE =============
-      const date = new Date('2023-11-16T22:52:50.265Z')
+      const date = new Date()
 
       const start: any = date.toISOString()
       setValue('dateStart', start)
@@ -125,7 +128,7 @@ const AddVacancy: FC = () => {
     data.status = false
     try {
       const response = await VacancyService.create(data)
-      // reset()
+      reset()
       setActiveSuccess(true)
     } catch (error: any) {
       setErrorUpdate(error.response.data.message)
@@ -140,7 +143,7 @@ const AddVacancy: FC = () => {
     data.status = true
     try {
       const response = await VacancyService.create(data)
-      // reset()
+      reset()
       setActivePayment(false)
       setActiveSuccess(true)
     } catch (error: any) {
@@ -271,12 +274,22 @@ const AddVacancy: FC = () => {
                   <span>Краткое описание на карточке вакансии</span>
                   <span className={styles.addVacancy__required}>*</span>
                 </div>
-                <textarea
-                  {...register('descCard', {
-                    required: 'Укажите описание вакансии'
-                  })}
-                  style={errors.descCard ? { borderColor: 'red' } : undefined}
-                ></textarea>
+                <Controller
+                  name="descCard"
+                  control={control}
+                  rules={{ required: true }}
+                  render={() => (
+                    <textarea
+                      maxLength={maxLength}
+                      onChange={e => setSizeField(e.target.value.length)}
+                      style={errors.descCard ? { borderColor: 'red' } : undefined}
+                    />
+                  )}
+                />
+
+                <div className={styles.addVacancy__size}>
+                  {sizeField}/{maxLength} символов
+                </div>
                 {errors.descCard && <span className={styles.addVacancy__errorField}>Укажите описание карточки вакансии</span>}
               </div>
               <div className={styles.addVacancy__inputs}>

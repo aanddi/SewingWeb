@@ -13,7 +13,7 @@ interface AboutVacancyProps {
 
 const VacanciesPage: NextPage<AboutVacancyProps> = ({ vacancy }) => {
   return (
-    <Meta title="Вакансия">
+    <Meta title={vacancy.title} desc={vacancy.descMain}>
       <AboutVacancy vacancy={vacancy} />
     </Meta>
   )

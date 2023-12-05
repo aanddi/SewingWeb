@@ -20,6 +20,7 @@ const Meta: FC<PropsWithChildren<ISeo>> = ({ title, desc, children }) => {
       <Head>
         <link rel="icon" type="image/ico" href="/favicon.ico" />
         <title itemProp="headline">{titleMerge(title)}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         {desc ? (
           <>
             <meta itemProp="description" name="description" content={desc} />

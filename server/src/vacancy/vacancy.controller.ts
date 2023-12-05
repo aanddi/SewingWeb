@@ -21,6 +21,11 @@ import { SimilarDto } from './dto/similar.dto'
 export class VacancyController {
   constructor(private readonly vacancyService: VacancyService) {}
 
+  @Get('suggest')
+  getSuggest(@Query('suggest') suggest: string) {
+    return this.vacancyService.getSuggest(suggest)
+  }
+
   @Get('ribbon')
   getRibbon(@Query('page') page: number) {
     return this.vacancyService.getRibbon(page)

@@ -247,7 +247,7 @@ const Resume: FC = () => {
                                 <div
                                   onClick={async () => {
                                     const response = await JobseekerService.getExperienceById(elem.id)
-                                    
+
                                     setExperienceItem(response)
                                     setActiveModal6(true)
                                   }}

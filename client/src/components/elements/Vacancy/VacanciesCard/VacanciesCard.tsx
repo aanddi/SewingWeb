@@ -97,11 +97,11 @@ const VacanciesCard: FC<Props> = ({ vacancy }) => {
   }, [myFavorites, vacancy.id])
 
   return (
-    <div onClick={() => router.push(`/vacancies/${vacancy.id}`)} className={styles.VCard}>
+    <div onClick={() => router.push(`/vacancy/${vacancy.id}`)} className={styles.VCard}>
       <div className={styles.VCard__content}>
         <div className={styles.VCard__header}>
           <div className={styles.VCard__mainHeader}>
-            <Link target="_blank" href={`/vacancies/${vacancy.id}`} className={styles.VCard__title}>
+            <Link target="_blank" href={`/vacancy/${vacancy.id}`} className={styles.VCard__title}>
               {vacancy.title}
             </Link>
 
