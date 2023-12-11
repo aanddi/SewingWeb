@@ -31,9 +31,12 @@ export class VacancyController {
     @Query('education') education: string,
     @Query('experience') experience: string,
     @Query('tags') tags: string,
-    @Query('timetable') timetable: string
+    @Query('timetable') timetable: string,
+    @Query('search') search: string,
+    @Query('city') city: string,
+    @Query('profession') profession: number
   ) {
-    return this.vacancyService.getCountFilter(education, experience, tags, timetable)
+    return this.vacancyService.getCountFilter(education, experience, tags, timetable, search, city, profession)
   }
 
   @Get('ribbon')

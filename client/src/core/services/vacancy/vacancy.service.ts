@@ -13,7 +13,7 @@ export const VacancyService = {
     })
     return response.data
   },
-  
+
   async getSuggest(suggest?: string, suggestCity?: string) {
     const queryParams = {
       suggest: suggest,
@@ -26,12 +26,23 @@ export const VacancyService = {
     })
   },
 
-  async getCountFilter(queryEducation: string, queryExperience: string, queryTags: string, queryTimetable: string) {
+  async getCountFilter(
+    queryEducation: string,
+    queryExperience: string,
+    queryTags: string,
+    queryTimetable: string,
+    querySearch: string,
+    queryCity: string,
+    queryProfession: string
+  ) {
     const queryParams = {
       education: queryEducation,
       experience: queryExperience,
       tags: queryTags,
-      timetable: queryTimetable
+      timetable: queryTimetable,
+      search: querySearch,
+      city: queryCity,
+      profession: queryProfession
     }
     return instance({
       url: `/vacancy/countFilter/`,
@@ -41,14 +52,14 @@ export const VacancyService = {
   },
 
   async getRibbon(
-    page: number,
-    profession: string | number,
-    querySearch: string,
-    city: string,
-    queryEducation: string,
-    queryExperience: string,
-    queryTags: string,
-    queryTimetable: string
+    page?: number,
+    profession?: string | number,
+    querySearch?: string,
+    city?: string,
+    queryEducation?: string,
+    queryExperience?: string,
+    queryTags?: string,
+    queryTimetable?: string
   ) {
     const queryParams = {
       page: page,

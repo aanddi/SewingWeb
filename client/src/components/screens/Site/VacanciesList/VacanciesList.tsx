@@ -15,9 +15,11 @@ import { IRibbonResponse } from '@/core/services/vacancy/vacancy.interface'
 import { useOutside } from '@/core/hooks/useOutside'
 import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 
+import { AiOutlineClose } from 'react-icons/ai'
 import { BiSearchAlt } from 'react-icons/bi'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { LuSettings2 } from 'react-icons/lu'
+import { MdOutlineDelete } from 'react-icons/md'
 import { RxCross1 } from 'react-icons/rx'
 
 const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanciesReturn }) => {
@@ -28,6 +30,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
 
   const [querySearch, setQuerySearch] = useState<string>('')
   const [queryCity, setQueryCity] = useState<string>('')
+  const [queryProfession, setQueryProfession] = useState<string>('')
+
   const queryClient = useQueryClient()
 
   const router = useRouter()
@@ -47,6 +51,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
   useEffect(() => {
     const querySearch = router.query.search as string
     const queryCity = router.query.city as string
+    const queryProfession = router.query.profession as string
+    setQueryProfession(queryProfession)
     setQuerySearch(querySearch)
     setSearchMain(querySearch)
 
@@ -56,8 +62,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
 
   return (
     <SiteLayout background={'#F6FAFF'}>
-      <div className={styles.professions}>
-        <section className={[styles.professions__head, styles.head].join(' ')}>
+      <div className={styles.vacancies}>
+        <section className={[styles.vacancies__head, styles.head].join(' ')}>
           <div className="head__container">
             <div className={styles.head__wrapper}>
               <h1 className={styles.head__title}>Каталог вакансий</h1>
@@ -129,7 +135,7 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                         onChange={e => {
                           setCity(e.target.value)
                           setIsShowSearchCity(true)
-                          queryClient.invalidateQueries({ queryKey: ['searchVacancies', searchMain, city ] })
+                          queryClient.invalidateQueries({ queryKey: ['searchVacancies', searchMain, city] })
                         }}
                         value={city}
                         type="text"
@@ -186,30 +192,59 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                   </Link>
                 </div>
               </div>
-              {queryCity || querySearch ? (
-                <div
-                  className={styles.search__resetFilter}
-                  onClick={() => {
-                    router.push({ pathname: 'vacancies', query: { ...router.query, city: '', search: '' } })
-                    setSearchMain('')
-                    setCity('')
-                  }}
-                >
-                  Сбросить поиск
-                </div>
-              ) : null}
-              {router.query.tags || router.query.experience || router.query.timetable || router.query.education ? (
-                <div
-                  className={styles.search__resetFilter}
-                  onClick={() => {
-                    router.push({ pathname: 'vacancies', query: { ...router.query, tags: '', experience: '', timetable: '', education: '' } })
-                    setSearchMain('')
-                    setCity('')
-                  }}
-                >
-                  Сбросить фильтры
-                </div>
-              ) : null}
+              <div className={styles.head__resetFilters}>
+                {queryCity || querySearch ? (
+                  <div
+                    className={styles.head__resetFilter}
+                    onClick={() => {
+                      const query: any = { ...router.query }
+                      delete query.city
+                      delete query.search
+
+                      router.push({ pathname: 'vacancies', query: query })
+                      setSearchMain('')
+                      setCity('')
+                    }}
+                  >
+                    <span> Сбросить поиск</span>
+                    <AiOutlineClose size={18} style={{ color: '#BCBCBC' }} />
+                  </div>
+                ) : null}
+                {router.query.tags || router.query.experience || router.query.timetable || router.query.education ? (
+                  <div
+                    className={styles.head__resetFilter}
+                    onClick={() => {
+                      const query: any = { ...router.query }
+                      delete query.tags
+                      delete query.experience
+                      delete query.timetable
+                      delete query.education
+
+                      router.push({ pathname: 'vacancies', query: query })
+                      setSearchMain('')
+                      setCity('')
+                    }}
+                  >
+                    <span>Сбросить фильтры</span>
+                    <AiOutlineClose size={18} style={{ color: '#BCBCBC' }} />
+                  </div>
+                ) : null}
+                {queryProfession ? (
+                  <div
+                    className={styles.head__resetFilter}
+                    onClick={() => {
+                      const query: any = {
+                        ...router.query
+                      }
+                      delete query.profession
+                      router.push({ pathname: 'vacancies', query: query })
+                    }}
+                  >
+                    <span>Сбросить профессию</span>
+                    <AiOutlineClose size={18} style={{ color: '#BCBCBC' }} />
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
         </section>

@@ -44,12 +44,17 @@ const RibbonVacancies: FC<IRibbonResponse> = ({ vacancies, totalPages, countVaca
   const router = useRouter()
 
   useEffect(() => {
-    const queryTags = router.query.tags?.split(',') || []
-    const queryWorkExperience = router.query.experience?.split(',') || []
-    const queryWorkTimetable = router.query.workTimetable?.split(',') || []
-    const queryEducation = router.query.education?.split(',') || []
+    const queryTags = router.query.tags as string
+    const queryWorkExperience = router.query.experience as string
+    const queryWorkTimetable = router.query.timetable as string
+    const queryEducation = router.query.education as string
 
-    const totalFilterCount = queryTags.length + queryWorkExperience.length + queryWorkTimetable.length + queryEducation.length
+    const newArrayTags = queryTags ? queryTags?.split(',').length : 0
+    const newArrayExperience = queryWorkExperience ? queryWorkExperience?.split(',').length : 0
+    const newArrayTimetable = queryWorkTimetable ? queryWorkTimetable?.split(',').length : 0
+    const newArrayEducation = queryEducation ? queryEducation?.split(',').length : 0
+
+    const totalFilterCount = newArrayTags + newArrayExperience + newArrayTimetable + newArrayEducation
     setTotalFilter(totalFilterCount)
   }, [router])
 
@@ -65,7 +70,7 @@ const RibbonVacancies: FC<IRibbonResponse> = ({ vacancies, totalPages, countVaca
                 <div className={styles.ribbon__vacansiesTop}>
                   <h3 className={styles.ribbon__vacansiesTop_count}>Найдено {countVacanciesReturn} вакансий</h3>
                   <div className={styles.ribbon__vacansiesTop_filter} onClick={() => setActiveFilter(true)}>
-                    <span className={styles.ribbon__totalFilter}>{totalFilter}</span> Фильтр
+                    <span className={styles.ribbon__totalFilter}>{totalFilter ? totalFilter : '0'}</span> Фильтр
                   </div>
                 </div>
                 <div className={styles.ribbon__content}>

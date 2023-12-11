@@ -86,20 +86,27 @@ export class VacancyService {
       }
     })
 
-    const titles = new Set();
+    const titles = new Set()
     const uniqueSearchResults = search.filter(item => {
       if (!titles.has(item.city)) {
-        titles.add(item.city);
-        return true;
+        titles.add(item.city)
+        return true
       }
-      return false;
-    });
-  
-    return uniqueSearchResults;
-  
+      return false
+    })
+
+    return uniqueSearchResults
   }
 
-  async getCountFilter(education: string, experience: string, tags: string, timetable: string) {
+  async getCountFilter(
+    education: string,
+    experience: string,
+    tags: string,
+    timetable: string,
+    search: string,
+    city: string,
+    profession: number
+  ) {
     const filter: any = {
       status: true
     }
@@ -108,6 +115,10 @@ export class VacancyService {
     if (experience) filter.workExperience = { in: [experience] }
     if (timetable) filter.workTimetable = { in: [timetable] }
     if (tags) filter.tags = { in: [tags] }
+
+    if (search) filter.title = { contains: search, mode: 'insensitive' }
+    if (city) filter.city = { contains: city, mode: 'insensitive' }
+    if (profession) filter.professionId = +profession
 
     const result = await this.prisma.vacancy.count({
       where: filter

@@ -49,15 +49,30 @@ const FilterModal: FC<PropsWithChildren<Props>> = ({ children, active, setActive
   const [workTimetableFilter, setWorkTimetableFilter] = useState<string[]>([])
   const [educationFilter, setEducationFilter] = useState<string[]>([])
 
+  const [titleFilter, setTitleFilter] = useState<string[]>([])
+  const [cityFilter, setCityFilter] = useState<string[]>([])
+
+  const [professionFilter, setProfessionFilter] = useState<string[]>([])
+
   useEffect(() => {
     const queryTags = router.query.tags as string
     const queryWorkExperience = router.query.experience as string
     const queryWorkTimetable = router.query.timetable as string
     const queryEducation = router.query.education as string
+
+    const queryTittle = router.query.search as string
+    const queryCity = router.query.city as string
+
+    const queryProfession = router.query.profession as string
+
     setTagsFilter(queryTags ? queryTags.split(',') : [])
     setWorkExperienceFilter(queryWorkExperience ? queryWorkExperience.split(',') : [])
     setWorkTimetableFilter(queryWorkTimetable ? queryWorkTimetable.split(',') : [])
     setEducationFilter(queryEducation ? queryEducation.split(',') : [])
+
+    setTitleFilter(queryTittle ? queryTittle.split(',') : [])
+    setCityFilter(queryCity ? queryCity.split(',') : [])
+    setProfessionFilter(queryProfession ? queryProfession.split(',') : [])
   }, [router])
 
   const handleWorkExperienceClick = (label: string) => {
@@ -97,22 +112,22 @@ const FilterModal: FC<PropsWithChildren<Props>> = ({ children, active, setActive
     setWorkExperienceFilter([])
     setWorkTimetableFilter([])
     setEducationFilter([])
-
-
-    
   }
 
   const [totalFilter, setTotalFilter] = useState(0)
   const queryClient = useQueryClient()
 
   const { data: countSearchFilter, isLoading } = useQuery({
-    queryKey: ['countFilter', educationFilter, workExperienceFilter, tagsFilter, workTimetableFilter],
+    queryKey: ['countFilter', educationFilter, workExperienceFilter, tagsFilter, workTimetableFilter, titleFilter, cityFilter, professionFilter],
     queryFn: async () => {
       const response = await VacancyService.getCountFilter(
         educationFilter.join(','),
         workExperienceFilter.join(','),
         tagsFilter.join(','),
-        workTimetableFilter.join(',')
+        workTimetableFilter.join(','),
+        titleFilter.join(','),
+        cityFilter.join(','),
+        professionFilter.join(',')
       )
       return response.data
     }
@@ -120,9 +135,10 @@ const FilterModal: FC<PropsWithChildren<Props>> = ({ children, active, setActive
 
   useEffect(() => {
     setTotalFilter(tagsFilter.length + workExperienceFilter.length + workTimetableFilter.length + educationFilter.length)
-
-    queryClient.invalidateQueries({ queryKey: ['countFilter', educationFilter, workExperienceFilter, tagsFilter, workTimetableFilter] })
-  }, [tagsFilter, workExperienceFilter, workTimetableFilter, educationFilter])
+    queryClient.invalidateQueries({
+      queryKey: ['countFilter', educationFilter, workExperienceFilter, tagsFilter, workTimetableFilter, titleFilter, cityFilter, professionFilter]
+    })
+  }, [tagsFilter, workExperienceFilter, workTimetableFilter, educationFilter, totalFilter, router])
 
   return (
     <div className={active ? [styles.modal, styles.modal__active].join(' ') : styles.modal} onClick={() => setActive(false)}>
@@ -217,18 +233,17 @@ const FilterModal: FC<PropsWithChildren<Props>> = ({ children, active, setActive
                 const query: any = {
                   ...router.query
                 }
-                if (tagsFilter.length > 0) {
-                  query.tags = tagsFilter.join(',')
-                }
-                if (workExperienceFilter.length > 0) {
-                  query.experience = workExperienceFilter.join(',')
-                }
-                if (workTimetableFilter.length > 0) {
-                  query.timetable = workTimetableFilter.join(',')
-                }
-                if (educationFilter.length > 0) {
-                  query.education = educationFilter.join(',')
-                }
+                if (tagsFilter.length > 0) query.tags = tagsFilter.join(',')
+                else delete query.tags
+
+                if (workExperienceFilter.length > 0) query.experience = workExperienceFilter.join(',')
+                else delete query.experience
+
+                if (workTimetableFilter.length > 0) query.timetable = workTimetableFilter.join(',')
+                else delete query.timetable
+
+                if (educationFilter.length > 0) query.education = educationFilter.join(',')
+                else delete query.education
 
                 router.push({
                   pathname: 'vacancies',
