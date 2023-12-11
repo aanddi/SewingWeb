@@ -36,10 +36,9 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
   const [city, setCity] = useState<string>('')
 
   const { data: search, isLoading } = useQuery({
-    queryKey: ['searchVacancies', searchMain],
+    queryKey: ['searchVacancies', searchMain, city],
     queryFn: async () => {
-      const response = await VacancyService.getSeggest(searchMain, city)
-
+      const response = await VacancyService.getSuggest(searchMain, city)
       return response.data
     },
     enabled: !!city || !!searchMain
@@ -79,7 +78,7 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                         onChange={e => {
                           setSearchMain(e.target.value)
                           setIsShowSearchTitle(true)
-                          queryClient.invalidateQueries({ queryKey: ['searchVacancies', searchMain] })
+                          queryClient.invalidateQueries({ queryKey: ['searchVacancies', searchMain, city] })
                         }}
                         value={searchMain}
                         type="text"
@@ -130,7 +129,7 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                         onChange={e => {
                           setCity(e.target.value)
                           setIsShowSearchCity(true)
-                          queryClient.invalidateQueries({ queryKey: ['searchVacancies', city] })
+                          queryClient.invalidateQueries({ queryKey: ['searchVacancies', searchMain, city ] })
                         }}
                         value={city}
                         type="text"

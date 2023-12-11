@@ -64,43 +64,39 @@ export class VacancyService {
   // =================================================
 
   async getSuggest(suggest: string, suggestCity: string) {
+    const filter: any = {
+      status: true,
+
+      title: {
+        contains: suggest,
+        mode: 'insensitive'
+      },
+
+      city: {
+        contains: suggestCity,
+        mode: 'insensitive'
+      }
+    }
+
     const search = await this.prisma.vacancy.findMany({
+      where: filter,
       select: {
         title: true,
         city: true
-      },
-      where: {
-        status: true,
-        OR: [
-          {
-            title: {
-              contains: suggest,
-              mode: 'insensitive'
-            }
-          },
-          {
-            city: {
-              contains: suggestCity,
-              mode: 'insensitive'
-            }
-          },
-          {
-            skills: {
-              contains: suggest,
-              mode: 'insensitive'
-            }
-          }
-        ]
       }
     })
 
-    // если ищем по городам то удаляем дубликаты городов
-    if (suggestCity) {
-      const result = new Set(search)
-      return result
-    }
-
-    return search
+    const titles = new Set();
+    const uniqueSearchResults = search.filter(item => {
+      if (!titles.has(item.city)) {
+        titles.add(item.city);
+        return true;
+      }
+      return false;
+    });
+  
+    return uniqueSearchResults;
+  
   }
 
   async getCountFilter(education: string, experience: string, tags: string, timetable: string) {
@@ -563,5 +559,18 @@ export class VacancyService {
         status: false
       }
     })
+  }
+
+  private async deleteDublicate(array) {
+    const uniqueVals = new Map()
+
+    array.forEach(item => {
+      const key = `${item.title.toLowerCase()}|${item.city.toLowerCase()}`
+      if (!uniqueVals.has(key)) {
+        uniqueVals.set(key, item)
+      }
+    })
+
+    return Array.from(uniqueVals.values())
   }
 }

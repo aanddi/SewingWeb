@@ -97,6 +97,9 @@ const FilterModal: FC<PropsWithChildren<Props>> = ({ children, active, setActive
     setWorkExperienceFilter([])
     setWorkTimetableFilter([])
     setEducationFilter([])
+
+
+    
   }
 
   const [totalFilter, setTotalFilter] = useState(0)
@@ -211,7 +214,9 @@ const FilterModal: FC<PropsWithChildren<Props>> = ({ children, active, setActive
             <button
               onClick={() => {
                 setActive(false)
-                const query: any = {}
+                const query: any = {
+                  ...router.query
+                }
                 if (tagsFilter.length > 0) {
                   query.tags = tagsFilter.join(',')
                 }

@@ -1,4 +1,4 @@
-import { IFavoriteList, IMyVacancy, IRibbonById, IRibbonResponse, IRibbonSeggest, ISimilarResponse, IVacancyResponse } from './vacancy.interface'
+import { IFavoriteList, IMyVacancy, IRibbonById, IRibbonResponse, IRibbonSuggest, ISimilarResponse, IVacancyResponse } from './vacancy.interface'
 import { IFavorite } from '@/core/types/favorite.interface'
 import { ITarifVacancy } from '@/core/types/tarif-vacancy.interface'
 import { IVacancy } from '@/core/types/vacancy.interface'
@@ -13,17 +13,16 @@ export const VacancyService = {
     })
     return response.data
   },
-
-  async getSeggest(suggest: string, suggestCity?: string) {
-    let url
-    if (suggest) {
-      url = `/vacancy/suggest/?suggest=${suggest}`
-    } else {
-      url = `/vacancy/suggest/?suggestCity=${suggestCity}`
+  
+  async getSuggest(suggest?: string, suggestCity?: string) {
+    const queryParams = {
+      suggest: suggest,
+      suggestCity: suggestCity
     }
-    return instance<IRibbonSeggest[]>({
-      url: url,
-      method: 'GET'
+    return instance<IRibbonSuggest[]>({
+      url: `/vacancy/suggest`,
+      method: 'GET',
+      params: queryParams
     })
   },
 

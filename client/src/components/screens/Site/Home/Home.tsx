@@ -32,7 +32,7 @@ const Home: FC<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, tot
   const { data: vacancySearch, isLoading: isSearchLoading } = useQuery({
     queryKey: ['vacancySuggest', valueSearch],
     queryFn: async () => {
-      const response = await VacancyService.getSeggest(valueSearch)
+      const response = await VacancyService.getSuggest(valueSearch)
 
       return response.data
     },

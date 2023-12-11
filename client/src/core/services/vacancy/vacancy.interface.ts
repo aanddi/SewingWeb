@@ -65,7 +65,7 @@ export interface ISimilarResponse {
   professionId: number
 }
 
-export interface IRibbonSeggest {
+export interface IRibbonSuggest {
   title: string
   city: string
 }
