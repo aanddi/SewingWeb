@@ -63,10 +63,11 @@ export class VacancyService {
 
   // =================================================
 
-  async getSuggest(suggest: string) {
-    const result = await this.prisma.vacancy.findMany({
+  async getSuggest(suggest: string, suggestCity: string) {
+    const search = await this.prisma.vacancy.findMany({
       select: {
-        title: true
+        title: true,
+        city: true
       },
       where: {
         status: true,
@@ -79,7 +80,7 @@ export class VacancyService {
           },
           {
             city: {
-              contains: suggest,
+              contains: suggestCity,
               mode: 'insensitive'
             }
           },
@@ -93,25 +94,88 @@ export class VacancyService {
       }
     })
 
+    // если ищем по городам то удаляем дубликаты городов
+    if (suggestCity) {
+      const result = new Set(search)
+      return result
+    }
+
+    return search
+  }
+
+  async getCountFilter(education: string, experience: string, tags: string, timetable: string) {
+    const filter: any = {
+      status: true
+    }
+
+    if (education) filter.education = { in: [education] }
+    if (experience) filter.workExperience = { in: [experience] }
+    if (timetable) filter.workTimetable = { in: [timetable] }
+    if (tags) filter.tags = { in: [tags] }
+
+    const result = await this.prisma.vacancy.count({
+      where: filter
+    })
+
     return result
   }
 
   // формирование ленты вакансий с пагинацией по странично
-  async getRibbon(page = 1) {
+  async getRibbon(
+    page = 1,
+    search: string,
+    city: string,
+    profession: number,
+    education: string,
+    experience: string,
+    tags: string,
+    timetable: string
+  ) {
     // проверка на срок годности вакансий
     await this.validateRibbon()
 
     // колво вакансий на одну подгрузку
-    const PAGE_SIZE = 3
+    const PAGE_SIZE = 2
 
     // определяет сколько вакансий надо пропустить
     const skip = (page - 1) * PAGE_SIZE
 
+    //==== filter ============================================
+
+    const filter: any = {
+      status: true,
+
+      city: {
+        contains: city,
+        mode: 'insensitive'
+      },
+
+      title: {
+        contains: search,
+        mode: 'insensitive'
+      }
+    }
+
+    // добавление фильтра по айди профессии
+    if (profession) filter.professionId = +profession
+
+    if (education) filter.education = { in: [education] }
+
+    if (experience) filter.workExperience = { in: [experience] }
+
+    if (timetable) filter.workTimetable = { in: [timetable] }
+
+    if (tags) filter.tags = { in: [tags] }
+
+    // подсчет возвращаемых вакансий юез учетав пагинации
+    const countVacanciesReturn = await this.prisma.vacancy.count({
+      where: filter
+    })
+    //================================================
+
     // Получение списка вакансий со статусом true
     const vacancies = await this.prisma.vacancy.findMany({
-      where: {
-        status: true
-      },
+      where: filter,
       skip: skip, // сколько пропустить
       take: PAGE_SIZE, // сколько вернуть
       select: {
@@ -151,10 +215,11 @@ export class VacancyService {
     }
 
     // Расчёт общего кол-ва страниц
-    const totalPages = Math.ceil(totalVacancies / PAGE_SIZE)
+    const totalPages = Math.ceil(countVacanciesReturn / PAGE_SIZE)
 
     return {
       vacancies: vacancies,
+      countVacanciesReturn: countVacanciesReturn,
       totalVacancies: totalVacancies,
       totalResume: totalResume,
       totalPages: totalPages

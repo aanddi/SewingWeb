@@ -29,7 +29,7 @@ const ProfessionCard: FC<Props> = ({ profession }) => {
   }, [])
 
   return (
-    <Link href="/" className={styles.profCard}>
+    <Link href={`/vacancies?profession=${profession.id}`} className={styles.profCard}>
       <div className={styles.profCard__wrapper}>
         <div className={styles.profCard__content}>
           <div className={styles.profCard__header}>

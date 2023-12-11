@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next'
 
 import Meta from '@/components/Meta/Meta'
-import AboutVacancy from '@/components/screens/Site/Vacancies/Vacancies'
+import AboutVacancy from '@/components/screens/Site/AboutVacancy/AboutVacancy'
 
 import { IVacancyResponse } from '@/core/services/vacancy/vacancy.interface'
 

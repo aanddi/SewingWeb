@@ -47,11 +47,8 @@ const Professions: FC<Props> = ({ professions }) => {
   useEffect(() => {
     const query = router.query.search as string
     setQuerySearch(query)
-
-    if (!value) setIsShowSearch(false)
-
-    queryClient.invalidateQueries({ queryKey: ['searchProfession', value] })
-  }, [value, search, router])
+    setValue(query)
+  }, [router])
 
   return (
     <SiteLayout background={'#F6FAFF'}>
@@ -99,7 +96,7 @@ const Professions: FC<Props> = ({ professions }) => {
                             {search?.map((elem, index) => {
                               return (
                                 <li onClick={() => setIsShowSearch(false)} key={index} className={styles.search__item}>
-                                  <Link href={{ query: { ...router.query, search: value } }} replace={true} className={styles.search__link}>
+                                  <Link href={{ query: { ...router.query, search: elem.name } }} replace={true} className={styles.search__link}>
                                     {elem.name}
                                   </Link>
                                 </li>

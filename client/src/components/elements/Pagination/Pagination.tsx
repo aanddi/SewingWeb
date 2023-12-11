@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 
@@ -23,9 +24,13 @@ const Pagination: FC<Props> = ({ vacanciesData, totalPages }) => {
       ))}
       <div>
         {totalPages == currentPage ? null : (
-          <button className={styles.pagination__showVacancies} onClick={() => router.push(`/?page=${currentPage + 1}`, undefined, { scroll: false })}>
+          <Link
+            href={{ pathname: router.pathname, query: { ...router.query, page: currentPage + 1 } }}
+            scroll={false}
+            className={styles.pagination__showVacancies}
+          >
             Показать еще
-          </button>
+          </Link>
         )}
       </div>
     </div>

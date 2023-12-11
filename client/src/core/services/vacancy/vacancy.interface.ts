@@ -8,8 +8,9 @@ export interface IVacancyResponse extends IVacancy {
 
 export interface IRibbonResponse {
   vacancies: IVacancyCard[]
-  totalVacancies: number
-  totalResume: number
+  countVacanciesReturn: number
+  totalVacancies?: number
+  totalResume?: number
   totalPages: number
 }
 
@@ -66,4 +67,5 @@ export interface ISimilarResponse {
 
 export interface IRibbonSeggest {
   title: string
+  city: string
 }

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 
-import styles from './Vacancies.module.scss'
+import styles from './AboutVacancy.module.scss'
 
 import TextToHTML from '@/components/elements/EditText/TextToHTML'
 import LoadingDots from '@/components/elements/Loading/LoadingDots'

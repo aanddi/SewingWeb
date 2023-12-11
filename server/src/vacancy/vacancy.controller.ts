@@ -22,13 +22,32 @@ export class VacancyController {
   constructor(private readonly vacancyService: VacancyService) {}
 
   @Get('suggest')
-  getSuggest(@Query('suggest') suggest: string) {
-    return this.vacancyService.getSuggest(suggest)
+  getSuggest(@Query('suggest') suggest: string, @Query('suggestCity') suggestCity: string) {
+    return this.vacancyService.getSuggest(suggest, suggestCity)
+  }
+
+  @Get('countFilter')
+  getCountFilter(
+    @Query('education') education: string,
+    @Query('experience') experience: string,
+    @Query('tags') tags: string,
+    @Query('timetable') timetable: string
+  ) {
+    return this.vacancyService.getCountFilter(education, experience, tags, timetable)
   }
 
   @Get('ribbon')
-  getRibbon(@Query('page') page: number) {
-    return this.vacancyService.getRibbon(page)
+  getRibbon(
+    @Query('page') page: number,
+    @Query('search') search: string,
+    @Query('city') city: string,
+    @Query('profession') profession: number,
+    @Query('education') education: string,
+    @Query('experience') experience: string,
+    @Query('tags') tags: string,
+    @Query('timetable') timetable: string
+  ) {
+    return this.vacancyService.getRibbon(page, search, city, profession, education, experience, tags, timetable)
   }
 
   @Get('ribbon/:id')

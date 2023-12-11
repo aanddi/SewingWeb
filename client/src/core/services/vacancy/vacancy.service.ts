@@ -14,17 +14,58 @@ export const VacancyService = {
     return response.data
   },
 
-  async getSeggest(suggest: string) {
+  async getSeggest(suggest: string, suggestCity?: string) {
+    let url
+    if (suggest) {
+      url = `/vacancy/suggest/?suggest=${suggest}`
+    } else {
+      url = `/vacancy/suggest/?suggestCity=${suggestCity}`
+    }
     return instance<IRibbonSeggest[]>({
-      url: `/vacancy/suggest/?suggest=${suggest}`,
+      url: url,
       method: 'GET'
     })
   },
 
-  async getRibbon(page: number) {
+  async getCountFilter(queryEducation: string, queryExperience: string, queryTags: string, queryTimetable: string) {
+    const queryParams = {
+      education: queryEducation,
+      experience: queryExperience,
+      tags: queryTags,
+      timetable: queryTimetable
+    }
+    return instance({
+      url: `/vacancy/countFilter/`,
+      method: 'GET',
+      params: queryParams
+    })
+  },
+
+  async getRibbon(
+    page: number,
+    profession: string | number,
+    querySearch: string,
+    city: string,
+    queryEducation: string,
+    queryExperience: string,
+    queryTags: string,
+    queryTimetable: string
+  ) {
+    const queryParams = {
+      page: page,
+      profession: profession,
+      search: querySearch,
+      city,
+      education: queryEducation,
+      experience: queryExperience,
+      tags: queryTags,
+      timetable: queryTimetable
+    }
+
     return instance<IRibbonResponse>({
-      url: `/vacancy/ribbon/?page=${page}`,
-      method: 'GET'
+      url: '/vacancy/ribbon/',
+      method: 'GET',
+      params: queryParams
     })
   },
 

@@ -7,10 +7,16 @@ import { IRibbonResponse, IVacancyCard } from '@/core/services/vacancy/vacancy.i
 
 import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 
-const HomePage: NextPage<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, totalPages }) => {
+const HomePage: NextPage<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, totalPages, countVacanciesReturn }) => {
   return (
     <Meta title="Найти работу">
-      <Home vacancies={vacancies} totalVacancies={totalVacancies} totalResume={totalResume} totalPages={totalPages} />
+      <Home
+        vacancies={vacancies}
+        totalVacancies={totalVacancies}
+        totalResume={totalResume}
+        totalPages={totalPages}
+        countVacanciesReturn={countVacanciesReturn}
+      />
     </Meta>
   )
 }
@@ -39,6 +45,7 @@ export const getServerSideProps: GetServerSideProps<IRibbonResponse> = async con
       return {
         props: {
           vacancies: vacancies,
+          countVacanciesReturn: response.data.countVacanciesReturn,
           totalVacancies: response.data.totalVacancies,
           totalResume: response.data.totalResume,
           totalPages: response.data.totalPages
@@ -48,6 +55,7 @@ export const getServerSideProps: GetServerSideProps<IRibbonResponse> = async con
       return {
         props: {
           vacancies: [],
+          countVacanciesReturn: 0,
           totalVacancies: 0,
           totalResume: 0,
           totalPages: 0
@@ -58,6 +66,7 @@ export const getServerSideProps: GetServerSideProps<IRibbonResponse> = async con
     return {
       props: {
         vacancies: [],
+        countVacanciesReturn: 0,
         totalVacancies: 0,
         totalResume: 0,
         totalPages: 0

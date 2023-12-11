@@ -8,7 +8,6 @@
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 9999999;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,12 +17,12 @@
 
   &__content {
     margin: 10px;
-    padding: 50px;
+    padding: 40px;
     border-radius: 7px;
     background: #fff;
     box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.03);
     backdrop-filter: blur(25px);
-    width: 500px;
+    width: 900px;
     height: auto;
     position: relative;
     z-index: 100;
@@ -41,4 +40,86 @@
     cursor: pointer;
   }
 
+  &__title {
+    font-weight: 800;
+    font-size: 24px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__countFilter {
+    color: $blue;
+    font-size: inherit;
+  }
+
+  &__filters {
+    & > * {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__block {
+  }
+
+  &__blockTitle {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #e1ecf4ff;
+    border-radius: 100px;
+    user-select: none;
+
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+
+    &_active {
+      border: 2px solid $blue !important;
+    }
+
+    &:hover {
+      border: 2px solid #add5f8;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 50px;
+  }
+
+  &__search {
+    background-color: $blue;
+    padding: 10px 0;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    width: 250px;
+    border-radius: 6px;
+    cursor: pointer;
+    &:hover {
+      background-color: $blueHover;
+    }
+  }
+
+  &__reset {
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 500;
+  }
 }
