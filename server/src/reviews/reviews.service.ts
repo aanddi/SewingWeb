@@ -30,7 +30,7 @@ export class ReviewsService {
 
     return {
       reviews: reviews,
-      averageRating: averageRating,
+      averageRating: averageRating.toFixed(1),
       countReviews: countReviews
     }
   }

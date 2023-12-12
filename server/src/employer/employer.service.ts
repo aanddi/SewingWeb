@@ -378,6 +378,6 @@ export class EmployerService {
     }
 
     const averageGrade = totalGrade / reviewCount
-    return averageGrade
+    return averageGrade.toFixed(1)
   }
 }
