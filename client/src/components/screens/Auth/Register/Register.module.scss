@@ -1,7 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .register {
-
   &__choice {
     display: flex;
     align-items: center;
@@ -17,7 +16,7 @@
   &__choiceItem {
     padding: 10px 10px;
     flex: 1 1 50%;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
     &_active {
       background-color: $blue !important;
       color: #fff !important;
@@ -26,9 +25,7 @@
     }
 
     &_unActive {
-
     }
-
   }
 
   &__title {
@@ -48,19 +45,17 @@
     }
 
     &_nodisplay {
-
     }
   }
 
   &__enter {
-
-
     border-bottom: 1px solid $grey;
     padding-bottom: 20px;
   }
 
   &__control {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 20px;
   }
@@ -92,9 +87,9 @@
 
   &__button {
     display: inline-flex;
-    background-color: #FCA4B6;
+    background-color: #fd859d;
     color: #fff;
-    padding: 12px 40px;
+    padding: 10px 30px;
     border-radius: 5px;
     font-size: 16px;
     font-weight: 500;
@@ -108,7 +103,6 @@
 
   &__forgot {
     color: $blue;
-
 
     &:hover {
       text-decoration: underline;
@@ -126,7 +120,7 @@
     span {
       color: $blue;
       cursor: pointer;
-      
+
       &:hover {
         text-decoration: underline;
       }

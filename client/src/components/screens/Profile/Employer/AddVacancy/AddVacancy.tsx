@@ -278,10 +278,14 @@ const AddVacancy: FC = () => {
                   name="descCard"
                   control={control}
                   rules={{ required: true }}
-                  render={() => (
+                  render={({field}) => (
                     <textarea
                       maxLength={maxLength}
-                      onChange={e => setSizeField(e.target.value.length)}
+                      onChange={e => {
+                        field.onChange(e.target.value);
+                        setSizeField(e.target.value.length);
+                      }}
+                      value={field.value} 
                       style={errors.descCard ? { borderColor: 'red' } : undefined}
                     />
                   )}

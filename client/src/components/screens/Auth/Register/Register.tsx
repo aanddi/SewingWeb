@@ -52,9 +52,6 @@ const Register: FC = () => {
   // submit form
   const onSubmit: SubmitHandler<IRegister> = data => {
     registration(data)
-
-    // баг здесь, не перекидывает, так как сверху асинк санк асинхронный и перекидывает на /
-    //if (user && errorMessage == undefined && role == '2') useAuthRedirect('/auth/registerCompany')
   }
 
   // ========== ROLES =============================

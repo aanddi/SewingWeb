@@ -13,6 +13,7 @@ import { IEmployer } from '@/core/types/employer.interface'
 import { validNumber } from '@/core/helpers/valid-field'
 import { useAuth } from '@/core/hooks/useAuth'
 import { EmployerService } from '@/core/services/employer/employer.service'
+import LoadingDots from '../../Loading/LoadingDots'
 
 interface Props {
   employer: IEmployer | undefined
@@ -28,6 +29,7 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
 
   // save error server
   const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
+  const [loader, setLoader] = useState(false)
 
   const {
     register,
@@ -58,20 +60,24 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
   const onSubmit: SubmitHandler<IEmployer> = async data => {
     if (!employer) {
       try {
+        setLoader(true)
         const respone = await EmployerService.create(data)
         reset()
         setActive(false)
         queryClient.invalidateQueries({ queryKey: ['employer'] })
       } catch (error: any) {
+        setLoader(false)
         setErrorUpdate(error.response.data.message)
       }
     } else {
       try {
+        setLoader(true)
         const respone = await EmployerService.update(employer?.id, data)
         reset()
         setActive(false)
         queryClient.invalidateQueries({ queryKey: ['employer'] })
       } catch (error: any) {
+        setLoader(false)
         setErrorUpdate(error.response.data.message)
       }
     }
@@ -120,7 +126,7 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
             star={true}
             error={errors.inn?.message}
           />
-
+          
           <FieldProfile
             {...register('type', {
               required: 'Укажите тип предприятия'
@@ -164,7 +170,7 @@ const EmployerInfo: FC<Props> = ({ employer, active, setActive }) => {
           <FieldProfile {...register('registrCity', {})} type={'text'} title={'Город регистрации'} star={false} error={errors.registrCity?.message} />
         </div>
         <div className={styles.updateCompany__modalFooter}>
-          <button className={styles.updateCompany__saveButton}>Сохранить</button>
+          <button className={styles.updateCompany__saveButton}>{loader ? <LoadingDots color='#fff' /> : "Сохранить"}</button>
           <div className={styles.updateCompany__resetButton} onClick={handleCancel}>
             Отменить
           </div>

@@ -26,7 +26,7 @@ const AuthLayout: FC<IAuthLayout> = props => {
             <div className={styles.auth__main}>
               <header className={styles.auth__header}>
                 <div className={styles.auth__logo}>
-                  <Image src={logo} alt={'SewingWeb ID'} />
+                  <Image src={logo} alt={'SewingWeb ID'} priority={true}/>
                 </div>
                 <div className={styles.auth__back}>
                   <Link href="/" className={styles.auth__closeBg}>
