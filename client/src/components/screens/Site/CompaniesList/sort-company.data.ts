@@ -1,7 +1,7 @@
 export const sortCompany = [
   {
     name: 'по популярности',
-    query: 'minReviews'
+    query: 'maxReviews'
   },
   {
     name: 'по количеству вакансий',

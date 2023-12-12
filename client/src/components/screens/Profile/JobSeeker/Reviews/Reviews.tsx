@@ -68,7 +68,7 @@ const Reviews: FC = () => {
                         Удалить отзыв
                       </div>
                     </div>
-                    <CompanyReviews key={index} reviews={elem} />
+                    <CompanyReviews key={elem.id} reviews={elem} />
                   </div>
                 )
               })
@@ -82,7 +82,7 @@ const Reviews: FC = () => {
             setActive={setActiveWarning}
           >
             <div className={styles.reviews__delete} onClick={async () => mutationDelete.mutate(targetId)}>
-              {mutationDelete.isPending ? <LoadingDots /> : 'Удалить'}
+              {mutationDelete.isPending ? <LoadingDots color="red"/> : 'Удалить'}
             </div>
           </WarningModal>
         </div>

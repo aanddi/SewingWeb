@@ -52,22 +52,22 @@ const FooterSite: FC<Props> = props => {
               <h3 className={styles.footer__title}>Соискателю</h3>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/profile/my" className={styles.footer__link}>
                 Кабинет
               </Link>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/vacancies" className={styles.footer__link}>
                 Поиск вакансии
               </Link>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/companies" className={styles.footer__link}>
                 Каталог компаний
               </Link>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/professions" className={styles.footer__link}>
                 Каталог профессий
               </Link>
             </li>
@@ -78,22 +78,22 @@ const FooterSite: FC<Props> = props => {
               <h3 className={styles.footer__title}>Работодателю</h3>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/profile/my" className={styles.footer__link}>
                 Кабинет
               </Link>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/employer" className={styles.footer__link}>
                 Информация
               </Link>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/profile/my-vacancies" className={styles.footer__link}>
                 Найти сотрудников
               </Link>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/professions" className={styles.footer__link}>
                 Каталог профессий
               </Link>
             </li>
@@ -104,7 +104,7 @@ const FooterSite: FC<Props> = props => {
               <h3 className={styles.footer__title}>Профессии</h3>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/professions" className={styles.footer__link}>
                 Список профессий
               </Link>
             </li>
@@ -115,7 +115,7 @@ const FooterSite: FC<Props> = props => {
               <h3 className={styles.footer__title}>Предприятия</h3>
             </li>
             <li className={styles.footer__item}>
-              <Link href="/" className={styles.footer__link}>
+              <Link href="/companies" className={styles.footer__link}>
                 Список предприятий
               </Link>
             </li>
