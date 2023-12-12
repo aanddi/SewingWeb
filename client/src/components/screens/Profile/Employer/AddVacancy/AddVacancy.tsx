@@ -81,6 +81,7 @@ const AddVacancy: FC = () => {
 
   // save error server
   const [errorUpdate, setErrorUpdate] = useState<string | null>(null)
+  const [isLoader, setIsLoader] = useState(false)
 
   const {
     register,
@@ -126,11 +127,14 @@ const AddVacancy: FC = () => {
 
   const onSave: SubmitHandler<IVacancy> = async data => {
     data.status = false
+    setIsLoader(true)
     try {
       const response = await VacancyService.create(data)
       reset()
+      setIsLoader(false)
       setActiveSuccess(true)
     } catch (error: any) {
+      setIsLoader(false)
       setErrorUpdate(error.response.data.message)
     }
   }
@@ -141,12 +145,15 @@ const AddVacancy: FC = () => {
 
   const onPayment: SubmitHandler<IVacancy> = async data => {
     data.status = true
+    setIsLoader(true)
     try {
       const response = await VacancyService.create(data)
       reset()
+      setIsLoader(false)
       setActivePayment(false)
       setActiveSuccess(true)
     } catch (error: any) {
+      setIsLoader(false)
       data.status = false
       setErrorUpdate(error.response.data.message)
     }
@@ -278,14 +285,14 @@ const AddVacancy: FC = () => {
                   name="descCard"
                   control={control}
                   rules={{ required: true }}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <textarea
                       maxLength={maxLength}
                       onChange={e => {
-                        field.onChange(e.target.value);
-                        setSizeField(e.target.value.length);
+                        field.onChange(e.target.value)
+                        setSizeField(e.target.value.length)
                       }}
-                      value={field.value} 
+                      value={field.value}
                       style={errors.descCard ? { borderColor: 'red' } : undefined}
                     />
                   )}
@@ -596,13 +603,11 @@ const AddVacancy: FC = () => {
                             tarifs && activeTarif == index
                               ? [styles.addVacancy__cardWrapper, styles.addVacancy__cardWrapper_active].join(' ')
                               : styles.addVacancy__cardWrapper
-                          }
-                        >
+                          }>
                           <div className={styles.addVacancy__cardTitle}>Вакансия {elem.name}</div>
                           <div className={styles.addVacancy__efficiency}>
                             <div
-                              className={[styles.addVacancy__efficiencyNumber, styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]].join(' ')}
-                            >
+                              className={[styles.addVacancy__efficiencyNumber, styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]].join(' ')}>
                               x{index + 1}
                             </div>
                             <div className={[styles.addVacancy__efficiencyDesc, styles[`addVacancy__efficiencyDesc_${(index % 3) + 1}`]].join(' ')}>
@@ -631,8 +636,14 @@ const AddVacancy: FC = () => {
                 )}
 
                 <div onClick={handleSubmit(onSave)} className={[styles.addVacancy__button, styles.addVacancy__button_save].join(' ')}>
-                  <CiSaveDown2 size={20} style={{ strokeWidth: '1' }} />
-                  <span>Сохранить вакансию</span>
+                  {isLoader ? (
+                    <LoadingDots />
+                  ) : (
+                    <>
+                      <CiSaveDown2 size={20} style={{ strokeWidth: '1' }} />
+                      <span>Сохранить вакансию</span>
+                    </>
+                  )}
                 </div>
               </div>
               <PaymentModal active={activePayment} setActive={setActivePayment} tarif={tarifs && activeTarif ? tarifs[activeTarif].name : undefined}>

@@ -122,15 +122,9 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
       const tagsString = tags.join(', ')
       setValue('tags', tagsString)
     }
+  }, [vacancy, activeTarif, tags, employerId, setValue])
 
-    if (vacancy.skills) {
-      const skillsArray = vacancy.skills.split(', ').map(skill => ({
-        value: skill,
-        label: skill
-      }))
-      setSkillsList(skillsArray)
-    }
-
+  useEffect(() => {
     setValue('title', vacancy.title)
     setValue('professionId', vacancy.professionId)
     setValue('minSalary', vacancy.minSalary)
@@ -147,7 +141,15 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
     setValue('phoneNumber', vacancy.phoneNumber)
     setValue('contact', vacancy.contact)
     setValue('tarifId', activeTarif)
-  }, [vacancy, activeTarif, employerId, tags, setValue])
+
+    if (vacancy.skills) {
+      const skillsArray = vacancy.skills.split(', ').map(skill => ({
+        value: skill,
+        label: skill
+      }))
+      setSkillsList(skillsArray)
+    }
+  }, [vacancy])
 
   const [skillsList, setSkillsList] = useState<MultiValue<{ value: string; label: string }>>([])
 
@@ -299,8 +301,7 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                       {...register('descCard', {
                         required: 'Укажите описание вакансии'
                       })}
-                      style={errors.descCard ? { borderColor: 'red' } : undefined}
-                    ></textarea>
+                      style={errors.descCard ? { borderColor: 'red' } : undefined}></textarea>
                     {errors.descCard && <span className={styles.editVacancy__errorField}>Укажите описание карточки вакансии</span>}
                   </div>
                   <div className={styles.editVacancy__inputs}>
@@ -610,23 +611,20 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                                     tarifs && activeTarif == index
                                       ? [styles.editVacancy__cardWrapper, styles.editVacancy__cardWrapper_active].join(' ')
                                       : styles.editVacancy__cardWrapper
-                                  }
-                                >
+                                  }>
                                   <div className={styles.editVacancy__cardTitle}>Вакансия {elem.name}</div>
                                   <div className={styles.editVacancy__efficiency}>
                                     <div
                                       className={[
                                         styles.editVacancy__efficiencyNumber,
                                         styles[`editVacancy__efficiencyNumber_${(index % 3) + 1}`]
-                                      ].join(' ')}
-                                    >
+                                      ].join(' ')}>
                                       x{index + 1}
                                     </div>
                                     <div
                                       className={[styles.editVacancy__efficiencyDesc, styles[`editVacancy__efficiencyDesc_${(index % 3) + 1}`]].join(
                                         ' '
-                                      )}
-                                    >
+                                      )}>
                                       в {index + 1} раз <br /> эффективность
                                     </div>
                                   </div>
@@ -668,8 +666,7 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                       ) : (
                         <div
                           onClick={handleSubmit(onOpenPayment)}
-                          className={[styles.editVacancy__button, styles.editVacancy__button_post].join(' ')}
-                        >
+                          className={[styles.editVacancy__button, styles.editVacancy__button_post].join(' ')}>
                           <span>Перейти к оплате</span>
                         </div>
                       )}
@@ -678,8 +675,7 @@ const EditVacancy: FC<Props> = ({ vacancy }) => {
                   <PaymentModal
                     active={activePayment}
                     setActive={setActivePayment}
-                    tarif={tarifs && activeTarif ? tarifs[activeTarif].name : undefined}
-                  >
+                    tarif={tarifs && activeTarif ? tarifs[activeTarif].name : undefined}>
                     <div onClick={handleSubmit(onPayment)} className={[styles.editVacancy__button, styles.editVacancy__button_post].join(' ')}>
                       {isLoadingSubmit ? (
                         <LoadingDots />

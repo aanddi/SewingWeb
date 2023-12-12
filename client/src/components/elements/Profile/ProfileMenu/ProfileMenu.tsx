@@ -95,7 +95,7 @@ const ProfileMenu: FC = () => {
             )}
           </nav>
           <div onClick={() => logout()} className={styles.profileMenu__logout}>
-            <IoExitOutline size={19} style={{ color: '#FD7791' }} />
+            <IoExitOutline size={19} style={{ color: 'red' }} />
             <span>Выйти</span>
           </div>
         </div>

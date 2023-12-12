@@ -101,7 +101,7 @@ const VacanciesCard: FC<Props> = ({ vacancy }) => {
       <div className={styles.VCard__content}>
         <div className={styles.VCard__header}>
           <div className={styles.VCard__mainHeader}>
-            <Link target="_blank" href={`/vacancy/${vacancy.id}`} className={styles.VCard__title}>
+            <Link target="_blank" href={`/vacancy/${vacancy.id}`} onClick={(e) => e.stopPropagation()} className={styles.VCard__title}>
               {vacancy.title}
             </Link>
 
@@ -154,7 +154,7 @@ const VacanciesCard: FC<Props> = ({ vacancy }) => {
           <div className={styles.VCard__company_svg}>
             <IoShieldCheckmarkSharp style={{ color: '#3490DF' }} />
           </div>
-          <Link href={`/company/${vacancy.employer.id}`} className={styles.VCard__company_name}>
+          <Link target="_blank" href={`/company/${vacancy.employer.id}`} className={styles.VCard__company_name}>
             {vacancy.employer.companyName}
           </Link>
         </div>

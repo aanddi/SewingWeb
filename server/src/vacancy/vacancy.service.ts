@@ -142,7 +142,7 @@ export class VacancyService {
     await this.validateRibbon()
 
     // колво вакансий на одну подгрузку
-    const PAGE_SIZE = 2
+    const PAGE_SIZE = 5
 
     // определяет сколько вакансий надо пропустить
     const skip = (page - 1) * PAGE_SIZE
@@ -468,15 +468,8 @@ export class VacancyService {
     // проверка на бесплатную вакансию
     const tarifs = await this.getTarif()
 
-    const checkCount = await this.prisma.vacancy.findMany({
-      where: {
-        employerId: dto.employerId,
-        tarifId: dto.tarifId,
-        status: true
-      }
-    })
 
-    if (tarifs[dto.tarifId].salary == 0 && checkCount.length > 0) {
+    if (tarifs[dto.tarifId].salary === 0) {
       throw new BadRequestException('Лимит на бесплатное размещение вакансии превышен.')
     } else {
       const vacancy = await this.prisma.vacancy.update({

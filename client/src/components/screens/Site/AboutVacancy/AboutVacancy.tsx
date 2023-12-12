@@ -174,8 +174,7 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
                   <iframe
                     src="https://yandex.ru/map-widget/v1/?um=constructor%3A1d4d9c1c194c130a58410eb949d712316553ac943af0a52a114b4d263ab7e0f3&amp;source=constructor"
                     width="100%"
-                    height="325"
-                  ></iframe>
+                    height="325"></iframe>
                 </div>
               </div>
               <aside className={styles.about__sideBar}>
@@ -204,8 +203,7 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
                           mutationResponse.mutate(data)
                         }
                       }}
-                      className={[styles.about__button, styles.about__button_responds].join(' ')}
-                    >
+                      className={[styles.about__button, styles.about__button_responds].join(' ')}>
                       {myResponsesLoading ? (
                         <LoadingDots color="#fff" />
                       ) : activeResponse ? (
@@ -222,8 +220,7 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
                       onClick={() => {
                         if (user) mutationDeleteFavorites.mutate(activeFavorite.id)
                       }}
-                      className={[styles.about__button, styles.about__button_favorites, styles.about__button_favoritesActive].join(' ')}
-                    >
+                      className={[styles.about__button, styles.about__button_favorites, styles.about__button_favoritesActive].join(' ')}>
                       <IoMdHeart size={20} />
                       <span>В избранном</span>
                     </div>
@@ -236,8 +233,7 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
                         const data = { userId, vacancyId }
                         mutationCreateFavorites.mutate(data)
                       }}
-                      className={[styles.about__button, styles.about__button_favorites].join(' ')}
-                    >
+                      className={[styles.about__button, styles.about__button_favorites].join(' ')}>
                       <IoMdHeart size={20} />
                       <span>Добавить в избранное</span>
                     </div>
@@ -269,14 +265,6 @@ const AboutVacancy: FC<{ vacancy: IVacancyResponse }> = ({ vacancy }) => {
                           <span className={styles.about__contactItem_title}>Доп. контакт:</span> {vacancy.contact}
                         </div>
                       ) : null}
-                      <div className={styles.about__reiting}>
-                        <FaStar style={{ color: '#F4A815' }} size={15} />
-                        <FaStar style={{ color: '#F4A815' }} size={15} />
-                        <FaStar style={{ color: '#F4A815' }} size={15} />
-                        <FaStar style={{ color: '#F4A815' }} size={15} />
-                        <FaStar style={{ color: '#F4A815' }} size={15} />
-                        <p>10 отзывов</p>
-                      </div>
                     </div>
                   </div>
                 </div>
