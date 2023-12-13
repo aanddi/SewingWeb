@@ -9,7 +9,7 @@ import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 
 const VacanciesListPage: NextPage<IRibbonResponse> = ({ vacancies, totalPages, countVacanciesReturn }) => {
   return (
-    <Meta title="Вакансии">
+    <Meta title="Каталог вакансий">
       <VacanciesList vacancies={vacancies} totalPages={totalPages} countVacanciesReturn={countVacanciesReturn} />
     </Meta>
   )

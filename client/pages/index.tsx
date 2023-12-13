@@ -8,8 +8,9 @@ import { IRibbonResponse, IVacancyCard } from '@/core/services/vacancy/vacancy.i
 import { VacancyService } from '@/core/services/vacancy/vacancy.service'
 
 const HomePage: NextPage<IRibbonResponse> = ({ vacancies, totalVacancies, totalResume, totalPages, countVacanciesReturn }) => {
+  const desc = `SewingWeb - это job-сайт для размещения вакансий работодателй и резюме соискателей легкой промышленности`
   return (
-    <Meta title="Найти работу">
+    <Meta title="Найти работу" desc={desc}>
       <Home
         vacancies={vacancies}
         totalVacancies={totalVacancies}

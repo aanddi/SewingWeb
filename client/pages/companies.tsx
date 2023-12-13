@@ -8,8 +8,13 @@ import { IEmployerCard } from '@/core/services/employer/employer.interface'
 import { EmployerService } from '@/core/services/employer/employer.service'
 
 const CompaniesPage: NextPage<IEmployerCard> = ({ companies, types }) => {
+  const desc = `"Каталог предприятий" - ваш источник для обнаружения и исследования разнообразных компаний и предприятий. 
+  Здесь вы найдете информацию о различных организациях, их специализации, контактных данных и местоположении.
+   Наш каталог предприятий предоставляет удобный способ просмотра и сравнения различных компаний,
+    чтобы вы могли быстро найти то, что вам нужно. Независимо от того, ищете ли вы поставщика, партнера 
+    или просто хотите узнать больше о бизнес-сообществе, наш каталог предприятий поможет вам в этом.`
   return (
-    <Meta title="Предприятия">
+    <Meta title="Каталог предприятий" desc={desc}>
       <CompaniesList companies={companies} types={types} />
     </Meta>
   )

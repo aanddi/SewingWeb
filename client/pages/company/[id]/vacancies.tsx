@@ -16,7 +16,7 @@ interface AboutEmployerProps {
 
 const CompanyVacanciesPage: NextPage<AboutEmployerProps> = ({ header, vacancies }) => {
   return (
-    <Meta title={header.companyName}>
+    <Meta title={header.companyName} desc={`Каталон вакансий предприятия ${header.companyName}`}>
       <CompanyVacancies header={header} vacancies={vacancies.vacancies} />
     </Meta>
   )

@@ -14,7 +14,7 @@ interface AboutEmployerProps {
 
 const AddReviewsPage: NextPageAuth<AboutEmployerProps> = ({ header }) => {
   return (
-    <Meta title={'Добавить отзыв'}>
+    <Meta title={'Добавить отзыв'} desc={'Добавить отзыв предприятию. Помогите будущим соискателем определится с предприятием мечты'}>
       <AddReviews header={header} />
     </Meta>
   )
