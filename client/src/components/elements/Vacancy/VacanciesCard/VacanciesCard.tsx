@@ -101,7 +101,7 @@ const VacanciesCard: FC<Props> = ({ vacancy }) => {
       <div className={styles.VCard__content}>
         <div className={styles.VCard__header}>
           <div className={styles.VCard__mainHeader}>
-            <Link target="_blank" href={`/vacancy/${vacancy.id}`} onClick={(e) => e.stopPropagation()} className={styles.VCard__title}>
+            <Link target="_blank" href={`/vacancy/${vacancy.id}`} onClick={e => e.stopPropagation()} className={styles.VCard__title}>
               {vacancy.title}
             </Link>
 

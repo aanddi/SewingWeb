@@ -2,7 +2,7 @@
 
 .auth {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 
   &__image {
     flex: 1 1 50%;
@@ -19,10 +19,11 @@
     max-width: 500px;
     margin-left: 70px;
     padding: 0px 15px;
-
+    padding-bottom: 30px;
   }
 
-  &__main {}
+  &__main {
+  }
 
   &__header {
     display: flex;

@@ -603,11 +603,13 @@ const AddVacancy: FC = () => {
                             tarifs && activeTarif == index
                               ? [styles.addVacancy__cardWrapper, styles.addVacancy__cardWrapper_active].join(' ')
                               : styles.addVacancy__cardWrapper
-                          }>
+                          }
+                        >
                           <div className={styles.addVacancy__cardTitle}>Вакансия {elem.name}</div>
                           <div className={styles.addVacancy__efficiency}>
                             <div
-                              className={[styles.addVacancy__efficiencyNumber, styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]].join(' ')}>
+                              className={[styles.addVacancy__efficiencyNumber, styles[`addVacancy__efficiencyNumber_${(index % 3) + 1}`]].join(' ')}
+                            >
                               x{index + 1}
                             </div>
                             <div className={[styles.addVacancy__efficiencyDesc, styles[`addVacancy__efficiencyDesc_${(index % 3) + 1}`]].join(' ')}>

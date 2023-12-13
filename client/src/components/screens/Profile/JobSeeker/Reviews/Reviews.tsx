@@ -82,7 +82,7 @@ const Reviews: FC = () => {
             setActive={setActiveWarning}
           >
             <div className={styles.reviews__delete} onClick={async () => mutationDelete.mutate(targetId)}>
-              {mutationDelete.isPending ? <LoadingDots color="red"/> : 'Удалить'}
+              {mutationDelete.isPending ? <LoadingDots color="red" /> : 'Удалить'}
             </div>
           </WarningModal>
         </div>

@@ -1,10 +1,9 @@
 @import '@/assets/styles/_variables.scss';
 
-
 .tagBlock {
   display: flex;
   gap: 8px;
-  
+
   &__item {
     display: flex;
     justify-content: center;
@@ -26,7 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #FFECEF;
+    background-color: #ffecef;
     border-radius: 20px;
     padding: 5px 15px;
     gap: 8px;

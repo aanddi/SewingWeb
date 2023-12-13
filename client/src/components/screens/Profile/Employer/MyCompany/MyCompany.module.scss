@@ -1,7 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .company {
-
   &__wrapper {
     display: flex;
     gap: 74px;
@@ -94,7 +93,7 @@
       line-height: 120%;
     }
   }
-  
+
   &__edit {
     display: inline-flex;
     align-items: center;

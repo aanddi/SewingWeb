@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"./**/*.{ts,tsx,json}\""
+    "format": "prettier --write \"./**/*.{ts,tsx,json,scss}\""
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",

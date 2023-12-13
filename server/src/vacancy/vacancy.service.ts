@@ -468,7 +468,6 @@ export class VacancyService {
     // проверка на бесплатную вакансию
     const tarifs = await this.getTarif()
 
-
     if (tarifs[dto.tarifId].salary === 0) {
       throw new BadRequestException('Лимит на бесплатное размещение вакансии превышен.')
     } else {

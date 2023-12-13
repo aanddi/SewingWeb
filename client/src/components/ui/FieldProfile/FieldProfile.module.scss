@@ -1,7 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .field {
-
   label {
     display: flex;
     align-items: center;
@@ -23,12 +22,12 @@
       flex: 1 1 100%;
       padding: 8px 0 8px 10px;
       border-radius: 5px;
-      border: 1px solid #C2BFBF;
-  
+      border: 1px solid #c2bfbf;
+
       &:hover {
         cursor: text;
       }
-  
+
       &:focus {
         border: 1px solid $blue !important;
       }
@@ -45,7 +44,7 @@
 
     &::placeholder {
       color: red !important;
-   }
+    }
   }
 
   &__required {

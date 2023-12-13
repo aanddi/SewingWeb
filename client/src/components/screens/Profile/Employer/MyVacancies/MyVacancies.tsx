@@ -182,7 +182,7 @@ const MyVacancies: FC = () => {
                 className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
                 onClick={async () => mutationDelete.mutate(targetId)}
               >
-                {mutationDelete.isPending ? <LoadingDots color='red'/> : 'Удалить'}
+                {mutationDelete.isPending ? <LoadingDots color="red" /> : 'Удалить'}
               </div>
             )}
 
@@ -191,7 +191,7 @@ const MyVacancies: FC = () => {
                 className={[styles.vacancies__item, styles.vacancies__item_toarchive].join(' ')}
                 onClick={() => mutationUnpublication.mutate(targetId)}
               >
-                {mutationUnpublication.isPending ? <LoadingDots color='red'/> : 'Снять с публикации'}
+                {mutationUnpublication.isPending ? <LoadingDots color="red" /> : 'Снять с публикации'}
               </div>
             )}
           </WarningModal>

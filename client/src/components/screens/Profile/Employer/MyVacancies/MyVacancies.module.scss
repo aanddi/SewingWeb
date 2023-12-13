@@ -1,7 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .vacancies {
-
   &__wrapper {
     width: 900px;
   }
@@ -40,14 +39,13 @@
   }
 
   &__statusItem {
-    
   }
 
   &__controlPanel {
     width: 100%;
     border-radius: 10px;
     background: #ffffff;
-    border: 1px solid #E0E0E0;
+    border: 1px solid #e0e0e0;
     margin-bottom: 15px;
   }
 
@@ -102,12 +100,10 @@
   }
 
   &__status {
-
   }
 
   &__statusItem {
     display: flex;
     align-items: center;
-
   }
 }

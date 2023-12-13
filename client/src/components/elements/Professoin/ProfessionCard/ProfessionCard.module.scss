@@ -2,7 +2,7 @@
 
 .profCard {
   border-radius: 10px;
-  background: #FFF;
+  background: #fff;
   box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.11);
   transition: all 0.4s ease;
 
@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  } 
+  }
 
   &__header {
     & > * {
@@ -30,7 +30,6 @@
   }
 
   &__icon {
-
   }
 
   &__title {
@@ -54,5 +53,4 @@
     line-height: 144%;
     color: #858585;
   }
-
 }

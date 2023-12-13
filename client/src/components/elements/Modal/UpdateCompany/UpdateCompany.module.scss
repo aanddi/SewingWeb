@@ -1,7 +1,6 @@
 @import '@/assets/styles/_variables.scss';
 
 .updateCompany {
-
   margin-top: 30px;
 
   &__block {
@@ -45,7 +44,7 @@
   &__select {
     flex: 1 1 100%;
 
-    & >* {
+    & > * {
       flex: 1 1 100%;
     }
   }
@@ -74,7 +73,7 @@
     &_month {
       flex: 0 0 60%;
 
-      & >* {
+      & > * {
         flex: 0 0 100%;
       }
     }
@@ -82,18 +81,17 @@
     &_year {
       flex: 1 1 20%;
     }
-    
 
     input {
       width: 100%;
       padding: 8px 0 8px 10px;
       border-radius: 5px;
-      border: 1px solid #C2BFBF;
-  
+      border: 1px solid #c2bfbf;
+
       &:hover {
         cursor: text;
       }
-  
+
       &:focus {
         border: 1px solid $blue !important;
       }
@@ -106,11 +104,10 @@
 
   &__radio {
     margin-right: 15px;
-
   }
 
   &__radioInput {
-    transform:scale(1.3);
+    transform: scale(1.3);
     margin-right: 6px;
     cursor: pointer;
   }
@@ -143,12 +140,12 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-    display:flex;
+    display: flex;
     align-items: center;
     gap: 20px;
     background-color: #fff;
     padding: 30px 30px 30px 40px;
-    box-shadow: 0 -10px 25px rgba(46,59,99,.08);
+    box-shadow: 0 -10px 25px rgba(46, 59, 99, 0.08);
   }
 
   &__formContent {
@@ -159,8 +156,6 @@
       margin-bottom: 30px;
     }
   }
-
-
 
   &__titleModal {
     font-size: 24px;

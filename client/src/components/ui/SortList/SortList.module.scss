@@ -18,7 +18,7 @@
 
   &__list {
     position: absolute;
-    bottom: calc(100% - 35px); 
+    bottom: calc(100% - 35px);
     left: 0;
     transform: translateY(-10%);
     transition: all 0.2s ease-in;
@@ -37,7 +37,7 @@
   }
 
   &__listWrapper {
-    min-height: 100px; 
+    min-height: 100px;
     padding: 10px 0;
     background-color: #fff;
     border-radius: 6px;

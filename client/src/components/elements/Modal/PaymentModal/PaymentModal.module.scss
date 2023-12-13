@@ -60,13 +60,12 @@
     gap: 20px;
     justify-content: space-between;
     border-radius: 20px;
-    background: linear-gradient(79deg, #E3E1E1 27.11%, #D2D1D1 72.14%);
-
+    background: linear-gradient(79deg, #e3e1e1 27.11%, #d2d1d1 72.14%);
 
     padding: 30px;
     margin: 40px 0;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
       transform: scale(1.1);

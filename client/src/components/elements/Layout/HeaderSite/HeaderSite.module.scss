@@ -2,7 +2,7 @@
 
 .header {
   background-color: $dark;
-  color: #FFFFFF;
+  color: #ffffff;
   position: sticky;
   top: 0;
   width: 100%;
@@ -22,11 +22,14 @@
     gap: 55px;
   }
 
-  &__logo {}
+  &__logo {
+  }
 
-  &__menu {}
+  &__menu {
+  }
 
-  &__menuNav {}
+  &__menuNav {
+  }
 
   &__menuList {
     display: flex;
@@ -34,7 +37,8 @@
     gap: 25px;
   }
 
-  &__menuItem {}
+  &__menuItem {
+  }
 
   &__menuLink {
     font-size: 15px;
@@ -65,9 +69,11 @@
     font-size: 15px;
   }
 
-  &__cityIcon {}
+  &__cityIcon {
+  }
 
-  &__login {}
+  &__login {
+  }
 
   &__loginBtn {
     font-size: 15px;
