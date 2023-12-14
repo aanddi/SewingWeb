@@ -11,10 +11,15 @@ export const EmployerService = {
     })
   },
 
-  async getEmployerAll() {
+  async getEmployerAll(search?: string, sort?: string) {
+    const url = {
+      sort: sort,
+      search: search
+    }
     return await instance<IEmployerCard>({
       url: `/employer`,
-      method: 'GET'
+      method: 'GET',
+      params: url
     })
   },
 
@@ -32,20 +37,7 @@ export const EmployerService = {
     })
   },
 
-  async getBySearch(search: string, sort: string) {
-    let url
-    if (search && sort) {
-      url = `/employer/?search=${search}&sort=${sort}`
-    } else if (!search) {
-      url = `/employer/?sort=${sort}`
-    } else if (!sort) {
-      url = `/employer/?search=${search}`
-    }
-    return instance<IEmployerCard>({
-      url,
-      method: 'GET'
-    })
-  },
+
 
   async create(data: IEmployer) {
     const response = await instance<IEmployer>({

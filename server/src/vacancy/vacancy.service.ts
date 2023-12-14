@@ -86,10 +86,10 @@ export class VacancyService {
       }
     })
 
-    const titles = new Set()
+    const cityUnique = new Set()
     const uniqueSearchResults = search.filter(item => {
-      if (!titles.has(item.city)) {
-        titles.add(item.city)
+      if (!cityUnique.has(item.city)) {
+        cityUnique.add(item.city)
         return true
       }
       return false

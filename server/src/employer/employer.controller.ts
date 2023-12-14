@@ -17,11 +17,6 @@ export class EmployerController {
     return this.employerService.getHeader(idEmployer)
   }
 
-  // @Get('search')
-  // getSearch(@Query('search') search: string, @Query('sort') sort: string) {
-  //   return this.employerService.getSearch(search, sort)
-  // }
-
   @Get('suggest')
   getSuggest(@Query('suggest') suggest: string) {
     return this.employerService.getSuggest(suggest)

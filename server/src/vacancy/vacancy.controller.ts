@@ -74,7 +74,7 @@ export class VacancyController {
   }
 
   @Get('getMyVacancies/:id')
-  @Auth()
+  // @Auth()
   getMyVacancies(@Param('id') idEmployer: number) {
     return this.vacancyService.getMyVacancies(idEmployer)
   }

@@ -7,8 +7,30 @@ import { EmployerDto } from './dto/employer.dto'
 export class EmployerService {
   constructor(private prisma: PrismaService) {}
 
-  async getAllEmployer(search: string = '', sort: string = 'maxReviews') {
+  async getAllEmployer(search: string = '', sort: string = 'maxVacancies') {
     const employers = await this.prisma.employer.findMany({
+      where: {
+        OR: [
+          {
+            companyName: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          },
+          {
+            type: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          },
+          {
+            adress: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          }
+        ]
+      },
       select: {
         id: true,
         companyName: true,
@@ -51,11 +73,18 @@ export class EmployerService {
       }
     })
 
-    const sortedReviews = companies.sort((a, b) => b.count.countReviews - a.count.countReviews)
-
-    return {
-      companies: sortedReviews,
-      types: types
+    if (sort === 'maxReviews') {
+      const sortedReviews = companies.sort((a, b) => b.count.countReviews - a.count.countReviews)
+      return {
+        companies: sortedReviews,
+        types: types
+      }
+    } else if (sort === 'maxVacancies') {
+      const sortedReviews = companies.sort((a, b) => b.count.countVacancy - a.count.countVacancy)
+      return {
+        companies: sortedReviews,
+        types: types
+      }
     }
   }
 
@@ -120,105 +149,6 @@ export class EmployerService {
     })
 
     return result
-  }
-
-  async getSearch(search: string = '', sort: string) {
-    const employers = await this.prisma.employer.findMany({
-      where: {
-        OR: [
-          {
-            companyName: {
-              contains: search,
-              mode: 'insensitive'
-            }
-          },
-          {
-            type: {
-              contains: search,
-              mode: 'insensitive'
-            }
-          },
-          {
-            adress: {
-              contains: search,
-              mode: 'insensitive'
-            }
-          }
-        ]
-      },
-      select: {
-        id: true,
-        companyName: true,
-        adress: true,
-        _count: {
-          select: {
-            vacansy: {
-              // выбираем количество вакансий
-              where: {
-                status: true
-              }
-            },
-            Reviews: true // выбираем количество отзывов
-          }
-        },
-        Reviews: {
-          select: {
-            grade: true // выбираем оценки для каждого работодателя
-          }
-        }
-      }
-    })
-
-    const types = await this.getCountTypes()
-
-    const companies = employers.map(employer => {
-      const averageGrade = this.calculateAverageGrade(employer.Reviews)
-
-      return {
-        employer: {
-          id: employer.id,
-          companyName: employer.companyName,
-          adress: employer.adress
-        },
-        count: {
-          countVacancy: employer._count.vacansy,
-          countReviews: employer._count.Reviews
-        },
-        averageGrade: averageGrade
-      }
-    })
-
-    if (!companies.length) {
-      return {
-        companies: [],
-        types: types
-      }
-    }
-
-    if (!sort) {
-      sort = 'maxReviews'
-    }
-
-    // if (sort === 'minReviews') {
-    //   const sortedReviews = companies.sort((a, b) => a.count.countReviews - b.count.countReviews)
-    //   return {
-    //     companies: sortedReviews,
-    //     types: types
-    //   }
-
-    if (sort === 'maxReviews') {
-      const sortedReviews = companies.sort((a, b) => b.count.countReviews - a.count.countReviews)
-      return {
-        companies: sortedReviews,
-        types: types
-      }
-    } else if (sort === 'maxVacancies') {
-      const sortedReviews = companies.sort((a, b) => b.count.countVacancy - a.count.countVacancy)
-      return {
-        companies: sortedReviews,
-        types: types
-      }
-    }
   }
 
   async getEmployerById(id: number) {

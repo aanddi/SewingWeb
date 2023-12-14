@@ -44,11 +44,8 @@ const CompaniesList: FC<IEmployerCard> = ({ companies, types }) => {
   useEffect(() => {
     const query = router.query.search as string
     setQuerySearch(query)
-
-    if (!value) setIsShowSearch(false)
-
-    queryClient.invalidateQueries({ queryKey: ['searchCompanies', value] })
-  }, [value, search, router])
+    setValue(query)
+  }, [router])
 
   return (
     <SiteLayout background={'#F6FAFF'}>
