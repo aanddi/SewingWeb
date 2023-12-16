@@ -19,7 +19,8 @@ const RevieswPage: NextPage<AboutEmployerProps> = ({ header, reviews }) => {
   return (
     <Meta
       title={header.companyName}
-      desc={`Отзывы компании ${header.companyName}. Оценка ${reviews.averageRating} на основе ${reviews.countReviews} отзывов`}>
+      desc={`Отзывы компании ${header.companyName}. Оценка ${reviews.averageRating} на основе ${reviews.countReviews} отзывов`}
+    >
       <Reviews header={header} reviews={reviews} />
     </Meta>
   )

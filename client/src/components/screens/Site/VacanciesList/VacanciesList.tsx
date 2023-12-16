@@ -107,7 +107,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                         onClick={() => setSearchMain('')}
                         className={
                           searchMain ? styles.search__resetSearch : [styles.search__resetSearch, styles.search__resetSearch_unactive].join(' ')
-                        }>
+                        }
+                      >
                         <RxCross1 />
                       </div>
                       <div
@@ -116,7 +117,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                           isShowSearchTitle
                             ? [styles.search__list, styles.search__list_active].join(' ')
                             : [styles.search__list, styles.search__list_unactive].join(' ')
-                        }>
+                        }
+                      >
                         <div className={styles.search__listWrapper}>
                           <ul className={styles.search__items}>
                             {search?.map((elem, index) => {
@@ -154,7 +156,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
 
                       <div
                         onClick={() => setCity('')}
-                        className={city ? styles.search__resetSearch : [styles.search__resetSearch, styles.search__resetSearch_unactive].join(' ')}>
+                        className={city ? styles.search__resetSearch : [styles.search__resetSearch, styles.search__resetSearch_unactive].join(' ')}
+                      >
                         <RxCross1 />
                       </div>
                       <div
@@ -163,7 +166,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                           isShowSearchCity
                             ? [styles.search__list, styles.search__listCity_active].join(' ')
                             : [styles.search__list, styles.search__listCity_unactive].join(' ')
-                        }>
+                        }
+                      >
                         <div className={styles.search__listWrapper}>
                           <ul className={styles.search__items}>
                             {search?.map((elem, index) => {
@@ -194,7 +198,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                       setIsShowSearchTitle(false)
                       setIsShowSearchCity(false)
                     }}
-                    className={[styles.search__button, styles.search__button_search].join(' ')}>
+                    className={[styles.search__button, styles.search__button_search].join(' ')}
+                  >
                     Найти
                   </Link>
                 </div>
@@ -211,7 +216,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                       router.push({ pathname: 'vacancies', query: query })
                       setSearchMain('')
                       setCity('')
-                    }}>
+                    }}
+                  >
                     <span> Сбросить поиск</span>
                     <AiOutlineClose size={18} style={{ color: '#BCBCBC' }} />
                   </div>
@@ -229,7 +235,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                       router.push({ pathname: 'vacancies', query: query })
                       setSearchMain('')
                       setCity('')
-                    }}>
+                    }}
+                  >
                     <span>Сбросить фильтры</span>
                     <AiOutlineClose size={18} style={{ color: '#BCBCBC' }} />
                   </div>
@@ -243,7 +250,8 @@ const VacanciesList: FC<IRibbonResponse> = ({ vacancies, totalPages, countVacanc
                       }
                       delete query.profession
                       router.push({ pathname: 'vacancies', query: query })
-                    }}>
+                    }}
+                  >
                     <span>Сбросить профессию</span>
                     <AiOutlineClose size={18} style={{ color: '#BCBCBC' }} />
                   </div>

@@ -133,7 +133,7 @@ const Employer: FC = () => {
                         <div className={styles.rates__icon}>
                           <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
-                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Продвижение в рассылке</p>
+                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Продвижение в вакансии в ленте</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
@@ -145,18 +145,14 @@ const Employer: FC = () => {
                         <div className={styles.rates__icon}>
                           <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
-                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Автоподбор резюме</p>
-                      </div>
-                      <div className={styles.rates__item}>
-                        <div className={styles.rates__icon}>
-                          <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
-                        </div>
-                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Топ поиска на 7 дней</p>
+                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Рекомендации вакансии</p>
                       </div>
                     </div>
                     <div className={styles.rates__footer}>
                       <h3 className={styles.rates__salary}>0 рублей</h3>
-                      <p className={styles.rates__time}>публикация на 7 дней</p>
+                      <p className={styles.rates__time}>
+                        публикация на <span>7 дней</span>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -186,7 +182,7 @@ const Employer: FC = () => {
                         <div className={styles.rates__icon}>
                           <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
-                        <p className={styles.rates__text}>Продвижение в рассылке</p>
+                        <p className={styles.rates__text}>Продвижение в вакансии в ленте</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
@@ -198,18 +194,14 @@ const Employer: FC = () => {
                         <div className={styles.rates__icon}>
                           <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
                         </div>
-                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Автоподбор резюме</p>
-                      </div>
-                      <div className={styles.rates__item}>
-                        <div className={styles.rates__icon}>
-                          <HiOutlineXMark style={{ color: '#C1C1C1' }} size={20} />
-                        </div>
-                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Топ поиска на 7 дней</p>
+                        <p className={[styles.rates__text, styles.rates__text_unactive].join(' ')}>Рекомендации вакансии</p>
                       </div>
                     </div>
                     <div className={styles.rates__footer}>
                       <h3 className={styles.rates__salary}>1990 рублей</h3>
-                      <p className={styles.rates__time}>публикация на 15 дней</p>
+                      <p className={styles.rates__time}>
+                        публикация на <span>15 дней</span>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -239,7 +231,7 @@ const Employer: FC = () => {
                         <div className={styles.rates__icon}>
                           <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
-                        <p className={styles.rates__text}>Продвижение в рассылке</p>
+                        <p className={styles.rates__text}>Продвижение в вакансии в ленте</p>
                       </div>
                       <div className={styles.rates__item}>
                         <div className={styles.rates__icon}>
@@ -251,18 +243,14 @@ const Employer: FC = () => {
                         <div className={styles.rates__icon}>
                           <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
                         </div>
-                        <p className={styles.rates__text}>Автоподбор резюме</p>
-                      </div>
-                      <div className={styles.rates__item}>
-                        <div className={styles.rates__icon}>
-                          <IoMdCheckmark style={{ color: '#5CDA4A' }} size={20} />
-                        </div>
-                        <p className={styles.rates__text}>Топ поиска на 7 дней</p>
+                        <p className={styles.rates__text}>Рекомендации вакансии</p>
                       </div>
                     </div>
                     <div className={styles.rates__footer}>
                       <h3 className={styles.rates__salary}>3990 рублей</h3>
-                      <p className={styles.rates__time}>публикация на 30 дней</p>
+                      <p className={styles.rates__time}>
+                        публикация на <span>30 дней</span>
+                      </p>
                     </div>
                   </div>
                 </div>

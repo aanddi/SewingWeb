@@ -37,8 +37,6 @@ export const EmployerService = {
     })
   },
 
-
-
   async create(data: IEmployer) {
     const response = await instance<IEmployer>({
       url: `/employer/create`,

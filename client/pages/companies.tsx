@@ -27,9 +27,8 @@ export const getServerSideProps: GetServerSideProps<IEmployerCard> = async conte
   const sort = context.query.sort as string
 
   try {
+    const response = await EmployerService.getEmployerAll(search, sort)
 
-    const  response = await EmployerService.getEmployerAll(search, sort)
-  
     if (response.data !== undefined) {
       return {
         props: {
