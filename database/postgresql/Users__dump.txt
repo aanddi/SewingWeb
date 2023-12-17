@@ -1,1 +1,0 @@
-2,2023-11-16 22:52:50.265,2023-11-20 00:49:17.75,$argon2id$v=19$m=65536\,t=3\,p=4$+lA+mebIdIUROYt1CtiFZg$+/mppiuMiGyrhjEiB5fMOqtsja92eamzc07MC2Qk5e4,Андрей,Куропаткин,Михайлович,kuropatkinn.a.i21@gmail.com,+79787408141,2
